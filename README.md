@@ -1,8 +1,19 @@
-# story-template-app (çalışma adı)
+# Kadraj
 
 iOS şablon-bazlı video oluşturucu (500 Stories / Mojo tarzı).
 Stack: SwiftUI + AVFoundation/Core Animation + Lottie + RevenueCat + StoreKit 2.
 MVP hunisi: **şablon seç → medya koy → export → öde.**
+
+> **Ad:** ürün adı **Kadraj** olarak belirlendi (depo adı `kadraj`). Kodda
+> kullanıcıya görünen ad hâlâ `StoryTemplate` — `AppInfo.displayName` +
+> `CFBundleDisplayName` + ikon birlikte güncellenecek (bkz. [MAGAZA.md](MAGAZA.md)).
+>
+> **Mağazaya çıkış:** App Store Connect'in istediği her metin ve cevap
+> [MAGAZA.md](MAGAZA.md) içinde. Yasal sayfalar `docs/` altında (GitHub Pages):
+> [gizlilik](https://unverfirat.github.io/kadraj/gizlilik.html) ·
+> [destek](https://unverfirat.github.io/kadraj/destek.html) ·
+> [koşullar](https://unverfirat.github.io/kadraj/kosullar.html)
+> — Pages açılmadan bu üç adres 404 verir, `Legal.swift` bunlara bakıyor.
 
 ## Depo yapısı
 
