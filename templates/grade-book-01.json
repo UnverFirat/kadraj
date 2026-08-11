@@ -1,0 +1,313 @@
+{
+  "schemaVersion": 1,
+  "id": "grade-book-01",
+  "name": {
+    "en": "Look Book",
+    "tr": "Renk Defteri"
+  },
+  "category": "minimal",
+  "isPro": true,
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "duration": 4.5,
+  "palette": {
+    "background": "#0E0E12",
+    "surface": "#FFFFFF",
+    "accent": "#E8B84B",
+    "textOnAccent": "#0E0E12",
+    "textPrimary": "#FFFFFF",
+    "textSecondary": "#B8B8C0"
+  },
+  "audio": {
+    "defaultTrackId": "smooth-01",
+    "volume": 0.85
+  },
+  "layers": [
+    {
+      "id": "bg",
+      "type": "shape",
+      "colorRole": "background",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      }
+    },
+    {
+      "id": "kicker",
+      "type": "text",
+      "key": "kicker",
+      "default": {
+        "en": "COLOR LOOKS",
+        "tr": "RENK TONLARI"
+      },
+      "font": {
+        "name": "AvenirNext-Bold",
+        "size": 0.026
+      },
+      "colorRole": "textOnAccent",
+      "highlightColorRole": "accent",
+      "alignment": "center",
+      "allCaps": true,
+      "letterSpacing": 0.01,
+      "frame": {
+        "x": 0.5,
+        "y": 0.12,
+        "width": 0.5,
+        "height": 0.05
+      },
+      "timing": {
+        "start": 0.3
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "pop",
+          "duration": 0.4,
+          "params": {
+            "overshoot": 1.1
+          }
+        }
+      ]
+    },
+    {
+      "id": "cell-mono",
+      "type": "mediaSlot",
+      "slotIndex": 0,
+      "media": "photo",
+      "mask": "rect",
+      "cornerRadius": 0.01,
+      "filter": "mono",
+      "frame": {
+        "x": 0.276,
+        "y": 0.34,
+        "width": 0.44,
+        "height": 0.28
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "scaleIn",
+          "duration": 0.5,
+          "params": {
+            "from": 0.88
+          }
+        }
+      ]
+    },
+    {
+      "id": "cell-vintage",
+      "type": "mediaSlot",
+      "slotIndex": 1,
+      "media": "photo",
+      "mask": "rect",
+      "cornerRadius": 0.01,
+      "filter": "vintage",
+      "frame": {
+        "x": 0.724,
+        "y": 0.34,
+        "width": 0.44,
+        "height": 0.28
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "scaleIn",
+          "duration": 0.5,
+          "delay": 0.1,
+          "params": {
+            "from": 0.88
+          }
+        }
+      ]
+    },
+    {
+      "id": "cell-vivid",
+      "type": "mediaSlot",
+      "slotIndex": 2,
+      "media": "photo",
+      "mask": "rect",
+      "cornerRadius": 0.01,
+      "filter": "vivid",
+      "frame": {
+        "x": 0.276,
+        "y": 0.64,
+        "width": 0.44,
+        "height": 0.28
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "scaleIn",
+          "duration": 0.5,
+          "delay": 0.2,
+          "params": {
+            "from": 0.88
+          }
+        }
+      ]
+    },
+    {
+      "id": "cell-cinematic",
+      "type": "mediaSlot",
+      "slotIndex": 3,
+      "media": "photo",
+      "mask": "rect",
+      "cornerRadius": 0.01,
+      "filter": "cinematic",
+      "frame": {
+        "x": 0.724,
+        "y": 0.64,
+        "width": 0.44,
+        "height": 0.28
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "scaleIn",
+          "duration": 0.5,
+          "delay": 0.3,
+          "params": {
+            "from": 0.88
+          }
+        }
+      ]
+    },
+    {
+      "id": "lbl-mono",
+      "type": "text",
+      "key": "l0",
+      "default": {
+        "en": "MONO",
+        "tr": "MONO"
+      },
+      "font": {
+        "name": "AvenirNext-Medium",
+        "size": 0.018
+      },
+      "colorRole": "textSecondary",
+      "alignment": "center",
+      "allCaps": true,
+      "letterSpacing": 0.01,
+      "frame": {
+        "x": 0.276,
+        "y": 0.49,
+        "width": 0.44,
+        "height": 0.03
+      },
+      "timing": {
+        "start": 0.6
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.3
+        }
+      ]
+    },
+    {
+      "id": "lbl-vintage",
+      "type": "text",
+      "key": "l1",
+      "default": {
+        "en": "VINTAGE",
+        "tr": "VINTAGE"
+      },
+      "font": {
+        "name": "AvenirNext-Medium",
+        "size": 0.018
+      },
+      "colorRole": "textSecondary",
+      "alignment": "center",
+      "allCaps": true,
+      "letterSpacing": 0.01,
+      "frame": {
+        "x": 0.724,
+        "y": 0.49,
+        "width": 0.44,
+        "height": 0.03
+      },
+      "timing": {
+        "start": 0.7
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.3
+        }
+      ]
+    },
+    {
+      "id": "lbl-vivid",
+      "type": "text",
+      "key": "l2",
+      "default": {
+        "en": "VIVID",
+        "tr": "CANLI"
+      },
+      "font": {
+        "name": "AvenirNext-Medium",
+        "size": 0.018
+      },
+      "colorRole": "textSecondary",
+      "alignment": "center",
+      "allCaps": true,
+      "letterSpacing": 0.01,
+      "frame": {
+        "x": 0.276,
+        "y": 0.79,
+        "width": 0.44,
+        "height": 0.03
+      },
+      "timing": {
+        "start": 0.8
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.3
+        }
+      ]
+    },
+    {
+      "id": "lbl-cinematic",
+      "type": "text",
+      "key": "l3",
+      "default": {
+        "en": "CINEMATIC",
+        "tr": "SİNEMATİK"
+      },
+      "font": {
+        "name": "AvenirNext-Medium",
+        "size": 0.018
+      },
+      "colorRole": "textSecondary",
+      "alignment": "center",
+      "allCaps": true,
+      "letterSpacing": 0.01,
+      "frame": {
+        "x": 0.724,
+        "y": 0.79,
+        "width": 0.44,
+        "height": 0.03
+      },
+      "timing": {
+        "start": 0.9
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.3
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,658 @@
+{
+  "schemaVersion": 2,
+  "id": "lookbook-01",
+  "name": {
+    "en": "Lookbook",
+    "tr": "Kombin Defteri"
+  },
+  "category": "fashion",
+  "isPro": false,
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "palette": {
+    "background": "#EFEAE2",
+    "surface": "#FFFFFF",
+    "accent": "#1F1D1A",
+    "textPrimary": "#1F1D1A",
+    "textSecondary": "#6F6A62",
+    "textOnAccent": "#FFFFFF",
+    "scrimClear": "#00000000",
+    "scrimSolid": "#000000CC"
+  },
+  "audio": {
+    "defaultTrackId": "chill-01",
+    "volume": 0.85
+  },
+  "scenes": [
+    {
+      "id": "look0",
+      "duration": 2.6,
+      "layers": [
+        {
+          "id": "look0-media",
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 1.0,
+            "height": 1.0
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "fadeIn",
+              "duration": 0.4
+            },
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 2.6,
+              "params": {
+                "zoom": 1.09,
+                "direction": "up"
+              }
+            }
+          ],
+          "type": "mediaSlot",
+          "slotIndex": 0,
+          "media": "photoOrVideo",
+          "contentMode": "fill",
+          "mask": "rect",
+          "filter": "warm",
+          "filterIntensity": 0.45
+        },
+        {
+          "id": "look0-scrim-top",
+          "frame": {
+            "x": 0.5,
+            "y": 0.12,
+            "width": 1.0,
+            "height": 0.24
+          },
+          "type": "shape",
+          "colorRole": "scrimClear",
+          "gradient": {
+            "from": "scrimClear",
+            "to": "scrimSolid",
+            "direction": "up"
+          }
+        },
+        {
+          "id": "look0-scrim",
+          "frame": {
+            "x": 0.5,
+            "y": 0.76,
+            "width": 1.0,
+            "height": 0.48
+          },
+          "type": "shape",
+          "colorRole": "scrimClear",
+          "gradient": {
+            "from": "scrimClear",
+            "to": "scrimSolid",
+            "direction": "down"
+          }
+        },
+        {
+          "id": "look0-tag",
+          "frame": {
+            "x": 0.155,
+            "y": 0.13,
+            "width": 0.15,
+            "height": 0.075
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "scaleIn",
+              "duration": 0.4,
+              "easing": "easeOut",
+              "params": {
+                "from": 0.7
+              }
+            },
+            {
+              "role": "loop",
+              "preset": "shake",
+              "duration": 1.4,
+              "delay": 0.8,
+              "params": {
+                "degrees": 2.0
+              }
+            }
+          ],
+          "type": "shape",
+          "colorRole": "accent",
+          "cornerRadius": 0.008
+        },
+        {
+          "id": "look0-num",
+          "frame": {
+            "x": 0.155,
+            "y": 0.13,
+            "width": 0.13,
+            "height": 0.05
+          },
+          "timing": {
+            "start": 0.2
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "fadeIn",
+              "duration": 0.35
+            }
+          ],
+          "type": "text",
+          "key": "lookNumber",
+          "default": {
+            "en": "01",
+            "tr": "01"
+          },
+          "font": {
+            "name": "Archivo-SemiBold",
+            "size": 0.034
+          },
+          "colorRole": "surface",
+          "alignment": "center"
+        },
+        {
+          "id": "look0-label",
+          "frame": {
+            "x": 0.5,
+            "y": 0.83,
+            "width": 0.82,
+            "height": 0.04
+          },
+          "timing": {
+            "start": 0.25
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "wipeReveal",
+              "duration": 0.5,
+              "easing": "easeOut",
+              "params": {
+                "direction": "right"
+              }
+            }
+          ],
+          "type": "text",
+          "key": "lookLabel",
+          "default": {
+            "en": "MORNING",
+            "tr": "SABAH"
+          },
+          "font": {
+            "name": "AvenirNext-Medium",
+            "size": 0.021
+          },
+          "colorRole": "surface",
+          "alignment": "center",
+          "letterSpacing": 0.014,
+          "allCaps": true
+        },
+        {
+          "id": "look0-title",
+          "frame": {
+            "x": 0.5,
+            "y": 0.89,
+            "width": 0.86,
+            "height": 0.06
+          },
+          "timing": {
+            "start": 0.4
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "slideIn",
+              "duration": 0.5,
+              "easing": "easeOut",
+              "params": {
+                "direction": "up",
+                "distance": 0.04
+              }
+            }
+          ],
+          "type": "text",
+          "key": "lookTitle",
+          "default": {
+            "en": "Coffee and linen",
+            "tr": "Kahve ve keten"
+          },
+          "font": {
+            "name": "Archivo-SemiBold",
+            "size": 0.038
+          },
+          "colorRole": "surface",
+          "alignment": "center"
+        }
+      ],
+      "transition": {
+        "style": "slideLeft",
+        "duration": 0.4
+      }
+    },
+    {
+      "id": "look1",
+      "duration": 2.6,
+      "layers": [
+        {
+          "id": "look1-media",
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 1.0,
+            "height": 1.0
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "fadeIn",
+              "duration": 0.4
+            },
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 2.6,
+              "params": {
+                "zoom": 1.09,
+                "direction": "down"
+              }
+            }
+          ],
+          "type": "mediaSlot",
+          "slotIndex": 1,
+          "media": "photoOrVideo",
+          "contentMode": "fill",
+          "mask": "rect",
+          "filter": "fade",
+          "filterIntensity": 0.45
+        },
+        {
+          "id": "look1-scrim-top",
+          "frame": {
+            "x": 0.5,
+            "y": 0.12,
+            "width": 1.0,
+            "height": 0.24
+          },
+          "type": "shape",
+          "colorRole": "scrimClear",
+          "gradient": {
+            "from": "scrimClear",
+            "to": "scrimSolid",
+            "direction": "up"
+          }
+        },
+        {
+          "id": "look1-scrim",
+          "frame": {
+            "x": 0.5,
+            "y": 0.76,
+            "width": 1.0,
+            "height": 0.48
+          },
+          "type": "shape",
+          "colorRole": "scrimClear",
+          "gradient": {
+            "from": "scrimClear",
+            "to": "scrimSolid",
+            "direction": "down"
+          }
+        },
+        {
+          "id": "look1-tag",
+          "frame": {
+            "x": 0.155,
+            "y": 0.13,
+            "width": 0.15,
+            "height": 0.075
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "scaleIn",
+              "duration": 0.4,
+              "easing": "easeOut",
+              "params": {
+                "from": 0.7
+              }
+            },
+            {
+              "role": "loop",
+              "preset": "shake",
+              "duration": 1.4,
+              "delay": 0.8,
+              "params": {
+                "degrees": 2.0
+              }
+            }
+          ],
+          "type": "shape",
+          "colorRole": "accent",
+          "cornerRadius": 0.008
+        },
+        {
+          "id": "look1-num",
+          "frame": {
+            "x": 0.155,
+            "y": 0.13,
+            "width": 0.13,
+            "height": 0.05
+          },
+          "timing": {
+            "start": 0.2
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "fadeIn",
+              "duration": 0.35
+            }
+          ],
+          "type": "text",
+          "key": "lookNumber",
+          "default": {
+            "en": "02",
+            "tr": "02"
+          },
+          "font": {
+            "name": "Archivo-SemiBold",
+            "size": 0.034
+          },
+          "colorRole": "surface",
+          "alignment": "center"
+        },
+        {
+          "id": "look1-label",
+          "frame": {
+            "x": 0.5,
+            "y": 0.83,
+            "width": 0.82,
+            "height": 0.04
+          },
+          "timing": {
+            "start": 0.25
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "wipeReveal",
+              "duration": 0.5,
+              "easing": "easeOut",
+              "params": {
+                "direction": "right"
+              }
+            }
+          ],
+          "type": "text",
+          "key": "lookLabel",
+          "default": {
+            "en": "AFTERNOON",
+            "tr": "ÖĞLEDEN SONRA"
+          },
+          "font": {
+            "name": "AvenirNext-Medium",
+            "size": 0.021
+          },
+          "colorRole": "surface",
+          "alignment": "center",
+          "letterSpacing": 0.014,
+          "allCaps": true
+        },
+        {
+          "id": "look1-title",
+          "frame": {
+            "x": 0.5,
+            "y": 0.89,
+            "width": 0.86,
+            "height": 0.06
+          },
+          "timing": {
+            "start": 0.4
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "slideIn",
+              "duration": 0.5,
+              "easing": "easeOut",
+              "params": {
+                "direction": "up",
+                "distance": 0.04
+              }
+            }
+          ],
+          "type": "text",
+          "key": "lookTitle",
+          "default": {
+            "en": "A walk in town",
+            "tr": "Şehirde yürüyüş"
+          },
+          "font": {
+            "name": "Archivo-SemiBold",
+            "size": 0.038
+          },
+          "colorRole": "surface",
+          "alignment": "center"
+        }
+      ],
+      "transition": {
+        "style": "slideLeft",
+        "duration": 0.4
+      }
+    },
+    {
+      "id": "look2",
+      "duration": 2.6,
+      "layers": [
+        {
+          "id": "look2-media",
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 1.0,
+            "height": 1.0
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "fadeIn",
+              "duration": 0.4
+            },
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 2.6,
+              "params": {
+                "zoom": 1.09,
+                "direction": "up"
+              }
+            }
+          ],
+          "type": "mediaSlot",
+          "slotIndex": 2,
+          "media": "photoOrVideo",
+          "contentMode": "fill",
+          "mask": "rect",
+          "filter": "mono",
+          "filterIntensity": 0.45
+        },
+        {
+          "id": "look2-scrim-top",
+          "frame": {
+            "x": 0.5,
+            "y": 0.12,
+            "width": 1.0,
+            "height": 0.24
+          },
+          "type": "shape",
+          "colorRole": "scrimClear",
+          "gradient": {
+            "from": "scrimClear",
+            "to": "scrimSolid",
+            "direction": "up"
+          }
+        },
+        {
+          "id": "look2-scrim",
+          "frame": {
+            "x": 0.5,
+            "y": 0.76,
+            "width": 1.0,
+            "height": 0.48
+          },
+          "type": "shape",
+          "colorRole": "scrimClear",
+          "gradient": {
+            "from": "scrimClear",
+            "to": "scrimSolid",
+            "direction": "down"
+          }
+        },
+        {
+          "id": "look2-tag",
+          "frame": {
+            "x": 0.155,
+            "y": 0.13,
+            "width": 0.15,
+            "height": 0.075
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "scaleIn",
+              "duration": 0.4,
+              "easing": "easeOut",
+              "params": {
+                "from": 0.7
+              }
+            },
+            {
+              "role": "loop",
+              "preset": "shake",
+              "duration": 1.4,
+              "delay": 0.8,
+              "params": {
+                "degrees": 2.0
+              }
+            }
+          ],
+          "type": "shape",
+          "colorRole": "accent",
+          "cornerRadius": 0.008
+        },
+        {
+          "id": "look2-num",
+          "frame": {
+            "x": 0.155,
+            "y": 0.13,
+            "width": 0.13,
+            "height": 0.05
+          },
+          "timing": {
+            "start": 0.2
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "fadeIn",
+              "duration": 0.35
+            }
+          ],
+          "type": "text",
+          "key": "lookNumber",
+          "default": {
+            "en": "03",
+            "tr": "03"
+          },
+          "font": {
+            "name": "Archivo-SemiBold",
+            "size": 0.034
+          },
+          "colorRole": "surface",
+          "alignment": "center"
+        },
+        {
+          "id": "look2-label",
+          "frame": {
+            "x": 0.5,
+            "y": 0.83,
+            "width": 0.82,
+            "height": 0.04
+          },
+          "timing": {
+            "start": 0.25
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "wipeReveal",
+              "duration": 0.5,
+              "easing": "easeOut",
+              "params": {
+                "direction": "right"
+              }
+            }
+          ],
+          "type": "text",
+          "key": "lookLabel",
+          "default": {
+            "en": "EVENING",
+            "tr": "AKŞAM"
+          },
+          "font": {
+            "name": "AvenirNext-Medium",
+            "size": 0.021
+          },
+          "colorRole": "surface",
+          "alignment": "center",
+          "letterSpacing": 0.014,
+          "allCaps": true
+        },
+        {
+          "id": "look2-title",
+          "frame": {
+            "x": 0.5,
+            "y": 0.89,
+            "width": 0.86,
+            "height": 0.06
+          },
+          "timing": {
+            "start": 0.4
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "slideIn",
+              "duration": 0.5,
+              "easing": "easeOut",
+              "params": {
+                "direction": "up",
+                "distance": 0.04
+              }
+            }
+          ],
+          "type": "text",
+          "key": "lookTitle",
+          "default": {
+            "en": "Nothing but black",
+            "tr": "Sadece siyah"
+          },
+          "font": {
+            "name": "Archivo-SemiBold",
+            "size": 0.038
+          },
+          "colorRole": "surface",
+          "alignment": "center"
+        }
+      ]
+    }
+  ],
+  "layers": []
+}

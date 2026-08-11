@@ -1,0 +1,260 @@
+{
+  "schemaVersion": 1,
+  "id": "mono-frame-01",
+  "name": {
+    "en": "Mono Frame",
+    "tr": "Siyah Beyaz"
+  },
+  "category": "minimal",
+  "isPro": false,
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "duration": 6.5,
+  "palette": {
+    "background": "#0A0A0A",
+    "surface": "#FFFFFF",
+    "accent": "#FFFFFF",
+    "textPrimary": "#FFFFFF",
+    "textSecondary": "#9A9A9A",
+    "textOnAccent": "#0A0A0A",
+    "scrimClear": "#00000000",
+    "scrimSolid": "#000000CC"
+  },
+  "audio": {
+    "defaultTrackId": "ambient-01",
+    "volume": 0.85
+  },
+  "layers": [
+    {
+      "id": "bg",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "type": "shape",
+      "colorRole": "background"
+    },
+    {
+      "id": "shot",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.8
+        },
+        {
+          "role": "loop",
+          "preset": "kenBurns",
+          "duration": 6.5,
+          "params": {
+            "zoom": 1.07,
+            "direction": "up"
+          }
+        }
+      ],
+      "type": "mediaSlot",
+      "slotIndex": 0,
+      "media": "photoOrVideo",
+      "contentMode": "fill",
+      "mask": "rect",
+      "filter": "mono",
+      "filterIntensity": 1.0
+    },
+    {
+      "id": "veil",
+      "frame": {
+        "x": 0.5,
+        "y": 0.78,
+        "width": 1.0,
+        "height": 0.44
+      },
+      "type": "shape",
+      "colorRole": "scrimClear",
+      "gradient": {
+        "from": "scrimClear",
+        "to": "scrimSolid",
+        "direction": "down"
+      }
+    },
+    {
+      "id": "edge-top",
+      "frame": {
+        "x": 0.5,
+        "y": 0.07,
+        "width": 0.84,
+        "height": 0.0035
+      },
+      "timing": {
+        "start": 0.3
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "wipeReveal",
+          "duration": 0.7,
+          "easing": "easeOut",
+          "params": {
+            "direction": "right"
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "surface"
+    },
+    {
+      "id": "edge-bottom",
+      "frame": {
+        "x": 0.5,
+        "y": 0.93,
+        "width": 0.84,
+        "height": 0.0035
+      },
+      "timing": {
+        "start": 0.3
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "wipeReveal",
+          "duration": 0.7,
+          "easing": "easeOut",
+          "params": {
+            "direction": "left"
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "surface"
+    },
+    {
+      "id": "edge-left",
+      "frame": {
+        "x": 0.08,
+        "y": 0.5,
+        "width": 0.002,
+        "height": 0.86
+      },
+      "timing": {
+        "start": 0.5
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.7
+        }
+      ],
+      "type": "shape",
+      "colorRole": "surface"
+    },
+    {
+      "id": "edge-right",
+      "frame": {
+        "x": 0.92,
+        "y": 0.5,
+        "width": 0.002,
+        "height": 0.86
+      },
+      "timing": {
+        "start": 0.5
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.7
+        }
+      ],
+      "type": "shape",
+      "colorRole": "surface"
+    },
+    {
+      "id": "caption",
+      "frame": {
+        "x": 0.5,
+        "y": 0.83,
+        "width": 0.74,
+        "height": 0.13
+      },
+      "timing": {
+        "start": 0.75
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "kineticWords",
+          "duration": 0.9,
+          "params": {
+            "distance": 0.02
+          }
+        },
+        {
+          "role": "loop",
+          "preset": "floatLoop",
+          "duration": 2.6,
+          "params": {
+            "distance": 0.006,
+            "axis": "y"
+          }
+        }
+      ],
+      "type": "text",
+      "key": "caption",
+      "default": {
+        "en": "Shadows say more\nthan color does",
+        "tr": "Gölgeler daha çok\nşey anlatıyor"
+      },
+      "font": {
+        "name": "Georgia-Italic",
+        "size": 0.05
+      },
+      "colorRole": "textPrimary",
+      "alignment": "center",
+      "maxLines": 2
+    },
+    {
+      "id": "date",
+      "frame": {
+        "x": 0.5,
+        "y": 0.925,
+        "width": 0.7,
+        "height": 0.033
+      },
+      "timing": {
+        "start": 1.15
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.6
+        }
+      ],
+      "type": "text",
+      "key": "date",
+      "default": {
+        "en": "AUGUST 10, 2026",
+        "tr": "10 AĞUSTOS 2026"
+      },
+      "font": {
+        "name": "AvenirNext-Medium",
+        "size": 0.019
+      },
+      "colorRole": "textSecondary",
+      "alignment": "center",
+      "letterSpacing": 0.014,
+      "allCaps": true
+    }
+  ]
+}

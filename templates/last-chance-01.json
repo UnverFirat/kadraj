@@ -1,0 +1,343 @@
+{
+  "schemaVersion": 2,
+  "id": "last-chance-01",
+  "name": {
+    "en": "Last Chance",
+    "tr": "Son Gün"
+  },
+  "category": "promo",
+  "isPro": true,
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "palette": {
+    "background": "#08080C",
+    "surface": "#FFFFFF",
+    "accent": "#00E5A0",
+    "textPrimary": "#FFFFFF",
+    "textSecondary": "#9FB3AC",
+    "textOnAccent": "#06120D",
+    "scrimClear": "#00000000",
+    "scrimSolid": "#000000CC"
+  },
+  "audio": {
+    "defaultTrackId": "impact-01",
+    "volume": 0.85
+  },
+  "scenes": [
+    {
+      "id": "hit",
+      "duration": 2.4,
+      "layers": [
+        {
+          "id": "hit-bg",
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 1.0,
+            "height": 1.0
+          },
+          "type": "shape",
+          "colorRole": "background"
+        },
+        {
+          "id": "hit-glow",
+          "frame": {
+            "x": 0.5,
+            "y": 0.45,
+            "width": 0.86,
+            "height": 0.42
+          },
+          "opacity": 0.16,
+          "animations": [
+            {
+              "role": "in",
+              "preset": "scaleIn",
+              "duration": 0.7,
+              "easing": "easeOut",
+              "params": {
+                "from": 0.8
+              }
+            },
+            {
+              "role": "loop",
+              "preset": "pulse",
+              "duration": 1.6,
+              "params": {
+                "scale": 1.06
+              }
+            }
+          ],
+          "type": "shape",
+          "colorRole": "accent",
+          "cornerRadius": 0.21
+        },
+        {
+          "id": "hit-title",
+          "frame": {
+            "x": 0.5,
+            "y": 0.45,
+            "width": 0.9,
+            "height": 0.15
+          },
+          "timing": {
+            "start": 0.2
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "pop",
+              "duration": 0.5,
+              "params": {
+                "overshoot": 1.16
+              }
+            },
+            {
+              "role": "loop",
+              "preset": "pulse",
+              "duration": 1.1,
+              "params": {
+                "scale": 1.05
+              }
+            }
+          ],
+          "type": "text",
+          "key": "hitTitle",
+          "default": {
+            "en": "LAST DAY",
+            "tr": "SON GÜN"
+          },
+          "font": {
+            "name": "AvenirNext-Heavy",
+            "size": 0.092
+          },
+          "colorRole": "textPrimary",
+          "alignment": "center",
+          "letterSpacing": 0.012,
+          "allCaps": true
+        },
+        {
+          "id": "hit-sub",
+          "frame": {
+            "x": 0.5,
+            "y": 0.575,
+            "width": 0.84,
+            "height": 0.05
+          },
+          "timing": {
+            "start": 0.6
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "fadeIn",
+              "duration": 0.5
+            }
+          ],
+          "type": "text",
+          "key": "hitSub",
+          "default": {
+            "en": "The sale ends at midnight",
+            "tr": "İndirim gece yarısı bitiyor"
+          },
+          "font": {
+            "name": "AvenirNext-Medium",
+            "size": 0.026
+          },
+          "colorRole": "accent",
+          "alignment": "center"
+        }
+      ],
+      "transition": {
+        "style": "whip",
+        "duration": 0.35
+      }
+    },
+    {
+      "id": "show",
+      "duration": 3.6,
+      "layers": [
+        {
+          "id": "show-media",
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 1.0,
+            "height": 1.0
+          },
+          "animations": [
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 3.6,
+              "params": {
+                "zoom": 1.13,
+                "direction": "left"
+              }
+            }
+          ],
+          "type": "mediaSlot",
+          "slotIndex": 0,
+          "media": "photoOrVideo",
+          "contentMode": "fill",
+          "mask": "rect",
+          "filter": "cinematic",
+          "filterIntensity": 0.4
+        },
+        {
+          "id": "show-scrim",
+          "frame": {
+            "x": 0.5,
+            "y": 0.76,
+            "width": 1.0,
+            "height": 0.48
+          },
+          "type": "shape",
+          "colorRole": "scrimClear",
+          "gradient": {
+            "from": "scrimClear",
+            "to": "scrimSolid",
+            "direction": "down"
+          }
+        },
+        {
+          "id": "show-chip",
+          "frame": {
+            "x": 0.24,
+            "y": 0.155,
+            "width": 0.32,
+            "height": 0.072
+          },
+          "timing": {
+            "start": 0.25
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "slideIn",
+              "duration": 0.5,
+              "easing": "easeOut",
+              "params": {
+                "direction": "right",
+                "distance": 0.06
+              }
+            },
+            {
+              "role": "loop",
+              "preset": "shake",
+              "duration": 1.4,
+              "delay": 0.9,
+              "params": {
+                "degrees": 2.0
+              }
+            }
+          ],
+          "type": "shape",
+          "colorRole": "accent",
+          "cornerRadius": 0.036
+        },
+        {
+          "id": "show-chip-text",
+          "frame": {
+            "x": 0.24,
+            "y": 0.155,
+            "width": 0.3,
+            "height": 0.045
+          },
+          "timing": {
+            "start": 0.4
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "fadeIn",
+              "duration": 0.35
+            }
+          ],
+          "type": "text",
+          "key": "showChip",
+          "default": {
+            "en": "24 HOURS LEFT",
+            "tr": "SON 24 SAAT"
+          },
+          "font": {
+            "name": "AvenirNext-Heavy",
+            "size": 0.024
+          },
+          "colorRole": "textOnAccent",
+          "alignment": "center",
+          "letterSpacing": 0.008,
+          "allCaps": true
+        },
+        {
+          "id": "show-title",
+          "frame": {
+            "x": 0.5,
+            "y": 0.795,
+            "width": 0.86,
+            "height": 0.09
+          },
+          "timing": {
+            "start": 0.5
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "kineticWords",
+              "duration": 0.9,
+              "params": {
+                "distance": 0.02
+              }
+            }
+          ],
+          "type": "text",
+          "key": "showTitle",
+          "default": {
+            "en": "40% off everything",
+            "tr": "Tüm koleksiyonda %40"
+          },
+          "font": {
+            "name": "AvenirNext-Heavy",
+            "size": 0.058
+          },
+          "colorRole": "textPrimary",
+          "alignment": "center"
+        },
+        {
+          "id": "show-cta",
+          "frame": {
+            "x": 0.5,
+            "y": 0.885,
+            "width": 0.84,
+            "height": 0.04
+          },
+          "timing": {
+            "start": 0.8
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "fadeIn",
+              "duration": 0.6
+            }
+          ],
+          "type": "text",
+          "key": "showCta",
+          "default": {
+            "en": "Shop from the link in bio",
+            "tr": "Profildeki bağlantıdan alışverişe"
+          },
+          "font": {
+            "name": "AvenirNext-Medium",
+            "size": 0.022
+          },
+          "colorRole": "textSecondary",
+          "alignment": "center"
+        }
+      ]
+    }
+  ],
+  "layers": []
+}

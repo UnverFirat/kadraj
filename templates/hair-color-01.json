@@ -1,0 +1,409 @@
+{
+  "schemaVersion": 1,
+  "id": "hair-color-01",
+  "name": {
+    "en": "Hair Colour",
+    "tr": "Saç Rengi"
+  },
+  "category": "beauty",
+  "isPro": false,
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "duration": 6.5,
+  "palette": {
+    "background": "#1C0F14",
+    "surface": "#FFF0F4",
+    "accent": "#F0698E",
+    "textPrimary": "#FFF0F4",
+    "textSecondary": "#D6A9B7",
+    "textOnAccent": "#FFFFFF",
+    "scrimClear": "#00000000",
+    "scrimSolid": "#000000CC",
+    "tone1": "#3B2A22",
+    "tone2": "#8A5A32",
+    "tone3": "#C08A4E",
+    "tone4": "#E3C89A"
+  },
+  "audio": {
+    "defaultTrackId": "smooth-01",
+    "volume": 0.85
+  },
+  "layers": [
+    {
+      "id": "bg",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "type": "shape",
+      "colorRole": "background"
+    },
+    {
+      "id": "photo",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.6
+        },
+        {
+          "role": "loop",
+          "preset": "kenBurns",
+          "duration": 6.5,
+          "params": {
+            "zoom": 1.11,
+            "direction": "up"
+          }
+        }
+      ],
+      "type": "mediaSlot",
+      "slotIndex": 0,
+      "media": "photoOrVideo",
+      "contentMode": "fill",
+      "mask": "rect",
+      "filter": "warm",
+      "filterIntensity": 0.35
+    },
+    {
+      "id": "scrim",
+      "frame": {
+        "x": 0.5,
+        "y": 0.72,
+        "width": 1.0,
+        "height": 0.56
+      },
+      "type": "shape",
+      "colorRole": "scrimClear",
+      "gradient": {
+        "from": "scrimClear",
+        "to": "scrimSolid",
+        "direction": "down"
+      }
+    },
+    {
+      "id": "kicker",
+      "frame": {
+        "x": 0.5,
+        "y": 0.635,
+        "width": 0.8,
+        "height": 0.038
+      },
+      "timing": {
+        "start": 0.3
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.55
+        }
+      ],
+      "type": "text",
+      "key": "kicker",
+      "default": {
+        "en": "THIS SEASON'S SHADES",
+        "tr": "SEZONUN TONLARI"
+      },
+      "font": {
+        "name": "AvenirNext-DemiBold",
+        "size": 0.022
+      },
+      "colorRole": "accent",
+      "alignment": "center",
+      "letterSpacing": 0.016,
+      "allCaps": true
+    },
+    {
+      "id": "headline",
+      "frame": {
+        "x": 0.5,
+        "y": 0.7,
+        "width": 0.86,
+        "height": 0.075
+      },
+      "timing": {
+        "start": 0.45
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "kineticWords",
+          "duration": 0.9,
+          "params": {
+            "distance": 0.02
+          }
+        },
+        {
+          "role": "loop",
+          "preset": "floatLoop",
+          "duration": 2.6,
+          "params": {
+            "distance": 0.006,
+            "axis": "y"
+          }
+        }
+      ],
+      "type": "text",
+      "key": "headline",
+      "default": {
+        "en": "New shade, new you",
+        "tr": "Yeni ton, yeni sen"
+      },
+      "font": {
+        "name": "AvenirNext-Bold",
+        "size": 0.052
+      },
+      "colorRole": "textPrimary",
+      "alignment": "center"
+    },
+    {
+      "id": "swatch0",
+      "frame": {
+        "x": 0.1925,
+        "y": 0.79,
+        "width": 0.17,
+        "height": 0.09
+      },
+      "timing": {
+        "start": 0.7
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "pop",
+          "duration": 0.4,
+          "params": {
+            "overshoot": 1.12
+          }
+        },
+        {
+          "role": "loop",
+          "preset": "shake",
+          "duration": 1.4,
+          "delay": 0.8,
+          "params": {
+            "degrees": 2.0
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "tone1",
+      "cornerRadius": 0.012
+    },
+    {
+      "id": "swatch1",
+      "frame": {
+        "x": 0.3975,
+        "y": 0.79,
+        "width": 0.17,
+        "height": 0.09
+      },
+      "timing": {
+        "start": 0.82
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "pop",
+          "duration": 0.4,
+          "params": {
+            "overshoot": 1.12
+          }
+        },
+        {
+          "role": "loop",
+          "preset": "shake",
+          "duration": 1.4,
+          "delay": 0.8,
+          "params": {
+            "degrees": 2.0
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "tone2",
+      "cornerRadius": 0.012
+    },
+    {
+      "id": "swatch2",
+      "frame": {
+        "x": 0.6025,
+        "y": 0.79,
+        "width": 0.17,
+        "height": 0.09
+      },
+      "timing": {
+        "start": 0.94
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "pop",
+          "duration": 0.4,
+          "params": {
+            "overshoot": 1.12
+          }
+        },
+        {
+          "role": "loop",
+          "preset": "shake",
+          "duration": 1.4,
+          "delay": 0.8,
+          "params": {
+            "degrees": 2.0
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "tone3",
+      "cornerRadius": 0.012
+    },
+    {
+      "id": "swatch3",
+      "frame": {
+        "x": 0.8075,
+        "y": 0.79,
+        "width": 0.17,
+        "height": 0.09
+      },
+      "timing": {
+        "start": 1.06
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "pop",
+          "duration": 0.4,
+          "params": {
+            "overshoot": 1.12
+          }
+        },
+        {
+          "role": "loop",
+          "preset": "shake",
+          "duration": 1.4,
+          "delay": 0.8,
+          "params": {
+            "degrees": 2.0
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "tone4",
+      "cornerRadius": 0.012
+    },
+    {
+      "id": "pick",
+      "frame": {
+        "x": 0.6025,
+        "y": 0.848,
+        "width": 0.17,
+        "height": 0.006
+      },
+      "timing": {
+        "start": 1.15
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "wipeReveal",
+          "duration": 0.45,
+          "easing": "easeOut",
+          "params": {
+            "direction": "right"
+          }
+        },
+        {
+          "role": "loop",
+          "preset": "shake",
+          "duration": 1.4,
+          "delay": 0.85,
+          "params": {
+            "degrees": 2.0
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "accent",
+      "cornerRadius": 0.003
+    },
+    {
+      "id": "tone-name",
+      "frame": {
+        "x": 0.5,
+        "y": 0.888,
+        "width": 0.82,
+        "height": 0.07
+      },
+      "timing": {
+        "start": 1.2
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "slideIn",
+          "duration": 0.5,
+          "easing": "easeOut",
+          "params": {
+            "direction": "up",
+            "distance": 0.03
+          }
+        }
+      ],
+      "type": "text",
+      "key": "toneName",
+      "default": {
+        "en": "Honey Foam",
+        "tr": "Bal Köpüğü"
+      },
+      "font": {
+        "name": "Georgia-Bold",
+        "size": 0.048
+      },
+      "colorRole": "textPrimary",
+      "alignment": "center"
+    },
+    {
+      "id": "note",
+      "frame": {
+        "x": 0.5,
+        "y": 0.95,
+        "width": 0.9,
+        "height": 0.032
+      },
+      "timing": {
+        "start": 1.2
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.6
+        }
+      ],
+      "type": "text",
+      "key": "note",
+      "default": {
+        "en": "Reached in three sessions · Free colour consult",
+        "tr": "3 seansta ulaşılır · Renk danışmanlığı ücretsiz"
+      },
+      "font": {
+        "name": "AvenirNext-Regular",
+        "size": 0.02
+      },
+      "colorRole": "textSecondary",
+      "alignment": "center"
+    }
+  ]
+}

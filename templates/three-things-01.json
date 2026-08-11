@@ -1,0 +1,482 @@
+{
+  "schemaVersion": 1,
+  "id": "three-things-01",
+  "name": {
+    "en": "Three Things",
+    "tr": "3 Şey"
+  },
+  "category": "social",
+  "isPro": true,
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "duration": 7.0,
+  "palette": {
+    "background": "#15171C",
+    "surface": "#FFFFFF",
+    "accent": "#8FA3B8",
+    "textPrimary": "#F7F9FC",
+    "textSecondary": "#A9B3C0",
+    "textOnAccent": "#FFFFFF",
+    "scrimClear": "#00000000",
+    "scrimSolid": "#000000CC"
+  },
+  "audio": {
+    "defaultTrackId": "clean-01",
+    "volume": 0.85
+  },
+  "layers": [
+    {
+      "id": "bg",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "type": "shape",
+      "colorRole": "background"
+    },
+    {
+      "id": "photo",
+      "frame": {
+        "x": 0.5,
+        "y": 0.26,
+        "width": 1.0,
+        "height": 0.52
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.6
+        },
+        {
+          "role": "loop",
+          "preset": "kenBurns",
+          "duration": 7.0,
+          "params": {
+            "zoom": 1.1,
+            "direction": "up"
+          }
+        }
+      ],
+      "type": "mediaSlot",
+      "slotIndex": 0,
+      "media": "photoOrVideo",
+      "contentMode": "fill",
+      "mask": "rect",
+      "filter": "cool",
+      "filterIntensity": 0.4
+    },
+    {
+      "id": "photo-veil",
+      "frame": {
+        "x": 0.5,
+        "y": 0.26,
+        "width": 1.0,
+        "height": 0.52
+      },
+      "type": "shape",
+      "colorRole": "scrimClear",
+      "gradient": {
+        "from": "scrimClear",
+        "to": "scrimSolid",
+        "direction": "down"
+      }
+    },
+    {
+      "id": "kicker",
+      "frame": {
+        "x": 0.5,
+        "y": 0.33,
+        "width": 0.6,
+        "height": 0.035
+      },
+      "timing": {
+        "start": 0.35
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.5
+        }
+      ],
+      "type": "text",
+      "key": "kicker",
+      "default": {
+        "en": "THIS WEEK",
+        "tr": "BU HAFTA"
+      },
+      "font": {
+        "name": "AvenirNext-DemiBold",
+        "size": 0.02
+      },
+      "colorRole": "accent",
+      "alignment": "center",
+      "letterSpacing": 0.012,
+      "allCaps": true
+    },
+    {
+      "id": "title",
+      "frame": {
+        "x": 0.5,
+        "y": 0.42,
+        "width": 0.7,
+        "height": 0.11
+      },
+      "timing": {
+        "start": 0.2
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "pop",
+          "duration": 0.5,
+          "params": {
+            "overshoot": 1.1
+          }
+        },
+        {
+          "role": "loop",
+          "preset": "floatLoop",
+          "duration": 2.6,
+          "params": {
+            "distance": 0.006,
+            "axis": "y"
+          }
+        }
+      ],
+      "type": "text",
+      "key": "title",
+      "default": {
+        "en": "3 THINGS",
+        "tr": "3 ŞEY"
+      },
+      "font": {
+        "name": "AvenirNext-Heavy",
+        "size": 0.075
+      },
+      "colorRole": "textPrimary",
+      "alignment": "center",
+      "letterSpacing": 0.006,
+      "allCaps": true
+    },
+    {
+      "id": "dot0",
+      "frame": {
+        "x": 0.155,
+        "y": 0.62,
+        "width": 0.1,
+        "height": 0.056
+      },
+      "timing": {
+        "start": 0.5
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "scaleIn",
+          "duration": 0.45,
+          "easing": "easeOut",
+          "params": {
+            "from": 0.7
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "accent",
+      "mask": "circle"
+    },
+    {
+      "id": "num0",
+      "frame": {
+        "x": 0.155,
+        "y": 0.62,
+        "width": 0.09,
+        "height": 0.05
+      },
+      "timing": {
+        "start": 0.6
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.35
+        }
+      ],
+      "type": "text",
+      "key": "num0",
+      "default": {
+        "en": "1",
+        "tr": "1"
+      },
+      "font": {
+        "name": "AvenirNext-Heavy",
+        "size": 0.03
+      },
+      "colorRole": "background",
+      "alignment": "center"
+    },
+    {
+      "id": "item0",
+      "frame": {
+        "x": 0.585,
+        "y": 0.62,
+        "width": 0.65,
+        "height": 0.085
+      },
+      "timing": {
+        "start": 0.6
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "slideIn",
+          "duration": 0.5,
+          "easing": "easeOut",
+          "params": {
+            "direction": "left",
+            "distance": 0.06
+          }
+        }
+      ],
+      "type": "text",
+      "key": "item0",
+      "default": {
+        "en": "A 20-minute morning walk",
+        "tr": "Sabah 20 dakika yürüyüş"
+      },
+      "font": {
+        "name": "AvenirNext-Medium",
+        "size": 0.036
+      },
+      "colorRole": "textPrimary",
+      "alignment": "left",
+      "maxLines": 2
+    },
+    {
+      "id": "dot1",
+      "frame": {
+        "x": 0.155,
+        "y": 0.735,
+        "width": 0.1,
+        "height": 0.056
+      },
+      "timing": {
+        "start": 0.7
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "scaleIn",
+          "duration": 0.45,
+          "easing": "easeOut",
+          "params": {
+            "from": 0.7
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "accent",
+      "mask": "circle"
+    },
+    {
+      "id": "num1",
+      "frame": {
+        "x": 0.155,
+        "y": 0.735,
+        "width": 0.09,
+        "height": 0.05
+      },
+      "timing": {
+        "start": 0.8
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.35
+        }
+      ],
+      "type": "text",
+      "key": "num1",
+      "default": {
+        "en": "2",
+        "tr": "2"
+      },
+      "font": {
+        "name": "AvenirNext-Heavy",
+        "size": 0.03
+      },
+      "colorRole": "background",
+      "alignment": "center"
+    },
+    {
+      "id": "item1",
+      "frame": {
+        "x": 0.585,
+        "y": 0.735,
+        "width": 0.65,
+        "height": 0.085
+      },
+      "timing": {
+        "start": 0.8
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "slideIn",
+          "duration": 0.5,
+          "easing": "easeOut",
+          "params": {
+            "direction": "right",
+            "distance": 0.06
+          }
+        }
+      ],
+      "type": "text",
+      "key": "item1",
+      "default": {
+        "en": "Leaving the phone on the table",
+        "tr": "Telefonu masada bırakmak"
+      },
+      "font": {
+        "name": "AvenirNext-Medium",
+        "size": 0.036
+      },
+      "colorRole": "textPrimary",
+      "alignment": "left",
+      "maxLines": 2
+    },
+    {
+      "id": "dot2",
+      "frame": {
+        "x": 0.155,
+        "y": 0.85,
+        "width": 0.1,
+        "height": 0.056
+      },
+      "timing": {
+        "start": 0.9
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "scaleIn",
+          "duration": 0.45,
+          "easing": "easeOut",
+          "params": {
+            "from": 0.7
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "accent",
+      "mask": "circle"
+    },
+    {
+      "id": "num2",
+      "frame": {
+        "x": 0.155,
+        "y": 0.85,
+        "width": 0.09,
+        "height": 0.05
+      },
+      "timing": {
+        "start": 1.0
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.35
+        }
+      ],
+      "type": "text",
+      "key": "num2",
+      "default": {
+        "en": "3",
+        "tr": "3"
+      },
+      "font": {
+        "name": "AvenirNext-Heavy",
+        "size": 0.03
+      },
+      "colorRole": "background",
+      "alignment": "center"
+    },
+    {
+      "id": "item2",
+      "frame": {
+        "x": 0.585,
+        "y": 0.85,
+        "width": 0.65,
+        "height": 0.085
+      },
+      "timing": {
+        "start": 1.0
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "slideIn",
+          "duration": 0.5,
+          "easing": "easeOut",
+          "params": {
+            "direction": "up",
+            "distance": 0.06
+          }
+        }
+      ],
+      "type": "text",
+      "key": "item2",
+      "default": {
+        "en": "Reading a chapter at night",
+        "tr": "Akşam bir bölüm okumak"
+      },
+      "font": {
+        "name": "AvenirNext-Medium",
+        "size": 0.036
+      },
+      "colorRole": "textPrimary",
+      "alignment": "left",
+      "maxLines": 2
+    },
+    {
+      "id": "cta",
+      "frame": {
+        "x": 0.5,
+        "y": 0.94,
+        "width": 0.7,
+        "height": 0.04
+      },
+      "timing": {
+        "start": 1.25
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.6
+        }
+      ],
+      "type": "text",
+      "key": "cta",
+      "default": {
+        "en": "What are yours?",
+        "tr": "Seninkiler ne?"
+      },
+      "font": {
+        "name": "AvenirNext-Regular",
+        "size": 0.021
+      },
+      "colorRole": "textSecondary",
+      "alignment": "center"
+    }
+  ]
+}

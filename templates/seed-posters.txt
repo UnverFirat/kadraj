@@ -1,0 +1,62 @@
+# UYGULAMA PAKETİNE GİREN POSTERLER
+#
+# Şablon JSON'larının HEPSİ pakete girer (toplam ~1 MB — katalog listesi
+# çevrimdışı da eksiksiz görünsün). Posterler girmez: 100+ şablonun iki dilli
+# posteri 16 MB tutuyor ve katalog büyüdükçe doğrusal artıyor.
+#
+# Buradaki şablonların posteri pakete girer; geri kalanların posteri ilk
+# görüntülendiğinde CDN'den inip önbelleğe alınır. Poster inene kadar kart BOŞ
+# KALMAZ — `TemplatePreview` şablonu kendi katmanlarından çizer.
+#
+# Seçim ölçütü: galerinin İLK ekranında görünen ve her kategoriyi temsil eden
+# işler. Kategori başına 1-2 tane yeter; kullanıcı aşağı indikçe gerisi zaten
+# ağdan gelir.
+#
+# Satır başına bir şablon id'si. '#' ile başlayan satırlar ve boş satırlar
+# yok sayılır. Değiştirdikten sonra yeniden derle (build script okur).
+
+# Sosyal — galerinin ilk bölümü, en çok görülen kartlar
+fast-cut-01
+grid-four-01
+day-in-life-01
+photo-dump-01
+three-things-01
+
+# Tanıtım
+sale-promo-01
+flash-discount-01
+coupon-code-01
+
+# Yemek
+cafe-menu-01
+daily-special-01
+recipe-steps-01
+
+# Gezi
+reel-collage-01
+travel-mix-01
+city-guide-01
+
+# İş
+testimonial-01
+team-hiring-01
+
+# Moda / güzellik / spor
+lookbook-01
+salon-booking-01
+gym-offer-01
+
+# Emlak / eğitim / müzik
+open-house-01
+course-promo-01
+track-drop-01
+
+# Kutlama / özel günler
+invite-card-01
+birthday-wish-01
+new-year-01
+
+# Minimal
+quote-01
+minimal-fade-01
+bold-statement-01

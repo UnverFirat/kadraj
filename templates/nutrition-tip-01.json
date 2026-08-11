@@ -1,0 +1,611 @@
+{
+  "schemaVersion": 1,
+  "id": "nutrition-tip-01",
+  "name": {
+    "en": "Nutrition Tip",
+    "tr": "Beslenme İpucu"
+  },
+  "category": "fitness",
+  "isPro": true,
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "duration": 7.0,
+  "palette": {
+    "background": "#0D1A12",
+    "surface": "#F0F7F1",
+    "accent": "#3FA06A",
+    "textPrimary": "#F3FAF4",
+    "textSecondary": "#A6C2AE",
+    "textOnAccent": "#FFFFFF",
+    "scrimClear": "#00000000",
+    "scrimSolid": "#000000CC"
+  },
+  "audio": {
+    "defaultTrackId": "energetic-01",
+    "volume": 0.85
+  },
+  "layers": [
+    {
+      "id": "bg",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "type": "shape",
+      "colorRole": "background"
+    },
+    {
+      "id": "photo",
+      "frame": {
+        "x": 0.5,
+        "y": 0.27,
+        "width": 1.0,
+        "height": 0.54
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.6
+        },
+        {
+          "role": "loop",
+          "preset": "kenBurns",
+          "duration": 7.0,
+          "params": {
+            "zoom": 1.1,
+            "direction": "down"
+          }
+        }
+      ],
+      "type": "mediaSlot",
+      "slotIndex": 0,
+      "media": "photoOrVideo",
+      "contentMode": "fill",
+      "mask": "rect",
+      "filter": "vivid",
+      "filterIntensity": 0.35
+    },
+    {
+      "id": "scrim",
+      "frame": {
+        "x": 0.5,
+        "y": 0.11,
+        "width": 1.0,
+        "height": 0.22
+      },
+      "type": "shape",
+      "colorRole": "scrimClear",
+      "gradient": {
+        "from": "scrimClear",
+        "to": "scrimSolid",
+        "direction": "up"
+      }
+    },
+    {
+      "id": "kicker",
+      "frame": {
+        "x": 0.5,
+        "y": 0.09,
+        "width": 0.82,
+        "height": 0.038
+      },
+      "timing": {
+        "start": 0.3
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.55
+        }
+      ],
+      "type": "text",
+      "key": "kicker",
+      "default": {
+        "en": "NUTRITION TIP",
+        "tr": "BESLENME İPUCU"
+      },
+      "font": {
+        "name": "AvenirNext-DemiBold",
+        "size": 0.022
+      },
+      "colorRole": "textPrimary",
+      "alignment": "center",
+      "letterSpacing": 0.018,
+      "allCaps": true
+    },
+    {
+      "id": "title",
+      "frame": {
+        "x": 0.5,
+        "y": 0.625,
+        "width": 0.88,
+        "height": 0.08
+      },
+      "timing": {
+        "start": 0.5
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "kineticWords",
+          "duration": 0.9,
+          "params": {
+            "distance": 0.02
+          }
+        },
+        {
+          "role": "loop",
+          "preset": "floatLoop",
+          "duration": 2.6,
+          "params": {
+            "distance": 0.006,
+            "axis": "y"
+          }
+        }
+      ],
+      "type": "text",
+      "key": "title",
+      "default": {
+        "en": "Build your plate like this",
+        "tr": "Tabağını böyle kur"
+      },
+      "font": {
+        "name": "AvenirNext-Bold",
+        "size": 0.052
+      },
+      "colorRole": "textPrimary",
+      "alignment": "center"
+    },
+    {
+      "id": "sub",
+      "frame": {
+        "x": 0.5,
+        "y": 0.695,
+        "width": 0.86,
+        "height": 0.038
+      },
+      "timing": {
+        "start": 0.7
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.55
+        }
+      ],
+      "type": "text",
+      "key": "sub",
+      "default": {
+        "en": "Hit all three at every main meal",
+        "tr": "Her ana öğünde üçünü de bulundur"
+      },
+      "font": {
+        "name": "AvenirNext-Regular",
+        "size": 0.021
+      },
+      "colorRole": "textSecondary",
+      "alignment": "center"
+    },
+    {
+      "id": "rule",
+      "frame": {
+        "x": 0.5,
+        "y": 0.745,
+        "width": 0.86,
+        "height": 0.0015
+      },
+      "opacity": 0.3,
+      "timing": {
+        "start": 0.85
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "wipeReveal",
+          "duration": 0.6,
+          "easing": "easeOut",
+          "params": {
+            "direction": "right"
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "textSecondary"
+    },
+    {
+      "id": "label0",
+      "frame": {
+        "x": 0.2,
+        "y": 0.795,
+        "width": 0.28,
+        "height": 0.03
+      },
+      "timing": {
+        "start": 0.95
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.45
+        }
+      ],
+      "type": "text",
+      "key": "macro1Label",
+      "default": {
+        "en": "PROTEIN",
+        "tr": "PROTEİN"
+      },
+      "font": {
+        "name": "AvenirNext-Medium",
+        "size": 0.018
+      },
+      "colorRole": "textSecondary",
+      "alignment": "center",
+      "letterSpacing": 0.012,
+      "allCaps": true
+    },
+    {
+      "id": "value0",
+      "frame": {
+        "x": 0.2,
+        "y": 0.858,
+        "width": 0.28,
+        "height": 0.075
+      },
+      "timing": {
+        "start": 1.0
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "slideIn",
+          "duration": 0.45,
+          "easing": "easeOut",
+          "params": {
+            "direction": "up",
+            "distance": 0.025
+          }
+        }
+      ],
+      "type": "text",
+      "key": "macro1",
+      "default": {
+        "en": "40%",
+        "tr": "%40"
+      },
+      "font": {
+        "name": "Archivo-SemiBold",
+        "size": 0.048
+      },
+      "colorRole": "textPrimary",
+      "alignment": "center"
+    },
+    {
+      "id": "bar0",
+      "frame": {
+        "x": 0.2,
+        "y": 0.912,
+        "width": 0.22,
+        "height": 0.007
+      },
+      "timing": {
+        "start": 1.05
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "wipeReveal",
+          "duration": 0.5,
+          "easing": "easeOut",
+          "params": {
+            "direction": "right"
+          }
+        },
+        {
+          "role": "loop",
+          "preset": "shake",
+          "duration": 1.4,
+          "delay": 0.9,
+          "params": {
+            "degrees": 2.0
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "accent",
+      "cornerRadius": 0.0035
+    },
+    {
+      "id": "label1",
+      "frame": {
+        "x": 0.5,
+        "y": 0.795,
+        "width": 0.28,
+        "height": 0.03
+      },
+      "timing": {
+        "start": 1.07
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.45
+        }
+      ],
+      "type": "text",
+      "key": "macro2Label",
+      "default": {
+        "en": "CARBS",
+        "tr": "KARBONHİDRAT"
+      },
+      "font": {
+        "name": "AvenirNext-Medium",
+        "size": 0.018
+      },
+      "colorRole": "textSecondary",
+      "alignment": "center",
+      "letterSpacing": 0.012,
+      "allCaps": true
+    },
+    {
+      "id": "value1",
+      "frame": {
+        "x": 0.5,
+        "y": 0.858,
+        "width": 0.28,
+        "height": 0.075
+      },
+      "timing": {
+        "start": 1.12
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "slideIn",
+          "duration": 0.45,
+          "easing": "easeOut",
+          "params": {
+            "direction": "up",
+            "distance": 0.025
+          }
+        }
+      ],
+      "type": "text",
+      "key": "macro2",
+      "default": {
+        "en": "40%",
+        "tr": "%40"
+      },
+      "font": {
+        "name": "Archivo-SemiBold",
+        "size": 0.048
+      },
+      "colorRole": "textPrimary",
+      "alignment": "center"
+    },
+    {
+      "id": "bar1",
+      "frame": {
+        "x": 0.5,
+        "y": 0.912,
+        "width": 0.22,
+        "height": 0.007
+      },
+      "timing": {
+        "start": 1.17
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "wipeReveal",
+          "duration": 0.5,
+          "easing": "easeOut",
+          "params": {
+            "direction": "right"
+          }
+        },
+        {
+          "role": "loop",
+          "preset": "shake",
+          "duration": 1.4,
+          "delay": 0.9,
+          "params": {
+            "degrees": 2.0
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "accent",
+      "cornerRadius": 0.0035
+    },
+    {
+      "id": "label2",
+      "frame": {
+        "x": 0.8,
+        "y": 0.795,
+        "width": 0.28,
+        "height": 0.03
+      },
+      "timing": {
+        "start": 1.19
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.45
+        }
+      ],
+      "type": "text",
+      "key": "macro3Label",
+      "default": {
+        "en": "FAT",
+        "tr": "YAĞ"
+      },
+      "font": {
+        "name": "AvenirNext-Medium",
+        "size": 0.018
+      },
+      "colorRole": "textSecondary",
+      "alignment": "center",
+      "letterSpacing": 0.012,
+      "allCaps": true
+    },
+    {
+      "id": "value2",
+      "frame": {
+        "x": 0.8,
+        "y": 0.858,
+        "width": 0.28,
+        "height": 0.075
+      },
+      "timing": {
+        "start": 1.24
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "slideIn",
+          "duration": 0.45,
+          "easing": "easeOut",
+          "params": {
+            "direction": "up",
+            "distance": 0.025
+          }
+        }
+      ],
+      "type": "text",
+      "key": "macro3",
+      "default": {
+        "en": "20%",
+        "tr": "%20"
+      },
+      "font": {
+        "name": "Archivo-SemiBold",
+        "size": 0.048
+      },
+      "colorRole": "textPrimary",
+      "alignment": "center"
+    },
+    {
+      "id": "bar2",
+      "frame": {
+        "x": 0.8,
+        "y": 0.912,
+        "width": 0.11,
+        "height": 0.007
+      },
+      "timing": {
+        "start": 1.29
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "wipeReveal",
+          "duration": 0.5,
+          "easing": "easeOut",
+          "params": {
+            "direction": "right"
+          }
+        },
+        {
+          "role": "loop",
+          "preset": "shake",
+          "duration": 1.4,
+          "delay": 0.9,
+          "params": {
+            "degrees": 2.0
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "accent",
+      "cornerRadius": 0.0035
+    },
+    {
+      "id": "div1",
+      "frame": {
+        "x": 0.35,
+        "y": 0.845,
+        "width": 0.0015,
+        "height": 0.1
+      },
+      "opacity": 0.35,
+      "timing": {
+        "start": 1.1
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.4
+        }
+      ],
+      "type": "shape",
+      "colorRole": "textSecondary"
+    },
+    {
+      "id": "div2",
+      "frame": {
+        "x": 0.65,
+        "y": 0.845,
+        "width": 0.0015,
+        "height": 0.1
+      },
+      "opacity": 0.35,
+      "timing": {
+        "start": 1.2
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.4
+        }
+      ],
+      "type": "shape",
+      "colorRole": "textSecondary"
+    },
+    {
+      "id": "note",
+      "frame": {
+        "x": 0.5,
+        "y": 0.955,
+        "width": 0.9,
+        "height": 0.032
+      },
+      "timing": {
+        "start": 1.2
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.6
+        }
+      ],
+      "type": "text",
+      "key": "note",
+      "default": {
+        "en": "Example: chicken, bulgur, avocado",
+        "tr": "Örnek: tavuk + bulgur + avokado"
+      },
+      "font": {
+        "name": "AvenirNext-Regular",
+        "size": 0.02
+      },
+      "colorRole": "textSecondary",
+      "alignment": "center"
+    }
+  ]
+}

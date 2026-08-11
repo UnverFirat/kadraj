@@ -1,0 +1,233 @@
+{
+  "schemaVersion": 1,
+  "id": "shapes-trio-01",
+  "name": {
+    "en": "Shape Frames",
+    "tr": "Şekilli Çerçeve"
+  },
+  "category": "wedding",
+  "isPro": true,
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "duration": 4.5,
+  "palette": {
+    "background": "#141018",
+    "surface": "#26202E",
+    "accent": "#F06BA8",
+    "textPrimary": "#FFFFFF",
+    "textSecondary": "#C6BCCF"
+  },
+  "audio": {
+    "defaultTrackId": "sweet-01",
+    "volume": 0.85
+  },
+  "layers": [
+    {
+      "id": "bg",
+      "type": "shape",
+      "colorRole": "background",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      }
+    },
+    {
+      "id": "kicker",
+      "type": "text",
+      "key": "kicker",
+      "default": {
+        "en": "MEMORIES",
+        "tr": "ANILAR"
+      },
+      "font": {
+        "name": "AvenirNext-Medium",
+        "size": 0.022
+      },
+      "colorRole": "accent",
+      "alignment": "center",
+      "allCaps": true,
+      "letterSpacing": 0.014,
+      "frame": {
+        "x": 0.5,
+        "y": 0.13,
+        "width": 0.8,
+        "height": 0.04
+      },
+      "timing": {
+        "start": 0.3
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.5
+        }
+      ]
+    },
+    {
+      "id": "circle-photo",
+      "type": "mediaSlot",
+      "slotIndex": 0,
+      "media": "photo",
+      "contentMode": "fill",
+      "mask": "circle",
+      "frame": {
+        "x": 0.5,
+        "y": 0.3,
+        "width": 0.5,
+        "height": 0.28
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "pop",
+          "duration": 0.5,
+          "easing": "spring",
+          "params": {
+            "overshoot": 1.1
+          }
+        },
+        {
+          "role": "loop",
+          "preset": "kenBurns",
+          "duration": 4.5,
+          "params": {
+            "zoom": 1.1,
+            "direction": "up"
+          }
+        }
+      ]
+    },
+    {
+      "id": "heart-photo",
+      "type": "mediaSlot",
+      "slotIndex": 1,
+      "media": "photo",
+      "contentMode": "fill",
+      "mask": "heart",
+      "frame": {
+        "x": 0.3,
+        "y": 0.56,
+        "width": 0.42,
+        "height": 0.24
+      },
+      "timing": {
+        "start": 0.3
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "pop",
+          "duration": 0.5,
+          "delay": 0.15,
+          "easing": "spring",
+          "params": {
+            "overshoot": 1.1
+          }
+        }
+      ]
+    },
+    {
+      "id": "star-photo",
+      "type": "mediaSlot",
+      "slotIndex": 2,
+      "media": "photo",
+      "contentMode": "fill",
+      "mask": "star",
+      "frame": {
+        "x": 0.7,
+        "y": 0.58,
+        "width": 0.42,
+        "height": 0.24
+      },
+      "timing": {
+        "start": 0.5
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "pop",
+          "duration": 0.5,
+          "delay": 0.3,
+          "easing": "spring",
+          "params": {
+            "overshoot": 1.1
+          }
+        }
+      ]
+    },
+    {
+      "id": "title",
+      "type": "text",
+      "key": "title",
+      "default": {
+        "en": "our little world",
+        "tr": "küçük dünyamız"
+      },
+      "font": {
+        "name": "SnellRoundhand-Bold",
+        "size": 0.055
+      },
+      "colorRole": "textPrimary",
+      "alignment": "center",
+      "frame": {
+        "x": 0.5,
+        "y": 0.76,
+        "width": 0.84,
+        "height": 0.09
+      },
+      "timing": {
+        "start": 0.9
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "slideIn",
+          "duration": 0.6,
+          "params": {
+            "direction": "up",
+            "distance": 0.03
+          }
+        }
+      ]
+    },
+    {
+      "id": "date",
+      "type": "text",
+      "key": "date",
+      "default": {
+        "en": "SUMMER 2026",
+        "tr": "YAZ 2026"
+      },
+      "font": {
+        "name": "AvenirNext-Medium",
+        "size": 0.02
+      },
+      "colorRole": "textSecondary",
+      "alignment": "center",
+      "allCaps": true,
+      "letterSpacing": 0.01,
+      "frame": {
+        "x": 0.5,
+        "y": 0.82,
+        "width": 0.7,
+        "height": 0.04
+      },
+      "timing": {
+        "start": 1.2
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.5
+        }
+      ]
+    }
+  ]
+}

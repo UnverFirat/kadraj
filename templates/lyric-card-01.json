@@ -1,0 +1,275 @@
+{
+  "schemaVersion": 1,
+  "id": "lyric-card-01",
+  "name": {
+    "en": "Lyric Card",
+    "tr": "Şarkı Sözü"
+  },
+  "category": "music",
+  "isPro": true,
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "duration": 8.0,
+  "palette": {
+    "background": "#160B2B",
+    "surface": "#FFFFFF",
+    "accent": "#B06BFF",
+    "textPrimary": "#F6F0FF",
+    "textSecondary": "#B9A9D4",
+    "textOnAccent": "#FFFFFF",
+    "scrimClear": "#00000000",
+    "scrimSolid": "#000000CC"
+  },
+  "audio": {
+    "defaultTrackId": "smooth-01",
+    "volume": 0.85
+  },
+  "layers": [
+    {
+      "id": "bg",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "type": "shape",
+      "colorRole": "background"
+    },
+    {
+      "id": "photo",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.8
+        },
+        {
+          "role": "loop",
+          "preset": "kenBurns",
+          "duration": 8.0,
+          "params": {
+            "zoom": 1.06,
+            "direction": "right"
+          }
+        }
+      ],
+      "type": "mediaSlot",
+      "slotIndex": 0,
+      "media": "photoOrVideo",
+      "contentMode": "fill",
+      "mask": "rect",
+      "filter": "fade",
+      "filterIntensity": 0.85
+    },
+    {
+      "id": "veil",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "opacity": 0.55,
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.8
+        }
+      ],
+      "type": "shape",
+      "colorRole": "background"
+    },
+    {
+      "id": "scrim",
+      "frame": {
+        "x": 0.5,
+        "y": 0.3,
+        "width": 1.0,
+        "height": 0.6
+      },
+      "type": "shape",
+      "colorRole": "scrimClear",
+      "gradient": {
+        "from": "scrimClear",
+        "to": "scrimSolid",
+        "direction": "up"
+      }
+    },
+    {
+      "id": "kicker",
+      "frame": {
+        "x": 0.5,
+        "y": 0.24,
+        "width": 0.7,
+        "height": 0.04
+      },
+      "timing": {
+        "start": 0.35
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.7
+        }
+      ],
+      "type": "text",
+      "key": "kicker",
+      "default": {
+        "en": "LYRIC",
+        "tr": "ŞARKI SÖZÜ"
+      },
+      "font": {
+        "name": "AvenirNext-Medium",
+        "size": 0.021
+      },
+      "colorRole": "accent",
+      "alignment": "center",
+      "letterSpacing": 0.022,
+      "allCaps": true
+    },
+    {
+      "id": "rule",
+      "frame": {
+        "x": 0.5,
+        "y": 0.283,
+        "width": 0.08,
+        "height": 0.004
+      },
+      "timing": {
+        "start": 0.55
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "wipeReveal",
+          "duration": 0.6,
+          "easing": "easeOut",
+          "params": {
+            "direction": "right"
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "accent"
+    },
+    {
+      "id": "lyric",
+      "frame": {
+        "x": 0.5,
+        "y": 0.46,
+        "width": 0.84,
+        "height": 0.3
+      },
+      "timing": {
+        "start": 0.7
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "kineticWords",
+          "duration": 0.9,
+          "params": {
+            "distance": 0.02
+          }
+        },
+        {
+          "role": "loop",
+          "preset": "floatLoop",
+          "duration": 2.6,
+          "params": {
+            "distance": 0.006,
+            "axis": "y"
+          }
+        }
+      ],
+      "type": "text",
+      "key": "lyric",
+      "default": {
+        "en": "Even if every\nlight goes out,\nyou stay.",
+        "tr": "Şehrin bütün\nışıkları sönse de\nsen kal."
+      },
+      "font": {
+        "name": "Georgia-Italic",
+        "size": 0.058
+      },
+      "colorRole": "textPrimary",
+      "alignment": "center",
+      "maxLines": 3
+    },
+    {
+      "id": "artist",
+      "frame": {
+        "x": 0.5,
+        "y": 0.7,
+        "width": 0.82,
+        "height": 0.04
+      },
+      "timing": {
+        "start": 1.1
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.7
+        }
+      ],
+      "type": "text",
+      "key": "artist",
+      "default": {
+        "en": "— Mert Kaya, “Midnight Hour”",
+        "tr": "— Mert Kaya, “Gece Yarısı”"
+      },
+      "font": {
+        "name": "AvenirNext-Medium",
+        "size": 0.022
+      },
+      "colorRole": "textSecondary",
+      "alignment": "center"
+    },
+    {
+      "id": "footer",
+      "frame": {
+        "x": 0.5,
+        "y": 0.9,
+        "width": 0.78,
+        "height": 0.035
+      },
+      "timing": {
+        "start": 1.2
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.8
+        }
+      ],
+      "type": "text",
+      "key": "footer",
+      "default": {
+        "en": "New album, September 12",
+        "tr": "Yeni albüm 12 Eylül'de"
+      },
+      "font": {
+        "name": "AvenirNext-Regular",
+        "size": 0.02
+      },
+      "colorRole": "textSecondary",
+      "alignment": "center",
+      "letterSpacing": 0.008
+    }
+  ]
+}

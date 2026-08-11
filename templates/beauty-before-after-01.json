@@ -1,0 +1,385 @@
+{
+  "schemaVersion": 2,
+  "id": "beauty-before-after-01",
+  "name": {
+    "en": "Before & After",
+    "tr": "Öncesi & Sonrası"
+  },
+  "category": "beauty",
+  "isPro": true,
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "palette": {
+    "background": "#1C0F14",
+    "surface": "#FFF0F4",
+    "accent": "#F0698E",
+    "textPrimary": "#FFF0F4",
+    "textSecondary": "#D6A9B7",
+    "textOnAccent": "#FFFFFF",
+    "scrimClear": "#00000000",
+    "scrimSolid": "#000000CC"
+  },
+  "audio": {
+    "defaultTrackId": "smooth-01",
+    "volume": 0.85
+  },
+  "scenes": [
+    {
+      "id": "before",
+      "duration": 3.4,
+      "layers": [
+        {
+          "id": "a-media",
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 1.0,
+            "height": 1.0
+          },
+          "animations": [
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 3.4,
+              "params": {
+                "zoom": 1.1,
+                "direction": "up"
+              }
+            }
+          ],
+          "type": "mediaSlot",
+          "slotIndex": 0,
+          "media": "photoOrVideo",
+          "contentMode": "fill",
+          "mask": "rect",
+          "filter": "fade",
+          "filterIntensity": 0.35
+        },
+        {
+          "id": "a-scrim",
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 1.0,
+            "height": 1.0
+          },
+          "type": "shape",
+          "colorRole": "scrimClear",
+          "gradient": {
+            "from": "scrimClear",
+            "to": "scrimSolid",
+            "direction": "up"
+          }
+        },
+        {
+          "id": "a-pill",
+          "frame": {
+            "x": 0.5,
+            "y": 0.135,
+            "width": 0.36,
+            "height": 0.088
+          },
+          "timing": {
+            "start": 0.2
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "pop",
+              "duration": 0.5,
+              "params": {
+                "overshoot": 1.1
+              }
+            },
+            {
+              "role": "loop",
+              "preset": "shake",
+              "duration": 1.4,
+              "delay": 0.9,
+              "params": {
+                "degrees": 2.0
+              }
+            }
+          ],
+          "type": "shape",
+          "colorRole": "surface",
+          "cornerRadius": 0.044
+        },
+        {
+          "id": "a-label",
+          "frame": {
+            "x": 0.5,
+            "y": 0.135,
+            "width": 0.34,
+            "height": 0.055
+          },
+          "timing": {
+            "start": 0.35
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "fadeIn",
+              "duration": 0.4
+            }
+          ],
+          "type": "text",
+          "key": "beforeLabel",
+          "default": {
+            "en": "BEFORE",
+            "tr": "ÖNCE"
+          },
+          "font": {
+            "name": "AvenirNext-Heavy",
+            "size": 0.034
+          },
+          "colorRole": "background",
+          "alignment": "center",
+          "letterSpacing": 0.012,
+          "allCaps": true
+        },
+        {
+          "id": "a-note",
+          "frame": {
+            "x": 0.5,
+            "y": 0.225,
+            "width": 0.7,
+            "height": 0.04
+          },
+          "timing": {
+            "start": 0.6
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "fadeIn",
+              "duration": 0.5
+            }
+          ],
+          "type": "text",
+          "key": "beforeNote",
+          "default": {
+            "en": "Dry, tired ends",
+            "tr": "Yıpranmış uçlar"
+          },
+          "font": {
+            "name": "AvenirNext-Medium",
+            "size": 0.024
+          },
+          "colorRole": "textSecondary",
+          "alignment": "center"
+        }
+      ],
+      "transition": {
+        "style": "whip",
+        "duration": 0.4
+      }
+    },
+    {
+      "id": "after",
+      "duration": 3.4,
+      "layers": [
+        {
+          "id": "b-media",
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 1.0,
+            "height": 1.0
+          },
+          "animations": [
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 3.4,
+              "params": {
+                "zoom": 1.1,
+                "direction": "down"
+              }
+            }
+          ],
+          "type": "mediaSlot",
+          "slotIndex": 1,
+          "media": "photoOrVideo",
+          "contentMode": "fill",
+          "mask": "rect",
+          "filter": "vivid",
+          "filterIntensity": 0.45
+        },
+        {
+          "id": "b-scrim",
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 1.0,
+            "height": 1.0
+          },
+          "type": "shape",
+          "colorRole": "scrimClear",
+          "gradient": {
+            "from": "scrimClear",
+            "to": "scrimSolid",
+            "direction": "up"
+          }
+        },
+        {
+          "id": "b-scrim-bottom",
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 1.0,
+            "height": 1.0
+          },
+          "type": "shape",
+          "colorRole": "scrimClear",
+          "gradient": {
+            "from": "scrimClear",
+            "to": "scrimSolid",
+            "direction": "down"
+          }
+        },
+        {
+          "id": "b-pill",
+          "frame": {
+            "x": 0.5,
+            "y": 0.135,
+            "width": 0.36,
+            "height": 0.088
+          },
+          "timing": {
+            "start": 0.2
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "pop",
+              "duration": 0.5,
+              "params": {
+                "overshoot": 1.12
+              }
+            },
+            {
+              "role": "loop",
+              "preset": "shake",
+              "duration": 1.4,
+              "delay": 0.9,
+              "params": {
+                "degrees": 2.0
+              }
+            }
+          ],
+          "type": "shape",
+          "colorRole": "accent",
+          "cornerRadius": 0.044
+        },
+        {
+          "id": "b-label",
+          "frame": {
+            "x": 0.5,
+            "y": 0.135,
+            "width": 0.34,
+            "height": 0.055
+          },
+          "timing": {
+            "start": 0.35
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "scaleIn",
+              "duration": 0.4,
+              "easing": "easeOut",
+              "params": {
+                "from": 0.8
+              }
+            }
+          ],
+          "type": "text",
+          "key": "afterLabel",
+          "default": {
+            "en": "AFTER",
+            "tr": "SONRA"
+          },
+          "font": {
+            "name": "AvenirNext-Heavy",
+            "size": 0.034
+          },
+          "colorRole": "textOnAccent",
+          "alignment": "center",
+          "letterSpacing": 0.012,
+          "allCaps": true
+        },
+        {
+          "id": "b-head",
+          "frame": {
+            "x": 0.5,
+            "y": 0.83,
+            "width": 0.84,
+            "height": 0.15
+          },
+          "timing": {
+            "start": 0.5
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "kineticWords",
+              "duration": 0.9,
+              "params": {
+                "distance": 0.02
+              }
+            }
+          ],
+          "type": "text",
+          "key": "afterHead",
+          "default": {
+            "en": "One session,\nfull balayage",
+            "tr": "Tek seansta\nbalyaj"
+          },
+          "font": {
+            "name": "AvenirNext-Bold",
+            "size": 0.05
+          },
+          "colorRole": "textPrimary",
+          "alignment": "center",
+          "maxLines": 2
+        },
+        {
+          "id": "b-cta",
+          "frame": {
+            "x": 0.5,
+            "y": 0.925,
+            "width": 0.78,
+            "height": 0.045
+          },
+          "timing": {
+            "start": 0.85
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "fadeIn",
+              "duration": 0.5
+            }
+          ],
+          "type": "text",
+          "key": "afterCta",
+          "default": {
+            "en": "Your turn — DM us",
+            "tr": "Sıra sende · DM at"
+          },
+          "font": {
+            "name": "AvenirNext-Medium",
+            "size": 0.026
+          },
+          "colorRole": "accent",
+          "alignment": "center"
+        }
+      ]
+    }
+  ],
+  "layers": []
+}

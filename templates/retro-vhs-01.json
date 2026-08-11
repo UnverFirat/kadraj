@@ -1,0 +1,275 @@
+{
+  "schemaVersion": 1,
+  "id": "retro-vhs-01",
+  "name": {
+    "en": "Retro Tape",
+    "tr": "Retro Kaset"
+  },
+  "category": "social",
+  "isPro": true,
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "duration": 7.0,
+  "palette": {
+    "background": "#1E1305",
+    "surface": "#F7E7C4",
+    "accent": "#E4A11B",
+    "textPrimary": "#FDF3DD",
+    "textSecondary": "#C9A96B",
+    "textOnAccent": "#1E1305",
+    "scrimClear": "#00000000",
+    "scrimSolid": "#000000CC",
+    "recRed": "#FF3B30"
+  },
+  "audio": {
+    "defaultTrackId": "groovy-01",
+    "volume": 0.85
+  },
+  "layers": [
+    {
+      "id": "bg",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "type": "shape",
+      "colorRole": "background"
+    },
+    {
+      "id": "tape",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.5
+        },
+        {
+          "role": "loop",
+          "preset": "kenBurns",
+          "duration": 7.0,
+          "params": {
+            "zoom": 1.1,
+            "direction": "down"
+          }
+        }
+      ],
+      "type": "mediaSlot",
+      "slotIndex": 0,
+      "media": "photoOrVideo",
+      "contentMode": "fill",
+      "mask": "rect",
+      "filter": "vintage",
+      "filterIntensity": 0.85
+    },
+    {
+      "id": "veil-top",
+      "frame": {
+        "x": 0.5,
+        "y": 0.13,
+        "width": 1.0,
+        "height": 0.26
+      },
+      "type": "shape",
+      "colorRole": "scrimClear",
+      "gradient": {
+        "from": "scrimClear",
+        "to": "scrimSolid",
+        "direction": "up"
+      }
+    },
+    {
+      "id": "veil-bottom",
+      "frame": {
+        "x": 0.5,
+        "y": 0.79,
+        "width": 1.0,
+        "height": 0.42
+      },
+      "type": "shape",
+      "colorRole": "scrimClear",
+      "gradient": {
+        "from": "scrimClear",
+        "to": "scrimSolid",
+        "direction": "down"
+      }
+    },
+    {
+      "id": "rec-dot",
+      "frame": {
+        "x": 0.115,
+        "y": 0.095,
+        "width": 0.026,
+        "height": 0.0146
+      },
+      "animations": [
+        {
+          "role": "loop",
+          "preset": "pulse",
+          "duration": 1.0,
+          "params": {
+            "scale": 1.25
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "recRed",
+      "mask": "circle"
+    },
+    {
+      "id": "rec",
+      "frame": {
+        "x": 0.215,
+        "y": 0.095,
+        "width": 0.15,
+        "height": 0.04
+      },
+      "timing": {
+        "start": 0.2
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.4
+        }
+      ],
+      "type": "text",
+      "key": "rec",
+      "default": {
+        "en": "REC",
+        "tr": "REC"
+      },
+      "font": {
+        "name": "Courier-Bold",
+        "size": 0.028
+      },
+      "colorRole": "recRed",
+      "alignment": "left",
+      "letterSpacing": 0.01,
+      "allCaps": true
+    },
+    {
+      "id": "timecode",
+      "frame": {
+        "x": 0.79,
+        "y": 0.095,
+        "width": 0.34,
+        "height": 0.04
+      },
+      "timing": {
+        "start": 0.2
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.4
+        }
+      ],
+      "type": "text",
+      "key": "timecode",
+      "default": {
+        "en": "00:00:12:04",
+        "tr": "00:00:12:04"
+      },
+      "font": {
+        "name": "Courier-Bold",
+        "size": 0.028
+      },
+      "colorRole": "textPrimary",
+      "alignment": "right",
+      "letterSpacing": 0.004
+    },
+    {
+      "id": "title",
+      "frame": {
+        "x": 0.5,
+        "y": 0.825,
+        "width": 0.84,
+        "height": 0.09
+      },
+      "timing": {
+        "start": 0.6
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "slideIn",
+          "duration": 0.6,
+          "easing": "easeOut",
+          "params": {
+            "direction": "up",
+            "distance": 0.04
+          }
+        },
+        {
+          "role": "loop",
+          "preset": "floatLoop",
+          "duration": 2.6,
+          "params": {
+            "distance": 0.006,
+            "axis": "y"
+          }
+        }
+      ],
+      "type": "text",
+      "key": "title",
+      "default": {
+        "en": "LAST DAY OF SUMMER",
+        "tr": "YAZIN SON GÜNÜ"
+      },
+      "font": {
+        "name": "Courier-Bold",
+        "size": 0.048
+      },
+      "colorRole": "textPrimary",
+      "alignment": "center",
+      "letterSpacing": 0.004,
+      "allCaps": true
+    },
+    {
+      "id": "datestamp",
+      "frame": {
+        "x": 0.5,
+        "y": 0.905,
+        "width": 0.8,
+        "height": 0.042
+      },
+      "timing": {
+        "start": 0.95
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "typewriter",
+          "duration": 1.0
+        }
+      ],
+      "type": "text",
+      "key": "datestamp",
+      "default": {
+        "en": "AUG 10 2026",
+        "tr": "10 AĞU 2026"
+      },
+      "font": {
+        "name": "Courier-Bold",
+        "size": 0.026
+      },
+      "colorRole": "accent",
+      "alignment": "center",
+      "letterSpacing": 0.02,
+      "allCaps": true
+    }
+  ]
+}

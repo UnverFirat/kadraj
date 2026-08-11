@@ -1,0 +1,522 @@
+{
+  "schemaVersion": 2,
+  "id": "real-estate-01",
+  "name": {
+    "en": "Property Tour",
+    "tr": "Emlak Turu"
+  },
+  "category": "realestate",
+  "isPro": true,
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "palette": {
+    "background": "#0D1117",
+    "surface": "#FFFFFF",
+    "scrim": "#000000A6",
+    "accent": "#C9A227",
+    "textOnAccent": "#11151A",
+    "textPrimary": "#FFFFFF",
+    "textSecondary": "#C9CDD3",
+    "scrimClear": "#00000000",
+    "scrimSolid": "#000000CC"
+  },
+  "audio": {
+    "defaultTrackId": "cinematic-01",
+    "volume": 0.85
+  },
+  "scenes": [
+    {
+      "id": "exterior",
+      "duration": 2.8,
+      "transition": {
+        "style": "crossDissolve",
+        "duration": 0.5
+      },
+      "layers": [
+        {
+          "id": "v0",
+          "type": "mediaSlot",
+          "slotIndex": 0,
+          "media": "photoOrVideo",
+          "contentMode": "fill",
+          "mask": "rect",
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 1.0,
+            "height": 1.0
+          },
+          "filter": "cinematic",
+          "filterIntensity": 0.6,
+          "animations": [
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 2.8,
+              "params": {
+                "zoom": 1.12,
+                "direction": "up"
+              }
+            }
+          ]
+        },
+        {
+          "id": "scrim0",
+          "type": "shape",
+          "colorRole": "scrimClear",
+          "frame": {
+            "x": 0.5,
+            "y": 0.8,
+            "width": 1.0,
+            "height": 0.42
+          },
+          "gradient": {
+            "from": "scrimClear",
+            "to": "scrimSolid",
+            "direction": "down"
+          }
+        },
+        {
+          "id": "title",
+          "type": "text",
+          "key": "title",
+          "default": {
+            "en": "FOR SALE",
+            "tr": "SATILIK DAİRE"
+          },
+          "font": {
+            "name": "AvenirNext-Heavy",
+            "size": 0.05
+          },
+          "colorRole": "textPrimary",
+          "alignment": "center",
+          "frame": {
+            "x": 0.5,
+            "y": 0.72,
+            "width": 0.86,
+            "height": 0.08
+          },
+          "allCaps": true,
+          "timing": {
+            "start": 0.3
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "slideIn",
+              "duration": 0.6,
+              "easing": "easeOut",
+              "params": {
+                "direction": "up",
+                "distance": 0.04
+              }
+            }
+          ]
+        },
+        {
+          "id": "loc",
+          "type": "text",
+          "key": "loc",
+          "default": {
+            "en": "KADIKOY · ISTANBUL",
+            "tr": "KADIKÖY · İSTANBUL"
+          },
+          "font": {
+            "name": "AvenirNext-Medium",
+            "size": 0.022
+          },
+          "colorRole": "textSecondary",
+          "alignment": "center",
+          "frame": {
+            "x": 0.5,
+            "y": 0.79,
+            "width": 0.86,
+            "height": 0.04
+          },
+          "allCaps": true,
+          "letterSpacing": 0.012,
+          "timing": {
+            "start": 0.6
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "fadeIn",
+              "duration": 0.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "interior",
+      "duration": 2.8,
+      "transition": {
+        "style": "crossDissolve",
+        "duration": 0.5
+      },
+      "layers": [
+        {
+          "id": "v1",
+          "type": "mediaSlot",
+          "slotIndex": 1,
+          "media": "photoOrVideo",
+          "contentMode": "fill",
+          "mask": "rect",
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 1.0,
+            "height": 1.0
+          },
+          "animations": [
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 2.8,
+              "params": {
+                "zoom": 1.1,
+                "direction": "left"
+              }
+            }
+          ]
+        },
+        {
+          "id": "scrim1",
+          "type": "shape",
+          "colorRole": "scrimClear",
+          "frame": {
+            "x": 0.5,
+            "y": 0.86,
+            "width": 1.0,
+            "height": 0.3
+          },
+          "gradient": {
+            "from": "scrimClear",
+            "to": "scrimSolid",
+            "direction": "down"
+          }
+        },
+        {
+          "id": "pill0",
+          "type": "shape",
+          "colorRole": "accent",
+          "frame": {
+            "x": 0.22,
+            "y": 0.82,
+            "width": 0.25,
+            "height": 0.062
+          },
+          "cornerRadius": 0.014,
+          "timing": {
+            "start": 0.4
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "pop",
+              "duration": 0.45,
+              "params": {
+                "overshoot": 1.12
+              }
+            }
+          ]
+        },
+        {
+          "id": "spec0",
+          "type": "text",
+          "key": "spec0",
+          "default": {
+            "en": "3+1",
+            "tr": "3+1"
+          },
+          "font": {
+            "name": "AvenirNext-Bold",
+            "size": 0.024
+          },
+          "colorRole": "textOnAccent",
+          "alignment": "center",
+          "frame": {
+            "x": 0.22,
+            "y": 0.82,
+            "width": 0.25,
+            "height": 0.045
+          },
+          "allCaps": true,
+          "letterSpacing": 0.006,
+          "timing": {
+            "start": 0.5
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "fadeIn",
+              "duration": 0.3
+            }
+          ]
+        },
+        {
+          "id": "pill1",
+          "type": "shape",
+          "colorRole": "accent",
+          "frame": {
+            "x": 0.5,
+            "y": 0.82,
+            "width": 0.25,
+            "height": 0.062
+          },
+          "cornerRadius": 0.014,
+          "timing": {
+            "start": 0.65
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "pop",
+              "duration": 0.45,
+              "params": {
+                "overshoot": 1.12
+              }
+            }
+          ]
+        },
+        {
+          "id": "spec1",
+          "type": "text",
+          "key": "spec1",
+          "default": {
+            "en": "120 m²",
+            "tr": "120 m²"
+          },
+          "font": {
+            "name": "AvenirNext-Bold",
+            "size": 0.024
+          },
+          "colorRole": "textOnAccent",
+          "alignment": "center",
+          "frame": {
+            "x": 0.5,
+            "y": 0.82,
+            "width": 0.25,
+            "height": 0.045
+          },
+          "allCaps": true,
+          "letterSpacing": 0.006,
+          "timing": {
+            "start": 0.75
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "fadeIn",
+              "duration": 0.3
+            }
+          ]
+        },
+        {
+          "id": "pill2",
+          "type": "shape",
+          "colorRole": "accent",
+          "frame": {
+            "x": 0.78,
+            "y": 0.82,
+            "width": 0.25,
+            "height": 0.062
+          },
+          "cornerRadius": 0.014,
+          "timing": {
+            "start": 0.9
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "pop",
+              "duration": 0.45,
+              "params": {
+                "overshoot": 1.12
+              }
+            }
+          ]
+        },
+        {
+          "id": "spec2",
+          "type": "text",
+          "key": "spec2",
+          "default": {
+            "en": "2ND FLOOR",
+            "tr": "2. KAT"
+          },
+          "font": {
+            "name": "AvenirNext-Bold",
+            "size": 0.024
+          },
+          "colorRole": "textOnAccent",
+          "alignment": "center",
+          "frame": {
+            "x": 0.78,
+            "y": 0.82,
+            "width": 0.25,
+            "height": 0.045
+          },
+          "allCaps": true,
+          "letterSpacing": 0.006,
+          "timing": {
+            "start": 1.0
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "fadeIn",
+              "duration": 0.3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cta",
+      "duration": 2.6,
+      "layers": [
+        {
+          "id": "v2",
+          "type": "mediaSlot",
+          "slotIndex": 2,
+          "media": "photoOrVideo",
+          "contentMode": "fill",
+          "mask": "rect",
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 1.0,
+            "height": 1.0
+          },
+          "filter": "cinematic",
+          "filterIntensity": 0.7,
+          "animations": [
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 2.6,
+              "params": {
+                "zoom": 1.08,
+                "direction": "down"
+              }
+            }
+          ]
+        },
+        {
+          "id": "scrim2",
+          "type": "shape",
+          "colorRole": "scrimSolid",
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 1.0,
+            "height": 1.0
+          },
+          "opacity": 0.85
+        },
+        {
+          "id": "price",
+          "type": "text",
+          "key": "price",
+          "default": {
+            "en": "$1,250,000",
+            "tr": "₺4.750.000"
+          },
+          "font": {
+            "name": "AvenirNext-Heavy",
+            "size": 0.058
+          },
+          "colorRole": "accent",
+          "alignment": "center",
+          "frame": {
+            "x": 0.5,
+            "y": 0.44,
+            "width": 0.9,
+            "height": 0.09
+          },
+          "timing": {
+            "start": 0.2
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "pop",
+              "duration": 0.5,
+              "params": {
+                "overshoot": 1.12
+              }
+            }
+          ]
+        },
+        {
+          "id": "cta",
+          "type": "text",
+          "key": "cta",
+          "default": {
+            "en": "DM FOR DETAILS",
+            "tr": "DETAY İÇİN DM"
+          },
+          "font": {
+            "name": "AvenirNext-Bold",
+            "size": 0.026
+          },
+          "colorRole": "textPrimary",
+          "alignment": "center",
+          "frame": {
+            "x": 0.5,
+            "y": 0.55,
+            "width": 0.8,
+            "height": 0.05
+          },
+          "allCaps": true,
+          "letterSpacing": 0.012,
+          "timing": {
+            "start": 0.5
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "fadeIn",
+              "duration": 0.5
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "layers": [
+    {
+      "id": "agent",
+      "type": "text",
+      "key": "agent",
+      "default": {
+        "en": "@realtyoffice",
+        "tr": "@emlakofisi"
+      },
+      "font": {
+        "name": "AvenirNext-Medium",
+        "size": 0.018
+      },
+      "colorRole": "textSecondary",
+      "alignment": "center",
+      "frame": {
+        "x": 0.5,
+        "y": 0.94,
+        "width": 0.6,
+        "height": 0.03
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.6
+        }
+      ]
+    }
+  ]
+}

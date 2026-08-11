@@ -1,0 +1,495 @@
+{
+  "schemaVersion": 2,
+  "id": "weekly-recap-01",
+  "name": {
+    "en": "Weekly Recap",
+    "tr": "Haftalık Özet"
+  },
+  "category": "social",
+  "isPro": true,
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "palette": {
+    "background": "#0B0B12",
+    "surface": "#FFFFFF",
+    "accent": "#6C8CFF",
+    "textPrimary": "#F4F5FF",
+    "textSecondary": "#A8ADC4",
+    "textOnAccent": "#FFFFFF",
+    "scrimClear": "#00000000",
+    "scrimSolid": "#000000CC"
+  },
+  "audio": {
+    "defaultTrackId": "cinematic-01",
+    "volume": 0.85
+  },
+  "scenes": [
+    {
+      "id": "cover",
+      "duration": 2.2,
+      "layers": [
+        {
+          "id": "cov-bg",
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 1.0,
+            "height": 1.0
+          },
+          "type": "shape",
+          "colorRole": "background"
+        },
+        {
+          "id": "cov-glow",
+          "frame": {
+            "x": 0.5,
+            "y": 0.44,
+            "width": 0.86,
+            "height": 0.48
+          },
+          "opacity": 0.16,
+          "animations": [
+            {
+              "role": "in",
+              "preset": "scaleIn",
+              "duration": 0.8,
+              "easing": "easeOut",
+              "params": {
+                "from": 0.85
+              }
+            },
+            {
+              "role": "loop",
+              "preset": "pulse",
+              "duration": 2.2,
+              "params": {
+                "scale": 1.04
+              }
+            }
+          ],
+          "type": "shape",
+          "colorRole": "accent",
+          "cornerRadius": 0.24
+        },
+        {
+          "id": "cov-kicker",
+          "frame": {
+            "x": 0.5,
+            "y": 0.33,
+            "width": 0.7,
+            "height": 0.04
+          },
+          "timing": {
+            "start": 0.2
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "fadeIn",
+              "duration": 0.5
+            }
+          ],
+          "type": "text",
+          "key": "covKicker",
+          "default": {
+            "en": "AUG 5 – 11",
+            "tr": "5 – 11 AĞUSTOS"
+          },
+          "font": {
+            "name": "AvenirNext-DemiBold",
+            "size": 0.022
+          },
+          "colorRole": "textSecondary",
+          "alignment": "center",
+          "letterSpacing": 0.014,
+          "allCaps": true
+        },
+        {
+          "id": "cov-title",
+          "frame": {
+            "x": 0.5,
+            "y": 0.46,
+            "width": 0.86,
+            "height": 0.2
+          },
+          "timing": {
+            "start": 0.35
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "kineticWords",
+              "duration": 0.9,
+              "params": {
+                "distance": 0.02
+              }
+            }
+          ],
+          "type": "text",
+          "key": "covTitle",
+          "default": {
+            "en": "WEEKLY\nRECAP",
+            "tr": "HAFTALIK\nÖZET"
+          },
+          "font": {
+            "name": "AvenirNext-Heavy",
+            "size": 0.078
+          },
+          "colorRole": "textPrimary",
+          "alignment": "center",
+          "maxLines": 2,
+          "allCaps": true
+        },
+        {
+          "id": "cov-sub",
+          "frame": {
+            "x": 0.5,
+            "y": 0.6,
+            "width": 0.78,
+            "height": 0.045
+          },
+          "timing": {
+            "start": 0.8
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "fadeIn",
+              "duration": 0.6
+            }
+          ],
+          "type": "text",
+          "key": "covSub",
+          "default": {
+            "en": "Three good things happened",
+            "tr": "Üç güzel şey oldu"
+          },
+          "font": {
+            "name": "AvenirNext-Regular",
+            "size": 0.024
+          },
+          "colorRole": "textSecondary",
+          "alignment": "center"
+        }
+      ],
+      "transition": {
+        "style": "slideUp",
+        "duration": 0.4
+      }
+    },
+    {
+      "id": "grid",
+      "duration": 2.8,
+      "layers": [
+        {
+          "id": "g0",
+          "frame": {
+            "x": 0.2525,
+            "y": 0.42,
+            "width": 0.47,
+            "height": 0.5
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "scaleIn",
+              "duration": 0.5,
+              "easing": "easeOut",
+              "params": {
+                "from": 0.9
+              }
+            },
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 2.8,
+              "params": {
+                "zoom": 1.08,
+                "direction": "up"
+              }
+            }
+          ],
+          "type": "mediaSlot",
+          "slotIndex": 0,
+          "media": "photoOrVideo",
+          "contentMode": "fill",
+          "mask": "rect",
+          "cornerRadius": 0.012,
+          "filter": "cinematic",
+          "filterIntensity": 0.5
+        },
+        {
+          "id": "g1",
+          "frame": {
+            "x": 0.7475,
+            "y": 0.42,
+            "width": 0.47,
+            "height": 0.5
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "scaleIn",
+              "duration": 0.5,
+              "delay": 0.1,
+              "easing": "easeOut",
+              "params": {
+                "from": 0.9
+              }
+            },
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 2.8,
+              "params": {
+                "zoom": 1.08,
+                "direction": "up"
+              }
+            }
+          ],
+          "type": "mediaSlot",
+          "slotIndex": 1,
+          "media": "photoOrVideo",
+          "contentMode": "fill",
+          "mask": "rect",
+          "cornerRadius": 0.012,
+          "filter": "cinematic",
+          "filterIntensity": 0.5
+        },
+        {
+          "id": "g-rule",
+          "frame": {
+            "x": 0.5,
+            "y": 0.72,
+            "width": 0.1,
+            "height": 0.005
+          },
+          "timing": {
+            "start": 0.5
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "wipeReveal",
+              "duration": 0.5,
+              "easing": "easeOut",
+              "params": {
+                "direction": "right"
+              }
+            }
+          ],
+          "type": "shape",
+          "colorRole": "accent"
+        },
+        {
+          "id": "g-title",
+          "frame": {
+            "x": 0.5,
+            "y": 0.79,
+            "width": 0.82,
+            "height": 0.09
+          },
+          "timing": {
+            "start": 0.6
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "slideIn",
+              "duration": 0.55,
+              "easing": "easeOut",
+              "params": {
+                "direction": "up",
+                "distance": 0.04
+              }
+            }
+          ],
+          "type": "text",
+          "key": "gTitle",
+          "default": {
+            "en": "Two cities, one week",
+            "tr": "İki şehir, bir hafta"
+          },
+          "font": {
+            "name": "AvenirNext-Bold",
+            "size": 0.046
+          },
+          "colorRole": "textPrimary",
+          "alignment": "center"
+        },
+        {
+          "id": "g-note",
+          "frame": {
+            "x": 0.5,
+            "y": 0.87,
+            "width": 0.7,
+            "height": 0.04
+          },
+          "timing": {
+            "start": 0.9
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "fadeIn",
+              "duration": 0.5
+            }
+          ],
+          "type": "text",
+          "key": "gNote",
+          "default": {
+            "en": "Izmir and Ankara",
+            "tr": "İzmir ve Ankara"
+          },
+          "font": {
+            "name": "AvenirNext-Regular",
+            "size": 0.022
+          },
+          "colorRole": "textSecondary",
+          "alignment": "center"
+        }
+      ],
+      "transition": {
+        "style": "blurDissolve",
+        "duration": 0.4
+      }
+    },
+    {
+      "id": "close",
+      "duration": 2.0,
+      "layers": [
+        {
+          "id": "cl-ring",
+          "frame": {
+            "x": 0.5,
+            "y": 0.36,
+            "width": 0.48,
+            "height": 0.27
+          },
+          "opacity": 0.28,
+          "animations": [
+            {
+              "role": "in",
+              "preset": "scaleIn",
+              "duration": 0.7,
+              "easing": "easeOut",
+              "params": {
+                "from": 0.8
+              }
+            }
+          ],
+          "type": "shape",
+          "colorRole": "accent",
+          "mask": "circle"
+        },
+        {
+          "id": "cl-media",
+          "frame": {
+            "x": 0.5,
+            "y": 0.36,
+            "width": 0.44,
+            "height": 0.2475
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "scaleIn",
+              "duration": 0.6,
+              "easing": "easeOut",
+              "params": {
+                "from": 0.85
+              }
+            },
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 2.0,
+              "params": {
+                "zoom": 1.1,
+                "direction": "up"
+              }
+            }
+          ],
+          "type": "mediaSlot",
+          "slotIndex": 2,
+          "media": "photoOrVideo",
+          "contentMode": "fill",
+          "mask": "circle",
+          "filter": "cinematic",
+          "filterIntensity": 0.4
+        },
+        {
+          "id": "cl-title",
+          "frame": {
+            "x": 0.5,
+            "y": 0.58,
+            "width": 0.82,
+            "height": 0.09
+          },
+          "timing": {
+            "start": 0.3
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "slideIn",
+              "duration": 0.5,
+              "easing": "easeOut",
+              "params": {
+                "direction": "up",
+                "distance": 0.04
+              }
+            }
+          ],
+          "type": "text",
+          "key": "clTitle",
+          "default": {
+            "en": "See you next week",
+            "tr": "Haftaya görüşürüz"
+          },
+          "font": {
+            "name": "AvenirNext-Bold",
+            "size": 0.046
+          },
+          "colorRole": "textPrimary",
+          "alignment": "center"
+        },
+        {
+          "id": "cl-handle",
+          "frame": {
+            "x": 0.5,
+            "y": 0.665,
+            "width": 0.6,
+            "height": 0.04
+          },
+          "timing": {
+            "start": 0.6
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "fadeIn",
+              "duration": 0.5
+            }
+          ],
+          "type": "text",
+          "key": "clHandle",
+          "default": {
+            "en": "@dailystory",
+            "tr": "@gunlukhikaye"
+          },
+          "font": {
+            "name": "AvenirNext-Regular",
+            "size": 0.021
+          },
+          "colorRole": "textSecondary",
+          "alignment": "center"
+        }
+      ]
+    }
+  ],
+  "layers": []
+}

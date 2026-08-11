@@ -1,0 +1,389 @@
+{
+  "schemaVersion": 1,
+  "id": "word-of-day-01",
+  "name": {
+    "en": "Word of the Day",
+    "tr": "Günün Kelimesi"
+  },
+  "category": "education",
+  "isPro": false,
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "duration": 7.5,
+  "palette": {
+    "background": "#FBFAF7",
+    "surface": "#FFFFFF",
+    "accent": "#B99566",
+    "textPrimary": "#1A1815",
+    "textSecondary": "#8A857D",
+    "textOnAccent": "#FFFFFF",
+    "scrimClear": "#00000000",
+    "scrimSolid": "#000000CC"
+  },
+  "audio": {
+    "defaultTrackId": "typewriter-01",
+    "volume": 0.85
+  },
+  "layers": [
+    {
+      "id": "bg",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "type": "shape",
+      "colorRole": "background"
+    },
+    {
+      "id": "card",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 0.86,
+        "height": 0.62
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "scaleIn",
+          "duration": 0.6,
+          "easing": "easeOut",
+          "params": {
+            "from": 0.95
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "surface",
+      "cornerRadius": 0.022
+    },
+    {
+      "id": "kicker",
+      "frame": {
+        "x": 0.5,
+        "y": 0.235,
+        "width": 0.74,
+        "height": 0.035
+      },
+      "timing": {
+        "start": 0.3
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.55
+        }
+      ],
+      "type": "text",
+      "key": "kicker",
+      "default": {
+        "en": "WORD OF THE DAY",
+        "tr": "GÜNÜN KELİMESİ"
+      },
+      "font": {
+        "name": "AvenirNext-Medium",
+        "size": 0.019
+      },
+      "colorRole": "accent",
+      "alignment": "left",
+      "letterSpacing": 0.014,
+      "allCaps": true
+    },
+    {
+      "id": "word",
+      "frame": {
+        "x": 0.5,
+        "y": 0.31,
+        "width": 0.74,
+        "height": 0.1
+      },
+      "timing": {
+        "start": 0.45
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "typewriter",
+          "duration": 1.0
+        },
+        {
+          "role": "loop",
+          "preset": "floatLoop",
+          "duration": 2.6,
+          "params": {
+            "distance": 0.006,
+            "axis": "y"
+          }
+        }
+      ],
+      "type": "text",
+      "key": "word",
+      "default": {
+        "en": "petrichor",
+        "tr": "münzevi"
+      },
+      "font": {
+        "name": "Georgia-Bold",
+        "size": 0.07
+      },
+      "colorRole": "textPrimary",
+      "alignment": "left"
+    },
+    {
+      "id": "pron",
+      "frame": {
+        "x": 0.5,
+        "y": 0.39,
+        "width": 0.74,
+        "height": 0.04
+      },
+      "timing": {
+        "start": 0.7
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.55
+        }
+      ],
+      "type": "text",
+      "key": "pron",
+      "default": {
+        "en": "/ˈpe-trə-kôr/ · noun",
+        "tr": "/mün-ze-vî/ · sıfat"
+      },
+      "font": {
+        "name": "Georgia-Italic",
+        "size": 0.022
+      },
+      "colorRole": "textSecondary",
+      "alignment": "left"
+    },
+    {
+      "id": "div1",
+      "frame": {
+        "x": 0.5,
+        "y": 0.435,
+        "width": 0.74,
+        "height": 0.0018
+      },
+      "opacity": 0.35,
+      "timing": {
+        "start": 0.8
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "wipeReveal",
+          "duration": 0.6,
+          "easing": "easeOut",
+          "params": {
+            "direction": "right"
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "textSecondary"
+    },
+    {
+      "id": "def-label",
+      "frame": {
+        "x": 0.5,
+        "y": 0.475,
+        "width": 0.74,
+        "height": 0.03
+      },
+      "timing": {
+        "start": 0.85
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.5
+        }
+      ],
+      "type": "text",
+      "key": "defLabel",
+      "default": {
+        "en": "MEANING",
+        "tr": "TANIM"
+      },
+      "font": {
+        "name": "AvenirNext-DemiBold",
+        "size": 0.018
+      },
+      "colorRole": "accent",
+      "alignment": "left",
+      "letterSpacing": 0.016,
+      "allCaps": true
+    },
+    {
+      "id": "definition",
+      "frame": {
+        "x": 0.5,
+        "y": 0.55,
+        "width": 0.74,
+        "height": 0.1
+      },
+      "timing": {
+        "start": 0.95
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "slideIn",
+          "duration": 0.55,
+          "easing": "easeOut",
+          "params": {
+            "direction": "right",
+            "distance": 0.03
+          }
+        }
+      ],
+      "type": "text",
+      "key": "definition",
+      "default": {
+        "en": "The earthy scent that rises\nwhen rain hits dry ground.",
+        "tr": "Toplumdan uzak durup\nyalnız yaşamayı seçen."
+      },
+      "font": {
+        "name": "AvenirNext-Medium",
+        "size": 0.03
+      },
+      "colorRole": "textPrimary",
+      "alignment": "left",
+      "maxLines": 2
+    },
+    {
+      "id": "div2",
+      "frame": {
+        "x": 0.5,
+        "y": 0.625,
+        "width": 0.74,
+        "height": 0.0018
+      },
+      "opacity": 0.35,
+      "timing": {
+        "start": 1.05
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "wipeReveal",
+          "duration": 0.6,
+          "easing": "easeOut",
+          "params": {
+            "direction": "right"
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "textSecondary"
+    },
+    {
+      "id": "ex-label",
+      "frame": {
+        "x": 0.5,
+        "y": 0.665,
+        "width": 0.74,
+        "height": 0.03
+      },
+      "timing": {
+        "start": 1.1
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.5
+        }
+      ],
+      "type": "text",
+      "key": "exLabel",
+      "default": {
+        "en": "IN A SENTENCE",
+        "tr": "ÖRNEK"
+      },
+      "font": {
+        "name": "AvenirNext-DemiBold",
+        "size": 0.018
+      },
+      "colorRole": "accent",
+      "alignment": "left",
+      "letterSpacing": 0.016,
+      "allCaps": true
+    },
+    {
+      "id": "example",
+      "frame": {
+        "x": 0.5,
+        "y": 0.74,
+        "width": 0.74,
+        "height": 0.09
+      },
+      "timing": {
+        "start": 1.15
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.6
+        }
+      ],
+      "type": "text",
+      "key": "example",
+      "default": {
+        "en": "“The petrichor drifted in\nthrough the open window.”",
+        "tr": "“Yıllardır dağ evinde\nmünzevi bir hayat sürüyor.”"
+      },
+      "font": {
+        "name": "Georgia-Italic",
+        "size": 0.026
+      },
+      "colorRole": "textSecondary",
+      "alignment": "left",
+      "maxLines": 2
+    },
+    {
+      "id": "footer",
+      "frame": {
+        "x": 0.5,
+        "y": 0.87,
+        "width": 0.8,
+        "height": 0.035
+      },
+      "timing": {
+        "start": 1.2
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.65
+        }
+      ],
+      "type": "text",
+      "key": "footer",
+      "default": {
+        "en": "A new word every day",
+        "tr": "Her gün yeni bir kelime"
+      },
+      "font": {
+        "name": "AvenirNext-Regular",
+        "size": 0.02
+      },
+      "colorRole": "textSecondary",
+      "alignment": "center",
+      "letterSpacing": 0.008
+    }
+  ]
+}

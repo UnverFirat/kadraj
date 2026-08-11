@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "defaultMode": "acceptEdits",
+    "allow": [
+      "Bash(xcrun simctl *)",
+      "Bash(xcrun actool *)",
+      "Bash(xcodebuild *)",
+      "Bash(swift build *)",
+      "Bash(swift test *)",
+      "Bash(./build.sh *)",
+      "Bash(./build.sh)",
+      "Bash(flutter analyze *)",
+      "Bash(flutter test *)",
+      "Bash(flutter build *)",
+      "Bash(flutter pub get)",
+      "Bash(dart analyze *)",
+      "mcp__ccd_session__mark_chapter"
+    ]
+  }
+}

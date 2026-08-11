@@ -1,0 +1,723 @@
+{
+  "schemaVersion": 2,
+  "id": "studio-session-01",
+  "name": {
+    "en": "Studio Session",
+    "tr": "Stüdyo Günü"
+  },
+  "category": "music",
+  "isPro": true,
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "palette": {
+    "background": "#111113",
+    "surface": "#FFFFFF",
+    "accent": "#D9A441",
+    "textPrimary": "#FFFFFF",
+    "textSecondary": "#B0B0B4",
+    "textOnAccent": "#FFFFFF",
+    "scrimClear": "#00000000",
+    "scrimSolid": "#000000CC"
+  },
+  "audio": {
+    "defaultTrackId": "groovy-01",
+    "volume": 0.85
+  },
+  "scenes": [
+    {
+      "id": "booth",
+      "duration": 4.0,
+      "layers": [
+        {
+          "id": "booth-media",
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 1.0,
+            "height": 1.0
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "fadeIn",
+              "duration": 0.5
+            },
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 4.0,
+              "params": {
+                "zoom": 1.1,
+                "direction": "down"
+              }
+            }
+          ],
+          "type": "mediaSlot",
+          "slotIndex": 0,
+          "media": "photoOrVideo",
+          "contentMode": "fill",
+          "mask": "rect",
+          "filter": "mono",
+          "filterIntensity": 0.35
+        },
+        {
+          "id": "booth-scrim-top",
+          "frame": {
+            "x": 0.5,
+            "y": 0.12,
+            "width": 1.0,
+            "height": 0.24
+          },
+          "type": "shape",
+          "colorRole": "scrimClear",
+          "gradient": {
+            "from": "scrimClear",
+            "to": "scrimSolid",
+            "direction": "up"
+          }
+        },
+        {
+          "id": "booth-scrim",
+          "frame": {
+            "x": 0.5,
+            "y": 0.78,
+            "width": 1.0,
+            "height": 0.44
+          },
+          "type": "shape",
+          "colorRole": "scrimClear",
+          "gradient": {
+            "from": "scrimClear",
+            "to": "scrimSolid",
+            "direction": "down"
+          }
+        },
+        {
+          "id": "booth-kicker",
+          "frame": {
+            "x": 0.5,
+            "y": 0.11,
+            "width": 0.84,
+            "height": 0.045
+          },
+          "timing": {
+            "start": 0.25
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "fadeIn",
+              "duration": 0.55
+            }
+          ],
+          "type": "text",
+          "key": "kicker",
+          "default": {
+            "en": "STUDIO SESSION",
+            "tr": "STÜDYO GÜNÜ"
+          },
+          "font": {
+            "name": "AvenirNext-DemiBold",
+            "size": 0.026
+          },
+          "colorRole": "accent",
+          "alignment": "center",
+          "letterSpacing": 0.022,
+          "allCaps": true
+        },
+        {
+          "id": "bar0",
+          "frame": {
+            "x": 0.34,
+            "y": 0.695,
+            "width": 0.012,
+            "height": 0.03
+          },
+          "timing": {
+            "start": 0.5
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "scaleIn",
+              "duration": 0.35,
+              "easing": "easeOut",
+              "params": {
+                "from": 0.4
+              }
+            },
+            {
+              "role": "loop",
+              "preset": "pulse",
+              "duration": 0.65,
+              "params": {
+                "scale": 1.6,
+                "axis": "y"
+              }
+            }
+          ],
+          "type": "shape",
+          "colorRole": "accent",
+          "cornerRadius": 0.006
+        },
+        {
+          "id": "bar1",
+          "frame": {
+            "x": 0.38,
+            "y": 0.695,
+            "width": 0.012,
+            "height": 0.048
+          },
+          "timing": {
+            "start": 0.55
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "scaleIn",
+              "duration": 0.35,
+              "easing": "easeOut",
+              "params": {
+                "from": 0.4
+              }
+            },
+            {
+              "role": "loop",
+              "preset": "pulse",
+              "duration": 0.73,
+              "params": {
+                "scale": 1.6,
+                "axis": "y"
+              }
+            }
+          ],
+          "type": "shape",
+          "colorRole": "accent",
+          "cornerRadius": 0.006
+        },
+        {
+          "id": "bar2",
+          "frame": {
+            "x": 0.42,
+            "y": 0.695,
+            "width": 0.012,
+            "height": 0.036
+          },
+          "timing": {
+            "start": 0.6
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "scaleIn",
+              "duration": 0.35,
+              "easing": "easeOut",
+              "params": {
+                "from": 0.4
+              }
+            },
+            {
+              "role": "loop",
+              "preset": "pulse",
+              "duration": 0.81,
+              "params": {
+                "scale": 1.6,
+                "axis": "y"
+              }
+            }
+          ],
+          "type": "shape",
+          "colorRole": "accent",
+          "cornerRadius": 0.006
+        },
+        {
+          "id": "bar3",
+          "frame": {
+            "x": 0.46,
+            "y": 0.695,
+            "width": 0.012,
+            "height": 0.055
+          },
+          "timing": {
+            "start": 0.65
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "scaleIn",
+              "duration": 0.35,
+              "easing": "easeOut",
+              "params": {
+                "from": 0.4
+              }
+            },
+            {
+              "role": "loop",
+              "preset": "pulse",
+              "duration": 0.89,
+              "params": {
+                "scale": 1.6,
+                "axis": "y"
+              }
+            }
+          ],
+          "type": "shape",
+          "colorRole": "accent",
+          "cornerRadius": 0.006
+        },
+        {
+          "id": "bar4",
+          "frame": {
+            "x": 0.5,
+            "y": 0.695,
+            "width": 0.012,
+            "height": 0.028
+          },
+          "timing": {
+            "start": 0.7
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "scaleIn",
+              "duration": 0.35,
+              "easing": "easeOut",
+              "params": {
+                "from": 0.4
+              }
+            },
+            {
+              "role": "loop",
+              "preset": "pulse",
+              "duration": 0.97,
+              "params": {
+                "scale": 1.6,
+                "axis": "y"
+              }
+            }
+          ],
+          "type": "shape",
+          "colorRole": "accent",
+          "cornerRadius": 0.006
+        },
+        {
+          "id": "bar5",
+          "frame": {
+            "x": 0.54,
+            "y": 0.695,
+            "width": 0.012,
+            "height": 0.05
+          },
+          "timing": {
+            "start": 0.75
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "scaleIn",
+              "duration": 0.35,
+              "easing": "easeOut",
+              "params": {
+                "from": 0.4
+              }
+            },
+            {
+              "role": "loop",
+              "preset": "pulse",
+              "duration": 1.05,
+              "params": {
+                "scale": 1.6,
+                "axis": "y"
+              }
+            }
+          ],
+          "type": "shape",
+          "colorRole": "accent",
+          "cornerRadius": 0.006
+        },
+        {
+          "id": "bar6",
+          "frame": {
+            "x": 0.58,
+            "y": 0.695,
+            "width": 0.012,
+            "height": 0.038
+          },
+          "timing": {
+            "start": 0.8
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "scaleIn",
+              "duration": 0.35,
+              "easing": "easeOut",
+              "params": {
+                "from": 0.4
+              }
+            },
+            {
+              "role": "loop",
+              "preset": "pulse",
+              "duration": 1.13,
+              "params": {
+                "scale": 1.6,
+                "axis": "y"
+              }
+            }
+          ],
+          "type": "shape",
+          "colorRole": "accent",
+          "cornerRadius": 0.006
+        },
+        {
+          "id": "bar7",
+          "frame": {
+            "x": 0.62,
+            "y": 0.695,
+            "width": 0.012,
+            "height": 0.044
+          },
+          "timing": {
+            "start": 0.85
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "scaleIn",
+              "duration": 0.35,
+              "easing": "easeOut",
+              "params": {
+                "from": 0.4
+              }
+            },
+            {
+              "role": "loop",
+              "preset": "pulse",
+              "duration": 1.21,
+              "params": {
+                "scale": 1.6,
+                "axis": "y"
+              }
+            }
+          ],
+          "type": "shape",
+          "colorRole": "accent",
+          "cornerRadius": 0.006
+        },
+        {
+          "id": "bar8",
+          "frame": {
+            "x": 0.66,
+            "y": 0.695,
+            "width": 0.012,
+            "height": 0.032
+          },
+          "timing": {
+            "start": 0.9
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "scaleIn",
+              "duration": 0.35,
+              "easing": "easeOut",
+              "params": {
+                "from": 0.4
+              }
+            },
+            {
+              "role": "loop",
+              "preset": "pulse",
+              "duration": 1.29,
+              "params": {
+                "scale": 1.6,
+                "axis": "y"
+              }
+            }
+          ],
+          "type": "shape",
+          "colorRole": "accent",
+          "cornerRadius": 0.006
+        },
+        {
+          "id": "booth-title",
+          "frame": {
+            "x": 0.5,
+            "y": 0.815,
+            "width": 0.86,
+            "height": 0.14
+          },
+          "timing": {
+            "start": 0.7
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "kineticWords",
+              "duration": 0.9,
+              "params": {
+                "distance": 0.02
+              }
+            }
+          ],
+          "type": "text",
+          "key": "sessionTitle",
+          "default": {
+            "en": "New album\nin the making",
+            "tr": "Yeni albüm\nkayıtta"
+          },
+          "font": {
+            "name": "AvenirNext-Heavy",
+            "size": 0.055
+          },
+          "colorRole": "textPrimary",
+          "alignment": "center",
+          "maxLines": 2
+        },
+        {
+          "id": "booth-note",
+          "frame": {
+            "x": 0.5,
+            "y": 0.94,
+            "width": 0.82,
+            "height": 0.035
+          },
+          "timing": {
+            "start": 1.0
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "fadeIn",
+              "duration": 0.6
+            }
+          ],
+          "type": "text",
+          "key": "sessionNote",
+          "default": {
+            "en": "Day three · six tracks down",
+            "tr": "3. gün · altı parça bitti"
+          },
+          "font": {
+            "name": "AvenirNext-Regular",
+            "size": 0.022
+          },
+          "colorRole": "textSecondary",
+          "alignment": "center"
+        }
+      ],
+      "transition": {
+        "style": "crossDissolve",
+        "duration": 0.6
+      }
+    },
+    {
+      "id": "closing",
+      "duration": 3.4,
+      "layers": [
+        {
+          "id": "closing-bg",
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 1.0,
+            "height": 1.0
+          },
+          "type": "shape",
+          "colorRole": "background"
+        },
+        {
+          "id": "disc",
+          "frame": {
+            "x": 0.5,
+            "y": 0.34,
+            "width": 0.32,
+            "height": 0.18
+          },
+          "opacity": 0.9,
+          "animations": [
+            {
+              "role": "in",
+              "preset": "scaleIn",
+              "duration": 0.6,
+              "easing": "easeOut",
+              "params": {
+                "from": 0.7
+              }
+            },
+            {
+              "role": "loop",
+              "preset": "pulse",
+              "duration": 2.4,
+              "params": {
+                "scale": 1.05
+              }
+            }
+          ],
+          "type": "shape",
+          "colorRole": "accent",
+          "mask": "circle"
+        },
+        {
+          "id": "headphones",
+          "frame": {
+            "x": 0.5,
+            "y": 0.34,
+            "width": 0.165,
+            "height": 0.12
+          },
+          "timing": {
+            "start": 0.25
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "bounce",
+              "duration": 0.7
+            }
+          ],
+          "type": "text",
+          "key": "headphones",
+          "default": {
+            "en": "🎧",
+            "tr": "🎧"
+          },
+          "font": {
+            "name": "AvenirNext-Bold",
+            "size": 0.075
+          },
+          "colorRole": "textPrimary",
+          "alignment": "center"
+        },
+        {
+          "id": "closing-line",
+          "frame": {
+            "x": 0.5,
+            "y": 0.55,
+            "width": 0.84,
+            "height": 0.16
+          },
+          "timing": {
+            "start": 0.4
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "kineticWords",
+              "duration": 0.9,
+              "params": {
+                "distance": 0.02
+              }
+            }
+          ],
+          "type": "text",
+          "key": "closingLine",
+          "default": {
+            "en": "Recording done.\nYour turn next.",
+            "tr": "Kayıt bitti.\nSıra sizde."
+          },
+          "font": {
+            "name": "AvenirNext-Bold",
+            "size": 0.056
+          },
+          "colorRole": "textPrimary",
+          "alignment": "center",
+          "maxLines": 2
+        },
+        {
+          "id": "closing-rule",
+          "frame": {
+            "x": 0.5,
+            "y": 0.665,
+            "width": 0.12,
+            "height": 0.004
+          },
+          "timing": {
+            "start": 0.75
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "wipeReveal",
+              "duration": 0.5,
+              "easing": "easeOut",
+              "params": {
+                "direction": "right"
+              }
+            }
+          ],
+          "type": "shape",
+          "colorRole": "accent"
+        },
+        {
+          "id": "closing-date",
+          "frame": {
+            "x": 0.5,
+            "y": 0.73,
+            "width": 0.82,
+            "height": 0.05
+          },
+          "timing": {
+            "start": 0.85
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "fadeIn",
+              "duration": 0.55
+            }
+          ],
+          "type": "text",
+          "key": "closingDate",
+          "default": {
+            "en": "Album out November 14",
+            "tr": "Albüm 14 Kasım'da"
+          },
+          "font": {
+            "name": "AvenirNext-Heavy",
+            "size": 0.028
+          },
+          "colorRole": "accent",
+          "alignment": "center"
+        },
+        {
+          "id": "closing-handle",
+          "frame": {
+            "x": 0.5,
+            "y": 0.8,
+            "width": 0.7,
+            "height": 0.035
+          },
+          "timing": {
+            "start": 1.05
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "fadeIn",
+              "duration": 0.6
+            }
+          ],
+          "type": "text",
+          "key": "closingHandle",
+          "default": {
+            "en": "@mertkaya.music",
+            "tr": "@mertkaya.music"
+          },
+          "font": {
+            "name": "AvenirNext-Regular",
+            "size": 0.02
+          },
+          "colorRole": "textSecondary",
+          "alignment": "center",
+          "letterSpacing": 0.008
+        }
+      ]
+    }
+  ],
+  "layers": []
+}

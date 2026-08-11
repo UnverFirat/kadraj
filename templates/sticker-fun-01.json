@@ -1,0 +1,232 @@
+{
+  "schemaVersion": 1,
+  "id": "sticker-fun-01",
+  "name": {
+    "en": "Sticker Fun",
+    "tr": "Sticker Keyfi"
+  },
+  "category": "social",
+  "isPro": true,
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "duration": 4.5,
+  "palette": {
+    "background": "#1A1420",
+    "surface": "#FFFFFF",
+    "accent": "#FF7AB6",
+    "textOnAccent": "#1A1420",
+    "textPrimary": "#FFFFFF",
+    "textSecondary": "#C9BFD2"
+  },
+  "audio": {
+    "defaultTrackId": "playful-01",
+    "volume": 0.9
+  },
+  "layers": [
+    {
+      "id": "photo",
+      "type": "mediaSlot",
+      "slotIndex": 0,
+      "media": "photoOrVideo",
+      "contentMode": "fill",
+      "mask": "rect",
+      "cornerRadius": 0.02,
+      "frame": {
+        "x": 0.5,
+        "y": 0.44,
+        "width": 0.82,
+        "height": 0.6
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "scaleIn",
+          "duration": 0.5,
+          "easing": "easeOut",
+          "params": {
+            "from": 0.9
+          }
+        },
+        {
+          "role": "loop",
+          "preset": "kenBurns",
+          "duration": 4.5,
+          "params": {
+            "zoom": 1.08,
+            "direction": "up"
+          }
+        }
+      ]
+    },
+    {
+      "id": "sticker-heart",
+      "type": "text",
+      "key": "s1",
+      "default": {
+        "en": "❤️",
+        "tr": "❤️"
+      },
+      "font": {
+        "name": "AvenirNext-Bold",
+        "size": 0.11
+      },
+      "colorRole": "textPrimary",
+      "alignment": "center",
+      "rotation": -16,
+      "frame": {
+        "x": 0.2,
+        "y": 0.2,
+        "width": 0.2,
+        "height": 0.14
+      },
+      "timing": {
+        "start": 0.5
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "pop",
+          "duration": 0.5,
+          "easing": "spring",
+          "params": {
+            "overshoot": 1.2
+          }
+        }
+      ]
+    },
+    {
+      "id": "sticker-spark",
+      "type": "text",
+      "key": "s2",
+      "default": {
+        "en": "✨",
+        "tr": "✨"
+      },
+      "font": {
+        "name": "AvenirNext-Bold",
+        "size": 0.09
+      },
+      "colorRole": "textPrimary",
+      "alignment": "center",
+      "rotation": 14,
+      "frame": {
+        "x": 0.82,
+        "y": 0.24,
+        "width": 0.18,
+        "height": 0.12
+      },
+      "timing": {
+        "start": 0.7
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "pop",
+          "duration": 0.5,
+          "easing": "spring",
+          "params": {
+            "overshoot": 1.2
+          }
+        }
+      ]
+    },
+    {
+      "id": "sticker-party",
+      "type": "text",
+      "key": "s3",
+      "default": {
+        "en": "🎉",
+        "tr": "🎉"
+      },
+      "font": {
+        "name": "AvenirNext-Bold",
+        "size": 0.1
+      },
+      "colorRole": "textPrimary",
+      "alignment": "center",
+      "rotation": 10,
+      "frame": {
+        "x": 0.84,
+        "y": 0.66,
+        "width": 0.2,
+        "height": 0.13
+      },
+      "timing": {
+        "start": 0.9
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "pop",
+          "duration": 0.5,
+          "easing": "spring",
+          "params": {
+            "overshoot": 1.2
+          }
+        }
+      ]
+    },
+    {
+      "id": "badge-pill",
+      "type": "shape",
+      "colorRole": "accent",
+      "mask": "rect",
+      "cornerRadius": 0.04,
+      "frame": {
+        "x": 0.5,
+        "y": 0.83,
+        "width": 0.5,
+        "height": 0.075
+      },
+      "timing": {
+        "start": 1.0
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "pop",
+          "duration": 0.45,
+          "params": {
+            "overshoot": 1.12
+          }
+        }
+      ]
+    },
+    {
+      "id": "badge-text",
+      "type": "text",
+      "key": "badge",
+      "default": {
+        "en": "GOOD VIBES",
+        "tr": "KEYİF ZAMANI"
+      },
+      "font": {
+        "name": "AvenirNext-Bold",
+        "size": 0.03
+      },
+      "colorRole": "textOnAccent",
+      "alignment": "center",
+      "allCaps": true,
+      "letterSpacing": 0.006,
+      "frame": {
+        "x": 0.5,
+        "y": 0.83,
+        "width": 0.5,
+        "height": 0.06
+      },
+      "timing": {
+        "start": 1.15
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.35
+        }
+      ]
+    }
+  ]
+}

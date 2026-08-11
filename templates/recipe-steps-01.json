@@ -1,0 +1,455 @@
+{
+  "schemaVersion": 1,
+  "id": "recipe-steps-01",
+  "name": {
+    "en": "Recipe Steps",
+    "tr": "Tarif Adımları"
+  },
+  "category": "food",
+  "isPro": false,
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "duration": 8.0,
+  "palette": {
+    "background": "#FFF7ED",
+    "surface": "#FFFFFF",
+    "accent": "#E2571E",
+    "textOnAccent": "#FFFFFF",
+    "textPrimary": "#2A1B12",
+    "textSecondary": "#7A6A5F"
+  },
+  "audio": {
+    "defaultTrackId": "warm-01",
+    "volume": 0.8
+  },
+  "layers": [
+    {
+      "id": "bg",
+      "type": "shape",
+      "colorRole": "background",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      }
+    },
+    {
+      "id": "photo",
+      "type": "mediaSlot",
+      "slotIndex": 0,
+      "media": "photoOrVideo",
+      "contentMode": "fill",
+      "mask": "rect",
+      "frame": {
+        "x": 0.5,
+        "y": 0.27,
+        "width": 0.9,
+        "height": 0.4
+      },
+      "cornerRadius": 0.02,
+      "animations": [
+        {
+          "role": "in",
+          "preset": "scaleIn",
+          "duration": 0.6,
+          "easing": "easeOut",
+          "params": {
+            "from": 0.94
+          }
+        },
+        {
+          "role": "loop",
+          "preset": "kenBurns",
+          "duration": 8.0,
+          "params": {
+            "zoom": 1.08,
+            "direction": "up"
+          }
+        }
+      ]
+    },
+    {
+      "id": "kicker",
+      "type": "text",
+      "key": "kicker",
+      "default": {
+        "en": "RECIPE",
+        "tr": "TARİF"
+      },
+      "font": {
+        "name": "AvenirNext-Bold",
+        "size": 0.018
+      },
+      "colorRole": "accent",
+      "alignment": "center",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 0.6,
+        "height": 0.03
+      },
+      "allCaps": true,
+      "letterSpacing": 0.014,
+      "timing": {
+        "start": 0.3
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.4
+        }
+      ]
+    },
+    {
+      "id": "title",
+      "type": "text",
+      "key": "title",
+      "default": {
+        "en": "Lentil Soup",
+        "tr": "Mercimek Çorbası"
+      },
+      "font": {
+        "name": "AvenirNext-Heavy",
+        "size": 0.044
+      },
+      "colorRole": "textPrimary",
+      "alignment": "center",
+      "frame": {
+        "x": 0.5,
+        "y": 0.565,
+        "width": 0.86,
+        "height": 0.075
+      },
+      "timing": {
+        "start": 0.45
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "slideIn",
+          "duration": 0.5,
+          "easing": "easeOut",
+          "params": {
+            "direction": "up",
+            "distance": 0.03
+          }
+        }
+      ]
+    },
+    {
+      "id": "num-bg0",
+      "type": "shape",
+      "colorRole": "accent",
+      "frame": {
+        "x": 0.13,
+        "y": 0.68,
+        "width": 0.07,
+        "height": 0.039
+      },
+      "cornerRadius": 0.02,
+      "timing": {
+        "start": 1.1
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "pop",
+          "duration": 0.4,
+          "params": {
+            "overshoot": 1.15
+          }
+        }
+      ]
+    },
+    {
+      "id": "num0",
+      "type": "text",
+      "key": "num0",
+      "default": {
+        "en": "1",
+        "tr": "1"
+      },
+      "font": {
+        "name": "AvenirNext-Bold",
+        "size": 0.021
+      },
+      "colorRole": "textOnAccent",
+      "alignment": "center",
+      "frame": {
+        "x": 0.13,
+        "y": 0.68,
+        "width": 0.07,
+        "height": 0.03
+      },
+      "timing": {
+        "start": 1.2000000000000002
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.3
+        }
+      ]
+    },
+    {
+      "id": "step0",
+      "type": "text",
+      "key": "step0",
+      "default": {
+        "en": "Rinse lentils, sauté with onion.",
+        "tr": "Mercimeği yıka, soğanla kavur."
+      },
+      "font": {
+        "name": "AvenirNext-Regular",
+        "size": 0.023
+      },
+      "colorRole": "textPrimary",
+      "alignment": "left",
+      "frame": {
+        "x": 0.57,
+        "y": 0.68,
+        "width": 0.74,
+        "height": 0.05
+      },
+      "maxLines": 2,
+      "timing": {
+        "start": 1.2000000000000002
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "slideIn",
+          "duration": 0.5,
+          "easing": "easeOut",
+          "params": {
+            "direction": "left",
+            "distance": 0.06
+          }
+        }
+      ]
+    },
+    {
+      "id": "num-bg1",
+      "type": "shape",
+      "colorRole": "accent",
+      "frame": {
+        "x": 0.13,
+        "y": 0.762,
+        "width": 0.07,
+        "height": 0.039
+      },
+      "cornerRadius": 0.02,
+      "timing": {
+        "start": 1.7000000000000002
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "pop",
+          "duration": 0.4,
+          "params": {
+            "overshoot": 1.15
+          }
+        }
+      ]
+    },
+    {
+      "id": "num1",
+      "type": "text",
+      "key": "num1",
+      "default": {
+        "en": "2",
+        "tr": "2"
+      },
+      "font": {
+        "name": "AvenirNext-Bold",
+        "size": 0.021
+      },
+      "colorRole": "textOnAccent",
+      "alignment": "center",
+      "frame": {
+        "x": 0.13,
+        "y": 0.762,
+        "width": 0.07,
+        "height": 0.03
+      },
+      "timing": {
+        "start": 1.8000000000000003
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.3
+        }
+      ]
+    },
+    {
+      "id": "step1",
+      "type": "text",
+      "key": "step1",
+      "default": {
+        "en": "Add water, simmer 25 min.",
+        "tr": "Su ekle, 25 dk kısık ateşte pişir."
+      },
+      "font": {
+        "name": "AvenirNext-Regular",
+        "size": 0.023
+      },
+      "colorRole": "textPrimary",
+      "alignment": "left",
+      "frame": {
+        "x": 0.57,
+        "y": 0.762,
+        "width": 0.74,
+        "height": 0.05
+      },
+      "maxLines": 2,
+      "timing": {
+        "start": 1.8000000000000003
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "slideIn",
+          "duration": 0.5,
+          "easing": "easeOut",
+          "params": {
+            "direction": "left",
+            "distance": 0.06
+          }
+        }
+      ]
+    },
+    {
+      "id": "num-bg2",
+      "type": "shape",
+      "colorRole": "accent",
+      "frame": {
+        "x": 0.13,
+        "y": 0.8440000000000001,
+        "width": 0.07,
+        "height": 0.039
+      },
+      "cornerRadius": 0.02,
+      "timing": {
+        "start": 2.3
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "pop",
+          "duration": 0.4,
+          "params": {
+            "overshoot": 1.15
+          }
+        }
+      ]
+    },
+    {
+      "id": "num2",
+      "type": "text",
+      "key": "num2",
+      "default": {
+        "en": "3",
+        "tr": "3"
+      },
+      "font": {
+        "name": "AvenirNext-Bold",
+        "size": 0.021
+      },
+      "colorRole": "textOnAccent",
+      "alignment": "center",
+      "frame": {
+        "x": 0.13,
+        "y": 0.8440000000000001,
+        "width": 0.07,
+        "height": 0.03
+      },
+      "timing": {
+        "start": 2.4
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.3
+        }
+      ]
+    },
+    {
+      "id": "step2",
+      "type": "text",
+      "key": "step2",
+      "default": {
+        "en": "Blend and serve with lemon.",
+        "tr": "Blenderdan geçir, limonla servis et."
+      },
+      "font": {
+        "name": "AvenirNext-Regular",
+        "size": 0.023
+      },
+      "colorRole": "textPrimary",
+      "alignment": "left",
+      "frame": {
+        "x": 0.57,
+        "y": 0.8440000000000001,
+        "width": 0.74,
+        "height": 0.05
+      },
+      "maxLines": 2,
+      "timing": {
+        "start": 2.4
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "slideIn",
+          "duration": 0.5,
+          "easing": "easeOut",
+          "params": {
+            "direction": "left",
+            "distance": 0.06
+          }
+        }
+      ]
+    },
+    {
+      "id": "handle",
+      "type": "text",
+      "key": "handle",
+      "default": {
+        "en": "@kitchenstories",
+        "tr": "@mutfakhikayeleri"
+      },
+      "font": {
+        "name": "AvenirNext-Medium",
+        "size": 0.018
+      },
+      "colorRole": "textSecondary",
+      "alignment": "center",
+      "frame": {
+        "x": 0.5,
+        "y": 0.93,
+        "width": 0.8,
+        "height": 0.03
+      },
+      "timing": {
+        "start": 3.4
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.5
+        }
+      ]
+    }
+  ]
+}

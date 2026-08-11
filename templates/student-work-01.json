@@ -1,0 +1,286 @@
+{
+  "schemaVersion": 1,
+  "id": "student-work-01",
+  "name": {
+    "en": "Student Work",
+    "tr": "Öğrenci Çalışması"
+  },
+  "category": "education",
+  "isPro": false,
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "duration": 6.5,
+  "palette": {
+    "background": "#2A1B16",
+    "surface": "#F3E4D7",
+    "accent": "#E2703A",
+    "textPrimary": "#FFF6EF",
+    "textSecondary": "#D6B7A4",
+    "textOnAccent": "#FFFFFF",
+    "scrimClear": "#00000000",
+    "scrimSolid": "#000000CC"
+  },
+  "audio": {
+    "defaultTrackId": "bright-01",
+    "volume": 0.85
+  },
+  "layers": [
+    {
+      "id": "bg",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "type": "shape",
+      "colorRole": "background"
+    },
+    {
+      "id": "photo",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.6
+        },
+        {
+          "role": "loop",
+          "preset": "kenBurns",
+          "duration": 6.5,
+          "params": {
+            "zoom": 1.1,
+            "direction": "up"
+          }
+        }
+      ],
+      "type": "mediaSlot",
+      "slotIndex": 0,
+      "media": "photoOrVideo",
+      "contentMode": "fill",
+      "mask": "rect",
+      "filter": "warm",
+      "filterIntensity": 0.3
+    },
+    {
+      "id": "scrim-top",
+      "frame": {
+        "x": 0.5,
+        "y": 0.13,
+        "width": 1.0,
+        "height": 0.26
+      },
+      "type": "shape",
+      "colorRole": "scrimClear",
+      "gradient": {
+        "from": "scrimClear",
+        "to": "scrimSolid",
+        "direction": "up"
+      }
+    },
+    {
+      "id": "scrim-bottom",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "type": "shape",
+      "colorRole": "scrimClear",
+      "gradient": {
+        "from": "scrimClear",
+        "to": "scrimSolid",
+        "direction": "down"
+      }
+    },
+    {
+      "id": "badge",
+      "frame": {
+        "x": 0.71,
+        "y": 0.115,
+        "width": 0.5,
+        "height": 0.082
+      },
+      "timing": {
+        "start": 0.35
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "slideIn",
+          "duration": 0.55,
+          "easing": "easeOut",
+          "params": {
+            "direction": "left",
+            "distance": 0.06
+          }
+        },
+        {
+          "role": "loop",
+          "preset": "shake",
+          "duration": 1.4,
+          "delay": 0.95,
+          "params": {
+            "degrees": 2.0
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "accent",
+      "cornerRadius": 0.041
+    },
+    {
+      "id": "badge-text",
+      "frame": {
+        "x": 0.71,
+        "y": 0.115,
+        "width": 0.47,
+        "height": 0.04
+      },
+      "timing": {
+        "start": 0.55
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.4
+        }
+      ],
+      "type": "text",
+      "key": "badge",
+      "default": {
+        "en": "GRAPHIC DESIGN COURSE",
+        "tr": "GRAFİK TASARIM KURSU"
+      },
+      "font": {
+        "name": "AvenirNext-Heavy",
+        "size": 0.021
+      },
+      "colorRole": "textOnAccent",
+      "alignment": "center",
+      "letterSpacing": 0.006,
+      "allCaps": true
+    },
+    {
+      "id": "headline",
+      "frame": {
+        "x": 0.5,
+        "y": 0.775,
+        "width": 0.88,
+        "height": 0.09
+      },
+      "timing": {
+        "start": 0.7
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "kineticWords",
+          "duration": 0.9,
+          "params": {
+            "distance": 0.02
+          }
+        },
+        {
+          "role": "loop",
+          "preset": "floatLoop",
+          "duration": 2.6,
+          "params": {
+            "distance": 0.006,
+            "axis": "y"
+          }
+        }
+      ],
+      "type": "text",
+      "key": "headline",
+      "default": {
+        "en": "Student Work",
+        "tr": "Öğrenci Çalışması"
+      },
+      "font": {
+        "name": "AvenirNext-Heavy",
+        "size": 0.054
+      },
+      "colorRole": "textPrimary",
+      "alignment": "center"
+    },
+    {
+      "id": "student",
+      "frame": {
+        "x": 0.5,
+        "y": 0.855,
+        "width": 0.86,
+        "height": 0.045
+      },
+      "timing": {
+        "start": 0.95
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "slideIn",
+          "duration": 0.5,
+          "easing": "easeOut",
+          "params": {
+            "direction": "up",
+            "distance": 0.03
+          }
+        }
+      ],
+      "type": "text",
+      "key": "student",
+      "default": {
+        "en": "Elif Demir · Term 3",
+        "tr": "Elif Demir · 3. dönem"
+      },
+      "font": {
+        "name": "AvenirNext-DemiBold",
+        "size": 0.028
+      },
+      "colorRole": "accent",
+      "alignment": "center"
+    },
+    {
+      "id": "note",
+      "frame": {
+        "x": 0.5,
+        "y": 0.915,
+        "width": 0.86,
+        "height": 0.04
+      },
+      "timing": {
+        "start": 1.15
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.6
+        }
+      ],
+      "type": "text",
+      "key": "note",
+      "default": {
+        "en": "Final project · Poster series",
+        "tr": "Bitirme projesi · Afiş serisi"
+      },
+      "font": {
+        "name": "AvenirNext-Regular",
+        "size": 0.021
+      },
+      "colorRole": "textSecondary",
+      "alignment": "center"
+    }
+  ]
+}

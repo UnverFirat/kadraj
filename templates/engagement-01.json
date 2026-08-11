@@ -1,0 +1,342 @@
+{
+  "schemaVersion": 2,
+  "id": "engagement-01",
+  "name": {
+    "en": "Engagement",
+    "tr": "Nişan Duyurusu"
+  },
+  "category": "wedding",
+  "isPro": true,
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "palette": {
+    "background": "#F7EDEC",
+    "surface": "#FFFFFF",
+    "accent": "#C98B8B",
+    "textPrimary": "#2B1F1F",
+    "textSecondary": "#8E7676",
+    "textOnAccent": "#FFFFFF",
+    "scrimClear": "#00000000",
+    "scrimSolid": "#000000CC"
+  },
+  "audio": {
+    "defaultTrackId": "sweet-01",
+    "volume": 0.85
+  },
+  "scenes": [
+    {
+      "id": "moment",
+      "duration": 3.4,
+      "layers": [
+        {
+          "id": "s1-photo",
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 1.0,
+            "height": 1.0
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "fadeIn",
+              "duration": 0.7
+            },
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 3.4,
+              "params": {
+                "zoom": 1.12,
+                "direction": "down"
+              }
+            }
+          ],
+          "type": "mediaSlot",
+          "slotIndex": 0,
+          "media": "photoOrVideo",
+          "contentMode": "fill",
+          "mask": "rect",
+          "filter": "warm",
+          "filterIntensity": 0.4
+        },
+        {
+          "id": "s1-scrim",
+          "frame": {
+            "x": 0.5,
+            "y": 0.72,
+            "width": 1.0,
+            "height": 0.56
+          },
+          "type": "shape",
+          "colorRole": "scrimClear",
+          "gradient": {
+            "from": "scrimClear",
+            "to": "scrimSolid",
+            "direction": "down"
+          }
+        },
+        {
+          "id": "s1-word",
+          "frame": {
+            "x": 0.5,
+            "y": 0.8,
+            "width": 0.86,
+            "height": 0.1
+          },
+          "timing": {
+            "start": 0.4
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "punchIn",
+              "duration": 0.55,
+              "params": {
+                "from": 1.5
+              }
+            }
+          ],
+          "type": "text",
+          "key": "announce",
+          "default": {
+            "en": "WE'RE ENGAGED",
+            "tr": "NİŞANLANDIK"
+          },
+          "font": {
+            "name": "AvenirNext-Heavy",
+            "size": 0.052
+          },
+          "colorRole": "surface",
+          "alignment": "center",
+          "letterSpacing": 0.012,
+          "allCaps": true
+        },
+        {
+          "id": "s1-date",
+          "frame": {
+            "x": 0.5,
+            "y": 0.89,
+            "width": 0.7,
+            "height": 0.04
+          },
+          "timing": {
+            "start": 0.75
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "fadeIn",
+              "duration": 0.6
+            }
+          ],
+          "type": "text",
+          "key": "date",
+          "default": {
+            "en": "June 12, 2026",
+            "tr": "12 Haziran 2026"
+          },
+          "font": {
+            "name": "AvenirNext-Medium",
+            "size": 0.021
+          },
+          "colorRole": "surface",
+          "alignment": "center",
+          "letterSpacing": 0.008
+        }
+      ],
+      "transition": {
+        "style": "crossDissolve",
+        "duration": 0.5
+      }
+    },
+    {
+      "id": "card",
+      "duration": 3.2,
+      "layers": [
+        {
+          "id": "s2-bg",
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 1.0,
+            "height": 1.0
+          },
+          "type": "shape",
+          "colorRole": "background"
+        },
+        {
+          "id": "s2-ring-out",
+          "frame": {
+            "x": 0.5,
+            "y": 0.42,
+            "width": 0.52,
+            "height": 0.2925
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "scaleIn",
+              "duration": 0.7,
+              "easing": "easeOut",
+              "params": {
+                "from": 0.86
+              }
+            }
+          ],
+          "type": "shape",
+          "colorRole": "accent",
+          "mask": "circle"
+        },
+        {
+          "id": "s2-ring-in",
+          "frame": {
+            "x": 0.5,
+            "y": 0.42,
+            "width": 0.505,
+            "height": 0.2841
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "scaleIn",
+              "duration": 0.7,
+              "easing": "easeOut",
+              "params": {
+                "from": 0.86
+              }
+            }
+          ],
+          "type": "shape",
+          "colorRole": "background",
+          "mask": "circle"
+        },
+        {
+          "id": "s2-ring-emoji",
+          "frame": {
+            "x": 0.5,
+            "y": 0.42,
+            "width": 0.165,
+            "height": 0.12
+          },
+          "timing": {
+            "start": 0.3
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "bounce",
+              "duration": 0.7
+            }
+          ],
+          "type": "text",
+          "key": "ring",
+          "default": {
+            "en": "💍",
+            "tr": "💍"
+          },
+          "font": {
+            "name": "AvenirNext-Bold",
+            "size": 0.075
+          },
+          "colorRole": "textPrimary",
+          "alignment": "center"
+        },
+        {
+          "id": "s2-names",
+          "frame": {
+            "x": 0.5,
+            "y": 0.62,
+            "width": 0.82,
+            "height": 0.12
+          },
+          "timing": {
+            "start": 0.45
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "kineticWords",
+              "duration": 0.9,
+              "params": {
+                "distance": 0.02
+              }
+            }
+          ],
+          "type": "text",
+          "key": "names",
+          "default": {
+            "en": "Ayşe & Mehmet",
+            "tr": "Ayşe & Mehmet"
+          },
+          "font": {
+            "name": "SnellRoundhand-Bold",
+            "size": 0.072
+          },
+          "colorRole": "textPrimary",
+          "alignment": "center"
+        },
+        {
+          "id": "s2-rule",
+          "frame": {
+            "x": 0.5,
+            "y": 0.71,
+            "width": 0.1,
+            "height": 0.004
+          },
+          "timing": {
+            "start": 0.75
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "wipeReveal",
+              "duration": 0.5,
+              "easing": "easeOut",
+              "params": {
+                "direction": "right"
+              }
+            }
+          ],
+          "type": "shape",
+          "colorRole": "accent"
+        },
+        {
+          "id": "s2-sub",
+          "frame": {
+            "x": 0.5,
+            "y": 0.775,
+            "width": 0.78,
+            "height": 0.045
+          },
+          "timing": {
+            "start": 0.9
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "fadeIn",
+              "duration": 0.6
+            }
+          ],
+          "type": "text",
+          "key": "sub",
+          "default": {
+            "en": "We'd love to have you with us",
+            "tr": "Sizi de aramızda görmek isteriz"
+          },
+          "font": {
+            "name": "AvenirNext-Regular",
+            "size": 0.022
+          },
+          "colorRole": "textSecondary",
+          "alignment": "center"
+        }
+      ]
+    }
+  ],
+  "layers": []
+}

@@ -1,0 +1,240 @@
+{
+  "schemaVersion": 1,
+  "id": "caption-bar-01",
+  "name": {
+    "en": "Caption Bar",
+    "tr": "Altyazı Şeridi"
+  },
+  "category": "social",
+  "isPro": false,
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "duration": 6.5,
+  "palette": {
+    "background": "#111113",
+    "surface": "#FFFFFF",
+    "accent": "#D9A441",
+    "textPrimary": "#FFFFFF",
+    "textSecondary": "#B0B0B4",
+    "textOnAccent": "#FFFFFF",
+    "scrimClear": "#00000000",
+    "scrimSolid": "#000000CC"
+  },
+  "audio": {
+    "defaultTrackId": "upbeat-01",
+    "volume": 0.85
+  },
+  "layers": [
+    {
+      "id": "bg",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "type": "shape",
+      "colorRole": "background"
+    },
+    {
+      "id": "clip",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.5
+        },
+        {
+          "role": "loop",
+          "preset": "kenBurns",
+          "duration": 6.5,
+          "params": {
+            "zoom": 1.1,
+            "direction": "up"
+          }
+        }
+      ],
+      "type": "mediaSlot",
+      "slotIndex": 0,
+      "media": "photoOrVideo",
+      "contentMode": "fill",
+      "mask": "rect"
+    },
+    {
+      "id": "veil-top",
+      "frame": {
+        "x": 0.5,
+        "y": 0.09,
+        "width": 1.0,
+        "height": 0.18
+      },
+      "type": "shape",
+      "colorRole": "scrimClear",
+      "gradient": {
+        "from": "scrimClear",
+        "to": "scrimSolid",
+        "direction": "up"
+      }
+    },
+    {
+      "id": "veil-bottom",
+      "frame": {
+        "x": 0.5,
+        "y": 0.8,
+        "width": 1.0,
+        "height": 0.4
+      },
+      "type": "shape",
+      "colorRole": "scrimClear",
+      "gradient": {
+        "from": "scrimClear",
+        "to": "scrimSolid",
+        "direction": "down"
+      }
+    },
+    {
+      "id": "avatar-ring",
+      "frame": {
+        "x": 0.115,
+        "y": 0.085,
+        "width": 0.085,
+        "height": 0.048
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "scaleIn",
+          "duration": 0.5,
+          "easing": "easeOut",
+          "params": {
+            "from": 0.7
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "accent",
+      "mask": "circle"
+    },
+    {
+      "id": "handle",
+      "frame": {
+        "x": 0.42,
+        "y": 0.085,
+        "width": 0.44,
+        "height": 0.04
+      },
+      "timing": {
+        "start": 0.3
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "slideIn",
+          "duration": 0.5,
+          "easing": "easeOut",
+          "params": {
+            "direction": "right",
+            "distance": 0.03
+          }
+        }
+      ],
+      "type": "text",
+      "key": "handle",
+      "default": {
+        "en": "@ada.kaya",
+        "tr": "@ada.kaya"
+      },
+      "font": {
+        "name": "AvenirNext-DemiBold",
+        "size": 0.022
+      },
+      "colorRole": "textPrimary",
+      "alignment": "left"
+    },
+    {
+      "id": "caption",
+      "frame": {
+        "x": 0.5,
+        "y": 0.795,
+        "width": 0.78,
+        "height": 0.14
+      },
+      "timing": {
+        "start": 0.55
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "pop",
+          "duration": 0.45,
+          "params": {
+            "overshoot": 1.06
+          }
+        },
+        {
+          "role": "loop",
+          "preset": "floatLoop",
+          "duration": 2.6,
+          "params": {
+            "distance": 0.006,
+            "axis": "y"
+          }
+        }
+      ],
+      "type": "text",
+      "key": "caption",
+      "default": {
+        "en": "made this recipe three\ntimes, finally nailed it",
+        "tr": "bu tarifi üç kez\ndenedim, sonunda tuttu"
+      },
+      "font": {
+        "name": "AvenirNext-Heavy",
+        "size": 0.042
+      },
+      "colorRole": "background",
+      "highlightColorRole": "surface",
+      "alignment": "center",
+      "maxLines": 2
+    },
+    {
+      "id": "cta",
+      "frame": {
+        "x": 0.5,
+        "y": 0.905,
+        "width": 0.7,
+        "height": 0.04
+      },
+      "timing": {
+        "start": 1.1
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.6
+        }
+      ],
+      "type": "text",
+      "key": "cta",
+      "default": {
+        "en": "recipe in bio",
+        "tr": "tarif profilde"
+      },
+      "font": {
+        "name": "AvenirNext-Medium",
+        "size": 0.021
+      },
+      "colorRole": "textSecondary",
+      "alignment": "center"
+    }
+  ]
+}

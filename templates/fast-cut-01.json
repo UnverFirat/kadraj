@@ -1,0 +1,333 @@
+{
+  "schemaVersion": 2,
+  "id": "fast-cut-01",
+  "name": {
+    "en": "Beat Cut",
+    "tr": "Ritim Kurgu"
+  },
+  "category": "social",
+  "isPro": false,
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "palette": {
+    "background": "#08080A",
+    "surface": "#141418",
+    "accent": "#FF3B5C",
+    "textPrimary": "#FFFFFF",
+    "textSecondary": "#B8B8BE"
+  },
+  "audio": {
+    "defaultTrackId": "beat-01",
+    "volume": 1.0
+  },
+  "scenes": [
+    {
+      "id": "hook",
+      "duration": 1.6,
+      "layers": [
+        {
+          "id": "v0",
+          "type": "mediaSlot",
+          "slotIndex": 0,
+          "media": "video",
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 1.0,
+            "height": 1.0
+          },
+          "animations": [
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 1.6,
+              "params": {
+                "zoom": 1.12,
+                "direction": "up"
+              }
+            }
+          ]
+        },
+        {
+          "id": "hook-title",
+          "type": "text",
+          "key": "hook",
+          "default": {
+            "en": "LET'S GO",
+            "tr": "HADİ BAŞLA"
+          },
+          "font": {
+            "name": "AvenirNext-Bold",
+            "size": 0.062
+          },
+          "colorRole": "textPrimary",
+          "alignment": "center",
+          "allCaps": true,
+          "letterSpacing": 0.002,
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 0.9,
+            "height": 0.16
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "pop",
+              "duration": 0.4,
+              "params": {
+                "overshoot": 1.12
+              }
+            },
+            {
+              "role": "out",
+              "preset": "fadeOut",
+              "duration": 0.2
+            }
+          ]
+        }
+      ],
+      "transition": {
+        "style": "cut",
+        "duration": 0
+      }
+    },
+    {
+      "id": "c1",
+      "duration": 1.0,
+      "layers": [
+        {
+          "id": "v1",
+          "type": "mediaSlot",
+          "slotIndex": 1,
+          "media": "video",
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 1.0,
+            "height": 1.0
+          },
+          "animations": [
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 1.0,
+              "params": {
+                "zoom": 1.1,
+                "direction": "left"
+              }
+            }
+          ]
+        }
+      ],
+      "transition": {
+        "style": "cut",
+        "duration": 0
+      }
+    },
+    {
+      "id": "c2",
+      "duration": 1.0,
+      "layers": [
+        {
+          "id": "v2",
+          "type": "mediaSlot",
+          "slotIndex": 2,
+          "media": "video",
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 1.0,
+            "height": 1.0
+          },
+          "animations": [
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 1.0,
+              "params": {
+                "zoom": 1.1,
+                "direction": "down"
+              }
+            }
+          ]
+        }
+      ],
+      "transition": {
+        "style": "crossDissolve",
+        "duration": 0.25
+      }
+    },
+    {
+      "id": "c3",
+      "duration": 1.0,
+      "layers": [
+        {
+          "id": "v3",
+          "type": "mediaSlot",
+          "slotIndex": 3,
+          "media": "video",
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 1.0,
+            "height": 1.0
+          },
+          "animations": [
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 1.0,
+              "params": {
+                "zoom": 1.1,
+                "direction": "right"
+              }
+            }
+          ]
+        }
+      ],
+      "transition": {
+        "style": "cut",
+        "duration": 0
+      }
+    },
+    {
+      "id": "outro",
+      "duration": 1.8,
+      "layers": [
+        {
+          "id": "v4",
+          "type": "mediaSlot",
+          "slotIndex": 4,
+          "media": "video",
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 1.0,
+            "height": 1.0
+          },
+          "animations": [
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 1.8,
+              "params": {
+                "zoom": 1.14,
+                "direction": "up"
+              }
+            }
+          ]
+        },
+        {
+          "id": "scrim",
+          "type": "shape",
+          "colorRole": "background",
+          "opacity": 0.35,
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 1.0,
+            "height": 1.0
+          }
+        },
+        {
+          "id": "outro-title",
+          "type": "text",
+          "key": "outro",
+          "default": {
+            "en": "FOLLOW FOR MORE",
+            "tr": "TAKİPTE KAL"
+          },
+          "font": {
+            "name": "AvenirNext-Bold",
+            "size": 0.04
+          },
+          "colorRole": "textPrimary",
+          "alignment": "center",
+          "allCaps": true,
+          "letterSpacing": 0.003,
+          "frame": {
+            "x": 0.5,
+            "y": 0.47,
+            "width": 0.86,
+            "height": 0.1
+          },
+          "timing": {
+            "start": 0.3
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "slideIn",
+              "duration": 0.4,
+              "params": {
+                "direction": "up",
+                "distance": 0.04
+              }
+            }
+          ]
+        },
+        {
+          "id": "outro-bar",
+          "type": "shape",
+          "colorRole": "accent",
+          "frame": {
+            "x": 0.5,
+            "y": 0.54,
+            "width": 0.14,
+            "height": 0.006
+          },
+          "timing": {
+            "start": 0.5
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "wipeReveal",
+              "duration": 0.35,
+              "params": {
+                "direction": "right"
+              }
+            }
+          ]
+        },
+        {
+          "id": "handle",
+          "type": "text",
+          "key": "handle",
+          "default": {
+            "en": "@yourhandle",
+            "tr": "@kullanici"
+          },
+          "font": {
+            "name": "AvenirNext-Medium",
+            "size": 0.024
+          },
+          "colorRole": "textSecondary",
+          "alignment": "center",
+          "letterSpacing": 0.004,
+          "frame": {
+            "x": 0.5,
+            "y": 0.58,
+            "width": 0.7,
+            "height": 0.05
+          },
+          "timing": {
+            "start": 0.7
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "fadeIn",
+              "duration": 0.4
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "layers": []
+}

@@ -1,0 +1,281 @@
+{
+  "schemaVersion": 1,
+  "id": "team-hiring-01",
+  "name": {
+    "en": "We're Hiring",
+    "tr": "İş İlanı"
+  },
+  "category": "business",
+  "isPro": false,
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "duration": 6.5,
+  "palette": {
+    "background": "#1B0F1E",
+    "surface": "#FFF3E9",
+    "accent": "#FF7A45",
+    "textPrimary": "#FFF3E9",
+    "textSecondary": "#D3AFA0",
+    "textOnAccent": "#FFFFFF",
+    "scrimClear": "#00000000",
+    "scrimSolid": "#000000CC"
+  },
+  "audio": {
+    "defaultTrackId": "upbeat-01",
+    "volume": 0.85
+  },
+  "layers": [
+    {
+      "id": "bg",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "type": "shape",
+      "colorRole": "background"
+    },
+    {
+      "id": "photo",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.5
+        },
+        {
+          "role": "loop",
+          "preset": "kenBurns",
+          "duration": 6.5,
+          "params": {
+            "zoom": 1.1,
+            "direction": "up"
+          }
+        }
+      ],
+      "type": "mediaSlot",
+      "slotIndex": 0,
+      "media": "photoOrVideo",
+      "contentMode": "fill",
+      "mask": "rect",
+      "filter": "warm",
+      "filterIntensity": 0.4
+    },
+    {
+      "id": "scrim-top",
+      "frame": {
+        "x": 0.5,
+        "y": 0.12,
+        "width": 1.0,
+        "height": 0.24
+      },
+      "type": "shape",
+      "colorRole": "scrimClear",
+      "gradient": {
+        "from": "scrimClear",
+        "to": "scrimSolid",
+        "direction": "up"
+      }
+    },
+    {
+      "id": "scrim-bottom",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "type": "shape",
+      "colorRole": "scrimClear",
+      "gradient": {
+        "from": "scrimClear",
+        "to": "scrimSolid",
+        "direction": "down"
+      }
+    },
+    {
+      "id": "terms",
+      "frame": {
+        "x": 0.5,
+        "y": 0.1,
+        "width": 0.86,
+        "height": 0.04
+      },
+      "timing": {
+        "start": 0.25
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "typewriter",
+          "duration": 1.0
+        }
+      ],
+      "type": "text",
+      "key": "terms",
+      "default": {
+        "en": "FULL-TIME · HYBRID",
+        "tr": "TAM ZAMANLI · İSTANBUL"
+      },
+      "font": {
+        "name": "AvenirNext-DemiBold",
+        "size": 0.022
+      },
+      "colorRole": "accent",
+      "alignment": "center",
+      "letterSpacing": 0.016,
+      "allCaps": true
+    },
+    {
+      "id": "headline",
+      "frame": {
+        "x": 0.5,
+        "y": 0.715,
+        "width": 0.86,
+        "height": 0.18
+      },
+      "timing": {
+        "start": 0.6
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "kineticWords",
+          "duration": 0.9,
+          "params": {
+            "distance": 0.02
+          }
+        },
+        {
+          "role": "loop",
+          "preset": "floatLoop",
+          "duration": 2.6,
+          "params": {
+            "distance": 0.006,
+            "axis": "y"
+          }
+        }
+      ],
+      "type": "text",
+      "key": "headline",
+      "default": {
+        "en": "JOIN OUR\nTEAM",
+        "tr": "EKİBİMİZE\nKATIL"
+      },
+      "font": {
+        "name": "AvenirNext-Heavy",
+        "size": 0.075
+      },
+      "colorRole": "textPrimary",
+      "alignment": "center",
+      "maxLines": 2,
+      "allCaps": true
+    },
+    {
+      "id": "chip",
+      "frame": {
+        "x": 0.5,
+        "y": 0.855,
+        "width": 0.66,
+        "height": 0.085
+      },
+      "timing": {
+        "start": 0.95
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "pop",
+          "duration": 0.5,
+          "params": {
+            "overshoot": 1.1
+          }
+        },
+        {
+          "role": "loop",
+          "preset": "shake",
+          "duration": 1.4,
+          "delay": 0.9,
+          "params": {
+            "degrees": 2.0
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "accent",
+      "cornerRadius": 0.042
+    },
+    {
+      "id": "role",
+      "frame": {
+        "x": 0.5,
+        "y": 0.855,
+        "width": 0.62,
+        "height": 0.05
+      },
+      "timing": {
+        "start": 1.1
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.4
+        }
+      ],
+      "type": "text",
+      "key": "role",
+      "default": {
+        "en": "Senior Graphic Designer",
+        "tr": "Kıdemli Grafik Tasarımcı"
+      },
+      "font": {
+        "name": "AvenirNext-Bold",
+        "size": 0.028
+      },
+      "colorRole": "textOnAccent",
+      "alignment": "center"
+    },
+    {
+      "id": "apply",
+      "frame": {
+        "x": 0.5,
+        "y": 0.935,
+        "width": 0.86,
+        "height": 0.04
+      },
+      "timing": {
+        "start": 1.2
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.6
+        }
+      ],
+      "type": "text",
+      "key": "apply",
+      "default": {
+        "en": "Apply: careers@studio.com",
+        "tr": "Başvuru: kariyer@sirket.com"
+      },
+      "font": {
+        "name": "AvenirNext-Regular",
+        "size": 0.021
+      },
+      "colorRole": "textSecondary",
+      "alignment": "center"
+    }
+  ]
+}

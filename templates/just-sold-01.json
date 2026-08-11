@@ -1,0 +1,314 @@
+{
+  "schemaVersion": 1,
+  "id": "just-sold-01",
+  "name": {
+    "en": "Just Sold",
+    "tr": "Satıldı"
+  },
+  "category": "realestate",
+  "isPro": false,
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "duration": 6.5,
+  "palette": {
+    "background": "#0D1A12",
+    "surface": "#F0F7F1",
+    "accent": "#3FA06A",
+    "textPrimary": "#F3FAF4",
+    "textSecondary": "#A6C2AE",
+    "textOnAccent": "#FFFFFF",
+    "scrimClear": "#00000000",
+    "scrimSolid": "#000000CC"
+  },
+  "audio": {
+    "defaultTrackId": "upbeat-01",
+    "volume": 0.85
+  },
+  "layers": [
+    {
+      "id": "bg",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "type": "shape",
+      "colorRole": "background"
+    },
+    {
+      "id": "photo",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.5
+        },
+        {
+          "role": "loop",
+          "preset": "kenBurns",
+          "duration": 6.5,
+          "params": {
+            "zoom": 1.12,
+            "direction": "left"
+          }
+        }
+      ],
+      "type": "mediaSlot",
+      "slotIndex": 0,
+      "media": "photoOrVideo",
+      "contentMode": "fill",
+      "mask": "rect",
+      "filter": "vivid",
+      "filterIntensity": 0.3
+    },
+    {
+      "id": "scrim-top",
+      "frame": {
+        "x": 0.5,
+        "y": 0.12,
+        "width": 1.0,
+        "height": 0.24
+      },
+      "type": "shape",
+      "colorRole": "scrimClear",
+      "gradient": {
+        "from": "scrimClear",
+        "to": "scrimSolid",
+        "direction": "up"
+      }
+    },
+    {
+      "id": "scrim-bottom",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "type": "shape",
+      "colorRole": "scrimClear",
+      "gradient": {
+        "from": "scrimClear",
+        "to": "scrimSolid",
+        "direction": "down"
+      }
+    },
+    {
+      "id": "agency",
+      "frame": {
+        "x": 0.5,
+        "y": 0.095,
+        "width": 0.86,
+        "height": 0.04
+      },
+      "timing": {
+        "start": 0.25
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.55
+        }
+      ],
+      "type": "text",
+      "key": "agency",
+      "default": {
+        "en": "MERIDIAN REALTY",
+        "tr": "MERİDYEN EMLAK"
+      },
+      "font": {
+        "name": "AvenirNext-DemiBold",
+        "size": 0.022
+      },
+      "colorRole": "textSecondary",
+      "alignment": "center",
+      "letterSpacing": 0.018,
+      "allCaps": true
+    },
+    {
+      "id": "band",
+      "frame": {
+        "x": 0.5,
+        "y": 0.42,
+        "width": 1.02,
+        "height": 0.135
+      },
+      "rotation": -7,
+      "timing": {
+        "start": 0.4
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "wipeReveal",
+          "duration": 0.6,
+          "easing": "easeOut",
+          "params": {
+            "direction": "right"
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "accent"
+    },
+    {
+      "id": "band-text",
+      "frame": {
+        "x": 0.5,
+        "y": 0.42,
+        "width": 0.96,
+        "height": 0.14
+      },
+      "rotation": -7,
+      "timing": {
+        "start": 0.7
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "pop",
+          "duration": 0.5,
+          "params": {
+            "overshoot": 1.08
+          }
+        },
+        {
+          "role": "loop",
+          "preset": "floatLoop",
+          "duration": 2.6,
+          "params": {
+            "distance": 0.006,
+            "axis": "y"
+          }
+        }
+      ],
+      "type": "text",
+      "key": "sold",
+      "default": {
+        "en": "JUST SOLD",
+        "tr": "SATILDI"
+      },
+      "font": {
+        "name": "AvenirNext-Heavy",
+        "size": 0.085
+      },
+      "colorRole": "textOnAccent",
+      "alignment": "center",
+      "letterSpacing": 0.02,
+      "allCaps": true
+    },
+    {
+      "id": "info",
+      "frame": {
+        "x": 0.5,
+        "y": 0.795,
+        "width": 0.88,
+        "height": 0.05
+      },
+      "timing": {
+        "start": 0.95
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "slideIn",
+          "duration": 0.55,
+          "easing": "easeOut",
+          "params": {
+            "direction": "up",
+            "distance": 0.04
+          }
+        }
+      ],
+      "type": "text",
+      "key": "info",
+      "default": {
+        "en": "Riverside · 3 bed · 1,270 ft²",
+        "tr": "Moda, Kadıköy · 3+1 · 118 m²"
+      },
+      "font": {
+        "name": "AvenirNext-DemiBold",
+        "size": 0.03
+      },
+      "colorRole": "textPrimary",
+      "alignment": "center"
+    },
+    {
+      "id": "speed",
+      "frame": {
+        "x": 0.5,
+        "y": 0.865,
+        "width": 0.88,
+        "height": 0.07
+      },
+      "timing": {
+        "start": 1.1
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "scaleIn",
+          "duration": 0.55,
+          "easing": "easeOut",
+          "params": {
+            "from": 0.88
+          }
+        }
+      ],
+      "type": "text",
+      "key": "speed",
+      "default": {
+        "en": "Sold in 14 days",
+        "tr": "14 günde satıldı"
+      },
+      "font": {
+        "name": "AvenirNext-Heavy",
+        "size": 0.046
+      },
+      "colorRole": "accent",
+      "alignment": "center"
+    },
+    {
+      "id": "cta",
+      "frame": {
+        "x": 0.5,
+        "y": 0.94,
+        "width": 0.88,
+        "height": 0.035
+      },
+      "timing": {
+        "start": 1.2
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.6
+        }
+      ],
+      "type": "text",
+      "key": "cta",
+      "default": {
+        "en": "Yours could be next · DM us",
+        "tr": "Sıradaki eviniz olabilir · DM"
+      },
+      "font": {
+        "name": "AvenirNext-Regular",
+        "size": 0.02
+      },
+      "colorRole": "textSecondary",
+      "alignment": "center"
+    }
+  ]
+}

@@ -1,0 +1,496 @@
+{
+  "schemaVersion": 2,
+  "id": "road-trip-01",
+  "name": {
+    "en": "Road Trip",
+    "tr": "Yol Hikâyesi"
+  },
+  "category": "travel",
+  "isPro": true,
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "palette": {
+    "background": "#E8DCC8",
+    "surface": "#FFFDF8",
+    "accent": "#8C6A43",
+    "textPrimary": "#31281E",
+    "textSecondary": "#7C6C58",
+    "textOnAccent": "#FFFFFF",
+    "scrimClear": "#00000000",
+    "scrimSolid": "#000000CC"
+  },
+  "audio": {
+    "defaultTrackId": "energetic-01",
+    "volume": 0.85
+  },
+  "scenes": [
+    {
+      "id": "start",
+      "duration": 2.3,
+      "layers": [
+        {
+          "id": "r0",
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 1.0,
+            "height": 1.0
+          },
+          "animations": [
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 2.3,
+              "params": {
+                "zoom": 1.12,
+                "direction": "left"
+              }
+            }
+          ],
+          "type": "mediaSlot",
+          "slotIndex": 0,
+          "media": "photoOrVideo",
+          "contentMode": "fill",
+          "mask": "rect",
+          "filter": "warm",
+          "filterIntensity": 0.4
+        },
+        {
+          "id": "r0-veil",
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 1.0,
+            "height": 1.0
+          },
+          "type": "shape",
+          "colorRole": "scrimClear",
+          "gradient": {
+            "from": "scrimClear",
+            "to": "scrimSolid",
+            "direction": "down"
+          }
+        },
+        {
+          "id": "r0-chip",
+          "frame": {
+            "x": 0.32,
+            "y": 0.79,
+            "width": 0.48,
+            "height": 0.062
+          },
+          "timing": {
+            "start": 0.15
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "slideIn",
+              "duration": 0.45,
+              "easing": "easeOut",
+              "params": {
+                "direction": "left",
+                "distance": 0.08
+              }
+            },
+            {
+              "role": "loop",
+              "preset": "shake",
+              "duration": 1.4,
+              "delay": 0.85,
+              "params": {
+                "degrees": 2.0
+              }
+            }
+          ],
+          "type": "shape",
+          "colorRole": "accent",
+          "cornerRadius": 0.031
+        },
+        {
+          "id": "r0-tag",
+          "frame": {
+            "x": 0.32,
+            "y": 0.79,
+            "width": 0.46,
+            "height": 0.05
+          },
+          "timing": {
+            "start": 0.25
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "fadeIn",
+              "duration": 0.35
+            }
+          ],
+          "type": "text",
+          "key": "tag0",
+          "default": {
+            "en": "KM 0 • IZMIR",
+            "tr": "KM 0 • İZMİR"
+          },
+          "font": {
+            "name": "AvenirNext-Heavy",
+            "size": 0.024
+          },
+          "colorRole": "textOnAccent",
+          "alignment": "center",
+          "letterSpacing": 0.008,
+          "allCaps": true
+        },
+        {
+          "id": "r0-cap",
+          "frame": {
+            "x": 0.5,
+            "y": 0.88,
+            "width": 0.84,
+            "height": 0.1
+          },
+          "timing": {
+            "start": 0.4
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "kineticWords",
+              "duration": 0.9,
+              "params": {
+                "distance": 0.02
+              }
+            }
+          ],
+          "type": "text",
+          "key": "cap0",
+          "default": {
+            "en": "Hitting the road",
+            "tr": "Yola çıkıyoruz"
+          },
+          "font": {
+            "name": "AvenirNext-Bold",
+            "size": 0.05
+          },
+          "colorRole": "surface",
+          "alignment": "center"
+        }
+      ],
+      "transition": {
+        "style": "whip",
+        "duration": 0.3
+      }
+    },
+    {
+      "id": "road",
+      "duration": 2.4,
+      "layers": [
+        {
+          "id": "r1",
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 1.0,
+            "height": 1.0
+          },
+          "animations": [
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 2.4,
+              "params": {
+                "zoom": 1.12,
+                "direction": "up"
+              }
+            }
+          ],
+          "type": "mediaSlot",
+          "slotIndex": 1,
+          "media": "photoOrVideo",
+          "contentMode": "fill",
+          "mask": "rect",
+          "filter": "warm",
+          "filterIntensity": 0.4
+        },
+        {
+          "id": "r1-veil",
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 1.0,
+            "height": 1.0
+          },
+          "type": "shape",
+          "colorRole": "scrimClear",
+          "gradient": {
+            "from": "scrimClear",
+            "to": "scrimSolid",
+            "direction": "down"
+          }
+        },
+        {
+          "id": "r1-chip",
+          "frame": {
+            "x": 0.32,
+            "y": 0.79,
+            "width": 0.48,
+            "height": 0.062
+          },
+          "timing": {
+            "start": 0.15
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "slideIn",
+              "duration": 0.45,
+              "easing": "easeOut",
+              "params": {
+                "direction": "left",
+                "distance": 0.08
+              }
+            },
+            {
+              "role": "loop",
+              "preset": "shake",
+              "duration": 1.4,
+              "delay": 0.85,
+              "params": {
+                "degrees": 2.0
+              }
+            }
+          ],
+          "type": "shape",
+          "colorRole": "accent",
+          "cornerRadius": 0.031
+        },
+        {
+          "id": "r1-tag",
+          "frame": {
+            "x": 0.32,
+            "y": 0.79,
+            "width": 0.46,
+            "height": 0.05
+          },
+          "timing": {
+            "start": 0.25
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "fadeIn",
+              "duration": 0.35
+            }
+          ],
+          "type": "text",
+          "key": "tag1",
+          "default": {
+            "en": "KM 148 • COAST ROAD",
+            "tr": "KM 148 • ÇEŞME YOLU"
+          },
+          "font": {
+            "name": "AvenirNext-Heavy",
+            "size": 0.024
+          },
+          "colorRole": "textOnAccent",
+          "alignment": "center",
+          "letterSpacing": 0.008,
+          "allCaps": true
+        },
+        {
+          "id": "r1-cap",
+          "frame": {
+            "x": 0.5,
+            "y": 0.88,
+            "width": 0.84,
+            "height": 0.1
+          },
+          "timing": {
+            "start": 0.4
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "kineticWords",
+              "duration": 0.9,
+              "params": {
+                "distance": 0.02
+              }
+            }
+          ],
+          "type": "text",
+          "key": "cap1",
+          "default": {
+            "en": "Windows down, music up",
+            "tr": "Cam açık, müzik açık"
+          },
+          "font": {
+            "name": "AvenirNext-Bold",
+            "size": 0.05
+          },
+          "colorRole": "surface",
+          "alignment": "center"
+        }
+      ],
+      "transition": {
+        "style": "slideLeft",
+        "duration": 0.4
+      }
+    },
+    {
+      "id": "arrive",
+      "duration": 2.3,
+      "layers": [
+        {
+          "id": "r2",
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 1.0,
+            "height": 1.0
+          },
+          "animations": [
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 2.3,
+              "params": {
+                "zoom": 1.12,
+                "direction": "right"
+              }
+            }
+          ],
+          "type": "mediaSlot",
+          "slotIndex": 2,
+          "media": "photoOrVideo",
+          "contentMode": "fill",
+          "mask": "rect",
+          "filter": "warm",
+          "filterIntensity": 0.4
+        },
+        {
+          "id": "r2-veil",
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 1.0,
+            "height": 1.0
+          },
+          "type": "shape",
+          "colorRole": "scrimClear",
+          "gradient": {
+            "from": "scrimClear",
+            "to": "scrimSolid",
+            "direction": "down"
+          }
+        },
+        {
+          "id": "r2-chip",
+          "frame": {
+            "x": 0.32,
+            "y": 0.79,
+            "width": 0.48,
+            "height": 0.062
+          },
+          "timing": {
+            "start": 0.15
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "slideIn",
+              "duration": 0.45,
+              "easing": "easeOut",
+              "params": {
+                "direction": "left",
+                "distance": 0.08
+              }
+            },
+            {
+              "role": "loop",
+              "preset": "shake",
+              "duration": 1.4,
+              "delay": 0.85,
+              "params": {
+                "degrees": 2.0
+              }
+            }
+          ],
+          "type": "shape",
+          "colorRole": "accent",
+          "cornerRadius": 0.031
+        },
+        {
+          "id": "r2-tag",
+          "frame": {
+            "x": 0.32,
+            "y": 0.79,
+            "width": 0.46,
+            "height": 0.05
+          },
+          "timing": {
+            "start": 0.25
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "fadeIn",
+              "duration": 0.35
+            }
+          ],
+          "type": "text",
+          "key": "tag2",
+          "default": {
+            "en": "KM 260 • ALACATI",
+            "tr": "KM 260 • ALAÇATI"
+          },
+          "font": {
+            "name": "AvenirNext-Heavy",
+            "size": 0.024
+          },
+          "colorRole": "textOnAccent",
+          "alignment": "center",
+          "letterSpacing": 0.008,
+          "allCaps": true
+        },
+        {
+          "id": "r2-cap",
+          "frame": {
+            "x": 0.5,
+            "y": 0.88,
+            "width": 0.84,
+            "height": 0.1
+          },
+          "timing": {
+            "start": 0.4
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "kineticWords",
+              "duration": 0.9,
+              "params": {
+                "distance": 0.02
+              }
+            }
+          ],
+          "type": "text",
+          "key": "cap2",
+          "default": {
+            "en": "Almost there",
+            "tr": "Geldik sayılır"
+          },
+          "font": {
+            "name": "AvenirNext-Bold",
+            "size": 0.05
+          },
+          "colorRole": "surface",
+          "alignment": "center"
+        }
+      ]
+    }
+  ],
+  "layers": []
+}

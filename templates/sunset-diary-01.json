@@ -1,0 +1,243 @@
+{
+  "schemaVersion": 1,
+  "id": "sunset-diary-01",
+  "name": {
+    "en": "Sunset Diary",
+    "tr": "Gün Batımı"
+  },
+  "category": "travel",
+  "isPro": false,
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "duration": 7.0,
+  "palette": {
+    "background": "#1B0F1E",
+    "surface": "#FFF3E9",
+    "accent": "#FF7A45",
+    "textPrimary": "#FFF3E9",
+    "textSecondary": "#D3AFA0",
+    "textOnAccent": "#FFFFFF",
+    "scrimClear": "#00000000",
+    "scrimSolid": "#000000CC",
+    "sunGlow": "#FF7A4500",
+    "sunDeep": "#2A0E1AF2"
+  },
+  "audio": {
+    "defaultTrackId": "ambient-01",
+    "volume": 0.85
+  },
+  "layers": [
+    {
+      "id": "bg",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "type": "shape",
+      "colorRole": "background"
+    },
+    {
+      "id": "sun",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.6
+        },
+        {
+          "role": "loop",
+          "preset": "kenBurns",
+          "duration": 7.0,
+          "params": {
+            "zoom": 1.12,
+            "direction": "down"
+          }
+        }
+      ],
+      "type": "mediaSlot",
+      "slotIndex": 0,
+      "media": "photoOrVideo",
+      "contentMode": "fill",
+      "mask": "rect",
+      "filter": "warm",
+      "filterIntensity": 0.55
+    },
+    {
+      "id": "sun-top",
+      "frame": {
+        "x": 0.5,
+        "y": 0.09,
+        "width": 1.0,
+        "height": 0.18
+      },
+      "type": "shape",
+      "colorRole": "scrimClear",
+      "gradient": {
+        "from": "scrimClear",
+        "to": "scrimSolid",
+        "direction": "up"
+      }
+    },
+    {
+      "id": "sun-veil",
+      "frame": {
+        "x": 0.5,
+        "y": 0.72,
+        "width": 1.0,
+        "height": 0.56
+      },
+      "type": "shape",
+      "colorRole": "sunGlow",
+      "gradient": {
+        "from": "sunGlow",
+        "to": "sunDeep",
+        "direction": "down"
+      }
+    },
+    {
+      "id": "sun-time",
+      "frame": {
+        "x": 0.5,
+        "y": 0.08,
+        "width": 0.4,
+        "height": 0.045
+      },
+      "timing": {
+        "start": 0.2
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.5
+        }
+      ],
+      "type": "text",
+      "key": "sunTime",
+      "default": {
+        "en": "19:42",
+        "tr": "19:42"
+      },
+      "font": {
+        "name": "AvenirNext-DemiBold",
+        "size": 0.026
+      },
+      "colorRole": "textPrimary",
+      "alignment": "center",
+      "letterSpacing": 0.01
+    },
+    {
+      "id": "sun-quote",
+      "frame": {
+        "x": 0.5,
+        "y": 0.7,
+        "width": 0.8,
+        "height": 0.22
+      },
+      "timing": {
+        "start": 0.4
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "kineticWords",
+          "duration": 0.9,
+          "params": {
+            "distance": 0.02
+          }
+        },
+        {
+          "role": "loop",
+          "preset": "floatLoop",
+          "duration": 2.6,
+          "params": {
+            "distance": 0.006,
+            "axis": "y"
+          }
+        }
+      ],
+      "type": "text",
+      "key": "sunQuote",
+      "default": {
+        "en": "Watching the sun\ngo down counts\nas a plan.",
+        "tr": "Gün batımını\nizlemek de\nbir plandır."
+      },
+      "font": {
+        "name": "Georgia-Italic",
+        "size": 0.052
+      },
+      "colorRole": "textPrimary",
+      "alignment": "center",
+      "maxLines": 3
+    },
+    {
+      "id": "sun-dash",
+      "frame": {
+        "x": 0.5,
+        "y": 0.845,
+        "width": 0.08,
+        "height": 0.005
+      },
+      "timing": {
+        "start": 1.0
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "wipeReveal",
+          "duration": 0.5,
+          "easing": "easeOut",
+          "params": {
+            "direction": "right"
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "accent"
+    },
+    {
+      "id": "sun-place",
+      "frame": {
+        "x": 0.5,
+        "y": 0.895,
+        "width": 0.72,
+        "height": 0.04
+      },
+      "timing": {
+        "start": 1.15
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.6
+        }
+      ],
+      "type": "text",
+      "key": "sunPlace",
+      "default": {
+        "en": "OLUDENIZ, TURKEY",
+        "tr": "ÖLÜDENİZ, FETHİYE"
+      },
+      "font": {
+        "name": "AvenirNext-DemiBold",
+        "size": 0.022
+      },
+      "colorRole": "accent",
+      "alignment": "center",
+      "letterSpacing": 0.014,
+      "allCaps": true
+    }
+  ]
+}

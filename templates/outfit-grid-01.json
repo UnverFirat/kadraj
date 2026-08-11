@@ -1,0 +1,312 @@
+{
+  "schemaVersion": 2,
+  "id": "outfit-grid-01",
+  "name": {
+    "en": "Outfit Grid",
+    "tr": "Kombin Izgarası"
+  },
+  "category": "fashion",
+  "isPro": true,
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "palette": {
+    "background": "#0A0A0A",
+    "surface": "#FFFFFF",
+    "accent": "#FFFFFF",
+    "textPrimary": "#FFFFFF",
+    "textSecondary": "#9A9A9A",
+    "textOnAccent": "#0A0A0A",
+    "scrimClear": "#00000000",
+    "scrimSolid": "#000000CC"
+  },
+  "audio": {
+    "defaultTrackId": "clean-01",
+    "volume": 0.85
+  },
+  "scenes": [
+    {
+      "id": "grid",
+      "duration": 6.0,
+      "layers": [
+        {
+          "id": "cell0",
+          "frame": {
+            "x": 0.2525,
+            "y": 0.2575,
+            "width": 0.495,
+            "height": 0.4925
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "scaleIn",
+              "duration": 0.5,
+              "easing": "easeOut",
+              "params": {
+                "from": 0.9
+              }
+            },
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 6.0,
+              "params": {
+                "zoom": 1.06,
+                "direction": "up"
+              }
+            }
+          ],
+          "type": "mediaSlot",
+          "slotIndex": 0,
+          "media": "photoOrVideo",
+          "contentMode": "fill",
+          "mask": "rect",
+          "cornerRadius": 0.006
+        },
+        {
+          "id": "cell1",
+          "frame": {
+            "x": 0.7475,
+            "y": 0.2575,
+            "width": 0.495,
+            "height": 0.4925
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "scaleIn",
+              "duration": 0.5,
+              "delay": 0.09,
+              "easing": "easeOut",
+              "params": {
+                "from": 0.9
+              }
+            },
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 6.0,
+              "params": {
+                "zoom": 1.06,
+                "direction": "down"
+              }
+            }
+          ],
+          "type": "mediaSlot",
+          "slotIndex": 1,
+          "media": "photoOrVideo",
+          "contentMode": "fill",
+          "mask": "rect",
+          "cornerRadius": 0.006,
+          "filter": "mono",
+          "filterIntensity": 0.3
+        },
+        {
+          "id": "cell2",
+          "frame": {
+            "x": 0.2525,
+            "y": 0.7425,
+            "width": 0.495,
+            "height": 0.4925
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "scaleIn",
+              "duration": 0.5,
+              "delay": 0.18,
+              "easing": "easeOut",
+              "params": {
+                "from": 0.9
+              }
+            },
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 6.0,
+              "params": {
+                "zoom": 1.06,
+                "direction": "left"
+              }
+            }
+          ],
+          "type": "mediaSlot",
+          "slotIndex": 2,
+          "media": "photoOrVideo",
+          "contentMode": "fill",
+          "mask": "rect",
+          "cornerRadius": 0.006
+        },
+        {
+          "id": "cell3",
+          "frame": {
+            "x": 0.7475,
+            "y": 0.7425,
+            "width": 0.495,
+            "height": 0.4925
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "scaleIn",
+              "duration": 0.5,
+              "delay": 0.27,
+              "easing": "easeOut",
+              "params": {
+                "from": 0.9
+              }
+            },
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 6.0,
+              "params": {
+                "zoom": 1.06,
+                "direction": "right"
+              }
+            }
+          ],
+          "type": "mediaSlot",
+          "slotIndex": 3,
+          "media": "photoOrVideo",
+          "contentMode": "fill",
+          "mask": "rect",
+          "cornerRadius": 0.006,
+          "filter": "mono",
+          "filterIntensity": 0.3
+        },
+        {
+          "id": "brand-chip",
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 0.56,
+            "height": 0.095
+          },
+          "timing": {
+            "start": 0.55
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "pop",
+              "duration": 0.5,
+              "params": {
+                "overshoot": 1.07
+              }
+            },
+            {
+              "role": "loop",
+              "preset": "shake",
+              "duration": 1.4,
+              "delay": 0.9,
+              "params": {
+                "degrees": 2.0
+              }
+            }
+          ],
+          "type": "shape",
+          "colorRole": "surface",
+          "cornerRadius": 0.0475
+        },
+        {
+          "id": "brand",
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 0.52,
+            "height": 0.06
+          },
+          "timing": {
+            "start": 0.7
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "fadeIn",
+              "duration": 0.4
+            }
+          ],
+          "type": "text",
+          "key": "brand",
+          "default": {
+            "en": "STUDIO TWELVE",
+            "tr": "ATÖLYE ON İKİ"
+          },
+          "font": {
+            "name": "Archivo-SemiBold",
+            "size": 0.032
+          },
+          "colorRole": "background",
+          "alignment": "center",
+          "letterSpacing": 0.012,
+          "allCaps": true
+        },
+        {
+          "id": "season-chip",
+          "frame": {
+            "x": 0.5,
+            "y": 0.588,
+            "width": 0.34,
+            "height": 0.055
+          },
+          "opacity": 0.9,
+          "timing": {
+            "start": 0.85
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "scaleIn",
+              "duration": 0.45,
+              "easing": "easeOut",
+              "params": {
+                "from": 0.85
+              }
+            }
+          ],
+          "type": "shape",
+          "colorRole": "background",
+          "cornerRadius": 0.0275
+        },
+        {
+          "id": "season",
+          "frame": {
+            "x": 0.5,
+            "y": 0.588,
+            "width": 0.32,
+            "height": 0.04
+          },
+          "timing": {
+            "start": 0.95
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "fadeIn",
+              "duration": 0.4
+            }
+          ],
+          "type": "text",
+          "key": "season",
+          "default": {
+            "en": "FALL 26",
+            "tr": "SONBAHAR 26"
+          },
+          "font": {
+            "name": "AvenirNext-DemiBold",
+            "size": 0.024
+          },
+          "colorRole": "textPrimary",
+          "alignment": "center",
+          "letterSpacing": 0.014,
+          "allCaps": true
+        }
+      ]
+    }
+  ],
+  "layers": []
+}

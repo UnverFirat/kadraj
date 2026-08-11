@@ -1,0 +1,301 @@
+{
+  "schemaVersion": 1,
+  "id": "new-arrival-01",
+  "name": {
+    "en": "New Arrival",
+    "tr": "Yeni Geldi"
+  },
+  "category": "promo",
+  "isPro": false,
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "duration": 6.0,
+  "palette": {
+    "background": "#0A0A0A",
+    "surface": "#FFFFFF",
+    "accent": "#FFFFFF",
+    "textPrimary": "#FFFFFF",
+    "textSecondary": "#9A9A9A",
+    "textOnAccent": "#0A0A0A",
+    "scrimClear": "#00000000",
+    "scrimSolid": "#000000CC",
+    "cardInk": "#111111"
+  },
+  "audio": {
+    "defaultTrackId": "bright-01",
+    "volume": 0.85
+  },
+  "layers": [
+    {
+      "id": "bg",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "type": "shape",
+      "colorRole": "background"
+    },
+    {
+      "id": "kicker",
+      "frame": {
+        "x": 0.5,
+        "y": 0.09,
+        "width": 0.8,
+        "height": 0.035
+      },
+      "timing": {
+        "start": 0.25
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.55
+        }
+      ],
+      "type": "text",
+      "key": "kicker",
+      "default": {
+        "en": "NEW SEASON",
+        "tr": "YENİ SEZON"
+      },
+      "font": {
+        "name": "AvenirNext-DemiBold",
+        "size": 0.024
+      },
+      "colorRole": "textSecondary",
+      "alignment": "center",
+      "letterSpacing": 0.02,
+      "allCaps": true
+    },
+    {
+      "id": "card",
+      "frame": {
+        "x": 0.5,
+        "y": 0.44,
+        "width": 0.72,
+        "height": 0.58
+      },
+      "timing": {
+        "start": 0.35
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "scaleIn",
+          "duration": 0.6,
+          "easing": "easeOut",
+          "params": {
+            "from": 0.92
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "surface",
+      "cornerRadius": 0.018
+    },
+    {
+      "id": "photo",
+      "frame": {
+        "x": 0.5,
+        "y": 0.42,
+        "width": 0.62,
+        "height": 0.48
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.6
+        },
+        {
+          "role": "loop",
+          "preset": "kenBurns",
+          "duration": 6.0,
+          "params": {
+            "zoom": 1.09,
+            "direction": "down"
+          }
+        }
+      ],
+      "type": "mediaSlot",
+      "slotIndex": 0,
+      "media": "photoOrVideo",
+      "contentMode": "fill",
+      "mask": "rect",
+      "cornerRadius": 0.01,
+      "filter": "mono",
+      "filterIntensity": 0.25
+    },
+    {
+      "id": "badge",
+      "frame": {
+        "x": 0.79,
+        "y": 0.19,
+        "width": 0.21,
+        "height": 0.118
+      },
+      "timing": {
+        "start": 0.7
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "pop",
+          "duration": 0.5,
+          "params": {
+            "overshoot": 1.14
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "accent",
+      "mask": "circle"
+    },
+    {
+      "id": "badge-text",
+      "frame": {
+        "x": 0.79,
+        "y": 0.19,
+        "width": 0.18,
+        "height": 0.05
+      },
+      "timing": {
+        "start": 0.85
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.35
+        }
+      ],
+      "type": "text",
+      "key": "badge",
+      "default": {
+        "en": "NEW",
+        "tr": "YENİ"
+      },
+      "font": {
+        "name": "AvenirNext-Heavy",
+        "size": 0.03
+      },
+      "colorRole": "textOnAccent",
+      "alignment": "center",
+      "letterSpacing": 0.006,
+      "allCaps": true
+    },
+    {
+      "id": "name",
+      "frame": {
+        "x": 0.33,
+        "y": 0.8,
+        "width": 0.38,
+        "height": 0.07
+      },
+      "timing": {
+        "start": 0.95
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "slideIn",
+          "duration": 0.5,
+          "easing": "easeOut",
+          "params": {
+            "direction": "up",
+            "distance": 0.03
+          }
+        },
+        {
+          "role": "loop",
+          "preset": "floatLoop",
+          "duration": 2.6,
+          "params": {
+            "distance": 0.006,
+            "axis": "y"
+          }
+        }
+      ],
+      "type": "text",
+      "key": "name",
+      "default": {
+        "en": "Linen Shirt",
+        "tr": "Keten Gömlek"
+      },
+      "font": {
+        "name": "AvenirNext-Bold",
+        "size": 0.04
+      },
+      "colorRole": "textPrimary",
+      "alignment": "left"
+    },
+    {
+      "id": "price",
+      "frame": {
+        "x": 0.76,
+        "y": 0.8,
+        "width": 0.2,
+        "height": 0.07
+      },
+      "timing": {
+        "start": 1.05
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.45
+        }
+      ],
+      "type": "text",
+      "key": "price",
+      "default": {
+        "en": "$149",
+        "tr": "₺1.290"
+      },
+      "font": {
+        "name": "AvenirNext-Heavy",
+        "size": 0.04
+      },
+      "colorRole": "textPrimary",
+      "alignment": "right"
+    },
+    {
+      "id": "stock",
+      "frame": {
+        "x": 0.5,
+        "y": 0.9,
+        "width": 0.8,
+        "height": 0.038
+      },
+      "timing": {
+        "start": 1.2
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.6
+        }
+      ],
+      "type": "text",
+      "key": "stock",
+      "default": {
+        "en": "Limited stock — 3 colors",
+        "tr": "Stoklarla sınırlı — 3 renk"
+      },
+      "font": {
+        "name": "AvenirNext-Regular",
+        "size": 0.02
+      },
+      "colorRole": "textSecondary",
+      "alignment": "center"
+    }
+  ]
+}

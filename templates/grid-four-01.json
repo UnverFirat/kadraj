@@ -1,0 +1,220 @@
+{
+  "schemaVersion": 2,
+  "id": "grid-four-01",
+  "name": {
+    "en": "Four Grid",
+    "tr": "Dörtlü Grid"
+  },
+  "category": "social",
+  "isPro": true,
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "palette": {
+    "background": "#0E0E12",
+    "surface": "#FFFFFF",
+    "accent": "#F5C518",
+    "textPrimary": "#0E0E12",
+    "textSecondary": "#FFFFFF"
+  },
+  "audio": {
+    "defaultTrackId": "chill-01",
+    "volume": 0.85
+  },
+  "scenes": [
+    {
+      "id": "grid",
+      "duration": 5.0,
+      "layers": [
+        {
+          "id": "cell-0",
+          "type": "mediaSlot",
+          "slotIndex": 0,
+          "media": "video",
+          "frame": {
+            "x": 0.252,
+            "y": 0.29,
+            "width": 0.49,
+            "height": 0.42
+          },
+          "cornerRadius": 0.008,
+          "animations": [
+            {
+              "role": "in",
+              "preset": "scaleIn",
+              "duration": 0.5,
+              "params": {
+                "from": 0.85
+              }
+            }
+          ]
+        },
+        {
+          "id": "cell-1",
+          "type": "mediaSlot",
+          "slotIndex": 1,
+          "media": "video",
+          "frame": {
+            "x": 0.748,
+            "y": 0.29,
+            "width": 0.49,
+            "height": 0.42
+          },
+          "cornerRadius": 0.008,
+          "animations": [
+            {
+              "role": "in",
+              "preset": "scaleIn",
+              "duration": 0.5,
+              "delay": 0.08,
+              "params": {
+                "from": 0.85
+              }
+            }
+          ]
+        },
+        {
+          "id": "cell-2",
+          "type": "mediaSlot",
+          "slotIndex": 2,
+          "media": "video",
+          "frame": {
+            "x": 0.252,
+            "y": 0.72,
+            "width": 0.49,
+            "height": 0.42
+          },
+          "cornerRadius": 0.008,
+          "animations": [
+            {
+              "role": "in",
+              "preset": "scaleIn",
+              "duration": 0.5,
+              "delay": 0.16,
+              "params": {
+                "from": 0.85
+              }
+            }
+          ]
+        },
+        {
+          "id": "cell-3",
+          "type": "mediaSlot",
+          "slotIndex": 3,
+          "media": "video",
+          "frame": {
+            "x": 0.748,
+            "y": 0.72,
+            "width": 0.49,
+            "height": 0.42
+          },
+          "cornerRadius": 0.008,
+          "animations": [
+            {
+              "role": "in",
+              "preset": "scaleIn",
+              "duration": 0.5,
+              "delay": 0.24,
+              "params": {
+                "from": 0.85
+              }
+            }
+          ]
+        },
+        {
+          "id": "logo-dot",
+          "type": "shape",
+          "colorRole": "surface",
+          "mask": "circle",
+          "frame": {
+            "x": 0.5,
+            "y": 0.505,
+            "width": 0.2,
+            "height": 0.113
+          },
+          "timing": {
+            "start": 0.4
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "pop",
+              "duration": 0.4,
+              "params": {
+                "overshoot": 1.1
+              }
+            }
+          ]
+        },
+        {
+          "id": "logo-text",
+          "type": "text",
+          "key": "logo",
+          "default": {
+            "en": "2026",
+            "tr": "2026"
+          },
+          "font": {
+            "name": "AvenirNext-Bold",
+            "size": 0.03
+          },
+          "colorRole": "textPrimary",
+          "alignment": "center",
+          "letterSpacing": 0.002,
+          "frame": {
+            "x": 0.5,
+            "y": 0.505,
+            "width": 0.2,
+            "height": 0.06
+          },
+          "timing": {
+            "start": 0.5
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "fadeIn",
+              "duration": 0.3
+            }
+          ]
+        },
+        {
+          "id": "caption",
+          "type": "text",
+          "key": "caption",
+          "default": {
+            "en": "A GOOD WEEK",
+            "tr": "GÜZEL BİR HAFTA"
+          },
+          "font": {
+            "name": "AvenirNext-Medium",
+            "size": 0.026
+          },
+          "colorRole": "textSecondary",
+          "alignment": "center",
+          "allCaps": true,
+          "letterSpacing": 0.006,
+          "frame": {
+            "x": 0.5,
+            "y": 0.955,
+            "width": 0.8,
+            "height": 0.05
+          },
+          "timing": {
+            "start": 0.8
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "fadeIn",
+              "duration": 0.5
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "layers": []
+}

@@ -1,0 +1,214 @@
+{
+  "schemaVersion": 1,
+  "id": "soft-gradient-01",
+  "name": {
+    "en": "Soft Gradient",
+    "tr": "Yumuşak Geçiş"
+  },
+  "category": "minimal",
+  "isPro": false,
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "duration": 7.0,
+  "palette": {
+    "background": "#F7EDEC",
+    "surface": "#FFFFFF",
+    "accent": "#C98B8B",
+    "textPrimary": "#2B1F1F",
+    "textSecondary": "#8E7676",
+    "textOnAccent": "#FFFFFF",
+    "scrimClear": "#00000000",
+    "scrimSolid": "#000000CC",
+    "glowRose": "#F3C9C4",
+    "glowLilac": "#DCCBE8",
+    "glowPeach": "#F8DCC2"
+  },
+  "audio": {
+    "defaultTrackId": "calm-01",
+    "volume": 0.85
+  },
+  "layers": [
+    {
+      "id": "bg",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "type": "shape",
+      "colorRole": "background"
+    },
+    {
+      "id": "glow-a",
+      "frame": {
+        "x": 0.34,
+        "y": 0.34,
+        "width": 0.72,
+        "height": 0.42
+      },
+      "opacity": 0.65,
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 1.0
+        },
+        {
+          "role": "loop",
+          "preset": "pulse",
+          "duration": 3.4,
+          "params": {
+            "scale": 1.05
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "glowRose",
+      "mask": "circle",
+      "gradient": {
+        "from": "glowRose",
+        "to": "glowLilac",
+        "direction": "diagonal"
+      }
+    },
+    {
+      "id": "glow-b",
+      "frame": {
+        "x": 0.66,
+        "y": 0.62,
+        "width": 0.72,
+        "height": 0.44
+      },
+      "opacity": 0.55,
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 1.2,
+          "delay": 0.2
+        },
+        {
+          "role": "loop",
+          "preset": "pulse",
+          "duration": 4.2,
+          "params": {
+            "scale": 1.04
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "glowPeach",
+      "mask": "circle",
+      "gradient": {
+        "from": "glowPeach",
+        "to": "glowRose",
+        "direction": "up"
+      }
+    },
+    {
+      "id": "title",
+      "frame": {
+        "x": 0.5,
+        "y": 0.475,
+        "width": 0.72,
+        "height": 0.15
+      },
+      "timing": {
+        "start": 0.5
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "scaleIn",
+          "duration": 0.9,
+          "easing": "easeOut",
+          "params": {
+            "from": 0.92
+          }
+        },
+        {
+          "role": "loop",
+          "preset": "floatLoop",
+          "duration": 2.6,
+          "params": {
+            "distance": 0.006,
+            "axis": "y"
+          }
+        }
+      ],
+      "type": "text",
+      "key": "title",
+      "default": {
+        "en": "Slow down\nand breathe",
+        "tr": "Yavaşla ve\nnefes al"
+      },
+      "font": {
+        "name": "Didot",
+        "size": 0.056
+      },
+      "colorRole": "textPrimary",
+      "alignment": "center",
+      "maxLines": 2
+    },
+    {
+      "id": "hair",
+      "frame": {
+        "x": 0.5,
+        "y": 0.585,
+        "width": 0.07,
+        "height": 0.003
+      },
+      "timing": {
+        "start": 1.0
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "wipeReveal",
+          "duration": 0.6,
+          "easing": "easeOut",
+          "params": {
+            "direction": "right"
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "accent"
+    },
+    {
+      "id": "sub",
+      "frame": {
+        "x": 0.5,
+        "y": 0.645,
+        "width": 0.76,
+        "height": 0.04
+      },
+      "timing": {
+        "start": 1.2
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.8
+        }
+      ],
+      "type": "text",
+      "key": "sub",
+      "default": {
+        "en": "A Sunday morning with nowhere to be",
+        "tr": "Acelesi olmayan bir pazar sabahı"
+      },
+      "font": {
+        "name": "AvenirNext-Regular",
+        "size": 0.021
+      },
+      "colorRole": "textSecondary",
+      "alignment": "center"
+    }
+  ]
+}

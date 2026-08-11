@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<!-- Uygulama yalnız HTTPS kullanıyor (kendi şifreleme kodu yok) →
+	     ihracat beyanı muaf. Bu anahtar olmadan her yüklemede sorulur. -->
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>tr</string>
+	<key>CFBundleDisplayName</key>
+	<string>StoryTemplate</string>
+	<key>CFBundleExecutable</key>
+	<string>$(EXECUTABLE_NAME)</string>
+	<key>CFBundleIdentifier</key>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>$(PRODUCT_NAME)</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>$(MARKETING_VERSION)</string>
+	<key>CFBundleVersion</key>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<key>LSRequiresIPhoneOS</key>
+	<true/>
+	<key>UILaunchScreen</key>
+	<dict/>
+	<key>UIUserInterfaceStyle</key>
+	<string>Dark</string>
+	<key>UISupportedInterfaceOrientations</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+	</array>
+	<!-- Şablonları paylaşırken kullanıcının kendi videosunu Fotoğraflar'a
+	     kaydedebilmesi için (yalnız EKLEME izni; kütüphaneyi okumuyoruz —
+	     medya seçimi PHPicker ile izinsiz yapılıyor). -->
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Oluşturduğun videoyu Fotoğraflar'a kaydetmek için.</string>
+	<!-- Yalnız geliştirme: `--cdn http://localhost:8765` ile depo templates/
+	     klasörünü yerel http sunucudan denemek için. Ürün CDN'i https olacağı
+	     için bu anahtar yayına çıkmadan kaldırılabilir. -->
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsLocalNetworking</key>
+		<true/>
+	</dict>
+	<!-- ŞABLON CDN'İ. Boşsa uygulama yalnız paketle gelen şablonlarla çalışır.
+	     Doldurulduğunda katalog (manifest + şablon JSON'ları + posterler) buradan
+	     tazelenir; `--cdn <url>` başlatma bayrağı geliştirmede bunu ezer.
+	     TODO (yayın öncesi): gerçek CDN alan adı. Yol şeması için
+	     docs/cdn-deployment.md. -->
+	<key>TemplateCDNBaseURL</key>
+	<string></string>
+	<!-- Deep link iskeleti: app://sablon/<id> (yönlendirme RootView'da). -->
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>com.storytemplate.app</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>storytemplate</string>
+			</array>
+		</dict>
+	</array>
+</dict>
+</plist>

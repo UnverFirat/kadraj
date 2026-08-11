@@ -1,0 +1,1990 @@
+{
+  "manifestVersion": 1,
+  "templates": [
+    {
+      "id": "reel-collage-01",
+      "version": 1,
+      "category": "travel",
+      "isPro": false,
+      "tags": [
+        "popular"
+      ],
+      "minAppVersion": "1.0.0",
+      "template": "reel-collage-01.json",
+      "thumbnail": "thumbs/reel-collage-01.jpg",
+      "preview": "previews/reel-collage-01.mp4",
+      "name": {
+        "en": "Reel Collage",
+        "tr": "Reel Kolaj"
+      }
+    },
+    {
+      "id": "sale-promo-01",
+      "version": 1,
+      "category": "promo",
+      "isPro": false,
+      "tags": [
+        "new"
+      ],
+      "minAppVersion": "1.0.0",
+      "template": "sale-promo-01.json",
+      "thumbnail": "thumbs/sale-promo-01.jpg",
+      "preview": "previews/sale-promo-01.mp4",
+      "name": {
+        "en": "Flash Sale",
+        "tr": "İndirim Duyurusu"
+      }
+    },
+    {
+      "id": "travel-mix-01",
+      "version": 1,
+      "category": "travel",
+      "isPro": true,
+      "tags": [
+        "popular"
+      ],
+      "minAppVersion": "1.0.0",
+      "template": "travel-mix-01.json",
+      "thumbnail": "thumbs/travel-mix-01.jpg",
+      "preview": "previews/travel-mix-01.mp4",
+      "name": {
+        "en": "Travel Mix",
+        "tr": "Gezi Karması"
+      }
+    },
+    {
+      "id": "recipe-steps-01",
+      "version": 1,
+      "category": "food",
+      "isPro": false,
+      "tags": [
+        "new"
+      ],
+      "minAppVersion": "1.0.0",
+      "template": "recipe-steps-01.json",
+      "thumbnail": "thumbs/recipe-steps-01.jpg",
+      "preview": "previews/recipe-steps-01.mp4",
+      "name": {
+        "en": "Recipe Steps",
+        "tr": "Tarif Adımları"
+      }
+    },
+    {
+      "id": "fast-cut-01",
+      "version": 1,
+      "category": "social",
+      "isPro": false,
+      "tags": [
+        "popular"
+      ],
+      "minAppVersion": "1.0.0",
+      "template": "fast-cut-01.json",
+      "thumbnail": "thumbs/fast-cut-01.jpg",
+      "preview": "previews/fast-cut-01.mp4",
+      "name": {
+        "en": "Beat Cut",
+        "tr": "Ritim Kurgu"
+      }
+    },
+    {
+      "id": "real-estate-01",
+      "version": 1,
+      "category": "realestate",
+      "isPro": true,
+      "tags": [
+        "new"
+      ],
+      "minAppVersion": "1.0.0",
+      "template": "real-estate-01.json",
+      "thumbnail": "thumbs/real-estate-01.jpg",
+      "preview": "previews/real-estate-01.mp4",
+      "name": {
+        "en": "Property Tour",
+        "tr": "Emlak Turu"
+      }
+    },
+    {
+      "id": "grid-four-01",
+      "version": 1,
+      "category": "social",
+      "isPro": true,
+      "tags": [],
+      "minAppVersion": "1.0.0",
+      "template": "grid-four-01.json",
+      "thumbnail": "thumbs/grid-four-01.jpg",
+      "preview": "previews/grid-four-01.mp4",
+      "name": {
+        "en": "Four Grid",
+        "tr": "Dörtlü Grid"
+      }
+    },
+    {
+      "id": "menu-card-01",
+      "version": 1,
+      "category": "food",
+      "isPro": true,
+      "tags": [
+        "new"
+      ],
+      "minAppVersion": "1.0.0",
+      "template": "menu-card-01.json",
+      "thumbnail": "thumbs/menu-card-01.jpg",
+      "preview": "previews/menu-card-01.mp4",
+      "name": {
+        "en": "Daily Menu",
+        "tr": "Günün Menüsü"
+      }
+    },
+    {
+      "id": "split-screen-01",
+      "version": 1,
+      "category": "promo",
+      "isPro": true,
+      "tags": [],
+      "minAppVersion": "1.0.0",
+      "template": "split-screen-01.json",
+      "thumbnail": "thumbs/split-screen-01.jpg",
+      "preview": "previews/split-screen-01.mp4",
+      "name": {
+        "en": "Split Screen",
+        "tr": "İkiz Ekran"
+      }
+    },
+    {
+      "id": "testimonial-01",
+      "version": 1,
+      "category": "business",
+      "isPro": true,
+      "tags": [
+        "new"
+      ],
+      "minAppVersion": "1.0.0",
+      "template": "testimonial-01.json",
+      "thumbnail": "thumbs/testimonial-01.jpg",
+      "preview": "previews/testimonial-01.mp4",
+      "name": {
+        "en": "Testimonial",
+        "tr": "Müşteri Yorumu"
+      }
+    },
+    {
+      "id": "bubble-grid-01",
+      "version": 1,
+      "category": "social",
+      "isPro": true,
+      "tags": [],
+      "minAppVersion": "1.0.0",
+      "template": "bubble-grid-01.json",
+      "thumbnail": "thumbs/bubble-grid-01.jpg",
+      "preview": "previews/bubble-grid-01.mp4",
+      "name": {
+        "en": "Bubble Grid",
+        "tr": "Balon Kolaj"
+      }
+    },
+    {
+      "id": "audiogram-01",
+      "version": 1,
+      "category": "social",
+      "isPro": true,
+      "tags": [
+        "new"
+      ],
+      "minAppVersion": "1.0.0",
+      "template": "audiogram-01.json",
+      "thumbnail": "thumbs/audiogram-01.jpg",
+      "preview": "previews/audiogram-01.mp4",
+      "name": {
+        "en": "Podcast Clip",
+        "tr": "Podcast Tanıtımı"
+      }
+    },
+    {
+      "id": "photo-slideshow-01",
+      "version": 1,
+      "category": "travel",
+      "isPro": false,
+      "tags": [],
+      "minAppVersion": "1.0.0",
+      "template": "photo-slideshow-01.json",
+      "thumbnail": "thumbs/photo-slideshow-01.jpg",
+      "preview": "previews/photo-slideshow-01.mp4",
+      "name": {
+        "en": "Photo Slideshow",
+        "tr": "Foto Albüm"
+      }
+    },
+    {
+      "id": "invite-card-01",
+      "version": 1,
+      "category": "wedding",
+      "isPro": true,
+      "tags": [
+        "new"
+      ],
+      "minAppVersion": "1.0.0",
+      "template": "invite-card-01.json",
+      "thumbnail": "thumbs/invite-card-01.jpg",
+      "preview": "previews/invite-card-01.mp4",
+      "name": {
+        "en": "Invitation",
+        "tr": "Davetiye"
+      }
+    },
+    {
+      "id": "vlog-intro-01",
+      "version": 1,
+      "category": "travel",
+      "isPro": false,
+      "tags": [],
+      "minAppVersion": "1.0.0",
+      "template": "vlog-intro-01.json",
+      "thumbnail": "thumbs/vlog-intro-01.jpg",
+      "preview": "previews/vlog-intro-01.mp4",
+      "name": {
+        "en": "Cinematic Intro",
+        "tr": "Sinematik Açılış"
+      }
+    },
+    {
+      "id": "quote-01",
+      "version": 1,
+      "category": "minimal",
+      "isPro": false,
+      "tags": [],
+      "minAppVersion": "1.0.0",
+      "template": "quote-01.json",
+      "thumbnail": "thumbs/quote-01.jpg",
+      "preview": "previews/quote-01.mp4",
+      "name": {
+        "en": "Quote Card",
+        "tr": "Alıntı Kartı"
+      }
+    },
+    {
+      "id": "typography-01",
+      "version": 1,
+      "category": "social",
+      "isPro": true,
+      "tags": [],
+      "minAppVersion": "1.0.0",
+      "template": "typography-01.json",
+      "thumbnail": "thumbs/typography-01.jpg",
+      "preview": "previews/typography-01.mp4",
+      "name": {
+        "en": "Kinetic Title",
+        "tr": "Kinetik Başlık"
+      }
+    },
+    {
+      "id": "headline-01",
+      "version": 1,
+      "category": "business",
+      "isPro": true,
+      "tags": [],
+      "minAppVersion": "1.0.0",
+      "template": "headline-01.json",
+      "thumbnail": "thumbs/headline-01.jpg",
+      "preview": "previews/headline-01.mp4",
+      "name": {
+        "en": "Bold Headline",
+        "tr": "Vurgu Manşet"
+      }
+    },
+    {
+      "id": "product-01",
+      "version": 1,
+      "category": "business",
+      "isPro": true,
+      "tags": [],
+      "minAppVersion": "1.0.0",
+      "template": "product-01.json",
+      "thumbnail": "thumbs/product-01.jpg",
+      "preview": "previews/product-01.mp4",
+      "name": {
+        "en": "Product Drop",
+        "tr": "Ürün Tanıtımı"
+      }
+    },
+    {
+      "id": "music-card-01",
+      "version": 1,
+      "category": "social",
+      "isPro": true,
+      "tags": [],
+      "minAppVersion": "1.0.0",
+      "template": "music-card-01.json",
+      "thumbnail": "thumbs/music-card-01.jpg",
+      "preview": "previews/music-card-01.mp4",
+      "name": {
+        "en": "Now Playing",
+        "tr": "Şimdi Çalıyor"
+      }
+    },
+    {
+      "id": "typewriter-note-01",
+      "version": 1,
+      "category": "minimal",
+      "isPro": true,
+      "tags": [],
+      "minAppVersion": "1.0.0",
+      "template": "typewriter-note-01.json",
+      "thumbnail": "thumbs/typewriter-note-01.jpg",
+      "preview": "previews/typewriter-note-01.mp4",
+      "name": {
+        "en": "Typed Note",
+        "tr": "Daktilo Notu"
+      }
+    },
+    {
+      "id": "grade-book-01",
+      "version": 1,
+      "category": "minimal",
+      "isPro": true,
+      "tags": [],
+      "minAppVersion": "1.0.0",
+      "template": "grade-book-01.json",
+      "thumbnail": "thumbs/grade-book-01.jpg",
+      "preview": "previews/grade-book-01.mp4",
+      "name": {
+        "en": "Look Book",
+        "tr": "Renk Defteri"
+      }
+    },
+    {
+      "id": "shapes-trio-01",
+      "version": 1,
+      "category": "wedding",
+      "isPro": true,
+      "tags": [],
+      "minAppVersion": "1.0.0",
+      "template": "shapes-trio-01.json",
+      "thumbnail": "thumbs/shapes-trio-01.jpg",
+      "preview": "previews/shapes-trio-01.mp4",
+      "name": {
+        "en": "Shape Frames",
+        "tr": "Şekilli Çerçeve"
+      }
+    },
+    {
+      "id": "sticker-fun-01",
+      "version": 1,
+      "category": "social",
+      "isPro": true,
+      "tags": [],
+      "minAppVersion": "1.0.0",
+      "template": "sticker-fun-01.json",
+      "thumbnail": "thumbs/sticker-fun-01.jpg",
+      "preview": "previews/sticker-fun-01.mp4",
+      "name": {
+        "en": "Sticker Fun",
+        "tr": "Sticker Keyfi"
+      }
+    },
+    {
+      "id": "countdown-01",
+      "version": 1,
+      "category": "wedding",
+      "isPro": false,
+      "tags": [],
+      "minAppVersion": "1.0.0",
+      "template": "countdown-01.json",
+      "thumbnail": "thumbs/countdown-01.jpg",
+      "preview": "previews/countdown-01.mp4",
+      "name": {
+        "en": "Countdown",
+        "tr": "Geri Sayım"
+      }
+    },
+    {
+      "id": "list-five-01",
+      "version": 1,
+      "category": "social",
+      "isPro": true,
+      "tags": [],
+      "minAppVersion": "1.0.0",
+      "template": "list-five-01.json",
+      "thumbnail": "thumbs/list-five-01.jpg",
+      "preview": "previews/list-five-01.mp4",
+      "name": {
+        "en": "Top 5 List",
+        "tr": "Liste 5"
+      }
+    },
+    {
+      "id": "polaroid-01",
+      "version": 1,
+      "category": "minimal",
+      "isPro": false,
+      "tags": [],
+      "minAppVersion": "1.0.0",
+      "template": "polaroid-01.json",
+      "thumbnail": "thumbs/polaroid-01.jpg",
+      "preview": "previews/polaroid-01.mp4",
+      "name": {
+        "en": "Polaroid",
+        "tr": "Polaroid"
+      }
+    },
+    {
+      "id": "minimal-fade-01",
+      "version": 1,
+      "category": "minimal",
+      "isPro": false,
+      "tags": [],
+      "minAppVersion": "1.0.0",
+      "template": "minimal-fade-01.json",
+      "thumbnail": "thumbs/minimal-fade-01.jpg",
+      "preview": "previews/minimal-fade-01.mp4",
+      "name": {
+        "en": "Minimal Fade",
+        "tr": "Minimal Geçiş"
+      }
+    },
+    {
+      "id": "celebrate-01",
+      "version": 1,
+      "category": "social",
+      "isPro": true,
+      "tags": [],
+      "minAppVersion": "1.0.0",
+      "template": "celebrate-01.json",
+      "thumbnail": "thumbs/celebrate-01.jpg",
+      "preview": "previews/celebrate-01.mp4",
+      "name": {
+        "en": "Celebrate",
+        "tr": "Kutlama"
+      }
+    },
+    {
+      "id": "anniversary-01",
+      "version": 1,
+      "category": "wedding",
+      "isPro": true,
+      "tags": [],
+      "minAppVersion": "1.0.0",
+      "template": "anniversary-01.json",
+      "thumbnail": "thumbs/anniversary-01.jpg",
+      "preview": "previews/anniversary-01.mp4",
+      "name": {
+        "en": "Anniversary",
+        "tr": "Yıl Dönümü"
+      }
+    },
+    {
+      "id": "baby-news-01",
+      "version": 1,
+      "category": "wedding",
+      "isPro": false,
+      "tags": [],
+      "minAppVersion": "1.0.0",
+      "template": "baby-news-01.json",
+      "thumbnail": "thumbs/baby-news-01.jpg",
+      "preview": "previews/baby-news-01.mp4",
+      "name": {
+        "en": "Baby News",
+        "tr": "Bebek Müjdesi"
+      }
+    },
+    {
+      "id": "bayram-greeting-01",
+      "version": 1,
+      "category": "holiday",
+      "isPro": false,
+      "tags": [],
+      "minAppVersion": "1.0.0",
+      "template": "bayram-greeting-01.json",
+      "thumbnail": "thumbs/bayram-greeting-01.jpg",
+      "preview": "previews/bayram-greeting-01.mp4",
+      "name": {
+        "en": "Holiday Greeting",
+        "tr": "Bayram Tebriği"
+      }
+    },
+    {
+      "id": "beauty-before-after-01",
+      "version": 1,
+      "category": "beauty",
+      "isPro": true,
+      "tags": [],
+      "minAppVersion": "1.0.0",
+      "template": "beauty-before-after-01.json",
+      "thumbnail": "thumbs/beauty-before-after-01.jpg",
+      "preview": "previews/beauty-before-after-01.mp4",
+      "name": {
+        "en": "Before & After",
+        "tr": "Öncesi & Sonrası"
+      }
+    },
+    {
+      "id": "birthday-wish-01",
+      "version": 1,
+      "category": "holiday",
+      "isPro": false,
+      "tags": [
+        "new"
+      ],
+      "minAppVersion": "1.0.0",
+      "template": "birthday-wish-01.json",
+      "thumbnail": "thumbs/birthday-wish-01.jpg",
+      "preview": "previews/birthday-wish-01.mp4",
+      "name": {
+        "en": "Birthday Wish",
+        "tr": "Doğum Günü"
+      }
+    },
+    {
+      "id": "bogo-offer-01",
+      "version": 1,
+      "category": "promo",
+      "isPro": false,
+      "tags": [],
+      "minAppVersion": "1.0.0",
+      "template": "bogo-offer-01.json",
+      "thumbnail": "thumbs/bogo-offer-01.jpg",
+      "preview": "previews/bogo-offer-01.mp4",
+      "name": {
+        "en": "Buy One Get One",
+        "tr": "2 Al 1 Öde"
+      }
+    },
+    {
+      "id": "bold-statement-01",
+      "version": 1,
+      "category": "minimal",
+      "isPro": false,
+      "tags": [
+        "new"
+      ],
+      "minAppVersion": "1.0.0",
+      "template": "bold-statement-01.json",
+      "thumbnail": "thumbs/bold-statement-01.jpg",
+      "preview": "previews/bold-statement-01.mp4",
+      "name": {
+        "en": "Bold Statement",
+        "tr": "Kalın Söz"
+      }
+    },
+    {
+      "id": "cafe-menu-01",
+      "version": 1,
+      "category": "food",
+      "isPro": false,
+      "tags": [
+        "new"
+      ],
+      "minAppVersion": "1.0.0",
+      "template": "cafe-menu-01.json",
+      "thumbnail": "thumbs/cafe-menu-01.jpg",
+      "preview": "previews/cafe-menu-01.mp4",
+      "name": {
+        "en": "Cafe Menu",
+        "tr": "Kafe Menüsü"
+      }
+    },
+    {
+      "id": "caption-bar-01",
+      "version": 1,
+      "category": "social",
+      "isPro": false,
+      "tags": [],
+      "minAppVersion": "1.0.0",
+      "template": "caption-bar-01.json",
+      "thumbnail": "thumbs/caption-bar-01.jpg",
+      "preview": "previews/caption-bar-01.mp4",
+      "name": {
+        "en": "Caption Bar",
+        "tr": "Altyazı Şeridi"
+      }
+    },
+    {
+      "id": "city-guide-01",
+      "version": 1,
+      "category": "travel",
+      "isPro": false,
+      "tags": [],
+      "minAppVersion": "1.0.0",
+      "template": "city-guide-01.json",
+      "thumbnail": "thumbs/city-guide-01.jpg",
+      "preview": "previews/city-guide-01.mp4",
+      "name": {
+        "en": "City Guide",
+        "tr": "Şehir Rehberi"
+      }
+    },
+    {
+      "id": "coffee-shop-01",
+      "version": 1,
+      "category": "food",
+      "isPro": true,
+      "tags": [],
+      "minAppVersion": "1.0.0",
+      "template": "coffee-shop-01.json",
+      "thumbnail": "thumbs/coffee-shop-01.jpg",
+      "preview": "previews/coffee-shop-01.mp4",
+      "name": {
+        "en": "Coffee Break",
+        "tr": "Kahve Molası"
+      }
+    },
+    {
+      "id": "coupon-code-01",
+      "version": 1,
+      "category": "promo",
+      "isPro": true,
+      "tags": [
+        "new"
+      ],
+      "minAppVersion": "1.0.0",
+      "template": "coupon-code-01.json",
+      "thumbnail": "thumbs/coupon-code-01.jpg",
+      "preview": "previews/coupon-code-01.mp4",
+      "name": {
+        "en": "Coupon Code",
+        "tr": "Kupon Kodu"
+      }
+    },
+    {
+      "id": "course-promo-01",
+      "version": 1,
+      "category": "education",
+      "isPro": false,
+      "tags": [
+        "new"
+      ],
+      "minAppVersion": "1.0.0",
+      "template": "course-promo-01.json",
+      "thumbnail": "thumbs/course-promo-01.jpg",
+      "preview": "previews/course-promo-01.mp4",
+      "name": {
+        "en": "Course Promo",
+        "tr": "Kurs Duyurusu"
+      }
+    },
+    {
+      "id": "daily-special-01",
+      "version": 1,
+      "category": "food",
+      "isPro": false,
+      "tags": [
+        "new"
+      ],
+      "minAppVersion": "1.0.0",
+      "template": "daily-special-01.json",
+      "thumbnail": "thumbs/daily-special-01.jpg",
+      "preview": "previews/daily-special-01.mp4",
+      "name": {
+        "en": "Daily Special",
+        "tr": "Günün Yemeği"
+      }
+    },
+    {
+      "id": "day-in-life-01",
+      "version": 1,
+      "category": "social",
+      "isPro": false,
+      "tags": [
+        "new"
+      ],
+      "minAppVersion": "1.0.0",
+      "template": "day-in-life-01.json",
+      "thumbnail": "thumbs/day-in-life-01.jpg",
+      "preview": "previews/day-in-life-01.mp4",
+      "name": {
+        "en": "Day in My Life",
+        "tr": "Günüm"
+      }
+    },
+    {
+      "id": "dessert-reveal-01",
+      "version": 1,
+      "category": "food",
+      "isPro": false,
+      "tags": [],
+      "minAppVersion": "1.0.0",
+      "template": "dessert-reveal-01.json",
+      "thumbnail": "thumbs/dessert-reveal-01.jpg",
+      "preview": "previews/dessert-reveal-01.mp4",
+      "name": {
+        "en": "Dessert Reveal",
+        "tr": "Tatlı Vitrin"
+      }
+    },
+    {
+      "id": "drinks-list-01",
+      "version": 1,
+      "category": "food",
+      "isPro": true,
+      "tags": [],
+      "minAppVersion": "1.0.0",
+      "template": "drinks-list-01.json",
+      "thumbnail": "thumbs/drinks-list-01.jpg",
+      "preview": "previews/drinks-list-01.mp4",
+      "name": {
+        "en": "Drinks List",
+        "tr": "İçecek Listesi"
+      }
+    },
+    {
+      "id": "engagement-01",
+      "version": 1,
+      "category": "wedding",
+      "isPro": true,
+      "tags": [],
+      "minAppVersion": "1.0.0",
+      "template": "engagement-01.json",
+      "thumbnail": "thumbs/engagement-01.jpg",
+      "preview": "previews/engagement-01.mp4",
+      "name": {
+        "en": "Engagement",
+        "tr": "Nişan Duyurusu"
+      }
+    },
+    {
+      "id": "film-strip-01",
+      "version": 1,
+      "category": "minimal",
+      "isPro": true,
+      "tags": [],
+      "minAppVersion": "1.0.0",
+      "template": "film-strip-01.json",
+      "thumbnail": "thumbs/film-strip-01.jpg",
+      "preview": "previews/film-strip-01.mp4",
+      "name": {
+        "en": "Film Strip",
+        "tr": "Film Şeridi"
+      }
+    },
+    {
+      "id": "flash-discount-01",
+      "version": 1,
+      "category": "promo",
+      "isPro": false,
+      "tags": [
+        "new"
+      ],
+      "minAppVersion": "1.0.0",
+      "template": "flash-discount-01.json",
+      "thumbnail": "thumbs/flash-discount-01.jpg",
+      "preview": "previews/flash-discount-01.mp4",
+      "name": {
+        "en": "Hourly Deal",
+        "tr": "Saatlik İndirim"
+      }
+    },
+    {
+      "id": "food-delivery-01",
+      "version": 1,
+      "category": "food",
+      "isPro": true,
+      "tags": [],
+      "minAppVersion": "1.0.0",
+      "template": "food-delivery-01.json",
+      "thumbnail": "thumbs/food-delivery-01.jpg",
+      "preview": "previews/food-delivery-01.mp4",
+      "name": {
+        "en": "Delivery",
+        "tr": "Paket Servis"
+      }
+    },
+    {
+      "id": "for-rent-01",
+      "version": 1,
+      "category": "realestate",
+      "isPro": false,
+      "tags": [],
+      "minAppVersion": "1.0.0",
+      "template": "for-rent-01.json",
+      "thumbnail": "thumbs/for-rent-01.jpg",
+      "preview": "previews/for-rent-01.mp4",
+      "name": {
+        "en": "For Rent",
+        "tr": "Kiralık İlan"
+      }
+    },
+    {
+      "id": "free-shipping-01",
+      "version": 1,
+      "category": "promo",
+      "isPro": false,
+      "tags": [],
+      "minAppVersion": "1.0.0",
+      "template": "free-shipping-01.json",
+      "thumbnail": "thumbs/free-shipping-01.jpg",
+      "preview": "previews/free-shipping-01.mp4",
+      "name": {
+        "en": "Free Shipping",
+        "tr": "Kargo Bedava"
+      }
+    },
+    {
+      "id": "gig-poster-01",
+      "version": 1,
+      "category": "music",
+      "isPro": false,
+      "tags": [],
+      "minAppVersion": "1.0.0",
+      "template": "gig-poster-01.json",
+      "thumbnail": "thumbs/gig-poster-01.jpg",
+      "preview": "previews/gig-poster-01.mp4",
+      "name": {
+        "en": "Gig Poster",
+        "tr": "Konser Afişi"
+      }
+    },
+    {
+      "id": "graduation-01",
+      "version": 1,
+      "category": "wedding",
+      "isPro": false,
+      "tags": [],
+      "minAppVersion": "1.0.0",
+      "template": "graduation-01.json",
+      "thumbnail": "thumbs/graduation-01.jpg",
+      "preview": "previews/graduation-01.mp4",
+      "name": {
+        "en": "Graduation",
+        "tr": "Mezuniyet"
+      }
+    },
+    {
+      "id": "gym-offer-01",
+      "version": 1,
+      "category": "fitness",
+      "isPro": false,
+      "tags": [
+        "new"
+      ],
+      "minAppVersion": "1.0.0",
+      "template": "gym-offer-01.json",
+      "thumbnail": "thumbs/gym-offer-01.jpg",
+      "preview": "previews/gym-offer-01.mp4",
+      "name": {
+        "en": "Gym Offer",
+        "tr": "Spor Salonu Kampanya"
+      }
+    },
+    {
+      "id": "last-chance-01",
+      "version": 1,
+      "category": "promo",
+      "isPro": true,
+      "tags": [],
+      "minAppVersion": "1.0.0",
+      "template": "last-chance-01.json",
+      "thumbnail": "thumbs/last-chance-01.jpg",
+      "preview": "previews/last-chance-01.mp4",
+      "name": {
+        "en": "Last Chance",
+        "tr": "Son Gün"
+      }
+    },
+    {
+      "id": "lesson-tips-01",
+      "version": 1,
+      "category": "education",
+      "isPro": true,
+      "tags": [],
+      "minAppVersion": "1.0.0",
+      "template": "lesson-tips-01.json",
+      "thumbnail": "thumbs/lesson-tips-01.jpg",
+      "preview": "previews/lesson-tips-01.mp4",
+      "name": {
+        "en": "3 Tips",
+        "tr": "3 İpucu"
+      }
+    },
+    {
+      "id": "logo-reveal-01",
+      "version": 1,
+      "category": "business",
+      "isPro": true,
+      "tags": [],
+      "minAppVersion": "1.0.0",
+      "template": "logo-reveal-01.json",
+      "thumbnail": "thumbs/logo-reveal-01.jpg",
+      "preview": "previews/logo-reveal-01.mp4",
+      "name": {
+        "en": "Logo Reveal",
+        "tr": "Logo Açılışı"
+      }
+    },
+    {
+      "id": "lookbook-01",
+      "version": 1,
+      "category": "fashion",
+      "isPro": false,
+      "tags": [
+        "new"
+      ],
+      "minAppVersion": "1.0.0",
+      "template": "lookbook-01.json",
+      "thumbnail": "thumbs/lookbook-01.jpg",
+      "preview": "previews/lookbook-01.mp4",
+      "name": {
+        "en": "Lookbook",
+        "tr": "Kombin Defteri"
+      }
+    },
+    {
+      "id": "lyric-card-01",
+      "version": 1,
+      "category": "music",
+      "isPro": true,
+      "tags": [
+        "new"
+      ],
+      "minAppVersion": "1.0.0",
+      "template": "lyric-card-01.json",
+      "thumbnail": "thumbs/lyric-card-01.jpg",
+      "preview": "previews/lyric-card-01.mp4",
+      "name": {
+        "en": "Lyric Card",
+        "tr": "Şarkı Sözü"
+      }
+    },
+    {
+      "id": "mono-frame-01",
+      "version": 1,
+      "category": "minimal",
+      "isPro": false,
+      "tags": [],
+      "minAppVersion": "1.0.0",
+      "template": "mono-frame-01.json",
+      "thumbnail": "thumbs/mono-frame-01.jpg",
+      "preview": "previews/mono-frame-01.mp4",
+      "name": {
+        "en": "Mono Frame",
+        "tr": "Siyah Beyaz"
+      }
+    },
+    {
+      "id": "mothers-day-01",
+      "version": 1,
+      "category": "holiday",
+      "isPro": true,
+      "tags": [],
+      "minAppVersion": "1.0.0",
+      "template": "mothers-day-01.json",
+      "thumbnail": "thumbs/mothers-day-01.jpg",
+      "preview": "previews/mothers-day-01.mp4",
+      "name": {
+        "en": "Mother's Day",
+        "tr": "Anneler Günü"
+      }
+    },
+    {
+      "id": "nail-art-01",
+      "version": 1,
+      "category": "beauty",
+      "isPro": true,
+      "tags": [],
+      "minAppVersion": "1.0.0",
+      "template": "nail-art-01.json",
+      "thumbnail": "thumbs/nail-art-01.jpg",
+      "preview": "previews/nail-art-01.mp4",
+      "name": {
+        "en": "Nail Art",
+        "tr": "Tırnak Sanatı"
+      }
+    },
+    {
+      "id": "neon-sign-01",
+      "version": 1,
+      "category": "social",
+      "isPro": true,
+      "tags": [],
+      "minAppVersion": "1.0.0",
+      "template": "neon-sign-01.json",
+      "thumbnail": "thumbs/neon-sign-01.jpg",
+      "preview": "previews/neon-sign-01.mp4",
+      "name": {
+        "en": "Neon Sign",
+        "tr": "Neon Tabela"
+      }
+    },
+    {
+      "id": "new-arrival-01",
+      "version": 1,
+      "category": "promo",
+      "isPro": false,
+      "tags": [],
+      "minAppVersion": "1.0.0",
+      "template": "new-arrival-01.json",
+      "thumbnail": "thumbs/new-arrival-01.jpg",
+      "preview": "previews/new-arrival-01.mp4",
+      "name": {
+        "en": "New Arrival",
+        "tr": "Yeni Geldi"
+      }
+    },
+    {
+      "id": "new-year-01",
+      "version": 1,
+      "category": "holiday",
+      "isPro": false,
+      "tags": [
+        "new"
+      ],
+      "minAppVersion": "1.0.0",
+      "template": "new-year-01.json",
+      "thumbnail": "thumbs/new-year-01.jpg",
+      "preview": "previews/new-year-01.mp4",
+      "name": {
+        "en": "New Year",
+        "tr": "Yeni Yıl"
+      }
+    },
+    {
+      "id": "open-house-01",
+      "version": 1,
+      "category": "realestate",
+      "isPro": false,
+      "tags": [
+        "new"
+      ],
+      "minAppVersion": "1.0.0",
+      "template": "open-house-01.json",
+      "thumbnail": "thumbs/open-house-01.jpg",
+      "preview": "previews/open-house-01.mp4",
+      "name": {
+        "en": "Open House",
+        "tr": "Açık Ev"
+      }
+    },
+    {
+      "id": "outfit-grid-01",
+      "version": 1,
+      "category": "fashion",
+      "isPro": true,
+      "tags": [],
+      "minAppVersion": "1.0.0",
+      "template": "outfit-grid-01.json",
+      "thumbnail": "thumbs/outfit-grid-01.jpg",
+      "preview": "previews/outfit-grid-01.mp4",
+      "name": {
+        "en": "Outfit Grid",
+        "tr": "Kombin Izgarası"
+      }
+    },
+    {
+      "id": "paper-note-01",
+      "version": 1,
+      "category": "minimal",
+      "isPro": true,
+      "tags": [],
+      "minAppVersion": "1.0.0",
+      "template": "paper-note-01.json",
+      "thumbnail": "thumbs/paper-note-01.jpg",
+      "preview": "previews/paper-note-01.mp4",
+      "name": {
+        "en": "Paper Note",
+        "tr": "Not Kâğıdı"
+      }
+    },
+    {
+      "id": "pet-star-01",
+      "version": 1,
+      "category": "social",
+      "isPro": false,
+      "tags": [],
+      "minAppVersion": "1.0.0",
+      "template": "pet-star-01.json",
+      "thumbnail": "thumbs/pet-star-01.jpg",
+      "preview": "previews/pet-star-01.mp4",
+      "name": {
+        "en": "Pet Star",
+        "tr": "Minik Dostum"
+      }
+    },
+    {
+      "id": "photo-dump-01",
+      "version": 1,
+      "category": "social",
+      "isPro": false,
+      "tags": [
+        "new"
+      ],
+      "minAppVersion": "1.0.0",
+      "template": "photo-dump-01.json",
+      "thumbnail": "thumbs/photo-dump-01.jpg",
+      "preview": "previews/photo-dump-01.mp4",
+      "name": {
+        "en": "Photo Dump",
+        "tr": "Fotoğraf Yığını"
+      }
+    },
+    {
+      "id": "poll-card-01",
+      "version": 1,
+      "category": "social",
+      "isPro": true,
+      "tags": [],
+      "minAppVersion": "1.0.0",
+      "template": "poll-card-01.json",
+      "thumbnail": "thumbs/poll-card-01.jpg",
+      "preview": "previews/poll-card-01.mp4",
+      "name": {
+        "en": "This or That",
+        "tr": "Bu mu Şu mu"
+      }
+    },
+    {
+      "id": "property-specs-01",
+      "version": 1,
+      "category": "realestate",
+      "isPro": true,
+      "tags": [],
+      "minAppVersion": "1.0.0",
+      "template": "property-specs-01.json",
+      "thumbnail": "thumbs/property-specs-01.jpg",
+      "preview": "previews/property-specs-01.mp4",
+      "name": {
+        "en": "Property Specs",
+        "tr": "Daire Künyesi"
+      }
+    },
+    {
+      "id": "qa-card-01",
+      "version": 1,
+      "category": "social",
+      "isPro": false,
+      "tags": [],
+      "minAppVersion": "1.0.0",
+      "template": "qa-card-01.json",
+      "thumbnail": "thumbs/qa-card-01.jpg",
+      "preview": "previews/qa-card-01.mp4",
+      "name": {
+        "en": "Q&A",
+        "tr": "Soru-Cevap"
+      }
+    },
+    {
+      "id": "ramadan-01",
+      "version": 1,
+      "category": "holiday",
+      "isPro": true,
+      "tags": [],
+      "minAppVersion": "1.0.0",
+      "template": "ramadan-01.json",
+      "thumbnail": "thumbs/ramadan-01.jpg",
+      "preview": "previews/ramadan-01.mp4",
+      "name": {
+        "en": "Ramadan",
+        "tr": "Ramazan"
+      }
+    },
+    {
+      "id": "recipe-quick-01",
+      "version": 1,
+      "category": "food",
+      "isPro": false,
+      "tags": [],
+      "minAppVersion": "1.0.0",
+      "template": "recipe-quick-01.json",
+      "thumbnail": "thumbs/recipe-quick-01.jpg",
+      "preview": "previews/recipe-quick-01.mp4",
+      "name": {
+        "en": "15-Minute Recipe",
+        "tr": "15 Dakikada"
+      }
+    },
+    {
+      "id": "restaurant-tour-01",
+      "version": 1,
+      "category": "food",
+      "isPro": true,
+      "tags": [],
+      "minAppVersion": "1.0.0",
+      "template": "restaurant-tour-01.json",
+      "thumbnail": "thumbs/restaurant-tour-01.jpg",
+      "preview": "previews/restaurant-tour-01.mp4",
+      "name": {
+        "en": "Venue Tour",
+        "tr": "Mekân Turu"
+      }
+    },
+    {
+      "id": "retro-vhs-01",
+      "version": 1,
+      "category": "social",
+      "isPro": true,
+      "tags": [],
+      "minAppVersion": "1.0.0",
+      "template": "retro-vhs-01.json",
+      "thumbnail": "thumbs/retro-vhs-01.jpg",
+      "preview": "previews/retro-vhs-01.mp4",
+      "name": {
+        "en": "Retro Tape",
+        "tr": "Retro Kaset"
+      }
+    },
+    {
+      "id": "road-trip-01",
+      "version": 1,
+      "category": "travel",
+      "isPro": true,
+      "tags": [],
+      "minAppVersion": "1.0.0",
+      "template": "road-trip-01.json",
+      "thumbnail": "thumbs/road-trip-01.jpg",
+      "preview": "previews/road-trip-01.mp4",
+      "name": {
+        "en": "Road Trip",
+        "tr": "Yol Hikâyesi"
+      }
+    },
+    {
+      "id": "run-stats-01",
+      "version": 1,
+      "category": "fitness",
+      "isPro": false,
+      "tags": [],
+      "minAppVersion": "1.0.0",
+      "template": "run-stats-01.json",
+      "thumbnail": "thumbs/run-stats-01.jpg",
+      "preview": "previews/run-stats-01.mp4",
+      "name": {
+        "en": "Run Stats",
+        "tr": "Koşu Kartı"
+      }
+    },
+    {
+      "id": "sale-rack-01",
+      "version": 1,
+      "category": "fashion",
+      "isPro": false,
+      "tags": [],
+      "minAppVersion": "1.0.0",
+      "template": "sale-rack-01.json",
+      "thumbnail": "thumbs/sale-rack-01.jpg",
+      "preview": "previews/sale-rack-01.mp4",
+      "name": {
+        "en": "Sale Rack",
+        "tr": "İndirim Reyonu"
+      }
+    },
+    {
+      "id": "salon-booking-01",
+      "version": 1,
+      "category": "beauty",
+      "isPro": false,
+      "tags": [
+        "new"
+      ],
+      "minAppVersion": "1.0.0",
+      "template": "salon-booking-01.json",
+      "thumbnail": "thumbs/salon-booking-01.jpg",
+      "preview": "previews/salon-booking-01.mp4",
+      "name": {
+        "en": "Salon Booking",
+        "tr": "Kuaför Randevu"
+      }
+    },
+    {
+      "id": "save-the-date-01",
+      "version": 1,
+      "category": "wedding",
+      "isPro": false,
+      "tags": [
+        "new"
+      ],
+      "minAppVersion": "1.0.0",
+      "template": "save-the-date-01.json",
+      "thumbnail": "thumbs/save-the-date-01.jpg",
+      "preview": "previews/save-the-date-01.mp4",
+      "name": {
+        "en": "Save the Date",
+        "tr": "Tarihi Ayır"
+      }
+    },
+    {
+      "id": "soft-gradient-01",
+      "version": 1,
+      "category": "minimal",
+      "isPro": false,
+      "tags": [],
+      "minAppVersion": "1.0.0",
+      "template": "soft-gradient-01.json",
+      "thumbnail": "thumbs/soft-gradient-01.jpg",
+      "preview": "previews/soft-gradient-01.mp4",
+      "name": {
+        "en": "Soft Gradient",
+        "tr": "Yumuşak Geçiş"
+      }
+    },
+    {
+      "id": "spa-calm-01",
+      "version": 1,
+      "category": "beauty",
+      "isPro": false,
+      "tags": [],
+      "minAppVersion": "1.0.0",
+      "template": "spa-calm-01.json",
+      "thumbnail": "thumbs/spa-calm-01.jpg",
+      "preview": "previews/spa-calm-01.mp4",
+      "name": {
+        "en": "Spa Invite",
+        "tr": "Bakım Daveti"
+      }
+    },
+    {
+      "id": "stat-card-01",
+      "version": 1,
+      "category": "business",
+      "isPro": true,
+      "tags": [],
+      "minAppVersion": "1.0.0",
+      "template": "stat-card-01.json",
+      "thumbnail": "thumbs/stat-card-01.jpg",
+      "preview": "previews/stat-card-01.mp4",
+      "name": {
+        "en": "Stat Card",
+        "tr": "Rakam Kartı"
+      }
+    },
+    {
+      "id": "sunset-diary-01",
+      "version": 1,
+      "category": "travel",
+      "isPro": false,
+      "tags": [],
+      "minAppVersion": "1.0.0",
+      "template": "sunset-diary-01.json",
+      "thumbnail": "thumbs/sunset-diary-01.jpg",
+      "preview": "previews/sunset-diary-01.mp4",
+      "name": {
+        "en": "Sunset Diary",
+        "tr": "Gün Batımı"
+      }
+    },
+    {
+      "id": "team-hiring-01",
+      "version": 1,
+      "category": "business",
+      "isPro": false,
+      "tags": [
+        "new"
+      ],
+      "minAppVersion": "1.0.0",
+      "template": "team-hiring-01.json",
+      "thumbnail": "thumbs/team-hiring-01.jpg",
+      "preview": "previews/team-hiring-01.mp4",
+      "name": {
+        "en": "We're Hiring",
+        "tr": "İş İlanı"
+      }
+    },
+    {
+      "id": "testimonial-quote-01",
+      "version": 1,
+      "category": "business",
+      "isPro": false,
+      "tags": [],
+      "minAppVersion": "1.0.0",
+      "template": "testimonial-quote-01.json",
+      "thumbnail": "thumbs/testimonial-quote-01.jpg",
+      "preview": "previews/testimonial-quote-01.mp4",
+      "name": {
+        "en": "Client Quote",
+        "tr": "Müşteri Sözü"
+      }
+    },
+    {
+      "id": "three-things-01",
+      "version": 1,
+      "category": "social",
+      "isPro": true,
+      "tags": [
+        "new"
+      ],
+      "minAppVersion": "1.0.0",
+      "template": "three-things-01.json",
+      "thumbnail": "thumbs/three-things-01.jpg",
+      "preview": "previews/three-things-01.mp4",
+      "name": {
+        "en": "Three Things",
+        "tr": "3 Şey"
+      }
+    },
+    {
+      "id": "throwback-01",
+      "version": 1,
+      "category": "social",
+      "isPro": true,
+      "tags": [],
+      "minAppVersion": "1.0.0",
+      "template": "throwback-01.json",
+      "thumbnail": "thumbs/throwback-01.jpg",
+      "preview": "previews/throwback-01.mp4",
+      "name": {
+        "en": "Throwback",
+        "tr": "Geçen Yıl"
+      }
+    },
+    {
+      "id": "track-drop-01",
+      "version": 1,
+      "category": "music",
+      "isPro": false,
+      "tags": [],
+      "minAppVersion": "1.0.0",
+      "template": "track-drop-01.json",
+      "thumbnail": "thumbs/track-drop-01.jpg",
+      "preview": "previews/track-drop-01.mp4",
+      "name": {
+        "en": "Track Drop",
+        "tr": "Yeni Şarkı"
+      }
+    },
+    {
+      "id": "transformation-01",
+      "version": 1,
+      "category": "fitness",
+      "isPro": true,
+      "tags": [],
+      "minAppVersion": "1.0.0",
+      "template": "transformation-01.json",
+      "thumbnail": "thumbs/transformation-01.jpg",
+      "preview": "previews/transformation-01.mp4",
+      "name": {
+        "en": "Transformation",
+        "tr": "Değişim Hikâyesi"
+      }
+    },
+    {
+      "id": "travel-checklist-01",
+      "version": 1,
+      "category": "travel",
+      "isPro": true,
+      "tags": [],
+      "minAppVersion": "1.0.0",
+      "template": "travel-checklist-01.json",
+      "thumbnail": "thumbs/travel-checklist-01.jpg",
+      "preview": "previews/travel-checklist-01.mp4",
+      "name": {
+        "en": "Packing List",
+        "tr": "Valiz Listesi"
+      }
+    },
+    {
+      "id": "try-on-01",
+      "version": 1,
+      "category": "fashion",
+      "isPro": true,
+      "tags": [],
+      "minAppVersion": "1.0.0",
+      "template": "try-on-01.json",
+      "thumbnail": "thumbs/try-on-01.jpg",
+      "preview": "previews/try-on-01.mp4",
+      "name": {
+        "en": "Try-On",
+        "tr": "Deneme Kabini"
+      }
+    },
+    {
+      "id": "valentines-01",
+      "version": 1,
+      "category": "holiday",
+      "isPro": true,
+      "tags": [],
+      "minAppVersion": "1.0.0",
+      "template": "valentines-01.json",
+      "thumbnail": "thumbs/valentines-01.jpg",
+      "preview": "previews/valentines-01.mp4",
+      "name": {
+        "en": "Valentine's",
+        "tr": "Sevgililer Günü"
+      }
+    },
+    {
+      "id": "webinar-invite-01",
+      "version": 1,
+      "category": "education",
+      "isPro": false,
+      "tags": [],
+      "minAppVersion": "1.0.0",
+      "template": "webinar-invite-01.json",
+      "thumbnail": "thumbs/webinar-invite-01.jpg",
+      "preview": "previews/webinar-invite-01.mp4",
+      "name": {
+        "en": "Webinar Invite",
+        "tr": "Webinar Daveti"
+      }
+    },
+    {
+      "id": "weekly-recap-01",
+      "version": 1,
+      "category": "social",
+      "isPro": true,
+      "tags": [],
+      "minAppVersion": "1.0.0",
+      "template": "weekly-recap-01.json",
+      "thumbnail": "thumbs/weekly-recap-01.jpg",
+      "preview": "previews/weekly-recap-01.mp4",
+      "name": {
+        "en": "Weekly Recap",
+        "tr": "Haftalık Özet"
+      }
+    },
+    {
+      "id": "workout-steps-01",
+      "version": 1,
+      "category": "fitness",
+      "isPro": true,
+      "tags": [],
+      "minAppVersion": "1.0.0",
+      "template": "workout-steps-01.json",
+      "thumbnail": "thumbs/workout-steps-01.jpg",
+      "preview": "previews/workout-steps-01.mp4",
+      "name": {
+        "en": "Workout Plan",
+        "tr": "Antrenman Programı"
+      }
+    },
+    {
+      "id": "zoom-punch-01",
+      "version": 1,
+      "category": "social",
+      "isPro": true,
+      "tags": [],
+      "minAppVersion": "1.0.0",
+      "template": "zoom-punch-01.json",
+      "thumbnail": "thumbs/zoom-punch-01.jpg",
+      "preview": "previews/zoom-punch-01.mp4",
+      "name": {
+        "en": "Zoom Punch",
+        "tr": "Ritim Zoom"
+      }
+    },
+    {
+      "id": "accessory-01",
+      "version": 1,
+      "category": "fashion",
+      "isPro": false,
+      "tags": [],
+      "minAppVersion": "1.0.0",
+      "template": "accessory-01.json",
+      "thumbnail": "thumbs/accessory-01.jpg",
+      "preview": "previews/accessory-01.mp4",
+      "name": {
+        "en": "Accessory Detail",
+        "tr": "Aksesuar Detayı"
+      }
+    },
+    {
+      "id": "agent-card-01",
+      "version": 1,
+      "category": "realestate",
+      "isPro": false,
+      "tags": [],
+      "minAppVersion": "1.0.0",
+      "template": "agent-card-01.json",
+      "thumbnail": "thumbs/agent-card-01.jpg",
+      "preview": "previews/agent-card-01.mp4",
+      "name": {
+        "en": "Agent Card",
+        "tr": "Danışman Kartı"
+      }
+    },
+    {
+      "id": "capsule-01",
+      "version": 1,
+      "category": "fashion",
+      "isPro": true,
+      "tags": [
+        "new"
+      ],
+      "minAppVersion": "1.0.0",
+      "template": "capsule-01.json",
+      "thumbnail": "thumbs/capsule-01.jpg",
+      "preview": "previews/capsule-01.mp4",
+      "name": {
+        "en": "Capsule Wardrobe",
+        "tr": "Kapsül Gardırop"
+      }
+    },
+    {
+      "id": "challenge-01",
+      "version": 1,
+      "category": "fitness",
+      "isPro": false,
+      "tags": [
+        "new"
+      ],
+      "minAppVersion": "1.0.0",
+      "template": "challenge-01.json",
+      "thumbnail": "thumbs/challenge-01.jpg",
+      "preview": "previews/challenge-01.mp4",
+      "name": {
+        "en": "30-Day Challenge",
+        "tr": "30 Gün Meydan Okuma"
+      }
+    },
+    {
+      "id": "class-schedule-01",
+      "version": 1,
+      "category": "fitness",
+      "isPro": false,
+      "tags": [
+        "new"
+      ],
+      "minAppVersion": "1.0.0",
+      "template": "class-schedule-01.json",
+      "thumbnail": "thumbs/class-schedule-01.jpg",
+      "preview": "previews/class-schedule-01.mp4",
+      "name": {
+        "en": "Class Schedule",
+        "tr": "Ders Programı"
+      }
+    },
+    {
+      "id": "cover-art-01",
+      "version": 1,
+      "category": "music",
+      "isPro": false,
+      "tags": [],
+      "minAppVersion": "1.0.0",
+      "template": "cover-art-01.json",
+      "thumbnail": "thumbs/cover-art-01.jpg",
+      "preview": "previews/cover-art-01.mp4",
+      "name": {
+        "en": "Cover Art",
+        "tr": "Kapak Tasarımı"
+      }
+    },
+    {
+      "id": "exam-countdown-01",
+      "version": 1,
+      "category": "education",
+      "isPro": true,
+      "tags": [],
+      "minAppVersion": "1.0.0",
+      "template": "exam-countdown-01.json",
+      "thumbnail": "thumbs/exam-countdown-01.jpg",
+      "preview": "previews/exam-countdown-01.mp4",
+      "name": {
+        "en": "Exam Countdown",
+        "tr": "Sınava Kalan"
+      }
+    },
+    {
+      "id": "hair-color-01",
+      "version": 1,
+      "category": "beauty",
+      "isPro": false,
+      "tags": [
+        "new"
+      ],
+      "minAppVersion": "1.0.0",
+      "template": "hair-color-01.json",
+      "thumbnail": "thumbs/hair-color-01.jpg",
+      "preview": "previews/hair-color-01.mp4",
+      "name": {
+        "en": "Hair Colour",
+        "tr": "Saç Rengi"
+      }
+    },
+    {
+      "id": "just-sold-01",
+      "version": 1,
+      "category": "realestate",
+      "isPro": false,
+      "tags": [
+        "new"
+      ],
+      "minAppVersion": "1.0.0",
+      "template": "just-sold-01.json",
+      "thumbnail": "thumbs/just-sold-01.jpg",
+      "preview": "previews/just-sold-01.mp4",
+      "name": {
+        "en": "Just Sold",
+        "tr": "Satıldı"
+      }
+    },
+    {
+      "id": "makeup-look-01",
+      "version": 1,
+      "category": "beauty",
+      "isPro": true,
+      "tags": [],
+      "minAppVersion": "1.0.0",
+      "template": "makeup-look-01.json",
+      "thumbnail": "thumbs/makeup-look-01.jpg",
+      "preview": "previews/makeup-look-01.mp4",
+      "name": {
+        "en": "Makeup Look",
+        "tr": "Makyaj Görünümü"
+      }
+    },
+    {
+      "id": "new-listing-01",
+      "version": 1,
+      "category": "realestate",
+      "isPro": false,
+      "tags": [],
+      "minAppVersion": "1.0.0",
+      "template": "new-listing-01.json",
+      "thumbnail": "thumbs/new-listing-01.jpg",
+      "preview": "previews/new-listing-01.mp4",
+      "name": {
+        "en": "New Listing",
+        "tr": "Yeni İlan"
+      }
+    },
+    {
+      "id": "nutrition-tip-01",
+      "version": 1,
+      "category": "fitness",
+      "isPro": true,
+      "tags": [],
+      "minAppVersion": "1.0.0",
+      "template": "nutrition-tip-01.json",
+      "thumbnail": "thumbs/nutrition-tip-01.jpg",
+      "preview": "previews/nutrition-tip-01.mp4",
+      "name": {
+        "en": "Nutrition Tip",
+        "tr": "Beslenme İpucu"
+      }
+    },
+    {
+      "id": "open-mic-01",
+      "version": 1,
+      "category": "music",
+      "isPro": false,
+      "tags": [],
+      "minAppVersion": "1.0.0",
+      "template": "open-mic-01.json",
+      "thumbnail": "thumbs/open-mic-01.jpg",
+      "preview": "previews/open-mic-01.mp4",
+      "name": {
+        "en": "Open Mic",
+        "tr": "Sahne Akşamı"
+      }
+    },
+    {
+      "id": "playlist-card-01",
+      "version": 1,
+      "category": "music",
+      "isPro": false,
+      "tags": [
+        "new"
+      ],
+      "minAppVersion": "1.0.0",
+      "template": "playlist-card-01.json",
+      "thumbnail": "thumbs/playlist-card-01.jpg",
+      "preview": "previews/playlist-card-01.mp4",
+      "name": {
+        "en": "Playlist",
+        "tr": "Çalma Listesi"
+      }
+    },
+    {
+      "id": "pr-card-01",
+      "version": 1,
+      "category": "fitness",
+      "isPro": true,
+      "tags": [
+        "new"
+      ],
+      "minAppVersion": "1.0.0",
+      "template": "pr-card-01.json",
+      "thumbnail": "thumbs/pr-card-01.jpg",
+      "preview": "previews/pr-card-01.mp4",
+      "name": {
+        "en": "New PR",
+        "tr": "Yeni Rekor"
+      }
+    },
+    {
+      "id": "price-drop-01",
+      "version": 1,
+      "category": "realestate",
+      "isPro": true,
+      "tags": [],
+      "minAppVersion": "1.0.0",
+      "template": "price-drop-01.json",
+      "thumbnail": "thumbs/price-drop-01.jpg",
+      "preview": "previews/price-drop-01.mp4",
+      "name": {
+        "en": "Price Drop",
+        "tr": "Fiyat Düştü"
+      }
+    },
+    {
+      "id": "price-list-01",
+      "version": 1,
+      "category": "beauty",
+      "isPro": true,
+      "tags": [
+        "new"
+      ],
+      "minAppVersion": "1.0.0",
+      "template": "price-list-01.json",
+      "thumbnail": "thumbs/price-list-01.jpg",
+      "preview": "previews/price-list-01.mp4",
+      "name": {
+        "en": "Price List",
+        "tr": "Hizmet Fiyatları"
+      }
+    },
+    {
+      "id": "quiz-card-01",
+      "version": 1,
+      "category": "education",
+      "isPro": true,
+      "tags": [],
+      "minAppVersion": "1.0.0",
+      "template": "quiz-card-01.json",
+      "thumbnail": "thumbs/quiz-card-01.jpg",
+      "preview": "previews/quiz-card-01.mp4",
+      "name": {
+        "en": "Quiz Card",
+        "tr": "Mini Test"
+      }
+    },
+    {
+      "id": "restock-01",
+      "version": 1,
+      "category": "fashion",
+      "isPro": true,
+      "tags": [],
+      "minAppVersion": "1.0.0",
+      "template": "restock-01.json",
+      "thumbnail": "thumbs/restock-01.jpg",
+      "preview": "previews/restock-01.mp4",
+      "name": {
+        "en": "Back in Stock",
+        "tr": "Yeniden Stokta"
+      }
+    },
+    {
+      "id": "room-tour-01",
+      "version": 1,
+      "category": "realestate",
+      "isPro": true,
+      "tags": [
+        "new"
+      ],
+      "minAppVersion": "1.0.0",
+      "template": "room-tour-01.json",
+      "thumbnail": "thumbs/room-tour-01.jpg",
+      "preview": "previews/room-tour-01.mp4",
+      "name": {
+        "en": "Room Tour",
+        "tr": "Oda Oda Gezi"
+      }
+    },
+    {
+      "id": "skincare-steps-01",
+      "version": 1,
+      "category": "beauty",
+      "isPro": false,
+      "tags": [],
+      "minAppVersion": "1.0.0",
+      "template": "skincare-steps-01.json",
+      "thumbnail": "thumbs/skincare-steps-01.jpg",
+      "preview": "previews/skincare-steps-01.mp4",
+      "name": {
+        "en": "Skincare Routine",
+        "tr": "Bakım Rutini"
+      }
+    },
+    {
+      "id": "student-work-01",
+      "version": 1,
+      "category": "education",
+      "isPro": false,
+      "tags": [],
+      "minAppVersion": "1.0.0",
+      "template": "student-work-01.json",
+      "thumbnail": "thumbs/student-work-01.jpg",
+      "preview": "previews/student-work-01.mp4",
+      "name": {
+        "en": "Student Work",
+        "tr": "Öğrenci Çalışması"
+      }
+    },
+    {
+      "id": "studio-session-01",
+      "version": 1,
+      "category": "music",
+      "isPro": true,
+      "tags": [],
+      "minAppVersion": "1.0.0",
+      "template": "studio-session-01.json",
+      "thumbnail": "thumbs/studio-session-01.jpg",
+      "preview": "previews/studio-session-01.mp4",
+      "name": {
+        "en": "Studio Session",
+        "tr": "Stüdyo Günü"
+      }
+    },
+    {
+      "id": "study-plan-01",
+      "version": 1,
+      "category": "education",
+      "isPro": false,
+      "tags": [
+        "new"
+      ],
+      "minAppVersion": "1.0.0",
+      "template": "study-plan-01.json",
+      "thumbnail": "thumbs/study-plan-01.jpg",
+      "preview": "previews/study-plan-01.mp4",
+      "name": {
+        "en": "Study Plan",
+        "tr": "Ders Programı"
+      }
+    },
+    {
+      "id": "style-tip-01",
+      "version": 1,
+      "category": "fashion",
+      "isPro": false,
+      "tags": [],
+      "minAppVersion": "1.0.0",
+      "template": "style-tip-01.json",
+      "thumbnail": "thumbs/style-tip-01.jpg",
+      "preview": "previews/style-tip-01.mp4",
+      "name": {
+        "en": "Style Tip",
+        "tr": "Stil İpucu"
+      }
+    },
+    {
+      "id": "tour-dates-01",
+      "version": 1,
+      "category": "music",
+      "isPro": true,
+      "tags": [
+        "new"
+      ],
+      "minAppVersion": "1.0.0",
+      "template": "tour-dates-01.json",
+      "thumbnail": "thumbs/tour-dates-01.jpg",
+      "preview": "previews/tour-dates-01.mp4",
+      "name": {
+        "en": "Tour Dates",
+        "tr": "Turne Takvimi"
+      }
+    },
+    {
+      "id": "word-of-day-01",
+      "version": 1,
+      "category": "education",
+      "isPro": false,
+      "tags": [
+        "new"
+      ],
+      "minAppVersion": "1.0.0",
+      "template": "word-of-day-01.json",
+      "thumbnail": "thumbs/word-of-day-01.jpg",
+      "preview": "previews/word-of-day-01.mp4",
+      "name": {
+        "en": "Word of the Day",
+        "tr": "Günün Kelimesi"
+      }
+    }
+  ]
+}

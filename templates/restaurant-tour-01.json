@@ -1,0 +1,502 @@
+{
+  "schemaVersion": 2,
+  "id": "restaurant-tour-01",
+  "name": {
+    "en": "Venue Tour",
+    "tr": "Mekân Turu"
+  },
+  "category": "food",
+  "isPro": true,
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "palette": {
+    "background": "#FBFAF7",
+    "surface": "#FFFFFF",
+    "accent": "#B99566",
+    "textPrimary": "#1A1815",
+    "textSecondary": "#8A857D",
+    "textOnAccent": "#FFFFFF",
+    "scrimClear": "#00000000",
+    "scrimSolid": "#000000CC"
+  },
+  "audio": {
+    "defaultTrackId": "smooth-01",
+    "volume": 0.85
+  },
+  "scenes": [
+    {
+      "id": "door",
+      "duration": 2.2,
+      "layers": [
+        {
+          "id": "door-media",
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 1.0,
+            "height": 1.0
+          },
+          "animations": [
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 2.2,
+              "params": {
+                "zoom": 1.09,
+                "direction": "up"
+              }
+            }
+          ],
+          "type": "mediaSlot",
+          "slotIndex": 0,
+          "media": "photoOrVideo",
+          "contentMode": "fill",
+          "mask": "rect",
+          "filter": "fade",
+          "filterIntensity": 0.3
+        },
+        {
+          "id": "door-scrim",
+          "frame": {
+            "x": 0.5,
+            "y": 0.78,
+            "width": 1.0,
+            "height": 0.44
+          },
+          "type": "shape",
+          "colorRole": "scrimClear",
+          "gradient": {
+            "from": "scrimClear",
+            "to": "scrimSolid",
+            "direction": "down"
+          }
+        },
+        {
+          "id": "door-rule",
+          "frame": {
+            "x": 0.5,
+            "y": 0.735,
+            "width": 0.09,
+            "height": 0.004
+          },
+          "timing": {
+            "start": 0.2
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "wipeReveal",
+              "duration": 0.45,
+              "easing": "easeOut",
+              "params": {
+                "direction": "right"
+              }
+            }
+          ],
+          "type": "shape",
+          "colorRole": "accent"
+        },
+        {
+          "id": "door-tag",
+          "frame": {
+            "x": 0.5,
+            "y": 0.785,
+            "width": 0.8,
+            "height": 0.05
+          },
+          "timing": {
+            "start": 0.3
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "slideIn",
+              "duration": 0.5,
+              "easing": "easeOut",
+              "params": {
+                "direction": "up",
+                "distance": 0.03
+              }
+            }
+          ],
+          "type": "text",
+          "key": "doorTag",
+          "default": {
+            "en": "THE DOOR",
+            "tr": "GİRİŞ"
+          },
+          "font": {
+            "name": "AvenirNext-DemiBold",
+            "size": 0.03
+          },
+          "colorRole": "accent",
+          "alignment": "center",
+          "letterSpacing": 0.014,
+          "allCaps": true
+        },
+        {
+          "id": "door-sub",
+          "frame": {
+            "x": 0.5,
+            "y": 0.858,
+            "width": 0.84,
+            "height": 0.07
+          },
+          "timing": {
+            "start": 0.5
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "fadeIn",
+              "duration": 0.6
+            }
+          ],
+          "type": "text",
+          "key": "doorSub",
+          "default": {
+            "en": "The moment you step in",
+            "tr": "Kapıdan girer girmez"
+          },
+          "font": {
+            "name": "Didot",
+            "size": 0.044
+          },
+          "colorRole": "textPrimary",
+          "alignment": "center"
+        }
+      ],
+      "transition": {
+        "style": "crossDissolve",
+        "duration": 0.4
+      }
+    },
+    {
+      "id": "table",
+      "duration": 2.2,
+      "layers": [
+        {
+          "id": "table-media",
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 1.0,
+            "height": 1.0
+          },
+          "animations": [
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 2.2,
+              "params": {
+                "zoom": 1.09,
+                "direction": "left"
+              }
+            }
+          ],
+          "type": "mediaSlot",
+          "slotIndex": 1,
+          "media": "photo",
+          "contentMode": "fill",
+          "mask": "rect",
+          "filter": "fade",
+          "filterIntensity": 0.3
+        },
+        {
+          "id": "table-scrim",
+          "frame": {
+            "x": 0.5,
+            "y": 0.78,
+            "width": 1.0,
+            "height": 0.44
+          },
+          "type": "shape",
+          "colorRole": "scrimClear",
+          "gradient": {
+            "from": "scrimClear",
+            "to": "scrimSolid",
+            "direction": "down"
+          }
+        },
+        {
+          "id": "table-rule",
+          "frame": {
+            "x": 0.5,
+            "y": 0.735,
+            "width": 0.09,
+            "height": 0.004
+          },
+          "timing": {
+            "start": 0.2
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "wipeReveal",
+              "duration": 0.45,
+              "easing": "easeOut",
+              "params": {
+                "direction": "right"
+              }
+            }
+          ],
+          "type": "shape",
+          "colorRole": "accent"
+        },
+        {
+          "id": "table-tag",
+          "frame": {
+            "x": 0.5,
+            "y": 0.785,
+            "width": 0.8,
+            "height": 0.05
+          },
+          "timing": {
+            "start": 0.3
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "slideIn",
+              "duration": 0.5,
+              "easing": "easeOut",
+              "params": {
+                "direction": "up",
+                "distance": 0.03
+              }
+            }
+          ],
+          "type": "text",
+          "key": "tableTag",
+          "default": {
+            "en": "YOUR TABLE",
+            "tr": "MASANIZ"
+          },
+          "font": {
+            "name": "AvenirNext-DemiBold",
+            "size": 0.03
+          },
+          "colorRole": "accent",
+          "alignment": "center",
+          "letterSpacing": 0.014,
+          "allCaps": true
+        },
+        {
+          "id": "table-sub",
+          "frame": {
+            "x": 0.5,
+            "y": 0.858,
+            "width": 0.84,
+            "height": 0.07
+          },
+          "timing": {
+            "start": 0.5
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "fadeIn",
+              "duration": 0.6
+            }
+          ],
+          "type": "text",
+          "key": "tableSub",
+          "default": {
+            "en": "The window seat is yours",
+            "tr": "Pencere kenarı sizin"
+          },
+          "font": {
+            "name": "Didot",
+            "size": 0.044
+          },
+          "colorRole": "textPrimary",
+          "alignment": "center"
+        }
+      ],
+      "transition": {
+        "style": "crossDissolve",
+        "duration": 0.4
+      }
+    },
+    {
+      "id": "plate",
+      "duration": 2.4,
+      "layers": [
+        {
+          "id": "plate-media",
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 1.0,
+            "height": 1.0
+          },
+          "animations": [
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 2.4,
+              "params": {
+                "zoom": 1.09,
+                "direction": "down"
+              }
+            }
+          ],
+          "type": "mediaSlot",
+          "slotIndex": 2,
+          "media": "photo",
+          "contentMode": "fill",
+          "mask": "rect",
+          "filter": "fade",
+          "filterIntensity": 0.3
+        },
+        {
+          "id": "plate-scrim",
+          "frame": {
+            "x": 0.5,
+            "y": 0.78,
+            "width": 1.0,
+            "height": 0.44
+          },
+          "type": "shape",
+          "colorRole": "scrimClear",
+          "gradient": {
+            "from": "scrimClear",
+            "to": "scrimSolid",
+            "direction": "down"
+          }
+        },
+        {
+          "id": "plate-rule",
+          "frame": {
+            "x": 0.5,
+            "y": 0.735,
+            "width": 0.09,
+            "height": 0.004
+          },
+          "timing": {
+            "start": 0.2
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "wipeReveal",
+              "duration": 0.45,
+              "easing": "easeOut",
+              "params": {
+                "direction": "right"
+              }
+            }
+          ],
+          "type": "shape",
+          "colorRole": "accent"
+        },
+        {
+          "id": "plate-tag",
+          "frame": {
+            "x": 0.5,
+            "y": 0.785,
+            "width": 0.8,
+            "height": 0.05
+          },
+          "timing": {
+            "start": 0.3
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "slideIn",
+              "duration": 0.5,
+              "easing": "easeOut",
+              "params": {
+                "direction": "up",
+                "distance": 0.03
+              }
+            }
+          ],
+          "type": "text",
+          "key": "plateTag",
+          "default": {
+            "en": "ON THE PLATE",
+            "tr": "TABAKTA"
+          },
+          "font": {
+            "name": "AvenirNext-DemiBold",
+            "size": 0.03
+          },
+          "colorRole": "accent",
+          "alignment": "center",
+          "letterSpacing": 0.014,
+          "allCaps": true
+        },
+        {
+          "id": "plate-sub",
+          "frame": {
+            "x": 0.5,
+            "y": 0.858,
+            "width": 0.84,
+            "height": 0.07
+          },
+          "timing": {
+            "start": 0.5
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "fadeIn",
+              "duration": 0.6
+            }
+          ],
+          "type": "text",
+          "key": "plateSub",
+          "default": {
+            "en": "Straight from the kitchen",
+            "tr": "Mutfaktan sıcak sıcak"
+          },
+          "font": {
+            "name": "Didot",
+            "size": 0.044
+          },
+          "colorRole": "textPrimary",
+          "alignment": "center"
+        }
+      ]
+    }
+  ],
+  "layers": [
+    {
+      "id": "venue",
+      "frame": {
+        "x": 0.5,
+        "y": 0.945,
+        "width": 0.8,
+        "height": 0.035
+      },
+      "timing": {
+        "start": 0.6
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.7
+        }
+      ],
+      "type": "text",
+      "key": "venue",
+      "default": {
+        "en": "Lezzet Kitchen — Moda",
+        "tr": "Lezzet Mutfağı — Moda"
+      },
+      "font": {
+        "name": "AvenirNext-Medium",
+        "size": 0.019
+      },
+      "colorRole": "textSecondary",
+      "alignment": "center",
+      "letterSpacing": 0.008
+    }
+  ]
+}

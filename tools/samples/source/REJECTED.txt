@@ -1,0 +1,22 @@
+# Elenmiş Commons dosyaları — `fetch-sample-photos.py` bunları BİR DAHA İNDİRMEZ
+# ve künyeye "elendi" olarak yazar. Satır biçimi:  <başlıktan bir parça> | <sebep>
+# Eşleşme küçük/büyük harf duyarsız ALT DİZE aramasıdır (Commons başlığı uzun).
+#
+# Lisans serbest olsa da vitrine giremeyen görüntüler: cihaz filigranı / tarih
+# damgası taşıyanlar, tanınabilir insan (kişilik hakkı), okunur MARKA/afiş metni,
+# tablo/çizim, tarihî siyah-beyaz kareler.
+#
+# NOT: eleme listesi yalnız TEKRAR İNDİRMEYİ önler. Her indirmeden sonra
+# görselleri GÖZLE denetle (15 indirmeden 5'i geçti) — otomatik tarama yetmiyor.
+
+N13P | tek yükleyicinin tüm karelerinde "REDMI NOTE …" cihaz filigranı + tarih damgası var (pig, abalone…)
+Coffee shop 1 - Wellington | tanınabilir insanlar (CC0 telifi kapsar, kişilik hakkını kapsamaz)
+Coffee shop 2 - Wellington | tanınabilir insanlar, yüzler net
+Dash Coffee at Gate 1 Dasma | okunur marka/kampanya metinleri ("BUY 1 GET", "P10 OFF") — vitrinde başka markanın afişi
+Battery Park and New York City Skyline | 1929 tarihî siyah-beyaz + üzerinde telif yazısı
+Johan Christian Dahl | TABLO (yağlı boya), fotoğraf değil
+Mountain landscape at sunset.PNG | TABLO (Fragonard)
+Pieter de Molijn | TABLO (yağlı boya)
+# DİKKAT: aynı serinin 04'ü KULLANILIYOR (kahverengi süet doku yakın planı) —
+# eleme yalnız 02 için, alt dize bu yüzden numarayı içeriyor.
+parafernalia de peleas de gallos 02 | zemin/ürün karışık, doku olarak okunmuyor

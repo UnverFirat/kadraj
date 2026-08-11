@@ -1,0 +1,553 @@
+{
+  "schemaVersion": 1,
+  "id": "agent-card-01",
+  "name": {
+    "en": "Agent Card",
+    "tr": "Danışman Kartı"
+  },
+  "category": "realestate",
+  "isPro": false,
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "duration": 7.0,
+  "palette": {
+    "background": "#FBFAF7",
+    "surface": "#FFFFFF",
+    "accent": "#B99566",
+    "textPrimary": "#1A1815",
+    "textSecondary": "#8A857D",
+    "textOnAccent": "#FFFFFF",
+    "scrimClear": "#00000000",
+    "scrimSolid": "#000000CC"
+  },
+  "audio": {
+    "defaultTrackId": "clean-01",
+    "volume": 0.85
+  },
+  "layers": [
+    {
+      "id": "bg",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "type": "shape",
+      "colorRole": "background"
+    },
+    {
+      "id": "header",
+      "frame": {
+        "x": 0.5,
+        "y": 0.055,
+        "width": 1.0,
+        "height": 0.11
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "slideIn",
+          "duration": 0.5,
+          "easing": "easeOut",
+          "params": {
+            "direction": "down",
+            "distance": 0.05
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "accent"
+    },
+    {
+      "id": "brand",
+      "frame": {
+        "x": 0.5,
+        "y": 0.055,
+        "width": 0.86,
+        "height": 0.045
+      },
+      "timing": {
+        "start": 0.3
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.5
+        }
+      ],
+      "type": "text",
+      "key": "brand",
+      "default": {
+        "en": "MERIDIAN REALTY",
+        "tr": "MERİDYEN EMLAK"
+      },
+      "font": {
+        "name": "AvenirNext-Heavy",
+        "size": 0.024
+      },
+      "colorRole": "textOnAccent",
+      "alignment": "center",
+      "letterSpacing": 0.024,
+      "allCaps": true
+    },
+    {
+      "id": "ring",
+      "frame": {
+        "x": 0.5,
+        "y": 0.31,
+        "width": 0.55,
+        "height": 0.3094
+      },
+      "opacity": 0.9,
+      "timing": {
+        "start": 0.25
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "scaleIn",
+          "duration": 0.6,
+          "easing": "easeOut",
+          "params": {
+            "from": 0.86
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "accent",
+      "mask": "circle"
+    },
+    {
+      "id": "portrait",
+      "frame": {
+        "x": 0.5,
+        "y": 0.31,
+        "width": 0.52,
+        "height": 0.2925
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "scaleIn",
+          "duration": 0.65,
+          "easing": "easeOut",
+          "params": {
+            "from": 0.9
+          }
+        },
+        {
+          "role": "loop",
+          "preset": "kenBurns",
+          "duration": 7.0,
+          "params": {
+            "zoom": 1.07,
+            "direction": "up"
+          }
+        }
+      ],
+      "type": "mediaSlot",
+      "slotIndex": 0,
+      "media": "photo",
+      "contentMode": "fill",
+      "mask": "circle",
+      "filter": "warm",
+      "filterIntensity": 0.2
+    },
+    {
+      "id": "name",
+      "frame": {
+        "x": 0.5,
+        "y": 0.51,
+        "width": 0.86,
+        "height": 0.09
+      },
+      "timing": {
+        "start": 0.6
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "kineticWords",
+          "duration": 0.9,
+          "params": {
+            "distance": 0.02
+          }
+        },
+        {
+          "role": "loop",
+          "preset": "floatLoop",
+          "duration": 2.6,
+          "params": {
+            "distance": 0.006,
+            "axis": "y"
+          }
+        }
+      ],
+      "type": "text",
+      "key": "name",
+      "default": {
+        "en": "Elif Demir",
+        "tr": "Elif Demir"
+      },
+      "font": {
+        "name": "AvenirNext-Bold",
+        "size": 0.058
+      },
+      "colorRole": "textPrimary",
+      "alignment": "center"
+    },
+    {
+      "id": "role",
+      "frame": {
+        "x": 0.5,
+        "y": 0.578,
+        "width": 0.82,
+        "height": 0.04
+      },
+      "timing": {
+        "start": 0.75
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.5
+        }
+      ],
+      "type": "text",
+      "key": "role",
+      "default": {
+        "en": "REAL ESTATE ADVISOR",
+        "tr": "GAYRİMENKUL DANIŞMANI"
+      },
+      "font": {
+        "name": "AvenirNext-Medium",
+        "size": 0.02
+      },
+      "colorRole": "textSecondary",
+      "alignment": "center",
+      "letterSpacing": 0.018,
+      "allCaps": true
+    },
+    {
+      "id": "rule",
+      "frame": {
+        "x": 0.5,
+        "y": 0.635,
+        "width": 0.1,
+        "height": 0.004
+      },
+      "timing": {
+        "start": 0.85
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "wipeReveal",
+          "duration": 0.5,
+          "easing": "easeOut",
+          "params": {
+            "direction": "right"
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "accent"
+    },
+    {
+      "id": "label0",
+      "frame": {
+        "x": 0.3,
+        "y": 0.7,
+        "width": 0.44,
+        "height": 0.028
+      },
+      "timing": {
+        "start": 0.9
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.45
+        }
+      ],
+      "type": "text",
+      "key": "row1Label",
+      "default": {
+        "en": "PHONE",
+        "tr": "TELEFON"
+      },
+      "font": {
+        "name": "AvenirNext-Medium",
+        "size": 0.017
+      },
+      "colorRole": "textSecondary",
+      "alignment": "left",
+      "letterSpacing": 0.016,
+      "allCaps": true
+    },
+    {
+      "id": "value0",
+      "frame": {
+        "x": 0.7,
+        "y": 0.7,
+        "width": 0.44,
+        "height": 0.045
+      },
+      "timing": {
+        "start": 0.95
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "slideIn",
+          "duration": 0.45,
+          "easing": "easeOut",
+          "params": {
+            "direction": "left",
+            "distance": 0.02
+          }
+        }
+      ],
+      "type": "text",
+      "key": "row1",
+      "default": {
+        "en": "555 010 0134",
+        "tr": "0532 000 00 00"
+      },
+      "font": {
+        "name": "AvenirNext-DemiBold",
+        "size": 0.024
+      },
+      "colorRole": "textPrimary",
+      "alignment": "right"
+    },
+    {
+      "id": "sep0",
+      "frame": {
+        "x": 0.5,
+        "y": 0.7425,
+        "width": 0.84,
+        "height": 0.0015
+      },
+      "opacity": 0.3,
+      "timing": {
+        "start": 1.0
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "wipeReveal",
+          "duration": 0.5,
+          "easing": "easeOut",
+          "params": {
+            "direction": "right"
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "textSecondary"
+    },
+    {
+      "id": "label1",
+      "frame": {
+        "x": 0.3,
+        "y": 0.785,
+        "width": 0.44,
+        "height": 0.028
+      },
+      "timing": {
+        "start": 1.03
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.45
+        }
+      ],
+      "type": "text",
+      "key": "row2Label",
+      "default": {
+        "en": "OFFICE",
+        "tr": "OFİS"
+      },
+      "font": {
+        "name": "AvenirNext-Medium",
+        "size": 0.017
+      },
+      "colorRole": "textSecondary",
+      "alignment": "left",
+      "letterSpacing": 0.016,
+      "allCaps": true
+    },
+    {
+      "id": "value1",
+      "frame": {
+        "x": 0.7,
+        "y": 0.785,
+        "width": 0.44,
+        "height": 0.045
+      },
+      "timing": {
+        "start": 1.08
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "slideIn",
+          "duration": 0.45,
+          "easing": "easeOut",
+          "params": {
+            "direction": "left",
+            "distance": 0.02
+          }
+        }
+      ],
+      "type": "text",
+      "key": "row2",
+      "default": {
+        "en": "212 Bagdat Ave, Kadıköy",
+        "tr": "Bağdat Cad. No:212, Kadıköy"
+      },
+      "font": {
+        "name": "AvenirNext-DemiBold",
+        "size": 0.024
+      },
+      "colorRole": "textPrimary",
+      "alignment": "right"
+    },
+    {
+      "id": "sep1",
+      "frame": {
+        "x": 0.5,
+        "y": 0.8275,
+        "width": 0.84,
+        "height": 0.0015
+      },
+      "opacity": 0.3,
+      "timing": {
+        "start": 1.13
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "wipeReveal",
+          "duration": 0.5,
+          "easing": "easeOut",
+          "params": {
+            "direction": "right"
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "textSecondary"
+    },
+    {
+      "id": "label2",
+      "frame": {
+        "x": 0.3,
+        "y": 0.87,
+        "width": 0.44,
+        "height": 0.028
+      },
+      "timing": {
+        "start": 1.16
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.45
+        }
+      ],
+      "type": "text",
+      "key": "row3Label",
+      "default": {
+        "en": "EMAIL",
+        "tr": "E-POSTA"
+      },
+      "font": {
+        "name": "AvenirNext-Medium",
+        "size": 0.017
+      },
+      "colorRole": "textSecondary",
+      "alignment": "left",
+      "letterSpacing": 0.016,
+      "allCaps": true
+    },
+    {
+      "id": "value2",
+      "frame": {
+        "x": 0.7,
+        "y": 0.87,
+        "width": 0.44,
+        "height": 0.045
+      },
+      "timing": {
+        "start": 1.21
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "slideIn",
+          "duration": 0.45,
+          "easing": "easeOut",
+          "params": {
+            "direction": "left",
+            "distance": 0.02
+          }
+        }
+      ],
+      "type": "text",
+      "key": "row3",
+      "default": {
+        "en": "elif@meridianrealty.com",
+        "tr": "elif@meridyenemlak.com"
+      },
+      "font": {
+        "name": "AvenirNext-DemiBold",
+        "size": 0.024
+      },
+      "colorRole": "textPrimary",
+      "alignment": "right"
+    },
+    {
+      "id": "footer",
+      "frame": {
+        "x": 0.5,
+        "y": 0.945,
+        "width": 0.84,
+        "height": 0.035
+      },
+      "timing": {
+        "start": 1.2
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.6
+        }
+      ],
+      "type": "text",
+      "key": "footer",
+      "default": {
+        "en": "Free valuation — just call",
+        "tr": "Ücretsiz değerleme için arayın"
+      },
+      "font": {
+        "name": "AvenirNext-DemiBold",
+        "size": 0.02
+      },
+      "colorRole": "accent",
+      "alignment": "center"
+    }
+  ]
+}

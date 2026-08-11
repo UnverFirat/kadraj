@@ -1,0 +1,832 @@
+{
+  "schemaVersion": 2,
+  "id": "try-on-01",
+  "name": {
+    "en": "Try-On",
+    "tr": "Deneme Kabini"
+  },
+  "category": "fashion",
+  "isPro": true,
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "palette": {
+    "background": "#101014",
+    "surface": "#FFFFFF",
+    "accent": "#FF2E63",
+    "textPrimary": "#FFFFFF",
+    "textSecondary": "#C9C9D1",
+    "textOnAccent": "#FFFFFF",
+    "scrimClear": "#00000000",
+    "scrimSolid": "#000000CC"
+  },
+  "audio": {
+    "defaultTrackId": "punchy-01",
+    "volume": 0.85
+  },
+  "scenes": [
+    {
+      "id": "fit0",
+      "duration": 1.6,
+      "layers": [
+        {
+          "id": "fit0-media",
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 1.0,
+            "height": 1.0
+          },
+          "animations": [
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 1.6,
+              "params": {
+                "zoom": 1.08,
+                "direction": "up"
+              }
+            }
+          ],
+          "type": "mediaSlot",
+          "slotIndex": 0,
+          "media": "photoOrVideo",
+          "contentMode": "fill",
+          "mask": "rect",
+          "filter": "vivid",
+          "filterIntensity": 0.4
+        },
+        {
+          "id": "fit0-scrim-top",
+          "frame": {
+            "x": 0.5,
+            "y": 0.11,
+            "width": 1.0,
+            "height": 0.22
+          },
+          "type": "shape",
+          "colorRole": "scrimClear",
+          "gradient": {
+            "from": "scrimClear",
+            "to": "scrimSolid",
+            "direction": "up"
+          }
+        },
+        {
+          "id": "fit0-scrim",
+          "frame": {
+            "x": 0.5,
+            "y": 0.8,
+            "width": 1.0,
+            "height": 0.4
+          },
+          "type": "shape",
+          "colorRole": "scrimClear",
+          "gradient": {
+            "from": "scrimClear",
+            "to": "scrimSolid",
+            "direction": "down"
+          }
+        },
+        {
+          "id": "fit0-label-chip",
+          "frame": {
+            "x": 0.22,
+            "y": 0.14,
+            "width": 0.3,
+            "height": 0.065
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "scaleIn",
+              "duration": 0.3,
+              "easing": "easeOut",
+              "params": {
+                "from": 0.8
+              }
+            },
+            {
+              "role": "loop",
+              "preset": "shake",
+              "duration": 1.4,
+              "delay": 0.7,
+              "params": {
+                "degrees": 2.0
+              }
+            }
+          ],
+          "type": "shape",
+          "colorRole": "surface",
+          "cornerRadius": 0.0325
+        },
+        {
+          "id": "fit0-label",
+          "frame": {
+            "x": 0.22,
+            "y": 0.14,
+            "width": 0.28,
+            "height": 0.045
+          },
+          "timing": {
+            "start": 0.12
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "fadeIn",
+              "duration": 0.25
+            }
+          ],
+          "type": "text",
+          "key": "fitLabel",
+          "default": {
+            "en": "LOOK 01",
+            "tr": "DENEME 01"
+          },
+          "font": {
+            "name": "AvenirNext-Heavy",
+            "size": 0.024
+          },
+          "colorRole": "background",
+          "alignment": "center",
+          "letterSpacing": 0.008,
+          "allCaps": true
+        },
+        {
+          "id": "fit0-price-chip",
+          "frame": {
+            "x": 0.78,
+            "y": 0.14,
+            "width": 0.28,
+            "height": 0.075
+          },
+          "rotation": -7,
+          "timing": {
+            "start": 0.15
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "pop",
+              "duration": 0.35,
+              "params": {
+                "overshoot": 1.15
+              }
+            },
+            {
+              "role": "loop",
+              "preset": "shake",
+              "duration": 1.4,
+              "delay": 0.75,
+              "params": {
+                "degrees": 2.0
+              }
+            }
+          ],
+          "type": "shape",
+          "colorRole": "accent",
+          "cornerRadius": 0.0375
+        },
+        {
+          "id": "fit0-price",
+          "frame": {
+            "x": 0.78,
+            "y": 0.14,
+            "width": 0.26,
+            "height": 0.05
+          },
+          "rotation": -7,
+          "timing": {
+            "start": 0.22
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "fadeIn",
+              "duration": 0.25
+            }
+          ],
+          "type": "text",
+          "key": "fitPrice",
+          "default": {
+            "en": "$29",
+            "tr": "₺349"
+          },
+          "font": {
+            "name": "AvenirNext-Heavy",
+            "size": 0.034
+          },
+          "colorRole": "textOnAccent",
+          "alignment": "center"
+        },
+        {
+          "id": "fit0-name",
+          "frame": {
+            "x": 0.5,
+            "y": 0.86,
+            "width": 0.86,
+            "height": 0.065
+          },
+          "timing": {
+            "start": 0.2
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "slideIn",
+              "duration": 0.35,
+              "easing": "easeOut",
+              "params": {
+                "direction": "up",
+                "distance": 0.05
+              }
+            }
+          ],
+          "type": "text",
+          "key": "fitName",
+          "default": {
+            "en": "Linen shirt",
+            "tr": "Keten gömlek"
+          },
+          "font": {
+            "name": "AvenirNext-Bold",
+            "size": 0.038
+          },
+          "colorRole": "textPrimary",
+          "alignment": "center"
+        },
+        {
+          "id": "fit0-hint",
+          "frame": {
+            "x": 0.5,
+            "y": 0.935,
+            "width": 0.7,
+            "height": 0.035
+          },
+          "timing": {
+            "start": 0.3
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "fadeIn",
+              "duration": 0.35
+            }
+          ],
+          "type": "text",
+          "key": "fitHint",
+          "default": {
+            "en": "Which one?",
+            "tr": "Hangisi olsun?"
+          },
+          "font": {
+            "name": "AvenirNext-Medium",
+            "size": 0.02
+          },
+          "colorRole": "textSecondary",
+          "alignment": "center"
+        }
+      ],
+      "transition": {
+        "style": "cut",
+        "duration": 0.12
+      }
+    },
+    {
+      "id": "fit1",
+      "duration": 1.6,
+      "layers": [
+        {
+          "id": "fit1-media",
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 1.0,
+            "height": 1.0
+          },
+          "animations": [
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 1.6,
+              "params": {
+                "zoom": 1.08,
+                "direction": "left"
+              }
+            }
+          ],
+          "type": "mediaSlot",
+          "slotIndex": 1,
+          "media": "photoOrVideo",
+          "contentMode": "fill",
+          "mask": "rect",
+          "filter": "vivid",
+          "filterIntensity": 0.4
+        },
+        {
+          "id": "fit1-scrim-top",
+          "frame": {
+            "x": 0.5,
+            "y": 0.11,
+            "width": 1.0,
+            "height": 0.22
+          },
+          "type": "shape",
+          "colorRole": "scrimClear",
+          "gradient": {
+            "from": "scrimClear",
+            "to": "scrimSolid",
+            "direction": "up"
+          }
+        },
+        {
+          "id": "fit1-scrim",
+          "frame": {
+            "x": 0.5,
+            "y": 0.8,
+            "width": 1.0,
+            "height": 0.4
+          },
+          "type": "shape",
+          "colorRole": "scrimClear",
+          "gradient": {
+            "from": "scrimClear",
+            "to": "scrimSolid",
+            "direction": "down"
+          }
+        },
+        {
+          "id": "fit1-label-chip",
+          "frame": {
+            "x": 0.22,
+            "y": 0.14,
+            "width": 0.3,
+            "height": 0.065
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "scaleIn",
+              "duration": 0.3,
+              "easing": "easeOut",
+              "params": {
+                "from": 0.8
+              }
+            },
+            {
+              "role": "loop",
+              "preset": "shake",
+              "duration": 1.4,
+              "delay": 0.7,
+              "params": {
+                "degrees": 2.0
+              }
+            }
+          ],
+          "type": "shape",
+          "colorRole": "surface",
+          "cornerRadius": 0.0325
+        },
+        {
+          "id": "fit1-label",
+          "frame": {
+            "x": 0.22,
+            "y": 0.14,
+            "width": 0.28,
+            "height": 0.045
+          },
+          "timing": {
+            "start": 0.12
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "fadeIn",
+              "duration": 0.25
+            }
+          ],
+          "type": "text",
+          "key": "fitLabel",
+          "default": {
+            "en": "LOOK 02",
+            "tr": "DENEME 02"
+          },
+          "font": {
+            "name": "AvenirNext-Heavy",
+            "size": 0.024
+          },
+          "colorRole": "background",
+          "alignment": "center",
+          "letterSpacing": 0.008,
+          "allCaps": true
+        },
+        {
+          "id": "fit1-price-chip",
+          "frame": {
+            "x": 0.78,
+            "y": 0.14,
+            "width": 0.28,
+            "height": 0.075
+          },
+          "rotation": -7,
+          "timing": {
+            "start": 0.15
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "pop",
+              "duration": 0.35,
+              "params": {
+                "overshoot": 1.15
+              }
+            },
+            {
+              "role": "loop",
+              "preset": "shake",
+              "duration": 1.4,
+              "delay": 0.75,
+              "params": {
+                "degrees": 2.0
+              }
+            }
+          ],
+          "type": "shape",
+          "colorRole": "accent",
+          "cornerRadius": 0.0375
+        },
+        {
+          "id": "fit1-price",
+          "frame": {
+            "x": 0.78,
+            "y": 0.14,
+            "width": 0.26,
+            "height": 0.05
+          },
+          "rotation": -7,
+          "timing": {
+            "start": 0.22
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "fadeIn",
+              "duration": 0.25
+            }
+          ],
+          "type": "text",
+          "key": "fitPrice",
+          "default": {
+            "en": "$39",
+            "tr": "₺499"
+          },
+          "font": {
+            "name": "AvenirNext-Heavy",
+            "size": 0.034
+          },
+          "colorRole": "textOnAccent",
+          "alignment": "center"
+        },
+        {
+          "id": "fit1-name",
+          "frame": {
+            "x": 0.5,
+            "y": 0.86,
+            "width": 0.86,
+            "height": 0.065
+          },
+          "timing": {
+            "start": 0.2
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "slideIn",
+              "duration": 0.35,
+              "easing": "easeOut",
+              "params": {
+                "direction": "up",
+                "distance": 0.05
+              }
+            }
+          ],
+          "type": "text",
+          "key": "fitName",
+          "default": {
+            "en": "High-waist trousers",
+            "tr": "Yüksek bel pantolon"
+          },
+          "font": {
+            "name": "AvenirNext-Bold",
+            "size": 0.038
+          },
+          "colorRole": "textPrimary",
+          "alignment": "center"
+        },
+        {
+          "id": "fit1-hint",
+          "frame": {
+            "x": 0.5,
+            "y": 0.935,
+            "width": 0.7,
+            "height": 0.035
+          },
+          "timing": {
+            "start": 0.3
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "fadeIn",
+              "duration": 0.35
+            }
+          ],
+          "type": "text",
+          "key": "fitHint",
+          "default": {
+            "en": "Which one?",
+            "tr": "Hangisi olsun?"
+          },
+          "font": {
+            "name": "AvenirNext-Medium",
+            "size": 0.02
+          },
+          "colorRole": "textSecondary",
+          "alignment": "center"
+        }
+      ],
+      "transition": {
+        "style": "cut",
+        "duration": 0.12
+      }
+    },
+    {
+      "id": "fit2",
+      "duration": 1.8,
+      "layers": [
+        {
+          "id": "fit2-media",
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 1.0,
+            "height": 1.0
+          },
+          "animations": [
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 1.8,
+              "params": {
+                "zoom": 1.08,
+                "direction": "up"
+              }
+            }
+          ],
+          "type": "mediaSlot",
+          "slotIndex": 2,
+          "media": "photoOrVideo",
+          "contentMode": "fill",
+          "mask": "rect",
+          "filter": "vivid",
+          "filterIntensity": 0.4
+        },
+        {
+          "id": "fit2-scrim-top",
+          "frame": {
+            "x": 0.5,
+            "y": 0.11,
+            "width": 1.0,
+            "height": 0.22
+          },
+          "type": "shape",
+          "colorRole": "scrimClear",
+          "gradient": {
+            "from": "scrimClear",
+            "to": "scrimSolid",
+            "direction": "up"
+          }
+        },
+        {
+          "id": "fit2-scrim",
+          "frame": {
+            "x": 0.5,
+            "y": 0.8,
+            "width": 1.0,
+            "height": 0.4
+          },
+          "type": "shape",
+          "colorRole": "scrimClear",
+          "gradient": {
+            "from": "scrimClear",
+            "to": "scrimSolid",
+            "direction": "down"
+          }
+        },
+        {
+          "id": "fit2-label-chip",
+          "frame": {
+            "x": 0.22,
+            "y": 0.14,
+            "width": 0.3,
+            "height": 0.065
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "scaleIn",
+              "duration": 0.3,
+              "easing": "easeOut",
+              "params": {
+                "from": 0.8
+              }
+            },
+            {
+              "role": "loop",
+              "preset": "shake",
+              "duration": 1.4,
+              "delay": 0.7,
+              "params": {
+                "degrees": 2.0
+              }
+            }
+          ],
+          "type": "shape",
+          "colorRole": "surface",
+          "cornerRadius": 0.0325
+        },
+        {
+          "id": "fit2-label",
+          "frame": {
+            "x": 0.22,
+            "y": 0.14,
+            "width": 0.28,
+            "height": 0.045
+          },
+          "timing": {
+            "start": 0.12
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "fadeIn",
+              "duration": 0.25
+            }
+          ],
+          "type": "text",
+          "key": "fitLabel",
+          "default": {
+            "en": "LOOK 03",
+            "tr": "DENEME 03"
+          },
+          "font": {
+            "name": "AvenirNext-Heavy",
+            "size": 0.024
+          },
+          "colorRole": "background",
+          "alignment": "center",
+          "letterSpacing": 0.008,
+          "allCaps": true
+        },
+        {
+          "id": "fit2-price-chip",
+          "frame": {
+            "x": 0.78,
+            "y": 0.14,
+            "width": 0.28,
+            "height": 0.075
+          },
+          "rotation": -7,
+          "timing": {
+            "start": 0.15
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "pop",
+              "duration": 0.35,
+              "params": {
+                "overshoot": 1.15
+              }
+            },
+            {
+              "role": "loop",
+              "preset": "shake",
+              "duration": 1.4,
+              "delay": 0.75,
+              "params": {
+                "degrees": 2.0
+              }
+            }
+          ],
+          "type": "shape",
+          "colorRole": "accent",
+          "cornerRadius": 0.0375
+        },
+        {
+          "id": "fit2-price",
+          "frame": {
+            "x": 0.78,
+            "y": 0.14,
+            "width": 0.26,
+            "height": 0.05
+          },
+          "rotation": -7,
+          "timing": {
+            "start": 0.22
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "fadeIn",
+              "duration": 0.25
+            }
+          ],
+          "type": "text",
+          "key": "fitPrice",
+          "default": {
+            "en": "$69",
+            "tr": "₺899"
+          },
+          "font": {
+            "name": "AvenirNext-Heavy",
+            "size": 0.034
+          },
+          "colorRole": "textOnAccent",
+          "alignment": "center"
+        },
+        {
+          "id": "fit2-name",
+          "frame": {
+            "x": 0.5,
+            "y": 0.86,
+            "width": 0.86,
+            "height": 0.065
+          },
+          "timing": {
+            "start": 0.2
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "slideIn",
+              "duration": 0.35,
+              "easing": "easeOut",
+              "params": {
+                "direction": "up",
+                "distance": 0.05
+              }
+            }
+          ],
+          "type": "text",
+          "key": "fitName",
+          "default": {
+            "en": "Long trench coat",
+            "tr": "Uzun trençkot"
+          },
+          "font": {
+            "name": "AvenirNext-Bold",
+            "size": 0.038
+          },
+          "colorRole": "textPrimary",
+          "alignment": "center"
+        },
+        {
+          "id": "fit2-hint",
+          "frame": {
+            "x": 0.5,
+            "y": 0.935,
+            "width": 0.7,
+            "height": 0.035
+          },
+          "timing": {
+            "start": 0.3
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "fadeIn",
+              "duration": 0.35
+            }
+          ],
+          "type": "text",
+          "key": "fitHint",
+          "default": {
+            "en": "Which one?",
+            "tr": "Hangisi olsun?"
+          },
+          "font": {
+            "name": "AvenirNext-Medium",
+            "size": 0.02
+          },
+          "colorRole": "textSecondary",
+          "alignment": "center"
+        }
+      ]
+    }
+  ],
+  "layers": []
+}

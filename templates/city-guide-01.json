@@ -1,0 +1,741 @@
+{
+  "schemaVersion": 2,
+  "id": "city-guide-01",
+  "name": {
+    "en": "City Guide",
+    "tr": "Şehir Rehberi"
+  },
+  "category": "travel",
+  "isPro": false,
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "palette": {
+    "background": "#06202B",
+    "surface": "#EAF7FB",
+    "accent": "#2BB3C0",
+    "textPrimary": "#F2FBFD",
+    "textSecondary": "#9CC3CE",
+    "textOnAccent": "#FFFFFF",
+    "scrimClear": "#00000000",
+    "scrimSolid": "#000000CC"
+  },
+  "audio": {
+    "defaultTrackId": "wanderlust-01",
+    "volume": 0.85
+  },
+  "scenes": [
+    {
+      "id": "stop0",
+      "duration": 2.4,
+      "layers": [
+        {
+          "id": "c0",
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 1.0,
+            "height": 1.0
+          },
+          "animations": [
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 2.4,
+              "params": {
+                "zoom": 1.1,
+                "direction": "up"
+              }
+            }
+          ],
+          "type": "mediaSlot",
+          "slotIndex": 0,
+          "media": "photoOrVideo",
+          "contentMode": "fill",
+          "mask": "rect",
+          "filter": "cool",
+          "filterIntensity": 0.35
+        },
+        {
+          "id": "c0-veil",
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 1.0,
+            "height": 1.0
+          },
+          "type": "shape",
+          "colorRole": "scrimClear",
+          "gradient": {
+            "from": "scrimClear",
+            "to": "scrimSolid",
+            "direction": "down"
+          }
+        },
+        {
+          "id": "c0-chip",
+          "frame": {
+            "x": 0.155,
+            "y": 0.7,
+            "width": 0.11,
+            "height": 0.062
+          },
+          "timing": {
+            "start": 0.15
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "pop",
+              "duration": 0.45,
+              "params": {
+                "overshoot": 1.1
+              }
+            },
+            {
+              "role": "loop",
+              "preset": "shake",
+              "duration": 1.4,
+              "delay": 0.85,
+              "params": {
+                "degrees": 2.0
+              }
+            }
+          ],
+          "type": "shape",
+          "colorRole": "accent",
+          "cornerRadius": 0.031
+        },
+        {
+          "id": "c0-num",
+          "frame": {
+            "x": 0.155,
+            "y": 0.7,
+            "width": 0.1,
+            "height": 0.05
+          },
+          "timing": {
+            "start": 0.25
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "fadeIn",
+              "duration": 0.35
+            }
+          ],
+          "type": "text",
+          "key": "num0",
+          "default": {
+            "en": "1",
+            "tr": "1"
+          },
+          "font": {
+            "name": "AvenirNext-Heavy",
+            "size": 0.03
+          },
+          "colorRole": "textOnAccent",
+          "alignment": "center"
+        },
+        {
+          "id": "c0-label",
+          "frame": {
+            "x": 0.56,
+            "y": 0.7,
+            "width": 0.62,
+            "height": 0.045
+          },
+          "timing": {
+            "start": 0.3
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "slideIn",
+              "duration": 0.45,
+              "easing": "easeOut",
+              "params": {
+                "direction": "left",
+                "distance": 0.05
+              }
+            }
+          ],
+          "type": "text",
+          "key": "label0",
+          "default": {
+            "en": "BREAKFAST",
+            "tr": "KAHVALTI"
+          },
+          "font": {
+            "name": "AvenirNext-DemiBold",
+            "size": 0.024
+          },
+          "colorRole": "accent",
+          "alignment": "left",
+          "letterSpacing": 0.014,
+          "allCaps": true
+        },
+        {
+          "id": "c0-place",
+          "frame": {
+            "x": 0.5,
+            "y": 0.795,
+            "width": 0.84,
+            "height": 0.1
+          },
+          "timing": {
+            "start": 0.45
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "kineticWords",
+              "duration": 0.9,
+              "params": {
+                "distance": 0.02
+              }
+            }
+          ],
+          "type": "text",
+          "key": "place0",
+          "default": {
+            "en": "Van Breakfast House",
+            "tr": "Van Kahvaltı Evi"
+          },
+          "font": {
+            "name": "AvenirNext-Bold",
+            "size": 0.052
+          },
+          "colorRole": "textPrimary",
+          "alignment": "left"
+        },
+        {
+          "id": "c0-note",
+          "frame": {
+            "x": 0.5,
+            "y": 0.875,
+            "width": 0.8,
+            "height": 0.04
+          },
+          "timing": {
+            "start": 0.65
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "fadeIn",
+              "duration": 0.5
+            }
+          ],
+          "type": "text",
+          "key": "note0",
+          "default": {
+            "en": "Kadikoy • 08:30",
+            "tr": "Kadıköy • 08:30"
+          },
+          "font": {
+            "name": "AvenirNext-Regular",
+            "size": 0.022
+          },
+          "colorRole": "textSecondary",
+          "alignment": "left"
+        }
+      ],
+      "transition": {
+        "style": "slideLeft",
+        "duration": 0.4
+      }
+    },
+    {
+      "id": "stop1",
+      "duration": 2.4,
+      "layers": [
+        {
+          "id": "c1",
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 1.0,
+            "height": 1.0
+          },
+          "animations": [
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 2.4,
+              "params": {
+                "zoom": 1.1,
+                "direction": "left"
+              }
+            }
+          ],
+          "type": "mediaSlot",
+          "slotIndex": 1,
+          "media": "photoOrVideo",
+          "contentMode": "fill",
+          "mask": "rect",
+          "filter": "cool",
+          "filterIntensity": 0.35
+        },
+        {
+          "id": "c1-veil",
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 1.0,
+            "height": 1.0
+          },
+          "type": "shape",
+          "colorRole": "scrimClear",
+          "gradient": {
+            "from": "scrimClear",
+            "to": "scrimSolid",
+            "direction": "down"
+          }
+        },
+        {
+          "id": "c1-chip",
+          "frame": {
+            "x": 0.155,
+            "y": 0.7,
+            "width": 0.11,
+            "height": 0.062
+          },
+          "timing": {
+            "start": 0.15
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "pop",
+              "duration": 0.45,
+              "params": {
+                "overshoot": 1.1
+              }
+            },
+            {
+              "role": "loop",
+              "preset": "shake",
+              "duration": 1.4,
+              "delay": 0.85,
+              "params": {
+                "degrees": 2.0
+              }
+            }
+          ],
+          "type": "shape",
+          "colorRole": "accent",
+          "cornerRadius": 0.031
+        },
+        {
+          "id": "c1-num",
+          "frame": {
+            "x": 0.155,
+            "y": 0.7,
+            "width": 0.1,
+            "height": 0.05
+          },
+          "timing": {
+            "start": 0.25
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "fadeIn",
+              "duration": 0.35
+            }
+          ],
+          "type": "text",
+          "key": "num1",
+          "default": {
+            "en": "2",
+            "tr": "2"
+          },
+          "font": {
+            "name": "AvenirNext-Heavy",
+            "size": 0.03
+          },
+          "colorRole": "textOnAccent",
+          "alignment": "center"
+        },
+        {
+          "id": "c1-label",
+          "frame": {
+            "x": 0.56,
+            "y": 0.7,
+            "width": 0.62,
+            "height": 0.045
+          },
+          "timing": {
+            "start": 0.3
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "slideIn",
+              "duration": 0.45,
+              "easing": "easeOut",
+              "params": {
+                "direction": "left",
+                "distance": 0.05
+              }
+            }
+          ],
+          "type": "text",
+          "key": "label1",
+          "default": {
+            "en": "COFFEE",
+            "tr": "KAHVE"
+          },
+          "font": {
+            "name": "AvenirNext-DemiBold",
+            "size": 0.024
+          },
+          "colorRole": "accent",
+          "alignment": "left",
+          "letterSpacing": 0.014,
+          "allCaps": true
+        },
+        {
+          "id": "c1-place",
+          "frame": {
+            "x": 0.5,
+            "y": 0.795,
+            "width": 0.84,
+            "height": 0.1
+          },
+          "timing": {
+            "start": 0.45
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "kineticWords",
+              "duration": 0.9,
+              "params": {
+                "distance": 0.02
+              }
+            }
+          ],
+          "type": "text",
+          "key": "place1",
+          "default": {
+            "en": "Fazil Bey Coffee",
+            "tr": "Fazıl Bey Kahvesi"
+          },
+          "font": {
+            "name": "AvenirNext-Bold",
+            "size": 0.052
+          },
+          "colorRole": "textPrimary",
+          "alignment": "left"
+        },
+        {
+          "id": "c1-note",
+          "frame": {
+            "x": 0.5,
+            "y": 0.875,
+            "width": 0.8,
+            "height": 0.04
+          },
+          "timing": {
+            "start": 0.65
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "fadeIn",
+              "duration": 0.5
+            }
+          ],
+          "type": "text",
+          "key": "note1",
+          "default": {
+            "en": "Moda • 11:00",
+            "tr": "Moda • 11:00"
+          },
+          "font": {
+            "name": "AvenirNext-Regular",
+            "size": 0.022
+          },
+          "colorRole": "textSecondary",
+          "alignment": "left"
+        }
+      ],
+      "transition": {
+        "style": "slideLeft",
+        "duration": 0.4
+      }
+    },
+    {
+      "id": "stop2",
+      "duration": 2.4,
+      "layers": [
+        {
+          "id": "c2",
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 1.0,
+            "height": 1.0
+          },
+          "animations": [
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 2.4,
+              "params": {
+                "zoom": 1.1,
+                "direction": "down"
+              }
+            }
+          ],
+          "type": "mediaSlot",
+          "slotIndex": 2,
+          "media": "photoOrVideo",
+          "contentMode": "fill",
+          "mask": "rect",
+          "filter": "cool",
+          "filterIntensity": 0.35
+        },
+        {
+          "id": "c2-veil",
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 1.0,
+            "height": 1.0
+          },
+          "type": "shape",
+          "colorRole": "scrimClear",
+          "gradient": {
+            "from": "scrimClear",
+            "to": "scrimSolid",
+            "direction": "down"
+          }
+        },
+        {
+          "id": "c2-chip",
+          "frame": {
+            "x": 0.155,
+            "y": 0.7,
+            "width": 0.11,
+            "height": 0.062
+          },
+          "timing": {
+            "start": 0.15
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "pop",
+              "duration": 0.45,
+              "params": {
+                "overshoot": 1.1
+              }
+            },
+            {
+              "role": "loop",
+              "preset": "shake",
+              "duration": 1.4,
+              "delay": 0.85,
+              "params": {
+                "degrees": 2.0
+              }
+            }
+          ],
+          "type": "shape",
+          "colorRole": "accent",
+          "cornerRadius": 0.031
+        },
+        {
+          "id": "c2-num",
+          "frame": {
+            "x": 0.155,
+            "y": 0.7,
+            "width": 0.1,
+            "height": 0.05
+          },
+          "timing": {
+            "start": 0.25
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "fadeIn",
+              "duration": 0.35
+            }
+          ],
+          "type": "text",
+          "key": "num2",
+          "default": {
+            "en": "3",
+            "tr": "3"
+          },
+          "font": {
+            "name": "AvenirNext-Heavy",
+            "size": 0.03
+          },
+          "colorRole": "textOnAccent",
+          "alignment": "center"
+        },
+        {
+          "id": "c2-label",
+          "frame": {
+            "x": 0.56,
+            "y": 0.7,
+            "width": 0.62,
+            "height": 0.045
+          },
+          "timing": {
+            "start": 0.3
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "slideIn",
+              "duration": 0.45,
+              "easing": "easeOut",
+              "params": {
+                "direction": "left",
+                "distance": 0.05
+              }
+            }
+          ],
+          "type": "text",
+          "key": "label2",
+          "default": {
+            "en": "SUNSET",
+            "tr": "GÜN BATIMI"
+          },
+          "font": {
+            "name": "AvenirNext-DemiBold",
+            "size": 0.024
+          },
+          "colorRole": "accent",
+          "alignment": "left",
+          "letterSpacing": 0.014,
+          "allCaps": true
+        },
+        {
+          "id": "c2-place",
+          "frame": {
+            "x": 0.5,
+            "y": 0.795,
+            "width": 0.84,
+            "height": 0.1
+          },
+          "timing": {
+            "start": 0.45
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "kineticWords",
+              "duration": 0.9,
+              "params": {
+                "distance": 0.02
+              }
+            }
+          ],
+          "type": "text",
+          "key": "place2",
+          "default": {
+            "en": "Moda Seaside",
+            "tr": "Moda Sahili"
+          },
+          "font": {
+            "name": "AvenirNext-Bold",
+            "size": 0.052
+          },
+          "colorRole": "textPrimary",
+          "alignment": "left"
+        },
+        {
+          "id": "c2-note",
+          "frame": {
+            "x": 0.5,
+            "y": 0.875,
+            "width": 0.8,
+            "height": 0.04
+          },
+          "timing": {
+            "start": 0.65
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "fadeIn",
+              "duration": 0.5
+            }
+          ],
+          "type": "text",
+          "key": "note2",
+          "default": {
+            "en": "Kadikoy • 19:45",
+            "tr": "Kadıköy • 19:45"
+          },
+          "font": {
+            "name": "AvenirNext-Regular",
+            "size": 0.022
+          },
+          "colorRole": "textSecondary",
+          "alignment": "left"
+        }
+      ]
+    }
+  ],
+  "layers": [
+    {
+      "id": "guide-veil",
+      "frame": {
+        "x": 0.5,
+        "y": 0.1,
+        "width": 1.0,
+        "height": 0.2
+      },
+      "type": "shape",
+      "colorRole": "scrimClear",
+      "gradient": {
+        "from": "scrimClear",
+        "to": "scrimSolid",
+        "direction": "up"
+      }
+    },
+    {
+      "id": "guide-title",
+      "frame": {
+        "x": 0.5,
+        "y": 0.075,
+        "width": 0.8,
+        "height": 0.05
+      },
+      "timing": {
+        "start": 0.3
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.6
+        }
+      ],
+      "type": "text",
+      "key": "guideTitle",
+      "default": {
+        "en": "ISTANBUL GUIDE",
+        "tr": "İSTANBUL REHBERİ"
+      },
+      "font": {
+        "name": "AvenirNext-DemiBold",
+        "size": 0.028
+      },
+      "colorRole": "textPrimary",
+      "alignment": "center",
+      "letterSpacing": 0.016,
+      "allCaps": true
+    }
+  ]
+}

@@ -1,0 +1,394 @@
+{
+  "schemaVersion": 1,
+  "id": "sale-promo-01",
+  "name": {
+    "en": "Flash Sale",
+    "tr": "İndirim Duyurusu"
+  },
+  "category": "promo",
+  "isPro": false,
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "duration": 6.0,
+  "palette": {
+    "background": "#101014",
+    "surface": "#FFFFFF",
+    "scrim": "#000000A0",
+    "accent": "#FF2E63",
+    "textOnAccent": "#FFFFFF",
+    "textPrimary": "#FFFFFF",
+    "textSecondary": "#C9C9D1",
+    "scrimClear": "#00000033",
+    "scrimSolid": "#000000CC"
+  },
+  "audio": {
+    "defaultTrackId": "punchy-01",
+    "volume": 0.95
+  },
+  "layers": [
+    {
+      "id": "bg",
+      "type": "shape",
+      "colorRole": "background",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      }
+    },
+    {
+      "id": "photo",
+      "type": "mediaSlot",
+      "slotIndex": 0,
+      "media": "photoOrVideo",
+      "contentMode": "fill",
+      "mask": "rect",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "filter": "vivid",
+      "filterIntensity": 0.7,
+      "animations": [
+        {
+          "role": "loop",
+          "preset": "kenBurns",
+          "duration": 6.0,
+          "params": {
+            "zoom": 1.12,
+            "direction": "up"
+          }
+        }
+      ]
+    },
+    {
+      "id": "scrim",
+      "type": "shape",
+      "colorRole": "scrimClear",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "gradient": {
+        "from": "scrimClear",
+        "to": "scrimSolid",
+        "direction": "down"
+      }
+    },
+    {
+      "id": "badge-bg",
+      "type": "shape",
+      "colorRole": "accent",
+      "frame": {
+        "x": 0.74,
+        "y": 0.2,
+        "width": 0.34,
+        "height": 0.11
+      },
+      "cornerRadius": 0.055,
+      "rotation": -10,
+      "timing": {
+        "start": 0.3
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "bounce",
+          "duration": 0.7
+        }
+      ]
+    },
+    {
+      "id": "badge",
+      "type": "text",
+      "key": "badge",
+      "default": {
+        "en": "50% OFF",
+        "tr": "%50"
+      },
+      "font": {
+        "name": "AvenirNext-Heavy",
+        "size": 0.055
+      },
+      "colorRole": "textOnAccent",
+      "alignment": "center",
+      "frame": {
+        "x": 0.74,
+        "y": 0.2,
+        "width": 0.34,
+        "height": 0.08
+      },
+      "rotation": -10,
+      "timing": {
+        "start": 0.45
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.3
+        }
+      ]
+    },
+    {
+      "id": "headline",
+      "type": "text",
+      "key": "headline",
+      "default": {
+        "en": "SUMMER\nSALE",
+        "tr": "YAZ\nİNDİRİMİ"
+      },
+      "font": {
+        "name": "AvenirNext-Heavy",
+        "size": 0.07
+      },
+      "colorRole": "textPrimary",
+      "alignment": "center",
+      "frame": {
+        "x": 0.5,
+        "y": 0.45,
+        "width": 0.9,
+        "height": 0.19
+      },
+      "allCaps": true,
+      "maxLines": 2,
+      "timing": {
+        "start": 0.6
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "slideIn",
+          "duration": 0.6,
+          "easing": "easeOut",
+          "params": {
+            "direction": "up",
+            "distance": 0.05
+          }
+        }
+      ]
+    },
+    {
+      "id": "underline",
+      "type": "shape",
+      "colorRole": "accent",
+      "frame": {
+        "x": 0.5,
+        "y": 0.55,
+        "width": 0.3,
+        "height": 0.008
+      },
+      "cornerRadius": 0.004,
+      "timing": {
+        "start": 1.1
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "wipeReveal",
+          "duration": 0.5,
+          "params": {
+            "direction": "right"
+          }
+        }
+      ]
+    },
+    {
+      "id": "old-price",
+      "type": "text",
+      "key": "oldPrice",
+      "default": {
+        "en": "$59",
+        "tr": "₺1.798"
+      },
+      "font": {
+        "name": "AvenirNext-Medium",
+        "size": 0.036
+      },
+      "colorRole": "textSecondary",
+      "alignment": "center",
+      "frame": {
+        "x": 0.35,
+        "y": 0.65,
+        "width": 0.28,
+        "height": 0.06
+      },
+      "timing": {
+        "start": 1.4
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.4
+        }
+      ]
+    },
+    {
+      "id": "strike",
+      "type": "shape",
+      "colorRole": "textSecondary",
+      "frame": {
+        "x": 0.35,
+        "y": 0.652,
+        "width": 0.17,
+        "height": 0.004
+      },
+      "timing": {
+        "start": 1.7
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "wipeReveal",
+          "duration": 0.35,
+          "params": {
+            "direction": "right"
+          }
+        }
+      ]
+    },
+    {
+      "id": "new-price",
+      "type": "text",
+      "key": "newPrice",
+      "default": {
+        "en": "$29",
+        "tr": "₺899"
+      },
+      "font": {
+        "name": "AvenirNext-Heavy",
+        "size": 0.062
+      },
+      "colorRole": "accent",
+      "alignment": "center",
+      "frame": {
+        "x": 0.66,
+        "y": 0.647,
+        "width": 0.34,
+        "height": 0.09
+      },
+      "timing": {
+        "start": 1.6
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "pop",
+          "duration": 0.5,
+          "params": {
+            "overshoot": 1.15
+          }
+        }
+      ]
+    },
+    {
+      "id": "cta-pill",
+      "type": "shape",
+      "colorRole": "accent",
+      "frame": {
+        "x": 0.5,
+        "y": 0.85,
+        "width": 0.7,
+        "height": 0.075
+      },
+      "cornerRadius": 0.037,
+      "timing": {
+        "start": 2.1
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "slideIn",
+          "duration": 0.5,
+          "easing": "easeOut",
+          "params": {
+            "direction": "up",
+            "distance": 0.03
+          }
+        },
+        {
+          "role": "loop",
+          "preset": "pulse",
+          "duration": 1.2,
+          "delay": 0.6,
+          "params": {
+            "scale": 1.04
+          }
+        }
+      ]
+    },
+    {
+      "id": "cta",
+      "type": "text",
+      "key": "cta",
+      "default": {
+        "en": "LAST 3 DAYS",
+        "tr": "SON 3 GÜN"
+      },
+      "font": {
+        "name": "AvenirNext-Bold",
+        "size": 0.028
+      },
+      "colorRole": "textOnAccent",
+      "alignment": "center",
+      "frame": {
+        "x": 0.5,
+        "y": 0.85,
+        "width": 0.7,
+        "height": 0.05
+      },
+      "allCaps": true,
+      "letterSpacing": 0.012,
+      "timing": {
+        "start": 2.3
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.4
+        }
+      ]
+    },
+    {
+      "id": "handle",
+      "type": "text",
+      "key": "handle",
+      "default": {
+        "en": "@yourstore",
+        "tr": "@markanız"
+      },
+      "font": {
+        "name": "AvenirNext-Medium",
+        "size": 0.018
+      },
+      "colorRole": "textSecondary",
+      "alignment": "center",
+      "frame": {
+        "x": 0.5,
+        "y": 0.94,
+        "width": 0.6,
+        "height": 0.03
+      },
+      "timing": {
+        "start": 2.8
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.5
+        }
+      ]
+    }
+  ]
+}

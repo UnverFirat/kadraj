@@ -1,0 +1,174 @@
+{
+  "schemaVersion": 1,
+  "id": "typewriter-note-01",
+  "name": {
+    "en": "Typed Note",
+    "tr": "Daktilo Notu"
+  },
+  "category": "minimal",
+  "isPro": true,
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "duration": 5.5,
+  "overlay": {
+    "vignette": 0.45,
+    "grain": 0.5
+  },
+  "palette": {
+    "background": "#12110F",
+    "surface": "#F3EDE1",
+    "accent": "#D98C4A",
+    "textOnAccent": "#12110F",
+    "textPrimary": "#F3EDE1",
+    "textSecondary": "#A8A093"
+  },
+  "audio": {
+    "defaultTrackId": "typewriter-01",
+    "volume": 0.85
+  },
+  "layers": [
+    {
+      "id": "photo",
+      "type": "mediaSlot",
+      "slotIndex": 0,
+      "media": "photoOrVideo",
+      "contentMode": "fill",
+      "mask": "rect",
+      "filter": "fade",
+      "filterIntensity": 0.65,
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.6
+        },
+        {
+          "role": "loop",
+          "preset": "kenBurns",
+          "duration": 5.5,
+          "params": {
+            "zoom": 1.1,
+            "direction": "up"
+          }
+        }
+      ]
+    },
+    {
+      "id": "scrim",
+      "type": "shape",
+      "colorRole": "background",
+      "opacity": 0.55,
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      }
+    },
+    {
+      "id": "line1",
+      "type": "text",
+      "key": "line1",
+      "default": {
+        "en": "dear diary,",
+        "tr": "sevgili günlük,"
+      },
+      "font": {
+        "name": "Courier-Bold",
+        "size": 0.034
+      },
+      "colorRole": "textSecondary",
+      "alignment": "left",
+      "frame": {
+        "x": 0.5,
+        "y": 0.42,
+        "width": 0.78,
+        "height": 0.06
+      },
+      "timing": {
+        "start": 0.4
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "typewriter",
+          "duration": 1.0
+        }
+      ]
+    },
+    {
+      "id": "line2",
+      "type": "text",
+      "key": "line2",
+      "default": {
+        "en": "today was one of those\ngood, quiet days.",
+        "tr": "bugün o güzel, sakin\ngünlerden biriydi."
+      },
+      "font": {
+        "name": "Courier-Bold",
+        "size": 0.038
+      },
+      "colorRole": "textPrimary",
+      "alignment": "left",
+      "maxLines": 3,
+      "frame": {
+        "x": 0.5,
+        "y": 0.53,
+        "width": 0.78,
+        "height": 0.16
+      },
+      "timing": {
+        "start": 1.5
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "typewriter",
+          "duration": 2.0
+        }
+      ]
+    },
+    {
+      "id": "stamp",
+      "type": "text",
+      "key": "stamp",
+      "default": {
+        "en": "21.07.2026",
+        "tr": "21.07.2026"
+      },
+      "font": {
+        "name": "Courier-Bold",
+        "size": 0.024
+      },
+      "colorRole": "textOnAccent",
+      "highlightColorRole": "accent",
+      "alignment": "center",
+      "letterSpacing": 0.004,
+      "frame": {
+        "x": 0.33,
+        "y": 0.72,
+        "width": 0.34,
+        "height": 0.05
+      },
+      "timing": {
+        "start": 3.8
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "bounce",
+          "duration": 0.8
+        }
+      ]
+    }
+  ]
+}

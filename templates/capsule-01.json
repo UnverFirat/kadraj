@@ -1,0 +1,430 @@
+{
+  "schemaVersion": 2,
+  "id": "capsule-01",
+  "name": {
+    "en": "Capsule Wardrobe",
+    "tr": "Kapsül Gardırop"
+  },
+  "category": "fashion",
+  "isPro": true,
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "palette": {
+    "background": "#EFEAE2",
+    "surface": "#FFFFFF",
+    "accent": "#1F1D1A",
+    "textPrimary": "#1F1D1A",
+    "textSecondary": "#6F6A62",
+    "textOnAccent": "#FFFFFF",
+    "scrimClear": "#00000000",
+    "scrimSolid": "#000000CC"
+  },
+  "audio": {
+    "defaultTrackId": "clean-01",
+    "volume": 0.85
+  },
+  "scenes": [
+    {
+      "id": "capsule",
+      "duration": 6.0,
+      "layers": [
+        {
+          "id": "strip0",
+          "frame": {
+            "x": 0.168,
+            "y": 0.5,
+            "width": 0.328,
+            "height": 0.66
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "scaleIn",
+              "duration": 0.55,
+              "easing": "easeOut",
+              "params": {
+                "from": 0.92
+              }
+            },
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 6.0,
+              "params": {
+                "zoom": 1.07,
+                "direction": "up"
+              }
+            }
+          ],
+          "type": "mediaSlot",
+          "slotIndex": 0,
+          "media": "photo",
+          "contentMode": "fill",
+          "mask": "rect",
+          "cornerRadius": 0.006
+        },
+        {
+          "id": "strip0-scrim",
+          "frame": {
+            "x": 0.168,
+            "y": 0.71,
+            "width": 0.328,
+            "height": 0.24
+          },
+          "type": "shape",
+          "colorRole": "scrimClear",
+          "gradient": {
+            "from": "scrimClear",
+            "to": "scrimSolid",
+            "direction": "down"
+          }
+        },
+        {
+          "id": "strip0-label",
+          "frame": {
+            "x": 0.168,
+            "y": 0.775,
+            "width": 0.3,
+            "height": 0.04
+          },
+          "timing": {
+            "start": 0.75
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "fadeIn",
+              "duration": 0.5
+            }
+          ],
+          "type": "text",
+          "key": "group1",
+          "default": {
+            "en": "TOPS",
+            "tr": "ÜST"
+          },
+          "font": {
+            "name": "AvenirNext-DemiBold",
+            "size": 0.021
+          },
+          "colorRole": "surface",
+          "alignment": "center",
+          "letterSpacing": 0.014,
+          "allCaps": true
+        },
+        {
+          "id": "strip1",
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 0.328,
+            "height": 0.66
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "scaleIn",
+              "duration": 0.55,
+              "delay": 0.12,
+              "easing": "easeOut",
+              "params": {
+                "from": 0.92
+              }
+            },
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 6.0,
+              "params": {
+                "zoom": 1.07,
+                "direction": "down"
+              }
+            }
+          ],
+          "type": "mediaSlot",
+          "slotIndex": 1,
+          "media": "photo",
+          "contentMode": "fill",
+          "mask": "rect",
+          "cornerRadius": 0.006,
+          "filter": "fade",
+          "filterIntensity": 0.35
+        },
+        {
+          "id": "strip1-scrim",
+          "frame": {
+            "x": 0.5,
+            "y": 0.71,
+            "width": 0.328,
+            "height": 0.24
+          },
+          "type": "shape",
+          "colorRole": "scrimClear",
+          "gradient": {
+            "from": "scrimClear",
+            "to": "scrimSolid",
+            "direction": "down"
+          }
+        },
+        {
+          "id": "strip1-label",
+          "frame": {
+            "x": 0.5,
+            "y": 0.775,
+            "width": 0.3,
+            "height": 0.04
+          },
+          "timing": {
+            "start": 0.87
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "fadeIn",
+              "duration": 0.5
+            }
+          ],
+          "type": "text",
+          "key": "group2",
+          "default": {
+            "en": "BOTTOMS",
+            "tr": "ALT"
+          },
+          "font": {
+            "name": "AvenirNext-DemiBold",
+            "size": 0.021
+          },
+          "colorRole": "surface",
+          "alignment": "center",
+          "letterSpacing": 0.014,
+          "allCaps": true
+        },
+        {
+          "id": "strip2",
+          "frame": {
+            "x": 0.832,
+            "y": 0.5,
+            "width": 0.328,
+            "height": 0.66
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "scaleIn",
+              "duration": 0.55,
+              "delay": 0.24,
+              "easing": "easeOut",
+              "params": {
+                "from": 0.92
+              }
+            },
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 6.0,
+              "params": {
+                "zoom": 1.07,
+                "direction": "up"
+              }
+            }
+          ],
+          "type": "mediaSlot",
+          "slotIndex": 2,
+          "media": "photo",
+          "contentMode": "fill",
+          "mask": "rect",
+          "cornerRadius": 0.006,
+          "filter": "mono",
+          "filterIntensity": 0.35
+        },
+        {
+          "id": "strip2-scrim",
+          "frame": {
+            "x": 0.832,
+            "y": 0.71,
+            "width": 0.328,
+            "height": 0.24
+          },
+          "type": "shape",
+          "colorRole": "scrimClear",
+          "gradient": {
+            "from": "scrimClear",
+            "to": "scrimSolid",
+            "direction": "down"
+          }
+        },
+        {
+          "id": "strip2-label",
+          "frame": {
+            "x": 0.832,
+            "y": 0.775,
+            "width": 0.3,
+            "height": 0.04
+          },
+          "timing": {
+            "start": 0.99
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "fadeIn",
+              "duration": 0.5
+            }
+          ],
+          "type": "text",
+          "key": "group3",
+          "default": {
+            "en": "OUTERWEAR",
+            "tr": "DIŞ"
+          },
+          "font": {
+            "name": "AvenirNext-DemiBold",
+            "size": 0.021
+          },
+          "colorRole": "surface",
+          "alignment": "center",
+          "letterSpacing": 0.014,
+          "allCaps": true
+        },
+        {
+          "id": "kicker",
+          "frame": {
+            "x": 0.5,
+            "y": 0.065,
+            "width": 0.86,
+            "height": 0.032
+          },
+          "timing": {
+            "start": 0.25
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "fadeIn",
+              "duration": 0.55
+            }
+          ],
+          "type": "text",
+          "key": "kicker",
+          "default": {
+            "en": "CAPSULE WARDROBE",
+            "tr": "KAPSÜL GARDIROP"
+          },
+          "font": {
+            "name": "AvenirNext-Medium",
+            "size": 0.022
+          },
+          "colorRole": "accent",
+          "alignment": "center",
+          "letterSpacing": 0.018,
+          "allCaps": true
+        },
+        {
+          "id": "title",
+          "frame": {
+            "x": 0.5,
+            "y": 0.125,
+            "width": 0.88,
+            "height": 0.075
+          },
+          "timing": {
+            "start": 0.4
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "kineticWords",
+              "duration": 0.9,
+              "params": {
+                "distance": 0.02
+              }
+            }
+          ],
+          "type": "text",
+          "key": "title",
+          "default": {
+            "en": "Fewer pieces, more looks",
+            "tr": "Az parça, çok kombin"
+          },
+          "font": {
+            "name": "Archivo-SemiBold",
+            "size": 0.05
+          },
+          "colorRole": "textPrimary",
+          "alignment": "center"
+        },
+        {
+          "id": "count",
+          "frame": {
+            "x": 0.5,
+            "y": 0.885,
+            "width": 0.8,
+            "height": 0.09
+          },
+          "timing": {
+            "start": 1.1
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "kineticWords",
+              "duration": 0.9,
+              "params": {
+                "distance": 0.02
+              }
+            }
+          ],
+          "type": "text",
+          "key": "count",
+          "default": {
+            "en": "12 PIECES",
+            "tr": "12 PARÇA"
+          },
+          "font": {
+            "name": "AvenirNext-Heavy",
+            "size": 0.055
+          },
+          "colorRole": "textPrimary",
+          "alignment": "center",
+          "letterSpacing": 0.012,
+          "allCaps": true
+        },
+        {
+          "id": "sub",
+          "frame": {
+            "x": 0.5,
+            "y": 0.955,
+            "width": 0.9,
+            "height": 0.032
+          },
+          "timing": {
+            "start": 1.2
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "fadeIn",
+              "duration": 0.6
+            }
+          ],
+          "type": "text",
+          "key": "sub",
+          "default": {
+            "en": "Fall 26 · Everything works together",
+            "tr": "Sonbahar 26 · Hepsi birbiriyle uyumlu"
+          },
+          "font": {
+            "name": "AvenirNext-Regular",
+            "size": 0.02
+          },
+          "colorRole": "textSecondary",
+          "alignment": "center"
+        }
+      ]
+    }
+  ],
+  "layers": []
+}

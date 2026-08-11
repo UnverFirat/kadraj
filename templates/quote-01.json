@@ -1,0 +1,214 @@
+{
+  "schemaVersion": 1,
+  "id": "quote-01",
+  "name": {
+    "en": "Quote Card",
+    "tr": "Alıntı Kartı"
+  },
+  "category": "minimal",
+  "isPro": false,
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "duration": 5.0,
+  "palette": {
+    "background": "#12100E",
+    "surface": "#1E1B18",
+    "accent": "#C8A96A",
+    "textPrimary": "#F6F1E8",
+    "textSecondary": "#B7AE9E"
+  },
+  "audio": {
+    "defaultTrackId": "ambient-01",
+    "volume": 0.75
+  },
+  "layers": [
+    {
+      "id": "photo",
+      "type": "mediaSlot",
+      "slotIndex": 0,
+      "media": "photoOrVideo",
+      "contentMode": "fill",
+      "mask": "rect",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.8
+        },
+        {
+          "role": "loop",
+          "preset": "kenBurns",
+          "duration": 5.0,
+          "params": {
+            "zoom": 1.12,
+            "direction": "down"
+          }
+        }
+      ],
+      "filter": "fade",
+      "filterIntensity": 0.7
+    },
+    {
+      "id": "scrim",
+      "type": "shape",
+      "colorRole": "background",
+      "opacity": 0.62,
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.8
+        }
+      ]
+    },
+    {
+      "id": "quote-mark",
+      "type": "text",
+      "key": "mark",
+      "default": {
+        "en": "“",
+        "tr": "“"
+      },
+      "font": {
+        "name": "Georgia-Bold",
+        "size": 0.16
+      },
+      "colorRole": "accent",
+      "alignment": "center",
+      "frame": {
+        "x": 0.5,
+        "y": 0.34,
+        "width": 0.5,
+        "height": 0.16
+      },
+      "timing": {
+        "start": 0.4
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "scaleIn",
+          "duration": 0.6,
+          "easing": "easeOut",
+          "params": {
+            "from": 0.6
+          }
+        }
+      ]
+    },
+    {
+      "id": "quote",
+      "type": "text",
+      "key": "quote",
+      "default": {
+        "en": "The best stories\nare the ones we live.",
+        "tr": "En güzel hikayeler\nyaşadıklarımızdır."
+      },
+      "font": {
+        "name": "Georgia-Italic",
+        "size": 0.042
+      },
+      "colorRole": "textPrimary",
+      "alignment": "center",
+      "maxLines": 3,
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 0.82,
+        "height": 0.22
+      },
+      "timing": {
+        "start": 0.7
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "slideIn",
+          "duration": 0.7,
+          "easing": "easeOut",
+          "params": {
+            "direction": "up",
+            "distance": 0.03
+          }
+        }
+      ]
+    },
+    {
+      "id": "rule",
+      "type": "shape",
+      "colorRole": "accent",
+      "frame": {
+        "x": 0.5,
+        "y": 0.63,
+        "width": 0.08,
+        "height": 0.004
+      },
+      "timing": {
+        "start": 1.2
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "wipeReveal",
+          "duration": 0.5,
+          "easing": "easeInOut",
+          "params": {
+            "direction": "right"
+          }
+        }
+      ]
+    },
+    {
+      "id": "author",
+      "type": "text",
+      "key": "author",
+      "default": {
+        "en": "— UNKNOWN",
+        "tr": "— ANONİM"
+      },
+      "font": {
+        "name": "AvenirNext-Medium",
+        "size": 0.02
+      },
+      "colorRole": "textSecondary",
+      "alignment": "center",
+      "allCaps": true,
+      "letterSpacing": 0.01,
+      "frame": {
+        "x": 0.5,
+        "y": 0.67,
+        "width": 0.7,
+        "height": 0.04
+      },
+      "timing": {
+        "start": 1.4
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.6
+        }
+      ]
+    }
+  ],
+  "overlay": {
+    "vignette": 0.4,
+    "grain": 0.25
+  }
+}

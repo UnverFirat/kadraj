@@ -1,0 +1,575 @@
+{
+  "schemaVersion": 1,
+  "id": "drinks-list-01",
+  "name": {
+    "en": "Drinks List",
+    "tr": "İçecek Listesi"
+  },
+  "category": "food",
+  "isPro": true,
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "duration": 6.5,
+  "palette": {
+    "background": "#111113",
+    "surface": "#FFFFFF",
+    "accent": "#D9A441",
+    "textPrimary": "#FFFFFF",
+    "textSecondary": "#B0B0B4",
+    "textOnAccent": "#FFFFFF",
+    "scrimClear": "#00000000",
+    "scrimSolid": "#000000CC",
+    "hairline": "#3A3A3E"
+  },
+  "audio": {
+    "defaultTrackId": "ambient-01",
+    "volume": 0.85
+  },
+  "layers": [
+    {
+      "id": "bg",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "type": "shape",
+      "colorRole": "background"
+    },
+    {
+      "id": "glow",
+      "frame": {
+        "x": 0.5,
+        "y": 0.2,
+        "width": 0.9,
+        "height": 0.36
+      },
+      "opacity": 0.1,
+      "animations": [
+        {
+          "role": "in",
+          "preset": "scaleIn",
+          "duration": 0.9,
+          "easing": "easeOut",
+          "params": {
+            "from": 0.85
+          }
+        },
+        {
+          "role": "loop",
+          "preset": "pulse",
+          "duration": 3.0,
+          "params": {
+            "scale": 1.04
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "accent",
+      "cornerRadius": 0.2
+    },
+    {
+      "id": "title",
+      "frame": {
+        "x": 0.5,
+        "y": 0.185,
+        "width": 0.84,
+        "height": 0.09
+      },
+      "timing": {
+        "start": 0.25
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "punchIn",
+          "duration": 0.55,
+          "params": {
+            "from": 1.5
+          }
+        },
+        {
+          "role": "loop",
+          "preset": "floatLoop",
+          "duration": 2.6,
+          "params": {
+            "distance": 0.006,
+            "axis": "y"
+          }
+        }
+      ],
+      "type": "text",
+      "key": "title",
+      "default": {
+        "en": "Drinks",
+        "tr": "İçecekler"
+      },
+      "font": {
+        "name": "Didot",
+        "size": 0.064
+      },
+      "colorRole": "textPrimary",
+      "alignment": "center"
+    },
+    {
+      "id": "sub",
+      "frame": {
+        "x": 0.5,
+        "y": 0.255,
+        "width": 0.8,
+        "height": 0.04
+      },
+      "timing": {
+        "start": 0.45
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.6
+        }
+      ],
+      "type": "text",
+      "key": "sub",
+      "default": {
+        "en": "From 8 am to midnight",
+        "tr": "Sabah 8'den gece yarısına"
+      },
+      "font": {
+        "name": "AvenirNext-Regular",
+        "size": 0.02
+      },
+      "colorRole": "textSecondary",
+      "alignment": "center",
+      "letterSpacing": 0.006
+    },
+    {
+      "id": "top-rule",
+      "frame": {
+        "x": 0.5,
+        "y": 0.315,
+        "width": 0.72,
+        "height": 0.003
+      },
+      "timing": {
+        "start": 0.6
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "wipeReveal",
+          "duration": 0.6,
+          "easing": "easeOut",
+          "params": {
+            "direction": "right"
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "accent"
+    },
+    {
+      "id": "drink0-name",
+      "frame": {
+        "x": 0.31,
+        "y": 0.4,
+        "width": 0.38,
+        "height": 0.06
+      },
+      "timing": {
+        "start": 0.75
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "slideIn",
+          "duration": 0.5,
+          "easing": "easeOut",
+          "params": {
+            "direction": "right",
+            "distance": 0.03
+          }
+        }
+      ],
+      "type": "text",
+      "key": "drink0Name",
+      "default": {
+        "en": "Espresso Tonic",
+        "tr": "Espresso Tonik"
+      },
+      "font": {
+        "name": "AvenirNext-Medium",
+        "size": 0.032
+      },
+      "colorRole": "textPrimary",
+      "alignment": "left"
+    },
+    {
+      "id": "drink0-price",
+      "frame": {
+        "x": 0.79,
+        "y": 0.4,
+        "width": 0.2,
+        "height": 0.06
+      },
+      "timing": {
+        "start": 0.85
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.45
+        }
+      ],
+      "type": "text",
+      "key": "drink0Price",
+      "default": {
+        "en": "₺95",
+        "tr": "₺95"
+      },
+      "font": {
+        "name": "AvenirNext-Heavy",
+        "size": 0.032
+      },
+      "colorRole": "accent",
+      "alignment": "right"
+    },
+    {
+      "id": "drink0-rule",
+      "frame": {
+        "x": 0.5,
+        "y": 0.4625,
+        "width": 0.72,
+        "height": 0.002
+      },
+      "timing": {
+        "start": 0.95
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "wipeReveal",
+          "duration": 0.4,
+          "easing": "easeOut",
+          "params": {
+            "direction": "right"
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "hairline"
+    },
+    {
+      "id": "drink1-name",
+      "frame": {
+        "x": 0.31,
+        "y": 0.525,
+        "width": 0.38,
+        "height": 0.06
+      },
+      "timing": {
+        "start": 0.89
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "slideIn",
+          "duration": 0.5,
+          "easing": "easeOut",
+          "params": {
+            "direction": "right",
+            "distance": 0.03
+          }
+        }
+      ],
+      "type": "text",
+      "key": "drink1Name",
+      "default": {
+        "en": "White Hot Chocolate",
+        "tr": "Sıcak Beyaz Çikolata"
+      },
+      "font": {
+        "name": "AvenirNext-Medium",
+        "size": 0.032
+      },
+      "colorRole": "textPrimary",
+      "alignment": "left"
+    },
+    {
+      "id": "drink1-price",
+      "frame": {
+        "x": 0.79,
+        "y": 0.525,
+        "width": 0.2,
+        "height": 0.06
+      },
+      "timing": {
+        "start": 0.99
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.45
+        }
+      ],
+      "type": "text",
+      "key": "drink1Price",
+      "default": {
+        "en": "₺110",
+        "tr": "₺110"
+      },
+      "font": {
+        "name": "AvenirNext-Heavy",
+        "size": 0.032
+      },
+      "colorRole": "accent",
+      "alignment": "right"
+    },
+    {
+      "id": "drink1-rule",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5875,
+        "width": 0.72,
+        "height": 0.002
+      },
+      "timing": {
+        "start": 1.09
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "wipeReveal",
+          "duration": 0.4,
+          "easing": "easeOut",
+          "params": {
+            "direction": "right"
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "hairline"
+    },
+    {
+      "id": "drink2-name",
+      "frame": {
+        "x": 0.31,
+        "y": 0.65,
+        "width": 0.38,
+        "height": 0.06
+      },
+      "timing": {
+        "start": 1.03
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "slideIn",
+          "duration": 0.5,
+          "easing": "easeOut",
+          "params": {
+            "direction": "right",
+            "distance": 0.03
+          }
+        }
+      ],
+      "type": "text",
+      "key": "drink2Name",
+      "default": {
+        "en": "Mint Lemon Soda",
+        "tr": "Nane Limon Soda"
+      },
+      "font": {
+        "name": "AvenirNext-Medium",
+        "size": 0.032
+      },
+      "colorRole": "textPrimary",
+      "alignment": "left"
+    },
+    {
+      "id": "drink2-price",
+      "frame": {
+        "x": 0.79,
+        "y": 0.65,
+        "width": 0.2,
+        "height": 0.06
+      },
+      "timing": {
+        "start": 1.13
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.45
+        }
+      ],
+      "type": "text",
+      "key": "drink2Price",
+      "default": {
+        "en": "₺85",
+        "tr": "₺85"
+      },
+      "font": {
+        "name": "AvenirNext-Heavy",
+        "size": 0.032
+      },
+      "colorRole": "accent",
+      "alignment": "right"
+    },
+    {
+      "id": "drink2-rule",
+      "frame": {
+        "x": 0.5,
+        "y": 0.7125,
+        "width": 0.72,
+        "height": 0.002
+      },
+      "timing": {
+        "start": 1.23
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "wipeReveal",
+          "duration": 0.4,
+          "easing": "easeOut",
+          "params": {
+            "direction": "right"
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "hairline"
+    },
+    {
+      "id": "drink3-name",
+      "frame": {
+        "x": 0.31,
+        "y": 0.775,
+        "width": 0.38,
+        "height": 0.06
+      },
+      "timing": {
+        "start": 1.17
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "slideIn",
+          "duration": 0.5,
+          "easing": "easeOut",
+          "params": {
+            "direction": "right",
+            "distance": 0.03
+          }
+        }
+      ],
+      "type": "text",
+      "key": "drink3Name",
+      "default": {
+        "en": "Chestnut Latte",
+        "tr": "Kestaneli Latte"
+      },
+      "font": {
+        "name": "AvenirNext-Medium",
+        "size": 0.032
+      },
+      "colorRole": "textPrimary",
+      "alignment": "left"
+    },
+    {
+      "id": "drink3-price",
+      "frame": {
+        "x": 0.79,
+        "y": 0.775,
+        "width": 0.2,
+        "height": 0.06
+      },
+      "timing": {
+        "start": 1.27
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.45
+        }
+      ],
+      "type": "text",
+      "key": "drink3Price",
+      "default": {
+        "en": "₺120",
+        "tr": "₺120"
+      },
+      "font": {
+        "name": "AvenirNext-Heavy",
+        "size": 0.032
+      },
+      "colorRole": "accent",
+      "alignment": "right"
+    },
+    {
+      "id": "drink3-rule",
+      "frame": {
+        "x": 0.5,
+        "y": 0.8375,
+        "width": 0.72,
+        "height": 0.002
+      },
+      "timing": {
+        "start": 1.37
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "wipeReveal",
+          "duration": 0.4,
+          "easing": "easeOut",
+          "params": {
+            "direction": "right"
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "hairline"
+    },
+    {
+      "id": "footer",
+      "frame": {
+        "x": 0.5,
+        "y": 0.9,
+        "width": 0.76,
+        "height": 0.035
+      },
+      "timing": {
+        "start": 1.2
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.6
+        }
+      ],
+      "type": "text",
+      "key": "footer",
+      "default": {
+        "en": "Service included",
+        "tr": "Fiyatlara servis dahildir"
+      },
+      "font": {
+        "name": "AvenirNext-Regular",
+        "size": 0.019
+      },
+      "colorRole": "textSecondary",
+      "alignment": "center"
+    }
+  ]
+}

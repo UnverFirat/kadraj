@@ -1,0 +1,729 @@
+{
+  "schemaVersion": 1,
+  "id": "price-list-01",
+  "name": {
+    "en": "Price List",
+    "tr": "Hizmet Fiyatları"
+  },
+  "category": "beauty",
+  "isPro": true,
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "duration": 7.5,
+  "palette": {
+    "background": "#FBFAF7",
+    "surface": "#FFFFFF",
+    "accent": "#B99566",
+    "textPrimary": "#1A1815",
+    "textSecondary": "#8A857D",
+    "textOnAccent": "#FFFFFF",
+    "scrimClear": "#00000000",
+    "scrimSolid": "#000000CC"
+  },
+  "audio": {
+    "defaultTrackId": "ambient-01",
+    "volume": 0.85
+  },
+  "layers": [
+    {
+      "id": "bg",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "type": "shape",
+      "colorRole": "background"
+    },
+    {
+      "id": "photo",
+      "frame": {
+        "x": 0.5,
+        "y": 0.155,
+        "width": 1.0,
+        "height": 0.31
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.6
+        },
+        {
+          "role": "loop",
+          "preset": "kenBurns",
+          "duration": 7.5,
+          "params": {
+            "zoom": 1.08,
+            "direction": "down"
+          }
+        }
+      ],
+      "type": "mediaSlot",
+      "slotIndex": 0,
+      "media": "photoOrVideo",
+      "contentMode": "fill",
+      "mask": "rect",
+      "filter": "fade",
+      "filterIntensity": 0.3
+    },
+    {
+      "id": "scrim",
+      "frame": {
+        "x": 0.5,
+        "y": 0.155,
+        "width": 1.0,
+        "height": 0.31
+      },
+      "type": "shape",
+      "colorRole": "scrimClear",
+      "gradient": {
+        "from": "scrimClear",
+        "to": "scrimSolid",
+        "direction": "up"
+      }
+    },
+    {
+      "id": "salon",
+      "frame": {
+        "x": 0.5,
+        "y": 0.115,
+        "width": 0.86,
+        "height": 0.05
+      },
+      "timing": {
+        "start": 0.3
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.6
+        }
+      ],
+      "type": "text",
+      "key": "salon",
+      "default": {
+        "en": "THE BEAUTY ROOM",
+        "tr": "GÜZELLİK ATÖLYESİ"
+      },
+      "font": {
+        "name": "Didot",
+        "size": 0.03
+      },
+      "colorRole": "surface",
+      "alignment": "center",
+      "letterSpacing": 0.02,
+      "allCaps": true
+    },
+    {
+      "id": "kicker",
+      "frame": {
+        "x": 0.5,
+        "y": 0.185,
+        "width": 0.8,
+        "height": 0.032
+      },
+      "timing": {
+        "start": 0.45
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.55
+        }
+      ],
+      "type": "text",
+      "key": "kicker",
+      "default": {
+        "en": "PRICE LIST · 2026",
+        "tr": "FİYAT LİSTESİ · 2026"
+      },
+      "font": {
+        "name": "AvenirNext-Medium",
+        "size": 0.019
+      },
+      "colorRole": "surface",
+      "alignment": "center",
+      "letterSpacing": 0.014,
+      "allCaps": true
+    },
+    {
+      "id": "card",
+      "frame": {
+        "x": 0.5,
+        "y": 0.635,
+        "width": 0.9,
+        "height": 0.6
+      },
+      "timing": {
+        "start": 0.35
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "slideIn",
+          "duration": 0.6,
+          "easing": "easeOut",
+          "params": {
+            "direction": "up",
+            "distance": 0.05
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "surface",
+      "cornerRadius": 0.03
+    },
+    {
+      "id": "name0",
+      "frame": {
+        "x": 0.31,
+        "y": 0.42,
+        "width": 0.44,
+        "height": 0.05
+      },
+      "timing": {
+        "start": 0.55
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "slideIn",
+          "duration": 0.5,
+          "easing": "easeOut",
+          "params": {
+            "direction": "right",
+            "distance": 0.035
+          }
+        }
+      ],
+      "type": "text",
+      "key": "service1",
+      "default": {
+        "en": "Blow-dry + Treatment",
+        "tr": "Fön + Bakım"
+      },
+      "font": {
+        "name": "AvenirNext-DemiBold",
+        "size": 0.032
+      },
+      "colorRole": "textPrimary",
+      "alignment": "left"
+    },
+    {
+      "id": "dur0",
+      "frame": {
+        "x": 0.31,
+        "y": 0.462,
+        "width": 0.44,
+        "height": 0.03
+      },
+      "timing": {
+        "start": 0.6
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.45
+        }
+      ],
+      "type": "text",
+      "key": "service1Duration",
+      "default": {
+        "en": "45 min",
+        "tr": "45 dakika"
+      },
+      "font": {
+        "name": "AvenirNext-Regular",
+        "size": 0.018
+      },
+      "colorRole": "textSecondary",
+      "alignment": "left"
+    },
+    {
+      "id": "price0",
+      "frame": {
+        "x": 0.79,
+        "y": 0.42,
+        "width": 0.28,
+        "height": 0.05
+      },
+      "timing": {
+        "start": 0.63
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.45
+        },
+        {
+          "role": "loop",
+          "preset": "floatLoop",
+          "duration": 2.6,
+          "params": {
+            "distance": 0.006,
+            "axis": "y"
+          }
+        }
+      ],
+      "type": "text",
+      "key": "service1Price",
+      "default": {
+        "en": "$38",
+        "tr": "₺450"
+      },
+      "font": {
+        "name": "AvenirNext-Heavy",
+        "size": 0.034
+      },
+      "colorRole": "accent",
+      "alignment": "right"
+    },
+    {
+      "id": "rule0",
+      "frame": {
+        "x": 0.5,
+        "y": 0.4875,
+        "width": 0.78,
+        "height": 0.0015
+      },
+      "opacity": 0.3,
+      "timing": {
+        "start": 0.67
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "wipeReveal",
+          "duration": 0.5,
+          "easing": "easeOut",
+          "params": {
+            "direction": "right"
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "textSecondary"
+    },
+    {
+      "id": "name1",
+      "frame": {
+        "x": 0.31,
+        "y": 0.545,
+        "width": 0.44,
+        "height": 0.05
+      },
+      "timing": {
+        "start": 0.7
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "slideIn",
+          "duration": 0.5,
+          "easing": "easeOut",
+          "params": {
+            "direction": "right",
+            "distance": 0.035
+          }
+        }
+      ],
+      "type": "text",
+      "key": "service2",
+      "default": {
+        "en": "Cut & Style",
+        "tr": "Kesim & Şekillendirme"
+      },
+      "font": {
+        "name": "AvenirNext-DemiBold",
+        "size": 0.032
+      },
+      "colorRole": "textPrimary",
+      "alignment": "left"
+    },
+    {
+      "id": "dur1",
+      "frame": {
+        "x": 0.31,
+        "y": 0.587,
+        "width": 0.44,
+        "height": 0.03
+      },
+      "timing": {
+        "start": 0.75
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.45
+        }
+      ],
+      "type": "text",
+      "key": "service2Duration",
+      "default": {
+        "en": "60 min",
+        "tr": "60 dakika"
+      },
+      "font": {
+        "name": "AvenirNext-Regular",
+        "size": 0.018
+      },
+      "colorRole": "textSecondary",
+      "alignment": "left"
+    },
+    {
+      "id": "price1",
+      "frame": {
+        "x": 0.79,
+        "y": 0.545,
+        "width": 0.28,
+        "height": 0.05
+      },
+      "timing": {
+        "start": 0.78
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.45
+        }
+      ],
+      "type": "text",
+      "key": "service2Price",
+      "default": {
+        "en": "$55",
+        "tr": "₺650"
+      },
+      "font": {
+        "name": "AvenirNext-Heavy",
+        "size": 0.034
+      },
+      "colorRole": "accent",
+      "alignment": "right"
+    },
+    {
+      "id": "rule1",
+      "frame": {
+        "x": 0.5,
+        "y": 0.6125,
+        "width": 0.78,
+        "height": 0.0015
+      },
+      "opacity": 0.3,
+      "timing": {
+        "start": 0.82
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "wipeReveal",
+          "duration": 0.5,
+          "easing": "easeOut",
+          "params": {
+            "direction": "right"
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "textSecondary"
+    },
+    {
+      "id": "name2",
+      "frame": {
+        "x": 0.31,
+        "y": 0.67,
+        "width": 0.44,
+        "height": 0.05
+      },
+      "timing": {
+        "start": 0.85
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "slideIn",
+          "duration": 0.5,
+          "easing": "easeOut",
+          "params": {
+            "direction": "right",
+            "distance": 0.035
+          }
+        }
+      ],
+      "type": "text",
+      "key": "service3",
+      "default": {
+        "en": "Root Colour",
+        "tr": "Dip Boya"
+      },
+      "font": {
+        "name": "AvenirNext-DemiBold",
+        "size": 0.032
+      },
+      "colorRole": "textPrimary",
+      "alignment": "left"
+    },
+    {
+      "id": "dur2",
+      "frame": {
+        "x": 0.31,
+        "y": 0.712,
+        "width": 0.44,
+        "height": 0.03
+      },
+      "timing": {
+        "start": 0.9
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.45
+        }
+      ],
+      "type": "text",
+      "key": "service3Duration",
+      "default": {
+        "en": "90 min",
+        "tr": "90 dakika"
+      },
+      "font": {
+        "name": "AvenirNext-Regular",
+        "size": 0.018
+      },
+      "colorRole": "textSecondary",
+      "alignment": "left"
+    },
+    {
+      "id": "price2",
+      "frame": {
+        "x": 0.79,
+        "y": 0.67,
+        "width": 0.28,
+        "height": 0.05
+      },
+      "timing": {
+        "start": 0.93
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.45
+        }
+      ],
+      "type": "text",
+      "key": "service3Price",
+      "default": {
+        "en": "$95",
+        "tr": "₺1.200"
+      },
+      "font": {
+        "name": "AvenirNext-Heavy",
+        "size": 0.034
+      },
+      "colorRole": "accent",
+      "alignment": "right"
+    },
+    {
+      "id": "rule2",
+      "frame": {
+        "x": 0.5,
+        "y": 0.7375,
+        "width": 0.78,
+        "height": 0.0015
+      },
+      "opacity": 0.3,
+      "timing": {
+        "start": 0.97
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "wipeReveal",
+          "duration": 0.5,
+          "easing": "easeOut",
+          "params": {
+            "direction": "right"
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "textSecondary"
+    },
+    {
+      "id": "name3",
+      "frame": {
+        "x": 0.31,
+        "y": 0.795,
+        "width": 0.44,
+        "height": 0.05
+      },
+      "timing": {
+        "start": 1.0
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "slideIn",
+          "duration": 0.5,
+          "easing": "easeOut",
+          "params": {
+            "direction": "right",
+            "distance": 0.035
+          }
+        }
+      ],
+      "type": "text",
+      "key": "service4",
+      "default": {
+        "en": "Keratin Treatment",
+        "tr": "Keratin Bakımı"
+      },
+      "font": {
+        "name": "AvenirNext-DemiBold",
+        "size": 0.032
+      },
+      "colorRole": "textPrimary",
+      "alignment": "left"
+    },
+    {
+      "id": "dur3",
+      "frame": {
+        "x": 0.31,
+        "y": 0.837,
+        "width": 0.44,
+        "height": 0.03
+      },
+      "timing": {
+        "start": 1.05
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.45
+        }
+      ],
+      "type": "text",
+      "key": "service4Duration",
+      "default": {
+        "en": "120 min",
+        "tr": "120 dakika"
+      },
+      "font": {
+        "name": "AvenirNext-Regular",
+        "size": 0.018
+      },
+      "colorRole": "textSecondary",
+      "alignment": "left"
+    },
+    {
+      "id": "price3",
+      "frame": {
+        "x": 0.79,
+        "y": 0.795,
+        "width": 0.28,
+        "height": 0.05
+      },
+      "timing": {
+        "start": 1.08
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.45
+        }
+      ],
+      "type": "text",
+      "key": "service4Price",
+      "default": {
+        "en": "$180",
+        "tr": "₺2.400"
+      },
+      "font": {
+        "name": "AvenirNext-Heavy",
+        "size": 0.034
+      },
+      "colorRole": "accent",
+      "alignment": "right"
+    },
+    {
+      "id": "book",
+      "frame": {
+        "x": 0.5,
+        "y": 0.885,
+        "width": 0.8,
+        "height": 0.04
+      },
+      "timing": {
+        "start": 1.15
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "pop",
+          "duration": 0.45,
+          "params": {
+            "overshoot": 1.05
+          }
+        }
+      ],
+      "type": "text",
+      "key": "book",
+      "default": {
+        "en": "Book · 555 010 0134",
+        "tr": "Randevu · 0532 000 00 00"
+      },
+      "font": {
+        "name": "AvenirNext-Heavy",
+        "size": 0.022
+      },
+      "colorRole": "accent",
+      "alignment": "center",
+      "letterSpacing": 0.006
+    },
+    {
+      "id": "small",
+      "frame": {
+        "x": 0.5,
+        "y": 0.94,
+        "width": 0.86,
+        "height": 0.03
+      },
+      "timing": {
+        "start": 1.2
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.6
+        }
+      ],
+      "type": "text",
+      "key": "small",
+      "default": {
+        "en": "Prices may vary with hair length",
+        "tr": "Fiyatlar saç boyuna göre değişebilir"
+      },
+      "font": {
+        "name": "AvenirNext-Regular",
+        "size": 0.018
+      },
+      "colorRole": "textSecondary",
+      "alignment": "center"
+    }
+  ]
+}

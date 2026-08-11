@@ -1,0 +1,287 @@
+{
+  "schemaVersion": 1,
+  "id": "for-rent-01",
+  "name": {
+    "en": "For Rent",
+    "tr": "Kiralık İlan"
+  },
+  "category": "realestate",
+  "isPro": false,
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "duration": 6.0,
+  "palette": {
+    "background": "#0F1216",
+    "surface": "#E8EEF5",
+    "accent": "#4C9BE8",
+    "textPrimary": "#F3F7FC",
+    "textSecondary": "#9AA9BB",
+    "textOnAccent": "#FFFFFF",
+    "scrimClear": "#00000000",
+    "scrimSolid": "#000000CC"
+  },
+  "audio": {
+    "defaultTrackId": "bright-01",
+    "volume": 0.85
+  },
+  "layers": [
+    {
+      "id": "bg",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "type": "shape",
+      "colorRole": "background"
+    },
+    {
+      "id": "photo",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.5
+        },
+        {
+          "role": "loop",
+          "preset": "kenBurns",
+          "duration": 6.0,
+          "params": {
+            "zoom": 1.11,
+            "direction": "up"
+          }
+        }
+      ],
+      "type": "mediaSlot",
+      "slotIndex": 0,
+      "media": "photoOrVideo",
+      "contentMode": "fill",
+      "mask": "rect",
+      "filter": "cinematic",
+      "filterIntensity": 0.35
+    },
+    {
+      "id": "scrim-top",
+      "frame": {
+        "x": 0.5,
+        "y": 0.13,
+        "width": 1.0,
+        "height": 0.26
+      },
+      "type": "shape",
+      "colorRole": "scrimClear",
+      "gradient": {
+        "from": "scrimClear",
+        "to": "scrimSolid",
+        "direction": "up"
+      }
+    },
+    {
+      "id": "scrim-bottom",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "type": "shape",
+      "colorRole": "scrimClear",
+      "gradient": {
+        "from": "scrimClear",
+        "to": "scrimSolid",
+        "direction": "down"
+      }
+    },
+    {
+      "id": "badge",
+      "frame": {
+        "x": 0.735,
+        "y": 0.155,
+        "width": 0.44,
+        "height": 0.1
+      },
+      "rotation": -6,
+      "timing": {
+        "start": 0.4
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "pop",
+          "duration": 0.5,
+          "params": {
+            "overshoot": 1.12
+          }
+        },
+        {
+          "role": "loop",
+          "preset": "shake",
+          "duration": 1.4,
+          "delay": 0.9,
+          "params": {
+            "degrees": 2.0
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "accent",
+      "cornerRadius": 0.05
+    },
+    {
+      "id": "price",
+      "frame": {
+        "x": 0.735,
+        "y": 0.155,
+        "width": 0.4,
+        "height": 0.06
+      },
+      "rotation": -6,
+      "timing": {
+        "start": 0.55
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.4
+        }
+      ],
+      "type": "text",
+      "key": "price",
+      "default": {
+        "en": "$1,450/mo",
+        "tr": "₺18.500/ay"
+      },
+      "font": {
+        "name": "AvenirNext-Heavy",
+        "size": 0.034
+      },
+      "colorRole": "textOnAccent",
+      "alignment": "center"
+    },
+    {
+      "id": "headline",
+      "frame": {
+        "x": 0.5,
+        "y": 0.755,
+        "width": 0.86,
+        "height": 0.08
+      },
+      "timing": {
+        "start": 0.7
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "wipeReveal",
+          "duration": 0.7,
+          "easing": "easeOut",
+          "params": {
+            "direction": "right"
+          }
+        },
+        {
+          "role": "loop",
+          "preset": "floatLoop",
+          "duration": 2.6,
+          "params": {
+            "distance": 0.006,
+            "axis": "y"
+          }
+        }
+      ],
+      "type": "text",
+      "key": "headline",
+      "default": {
+        "en": "NOW FOR RENT",
+        "tr": "KİRALIK DAİRE"
+      },
+      "font": {
+        "name": "AvenirNext-Heavy",
+        "size": 0.052
+      },
+      "colorRole": "textPrimary",
+      "alignment": "center",
+      "letterSpacing": 0.012,
+      "allCaps": true
+    },
+    {
+      "id": "info",
+      "frame": {
+        "x": 0.5,
+        "y": 0.83,
+        "width": 0.86,
+        "height": 0.045
+      },
+      "timing": {
+        "start": 0.95
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "slideIn",
+          "duration": 0.5,
+          "easing": "easeOut",
+          "params": {
+            "direction": "up",
+            "distance": 0.03
+          }
+        }
+      ],
+      "type": "text",
+      "key": "info",
+      "default": {
+        "en": "Riverside · 2 bed · 1,020 ft²",
+        "tr": "Moda, Kadıköy · 2+1 · 95 m²"
+      },
+      "font": {
+        "name": "AvenirNext-DemiBold",
+        "size": 0.026
+      },
+      "colorRole": "accent",
+      "alignment": "center"
+    },
+    {
+      "id": "extra",
+      "frame": {
+        "x": 0.5,
+        "y": 0.895,
+        "width": 0.86,
+        "height": 0.04
+      },
+      "timing": {
+        "start": 1.15
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.6
+        }
+      ],
+      "type": "text",
+      "key": "extra",
+      "default": {
+        "en": "Furnished · Move-in ready · DM",
+        "tr": "Eşyalı · Hemen taşınabilir · DM"
+      },
+      "font": {
+        "name": "AvenirNext-Regular",
+        "size": 0.021
+      },
+      "colorRole": "textSecondary",
+      "alignment": "center"
+    }
+  ]
+}

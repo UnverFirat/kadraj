@@ -1,0 +1,314 @@
+{
+  "schemaVersion": 1,
+  "id": "open-mic-01",
+  "name": {
+    "en": "Open Mic",
+    "tr": "Sahne Akşamı"
+  },
+  "category": "music",
+  "isPro": false,
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "duration": 6.5,
+  "palette": {
+    "background": "#1A1408",
+    "surface": "#FFFFFF",
+    "accent": "#F2B705",
+    "textPrimary": "#FFFCF0",
+    "textSecondary": "#CBBE9A",
+    "textOnAccent": "#1A1408",
+    "scrimClear": "#00000000",
+    "scrimSolid": "#000000CC"
+  },
+  "audio": {
+    "defaultTrackId": "acoustic-01",
+    "volume": 0.85
+  },
+  "layers": [
+    {
+      "id": "bg",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "type": "shape",
+      "colorRole": "background"
+    },
+    {
+      "id": "photo",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.5
+        },
+        {
+          "role": "loop",
+          "preset": "kenBurns",
+          "duration": 6.5,
+          "params": {
+            "zoom": 1.13,
+            "direction": "up"
+          }
+        }
+      ],
+      "type": "mediaSlot",
+      "slotIndex": 0,
+      "media": "photoOrVideo",
+      "contentMode": "fill",
+      "mask": "rect",
+      "filter": "warm",
+      "filterIntensity": 0.45
+    },
+    {
+      "id": "scrim-top",
+      "frame": {
+        "x": 0.5,
+        "y": 0.16,
+        "width": 1.0,
+        "height": 0.32
+      },
+      "type": "shape",
+      "colorRole": "scrimClear",
+      "gradient": {
+        "from": "scrimClear",
+        "to": "scrimSolid",
+        "direction": "up"
+      }
+    },
+    {
+      "id": "scrim-bottom",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "type": "shape",
+      "colorRole": "scrimClear",
+      "gradient": {
+        "from": "scrimClear",
+        "to": "scrimSolid",
+        "direction": "down"
+      }
+    },
+    {
+      "id": "badge",
+      "frame": {
+        "x": 0.7,
+        "y": 0.2,
+        "width": 0.5,
+        "height": 0.11
+      },
+      "rotation": -8,
+      "timing": {
+        "start": 0.4
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "bounce",
+          "duration": 0.65
+        },
+        {
+          "role": "loop",
+          "preset": "shake",
+          "duration": 1.4,
+          "delay": 1.05,
+          "params": {
+            "degrees": 2.0
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "accent",
+      "cornerRadius": 0.055
+    },
+    {
+      "id": "badge-text",
+      "frame": {
+        "x": 0.7,
+        "y": 0.2,
+        "width": 0.46,
+        "height": 0.06
+      },
+      "rotation": -8,
+      "timing": {
+        "start": 0.6
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.4
+        }
+      ],
+      "type": "text",
+      "key": "badge",
+      "default": {
+        "en": "OPEN MIC",
+        "tr": "SAHNE AÇIK"
+      },
+      "font": {
+        "name": "AvenirNext-Heavy",
+        "size": 0.032
+      },
+      "colorRole": "textOnAccent",
+      "alignment": "center",
+      "letterSpacing": 0.012,
+      "allCaps": true
+    },
+    {
+      "id": "headline",
+      "frame": {
+        "x": 0.5,
+        "y": 0.735,
+        "width": 0.88,
+        "height": 0.1
+      },
+      "timing": {
+        "start": 0.7
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "kineticWords",
+          "duration": 0.9,
+          "params": {
+            "distance": 0.02
+          }
+        },
+        {
+          "role": "loop",
+          "preset": "floatLoop",
+          "duration": 2.6,
+          "params": {
+            "distance": 0.006,
+            "axis": "y"
+          }
+        }
+      ],
+      "type": "text",
+      "key": "headline",
+      "default": {
+        "en": "Open Mic Night",
+        "tr": "Sahne Akşamı"
+      },
+      "font": {
+        "name": "AvenirNext-Heavy",
+        "size": 0.06
+      },
+      "colorRole": "textPrimary",
+      "alignment": "center"
+    },
+    {
+      "id": "when",
+      "frame": {
+        "x": 0.5,
+        "y": 0.82,
+        "width": 0.88,
+        "height": 0.05
+      },
+      "timing": {
+        "start": 0.95
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "slideIn",
+          "duration": 0.5,
+          "easing": "easeOut",
+          "params": {
+            "direction": "up",
+            "distance": 0.03
+          }
+        }
+      ],
+      "type": "text",
+      "key": "when",
+      "default": {
+        "en": "Tuesdays 8:30 PM · Kadıköy",
+        "tr": "Salı 20:30 · Kadıköy"
+      },
+      "font": {
+        "name": "AvenirNext-DemiBold",
+        "size": 0.03
+      },
+      "colorRole": "accent",
+      "alignment": "center"
+    },
+    {
+      "id": "venue",
+      "frame": {
+        "x": 0.5,
+        "y": 0.882,
+        "width": 0.9,
+        "height": 0.04
+      },
+      "timing": {
+        "start": 1.1
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.6
+        }
+      ],
+      "type": "text",
+      "key": "venue",
+      "default": {
+        "en": "Mikrofon Coffee · 41 Moda Ave",
+        "tr": "Mikrofon Kahve · Moda Cad. No:41"
+      },
+      "font": {
+        "name": "AvenirNext-Regular",
+        "size": 0.022
+      },
+      "colorRole": "textSecondary",
+      "alignment": "center"
+    },
+    {
+      "id": "cta",
+      "frame": {
+        "x": 0.5,
+        "y": 0.94,
+        "width": 0.9,
+        "height": 0.035
+      },
+      "timing": {
+        "start": 1.2
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.6
+        }
+      ],
+      "type": "text",
+      "key": "cta",
+      "default": {
+        "en": "DM to grab a slot · Free entry",
+        "tr": "Sıra almak için DM · Giriş serbest"
+      },
+      "font": {
+        "name": "AvenirNext-Medium",
+        "size": 0.02
+      },
+      "colorRole": "textSecondary",
+      "alignment": "center"
+    }
+  ]
+}

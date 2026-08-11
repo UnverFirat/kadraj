@@ -1,0 +1,357 @@
+{
+  "schemaVersion": 1,
+  "id": "mothers-day-01",
+  "name": {
+    "en": "Mother's Day",
+    "tr": "Anneler Günü"
+  },
+  "category": "holiday",
+  "isPro": true,
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "duration": 7.0,
+  "palette": {
+    "background": "#F7EDEC",
+    "surface": "#FFFFFF",
+    "accent": "#C98B8B",
+    "textPrimary": "#2B1F1F",
+    "textSecondary": "#8E7676",
+    "textOnAccent": "#FFFFFF",
+    "scrimClear": "#00000000",
+    "scrimSolid": "#000000CC"
+  },
+  "audio": {
+    "defaultTrackId": "warm-01",
+    "volume": 0.85
+  },
+  "layers": [
+    {
+      "id": "bg",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "type": "shape",
+      "colorRole": "background"
+    },
+    {
+      "id": "md-blob",
+      "frame": {
+        "x": 0.5,
+        "y": 0.32,
+        "width": 0.92,
+        "height": 0.52
+      },
+      "opacity": 0.16,
+      "animations": [
+        {
+          "role": "in",
+          "preset": "scaleIn",
+          "duration": 0.8,
+          "easing": "easeOut",
+          "params": {
+            "from": 0.9
+          }
+        },
+        {
+          "role": "loop",
+          "preset": "pulse",
+          "duration": 3.0,
+          "params": {
+            "scale": 1.03
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "accent",
+      "cornerRadius": 0.26
+    },
+    {
+      "id": "md-photo",
+      "frame": {
+        "x": 0.5,
+        "y": 0.33,
+        "width": 0.62,
+        "height": 0.42
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "scaleIn",
+          "duration": 0.7,
+          "easing": "easeOut",
+          "params": {
+            "from": 0.88
+          }
+        },
+        {
+          "role": "loop",
+          "preset": "kenBurns",
+          "duration": 7.0,
+          "params": {
+            "zoom": 1.08,
+            "direction": "up"
+          }
+        }
+      ],
+      "type": "mediaSlot",
+      "slotIndex": 0,
+      "media": "photoOrVideo",
+      "contentMode": "fill",
+      "mask": "heart",
+      "filter": "warm",
+      "filterIntensity": 0.4
+    },
+    {
+      "id": "md-kicker",
+      "frame": {
+        "x": 0.5,
+        "y": 0.075,
+        "width": 0.7,
+        "height": 0.04
+      },
+      "timing": {
+        "start": 0.25
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.6
+        }
+      ],
+      "type": "text",
+      "key": "mdKicker",
+      "default": {
+        "en": "MOTHER'S DAY",
+        "tr": "ANNELER GÜNÜ"
+      },
+      "font": {
+        "name": "AvenirNext-DemiBold",
+        "size": 0.022
+      },
+      "colorRole": "accent",
+      "alignment": "center",
+      "letterSpacing": 0.016,
+      "allCaps": true
+    },
+    {
+      "id": "md-title",
+      "frame": {
+        "x": 0.5,
+        "y": 0.63,
+        "width": 0.84,
+        "height": 0.13
+      },
+      "timing": {
+        "start": 0.5
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "wipeReveal",
+          "duration": 0.9,
+          "easing": "easeOut",
+          "params": {
+            "direction": "right"
+          }
+        },
+        {
+          "role": "loop",
+          "preset": "floatLoop",
+          "duration": 2.6,
+          "params": {
+            "distance": 0.006,
+            "axis": "y"
+          }
+        }
+      ],
+      "type": "text",
+      "key": "mdTitle",
+      "default": {
+        "en": "Dearest mom",
+        "tr": "Canım annem"
+      },
+      "font": {
+        "name": "SnellRoundhand-Bold",
+        "size": 0.078
+      },
+      "colorRole": "textPrimary",
+      "alignment": "center"
+    },
+    {
+      "id": "md-msg",
+      "frame": {
+        "x": 0.5,
+        "y": 0.755,
+        "width": 0.76,
+        "height": 0.09
+      },
+      "timing": {
+        "start": 0.9
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "slideIn",
+          "duration": 0.6,
+          "easing": "easeOut",
+          "params": {
+            "direction": "up",
+            "distance": 0.03
+          }
+        }
+      ],
+      "type": "text",
+      "key": "mdMsg",
+      "default": {
+        "en": "Thank you for everything.\nI'm so glad you're here.",
+        "tr": "Her şey için teşekkür ederim.\nİyi ki varsın."
+      },
+      "font": {
+        "name": "AvenirNext-Regular",
+        "size": 0.026
+      },
+      "colorRole": "textSecondary",
+      "alignment": "center",
+      "maxLines": 2
+    },
+    {
+      "id": "md-foot",
+      "frame": {
+        "x": 0.5,
+        "y": 0.85,
+        "width": 0.7,
+        "height": 0.04
+      },
+      "timing": {
+        "start": 1.2
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.6
+        }
+      ],
+      "type": "text",
+      "key": "mdFoot",
+      "default": {
+        "en": "I love you so much",
+        "tr": "Seni çok seviyorum"
+      },
+      "font": {
+        "name": "AvenirNext-Medium",
+        "size": 0.022
+      },
+      "colorRole": "accent",
+      "alignment": "center"
+    },
+    {
+      "id": "md-flower",
+      "frame": {
+        "x": 0.13,
+        "y": 0.15,
+        "width": 0.154,
+        "height": 0.112
+      },
+      "rotation": -12,
+      "timing": {
+        "start": 0.35
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "pop",
+          "duration": 0.5,
+          "params": {
+            "overshoot": 1.15
+          }
+        }
+      ],
+      "type": "text",
+      "key": "mdFlower",
+      "default": {
+        "en": "🌸",
+        "tr": "🌸"
+      },
+      "font": {
+        "name": "AvenirNext-Bold",
+        "size": 0.07
+      },
+      "colorRole": "textPrimary",
+      "alignment": "center"
+    },
+    {
+      "id": "md-tulip",
+      "frame": {
+        "x": 0.88,
+        "y": 0.2,
+        "width": 0.143,
+        "height": 0.104
+      },
+      "rotation": 12,
+      "timing": {
+        "start": 0.55
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "bounce",
+          "duration": 0.6
+        }
+      ],
+      "type": "text",
+      "key": "mdTulip",
+      "default": {
+        "en": "🌷",
+        "tr": "🌷"
+      },
+      "font": {
+        "name": "AvenirNext-Bold",
+        "size": 0.065
+      },
+      "colorRole": "textPrimary",
+      "alignment": "center"
+    },
+    {
+      "id": "md-heart",
+      "frame": {
+        "x": 0.5,
+        "y": 0.925,
+        "width": 0.132,
+        "height": 0.096
+      },
+      "timing": {
+        "start": 1.4
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "pop",
+          "duration": 0.45,
+          "params": {
+            "overshoot": 1.2
+          }
+        }
+      ],
+      "type": "text",
+      "key": "mdHeart",
+      "default": {
+        "en": "❤️",
+        "tr": "❤️"
+      },
+      "font": {
+        "name": "AvenirNext-Bold",
+        "size": 0.06
+      },
+      "colorRole": "textPrimary",
+      "alignment": "center"
+    }
+  ]
+}

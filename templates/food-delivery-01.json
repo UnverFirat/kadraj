@@ -1,0 +1,303 @@
+{
+  "schemaVersion": 1,
+  "id": "food-delivery-01",
+  "name": {
+    "en": "Delivery",
+    "tr": "Paket Servis"
+  },
+  "category": "food",
+  "isPro": true,
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "duration": 6.5,
+  "palette": {
+    "background": "#1A1408",
+    "surface": "#FFFFFF",
+    "accent": "#F2B705",
+    "textPrimary": "#FFFCF0",
+    "textSecondary": "#CBBE9A",
+    "textOnAccent": "#1A1408",
+    "scrimClear": "#00000000",
+    "scrimSolid": "#000000CC"
+  },
+  "audio": {
+    "defaultTrackId": "upbeat-01",
+    "volume": 0.85
+  },
+  "layers": [
+    {
+      "id": "bg",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "type": "shape",
+      "colorRole": "background"
+    },
+    {
+      "id": "photo",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.5
+        },
+        {
+          "role": "loop",
+          "preset": "kenBurns",
+          "duration": 6.5,
+          "params": {
+            "zoom": 1.12,
+            "direction": "down"
+          }
+        }
+      ],
+      "type": "mediaSlot",
+      "slotIndex": 0,
+      "media": "photoOrVideo",
+      "contentMode": "fill",
+      "mask": "rect",
+      "filter": "vivid",
+      "filterIntensity": 0.45
+    },
+    {
+      "id": "scrim-top",
+      "frame": {
+        "x": 0.5,
+        "y": 0.16,
+        "width": 1.0,
+        "height": 0.34
+      },
+      "type": "shape",
+      "colorRole": "scrimClear",
+      "gradient": {
+        "from": "scrimClear",
+        "to": "scrimSolid",
+        "direction": "up"
+      }
+    },
+    {
+      "id": "scrim-bottom",
+      "frame": {
+        "x": 0.5,
+        "y": 0.79,
+        "width": 1.0,
+        "height": 0.42
+      },
+      "type": "shape",
+      "colorRole": "scrimClear",
+      "gradient": {
+        "from": "scrimClear",
+        "to": "scrimSolid",
+        "direction": "down"
+      }
+    },
+    {
+      "id": "banner",
+      "frame": {
+        "x": 0.5,
+        "y": 0.1,
+        "width": 1.0,
+        "height": 0.085
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "slideIn",
+          "duration": 0.55,
+          "easing": "easeOut",
+          "params": {
+            "direction": "down",
+            "distance": 0.09
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "accent"
+    },
+    {
+      "id": "banner-text",
+      "frame": {
+        "x": 0.5,
+        "y": 0.1,
+        "width": 0.92,
+        "height": 0.05
+      },
+      "timing": {
+        "start": 0.35
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.4
+        }
+      ],
+      "type": "text",
+      "key": "banner",
+      "default": {
+        "en": "WE DELIVER",
+        "tr": "PAKET SERVİS VAR"
+      },
+      "font": {
+        "name": "AvenirNext-Heavy",
+        "size": 0.032
+      },
+      "colorRole": "textOnAccent",
+      "alignment": "center",
+      "letterSpacing": 0.014,
+      "allCaps": true
+    },
+    {
+      "id": "brand",
+      "frame": {
+        "x": 0.5,
+        "y": 0.7,
+        "width": 0.8,
+        "height": 0.04
+      },
+      "timing": {
+        "start": 0.6
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.55
+        }
+      ],
+      "type": "text",
+      "key": "brand",
+      "default": {
+        "en": "Lezzet Kitchen",
+        "tr": "Lezzet Mutfağı"
+      },
+      "font": {
+        "name": "AvenirNext-Medium",
+        "size": 0.024
+      },
+      "colorRole": "textSecondary",
+      "alignment": "center"
+    },
+    {
+      "id": "phone",
+      "frame": {
+        "x": 0.5,
+        "y": 0.785,
+        "width": 0.86,
+        "height": 0.085
+      },
+      "timing": {
+        "start": 0.8
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "kineticWords",
+          "duration": 0.9,
+          "params": {
+            "distance": 0.02
+          }
+        },
+        {
+          "role": "loop",
+          "preset": "floatLoop",
+          "duration": 2.6,
+          "params": {
+            "distance": 0.006,
+            "axis": "y"
+          }
+        }
+      ],
+      "type": "text",
+      "key": "phone",
+      "default": {
+        "en": "(212) 555 0420",
+        "tr": "0212 555 04 20"
+      },
+      "font": {
+        "name": "AvenirNext-Heavy",
+        "size": 0.052
+      },
+      "colorRole": "textPrimary",
+      "alignment": "center",
+      "letterSpacing": 0.006
+    },
+    {
+      "id": "eta",
+      "frame": {
+        "x": 0.5,
+        "y": 0.885,
+        "width": 0.58,
+        "height": 0.078
+      },
+      "timing": {
+        "start": 1.0
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "pop",
+          "duration": 0.5,
+          "params": {
+            "overshoot": 1.08
+          }
+        },
+        {
+          "role": "loop",
+          "preset": "shake",
+          "duration": 1.4,
+          "delay": 0.9,
+          "params": {
+            "degrees": 2.0
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "accent",
+      "cornerRadius": 0.039
+    },
+    {
+      "id": "eta-text",
+      "frame": {
+        "x": 0.5,
+        "y": 0.885,
+        "width": 0.55,
+        "height": 0.05
+      },
+      "timing": {
+        "start": 1.15
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.4
+        }
+      ],
+      "type": "text",
+      "key": "eta",
+      "default": {
+        "en": "At your door in 30 min",
+        "tr": "30 dakikada kapında"
+      },
+      "font": {
+        "name": "AvenirNext-Bold",
+        "size": 0.028
+      },
+      "colorRole": "textOnAccent",
+      "alignment": "center"
+    }
+  ]
+}

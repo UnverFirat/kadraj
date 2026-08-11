@@ -1,0 +1,297 @@
+{
+  "schemaVersion": 1,
+  "id": "coffee-shop-01",
+  "name": {
+    "en": "Coffee Break",
+    "tr": "Kahve Molası"
+  },
+  "category": "food",
+  "isPro": true,
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "duration": 6.5,
+  "palette": {
+    "background": "#E8DCC8",
+    "surface": "#FFFDF8",
+    "accent": "#8C6A43",
+    "textPrimary": "#31281E",
+    "textSecondary": "#7C6C58",
+    "textOnAccent": "#FFFFFF",
+    "scrimClear": "#00000000",
+    "scrimSolid": "#000000CC"
+  },
+  "audio": {
+    "defaultTrackId": "chill-01",
+    "volume": 0.85
+  },
+  "layers": [
+    {
+      "id": "bg",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "type": "shape",
+      "colorRole": "background"
+    },
+    {
+      "id": "halo",
+      "frame": {
+        "x": 0.5,
+        "y": 0.4,
+        "width": 0.82,
+        "height": 0.461
+      },
+      "opacity": 0.2,
+      "animations": [
+        {
+          "role": "in",
+          "preset": "scaleIn",
+          "duration": 0.8,
+          "easing": "easeOut",
+          "params": {
+            "from": 0.86
+          }
+        },
+        {
+          "role": "loop",
+          "preset": "pulse",
+          "duration": 2.6,
+          "params": {
+            "scale": 1.03
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "accent",
+      "mask": "circle"
+    },
+    {
+      "id": "ring",
+      "frame": {
+        "x": 0.5,
+        "y": 0.4,
+        "width": 0.7,
+        "height": 0.394
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "scaleIn",
+          "duration": 0.65,
+          "easing": "easeOut",
+          "params": {
+            "from": 0.9
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "accent",
+      "mask": "circle"
+    },
+    {
+      "id": "photo",
+      "frame": {
+        "x": 0.5,
+        "y": 0.4,
+        "width": 0.664,
+        "height": 0.374
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "scaleIn",
+          "duration": 0.7,
+          "easing": "easeOut",
+          "params": {
+            "from": 0.92
+          }
+        },
+        {
+          "role": "loop",
+          "preset": "kenBurns",
+          "duration": 6.5,
+          "params": {
+            "zoom": 1.1,
+            "direction": "right"
+          }
+        }
+      ],
+      "type": "mediaSlot",
+      "slotIndex": 0,
+      "media": "photoOrVideo",
+      "contentMode": "fill",
+      "mask": "circle",
+      "filter": "warm",
+      "filterIntensity": 0.5
+    },
+    {
+      "id": "kicker",
+      "frame": {
+        "x": 0.5,
+        "y": 0.115,
+        "width": 0.8,
+        "height": 0.04
+      },
+      "timing": {
+        "start": 0.35
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.6
+        }
+      ],
+      "type": "text",
+      "key": "kicker",
+      "default": {
+        "en": "SMALL BATCH",
+        "tr": "EL YAPIMI"
+      },
+      "font": {
+        "name": "AvenirNext-DemiBold",
+        "size": 0.024
+      },
+      "colorRole": "accent",
+      "alignment": "center",
+      "letterSpacing": 0.012,
+      "allCaps": true
+    },
+    {
+      "id": "title",
+      "frame": {
+        "x": 0.5,
+        "y": 0.685,
+        "width": 0.84,
+        "height": 0.09
+      },
+      "timing": {
+        "start": 0.6
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "kineticWords",
+          "duration": 0.9,
+          "params": {
+            "distance": 0.02
+          }
+        },
+        {
+          "role": "loop",
+          "preset": "floatLoop",
+          "duration": 2.6,
+          "params": {
+            "distance": 0.006,
+            "axis": "y"
+          }
+        }
+      ],
+      "type": "text",
+      "key": "title",
+      "default": {
+        "en": "Coffee Break",
+        "tr": "Kahve Molası"
+      },
+      "font": {
+        "name": "Didot",
+        "size": 0.062
+      },
+      "colorRole": "textPrimary",
+      "alignment": "center"
+    },
+    {
+      "id": "sub",
+      "frame": {
+        "x": 0.5,
+        "y": 0.765,
+        "width": 0.78,
+        "height": 0.04
+      },
+      "timing": {
+        "start": 0.9
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.6
+        }
+      ],
+      "type": "text",
+      "key": "sub",
+      "default": {
+        "en": "Ground fresh every morning",
+        "tr": "Her fincan günlük çekiliyor"
+      },
+      "font": {
+        "name": "AvenirNext-Regular",
+        "size": 0.022
+      },
+      "colorRole": "textSecondary",
+      "alignment": "center"
+    },
+    {
+      "id": "dash",
+      "frame": {
+        "x": 0.5,
+        "y": 0.825,
+        "width": 0.08,
+        "height": 0.004
+      },
+      "timing": {
+        "start": 1.05
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "wipeReveal",
+          "duration": 0.5,
+          "easing": "easeOut",
+          "params": {
+            "direction": "right"
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "accent"
+    },
+    {
+      "id": "hours",
+      "frame": {
+        "x": 0.5,
+        "y": 0.885,
+        "width": 0.76,
+        "height": 0.04
+      },
+      "timing": {
+        "start": 1.15
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.6
+        }
+      ],
+      "type": "text",
+      "key": "hours",
+      "default": {
+        "en": "Open daily 8 – 8",
+        "tr": "Her gün 08:00 – 20:00"
+      },
+      "font": {
+        "name": "AvenirNext-Medium",
+        "size": 0.021
+      },
+      "colorRole": "textPrimary",
+      "alignment": "center"
+    }
+  ]
+}

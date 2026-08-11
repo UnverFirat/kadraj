@@ -1,0 +1,246 @@
+{
+  "schemaVersion": 1,
+  "id": "testimonial-quote-01",
+  "name": {
+    "en": "Client Quote",
+    "tr": "Müşteri Sözü"
+  },
+  "category": "business",
+  "isPro": false,
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "duration": 7.0,
+  "palette": {
+    "background": "#FBFAF7",
+    "surface": "#FFFFFF",
+    "accent": "#B99566",
+    "textPrimary": "#1A1815",
+    "textSecondary": "#8A857D",
+    "textOnAccent": "#FFFFFF",
+    "scrimClear": "#00000000",
+    "scrimSolid": "#000000CC"
+  },
+  "audio": {
+    "defaultTrackId": "clean-01",
+    "volume": 0.85
+  },
+  "layers": [
+    {
+      "id": "bg",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "type": "shape",
+      "colorRole": "background"
+    },
+    {
+      "id": "kicker",
+      "frame": {
+        "x": 0.42,
+        "y": 0.215,
+        "width": 0.5,
+        "height": 0.035
+      },
+      "timing": {
+        "start": 0.25
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.5
+        }
+      ],
+      "type": "text",
+      "key": "kicker",
+      "default": {
+        "en": "CLIENT STORY",
+        "tr": "MÜŞTERİ SÖZÜ"
+      },
+      "font": {
+        "name": "AvenirNext-DemiBold",
+        "size": 0.02
+      },
+      "colorRole": "accent",
+      "alignment": "left",
+      "letterSpacing": 0.014,
+      "allCaps": true
+    },
+    {
+      "id": "bar",
+      "frame": {
+        "x": 0.115,
+        "y": 0.42,
+        "width": 0.008,
+        "height": 0.34
+      },
+      "timing": {
+        "start": 0.4
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "wipeReveal",
+          "duration": 0.7,
+          "easing": "easeOut",
+          "params": {
+            "direction": "down"
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "accent"
+    },
+    {
+      "id": "quote",
+      "frame": {
+        "x": 0.56,
+        "y": 0.42,
+        "width": 0.72,
+        "height": 0.34
+      },
+      "timing": {
+        "start": 0.55
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "slideIn",
+          "duration": 0.7,
+          "easing": "easeOut",
+          "params": {
+            "direction": "up",
+            "distance": 0.03
+          }
+        },
+        {
+          "role": "loop",
+          "preset": "floatLoop",
+          "duration": 2.6,
+          "params": {
+            "distance": 0.006,
+            "axis": "y"
+          }
+        }
+      ],
+      "type": "text",
+      "key": "quote",
+      "default": {
+        "en": "Working with them\nchanged how we\nrun the whole\nbusiness.",
+        "tr": "Ekiple çalışmak\nişimizi baştan\nkurgulamamızı\nsağladı."
+      },
+      "font": {
+        "name": "Georgia-Bold",
+        "size": 0.042
+      },
+      "colorRole": "textPrimary",
+      "alignment": "left",
+      "maxLines": 4
+    },
+    {
+      "id": "avatar",
+      "frame": {
+        "x": 0.155,
+        "y": 0.7,
+        "width": 0.16,
+        "height": 0.09
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "scaleIn",
+          "duration": 0.6,
+          "delay": 1.0,
+          "easing": "easeOut",
+          "params": {
+            "from": 0.8
+          }
+        },
+        {
+          "role": "loop",
+          "preset": "kenBurns",
+          "duration": 7.0,
+          "params": {
+            "zoom": 1.08,
+            "direction": "up"
+          }
+        }
+      ],
+      "type": "mediaSlot",
+      "slotIndex": 0,
+      "media": "photo",
+      "contentMode": "fill",
+      "mask": "circle",
+      "filter": "warm",
+      "filterIntensity": 0.25
+    },
+    {
+      "id": "name",
+      "frame": {
+        "x": 0.6,
+        "y": 0.682,
+        "width": 0.6,
+        "height": 0.042
+      },
+      "timing": {
+        "start": 1.15
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.5
+        }
+      ],
+      "type": "text",
+      "key": "name",
+      "default": {
+        "en": "Selin Aydin",
+        "tr": "Selin Aydın"
+      },
+      "font": {
+        "name": "AvenirNext-Bold",
+        "size": 0.026
+      },
+      "colorRole": "textPrimary",
+      "alignment": "left"
+    },
+    {
+      "id": "role",
+      "frame": {
+        "x": 0.6,
+        "y": 0.728,
+        "width": 0.6,
+        "height": 0.035
+      },
+      "timing": {
+        "start": 1.3
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.5
+        }
+      ],
+      "type": "text",
+      "key": "role",
+      "default": {
+        "en": "Founder · Nora Studio",
+        "tr": "Kurucu · Nora Stüdyo"
+      },
+      "font": {
+        "name": "AvenirNext-Regular",
+        "size": 0.019
+      },
+      "colorRole": "textSecondary",
+      "alignment": "left"
+    }
+  ]
+}

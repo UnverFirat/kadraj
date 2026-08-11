@@ -1,0 +1,284 @@
+{
+  "schemaVersion": 1,
+  "id": "list-five-01",
+  "name": {
+    "en": "Top 5 List",
+    "tr": "Liste 5"
+  },
+  "category": "social",
+  "isPro": true,
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "duration": 5.5,
+  "palette": {
+    "background": "#141317",
+    "surface": "#20202A",
+    "accent": "#7C5CFF",
+    "textPrimary": "#FFFFFF",
+    "textSecondary": "#A9A7B4"
+  },
+  "audio": {
+    "defaultTrackId": "groovy-01",
+    "volume": 0.9
+  },
+  "layers": [
+    {
+      "id": "bg",
+      "type": "shape",
+      "colorRole": "background",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      }
+    },
+    {
+      "id": "kicker",
+      "type": "text",
+      "key": "kicker",
+      "default": {
+        "en": "MY TOP",
+        "tr": "FAVORİ"
+      },
+      "font": {
+        "name": "AvenirNext-Medium",
+        "size": 0.022
+      },
+      "colorRole": "accent",
+      "alignment": "left",
+      "allCaps": true,
+      "letterSpacing": 0.014,
+      "frame": {
+        "x": 0.5,
+        "y": 0.14,
+        "width": 0.82,
+        "height": 0.04
+      },
+      "timing": {
+        "start": 0.2
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.5
+        }
+      ]
+    },
+    {
+      "id": "title",
+      "type": "text",
+      "key": "title",
+      "default": {
+        "en": "5 PLACES",
+        "tr": "5 MEKAN"
+      },
+      "font": {
+        "name": "AvenirNext-Heavy",
+        "size": 0.062
+      },
+      "colorRole": "textPrimary",
+      "alignment": "left",
+      "allCaps": true,
+      "letterSpacing": 0.001,
+      "frame": {
+        "x": 0.5,
+        "y": 0.2,
+        "width": 0.82,
+        "height": 0.09
+      },
+      "timing": {
+        "start": 0.35
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "slideIn",
+          "duration": 0.5,
+          "params": {
+            "direction": "left",
+            "distance": 0.06
+          }
+        }
+      ]
+    },
+    {
+      "id": "item1",
+      "type": "text",
+      "key": "item1",
+      "default": {
+        "en": "1   Sunset point",
+        "tr": "1   Gün batımı"
+      },
+      "font": {
+        "name": "AvenirNext-DemiBold",
+        "size": 0.036
+      },
+      "colorRole": "textPrimary",
+      "alignment": "left",
+      "frame": {
+        "x": 0.5,
+        "y": 0.38,
+        "width": 0.82,
+        "height": 0.06
+      },
+      "timing": {
+        "start": 0.9
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "slideIn",
+          "duration": 0.45,
+          "params": {
+            "direction": "left",
+            "distance": 0.05
+          }
+        }
+      ]
+    },
+    {
+      "id": "item2",
+      "type": "text",
+      "key": "item2",
+      "default": {
+        "en": "2   Old bazaar",
+        "tr": "2   Kapalıçarşı"
+      },
+      "font": {
+        "name": "AvenirNext-DemiBold",
+        "size": 0.036
+      },
+      "colorRole": "textPrimary",
+      "alignment": "left",
+      "frame": {
+        "x": 0.5,
+        "y": 0.47,
+        "width": 0.82,
+        "height": 0.06
+      },
+      "timing": {
+        "start": 1.15
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "slideIn",
+          "duration": 0.45,
+          "params": {
+            "direction": "left",
+            "distance": 0.05
+          }
+        }
+      ]
+    },
+    {
+      "id": "item3",
+      "type": "text",
+      "key": "item3",
+      "default": {
+        "en": "3   Rooftop cafe",
+        "tr": "3   Teras kafe"
+      },
+      "font": {
+        "name": "AvenirNext-DemiBold",
+        "size": 0.036
+      },
+      "colorRole": "textPrimary",
+      "alignment": "left",
+      "frame": {
+        "x": 0.5,
+        "y": 0.56,
+        "width": 0.82,
+        "height": 0.06
+      },
+      "timing": {
+        "start": 1.4
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "slideIn",
+          "duration": 0.45,
+          "params": {
+            "direction": "left",
+            "distance": 0.05
+          }
+        }
+      ]
+    },
+    {
+      "id": "item4",
+      "type": "text",
+      "key": "item4",
+      "default": {
+        "en": "4   Ferry ride",
+        "tr": "4   Vapur turu"
+      },
+      "font": {
+        "name": "AvenirNext-DemiBold",
+        "size": 0.036
+      },
+      "colorRole": "textPrimary",
+      "alignment": "left",
+      "frame": {
+        "x": 0.5,
+        "y": 0.65,
+        "width": 0.82,
+        "height": 0.06
+      },
+      "timing": {
+        "start": 1.65
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "slideIn",
+          "duration": 0.45,
+          "params": {
+            "direction": "left",
+            "distance": 0.05
+          }
+        }
+      ]
+    },
+    {
+      "id": "item5",
+      "type": "text",
+      "key": "item5",
+      "default": {
+        "en": "5   Night walk",
+        "tr": "5   Gece yürüyüşü"
+      },
+      "font": {
+        "name": "AvenirNext-DemiBold",
+        "size": 0.036
+      },
+      "colorRole": "accent",
+      "alignment": "left",
+      "frame": {
+        "x": 0.5,
+        "y": 0.74,
+        "width": 0.82,
+        "height": 0.06
+      },
+      "timing": {
+        "start": 1.9
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "pop",
+          "duration": 0.5,
+          "params": {
+            "overshoot": 1.1
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,174 @@
+{
+  "schemaVersion": 1,
+  "id": "celebrate-01",
+  "name": {
+    "en": "Celebrate",
+    "tr": "Kutlama"
+  },
+  "category": "social",
+  "isPro": true,
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "duration": 4.0,
+  "palette": {
+    "background": "#140F1F",
+    "surface": "#FFFFFF",
+    "accent": "#8B5CF6",
+    "highlight": "#FFC53D",
+    "textPrimary": "#FFFFFF",
+    "textOnAccent": "#FFFFFF",
+    "textSecondary": "#CFC6E0",
+    "scrimClear": "#140F1F00",
+    "scrimSolid": "#140F1FCC"
+  },
+  "audio": {
+    "defaultTrackId": "playful-01",
+    "volume": 0.9
+  },
+  "layers": [
+    {
+      "id": "photo",
+      "type": "mediaSlot",
+      "slotIndex": 0,
+      "media": "photoOrVideo",
+      "contentMode": "fill",
+      "mask": "rect",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.4
+        },
+        {
+          "role": "loop",
+          "preset": "kenBurns",
+          "duration": 4.0,
+          "params": {
+            "zoom": 1.1,
+            "direction": "up"
+          }
+        }
+      ]
+    },
+    {
+      "id": "scrim",
+      "type": "shape",
+      "colorRole": "scrimClear",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "gradient": {
+        "from": "scrimClear",
+        "to": "scrimSolid",
+        "direction": "down"
+      }
+    },
+    {
+      "id": "headline",
+      "type": "text",
+      "key": "headline",
+      "default": {
+        "en": "CONGRATS!",
+        "tr": "TEBRİKLER!"
+      },
+      "font": {
+        "name": "AvenirNext-Heavy",
+        "size": 0.072
+      },
+      "colorRole": "textOnAccent",
+      "highlightColorRole": "accent",
+      "alignment": "center",
+      "allCaps": true,
+      "letterSpacing": 0.004,
+      "frame": {
+        "x": 0.5,
+        "y": 0.62,
+        "width": 0.86,
+        "height": 0.14
+      },
+      "timing": {
+        "start": 0.35
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "pop",
+          "duration": 0.55,
+          "easing": "spring",
+          "params": {
+            "overshoot": 1.18
+          }
+        }
+      ]
+    },
+    {
+      "id": "subtitle",
+      "type": "text",
+      "key": "subtitle",
+      "default": {
+        "en": "one year together",
+        "tr": "birlikte bir yıl"
+      },
+      "font": {
+        "name": "AvenirNext-Medium",
+        "size": 0.028
+      },
+      "colorRole": "textSecondary",
+      "alignment": "center",
+      "letterSpacing": 0.004,
+      "frame": {
+        "x": 0.5,
+        "y": 0.72,
+        "width": 0.8,
+        "height": 0.07
+      },
+      "timing": {
+        "start": 0.7
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "slideIn",
+          "duration": 0.45,
+          "easing": "easeOut",
+          "params": {
+            "direction": "up",
+            "distance": 0.03
+          }
+        }
+      ]
+    },
+    {
+      "id": "confetti",
+      "type": "lottie",
+      "asset": "assets/confetti.json",
+      "loopMode": "loop",
+      "colorRemap": {
+        "#FF4D6D": "accent",
+        "#FFD166": "highlight",
+        "#FFFFFF": "surface"
+      },
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "timing": {
+        "start": 0.2
+      }
+    }
+  ]
+}

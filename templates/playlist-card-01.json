@@ -1,0 +1,642 @@
+{
+  "schemaVersion": 1,
+  "id": "playlist-card-01",
+  "name": {
+    "en": "Playlist",
+    "tr": "Çalma Listesi"
+  },
+  "category": "music",
+  "isPro": false,
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "duration": 8.0,
+  "palette": {
+    "background": "#0B0B12",
+    "surface": "#FFFFFF",
+    "accent": "#6C8CFF",
+    "textPrimary": "#F4F5FF",
+    "textSecondary": "#A8ADC4",
+    "textOnAccent": "#FFFFFF",
+    "scrimClear": "#00000000",
+    "scrimSolid": "#000000CC"
+  },
+  "audio": {
+    "defaultTrackId": "chill-01",
+    "volume": 0.85
+  },
+  "layers": [
+    {
+      "id": "bg",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "type": "shape",
+      "colorRole": "background"
+    },
+    {
+      "id": "glow",
+      "frame": {
+        "x": 0.5,
+        "y": 0.28,
+        "width": 0.92,
+        "height": 0.42
+      },
+      "opacity": 0.1,
+      "animations": [
+        {
+          "role": "in",
+          "preset": "scaleIn",
+          "duration": 0.9,
+          "easing": "easeOut",
+          "params": {
+            "from": 0.85
+          }
+        },
+        {
+          "role": "loop",
+          "preset": "pulse",
+          "duration": 3.0,
+          "params": {
+            "scale": 1.04
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "accent",
+      "mask": "circle"
+    },
+    {
+      "id": "kicker",
+      "frame": {
+        "x": 0.5,
+        "y": 0.115,
+        "width": 0.8,
+        "height": 0.04
+      },
+      "timing": {
+        "start": 0.25
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.55
+        }
+      ],
+      "type": "text",
+      "key": "kicker",
+      "default": {
+        "en": "PLAYLIST",
+        "tr": "ÇALMA LİSTESİ"
+      },
+      "font": {
+        "name": "AvenirNext-DemiBold",
+        "size": 0.022
+      },
+      "colorRole": "accent",
+      "alignment": "center",
+      "letterSpacing": 0.024,
+      "allCaps": true
+    },
+    {
+      "id": "cover",
+      "frame": {
+        "x": 0.5,
+        "y": 0.29,
+        "width": 0.44,
+        "height": 0.2475
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "scaleIn",
+          "duration": 0.65,
+          "easing": "easeOut",
+          "params": {
+            "from": 0.88
+          }
+        },
+        {
+          "role": "loop",
+          "preset": "kenBurns",
+          "duration": 8.0,
+          "params": {
+            "zoom": 1.06,
+            "direction": "up"
+          }
+        }
+      ],
+      "type": "mediaSlot",
+      "slotIndex": 0,
+      "media": "photo",
+      "contentMode": "fill",
+      "mask": "rect",
+      "cornerRadius": 0.012,
+      "filter": "cool",
+      "filterIntensity": 0.35
+    },
+    {
+      "id": "name",
+      "frame": {
+        "x": 0.5,
+        "y": 0.47,
+        "width": 0.88,
+        "height": 0.1
+      },
+      "timing": {
+        "start": 0.55
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "kineticWords",
+          "duration": 0.9,
+          "params": {
+            "distance": 0.02
+          }
+        },
+        {
+          "role": "loop",
+          "preset": "floatLoop",
+          "duration": 2.6,
+          "params": {
+            "distance": 0.006,
+            "axis": "y"
+          }
+        }
+      ],
+      "type": "text",
+      "key": "name",
+      "default": {
+        "en": "Night Drive",
+        "tr": "Gece Sürüşü"
+      },
+      "font": {
+        "name": "AvenirNext-Heavy",
+        "size": 0.062
+      },
+      "colorRole": "textPrimary",
+      "alignment": "center"
+    },
+    {
+      "id": "meta",
+      "frame": {
+        "x": 0.5,
+        "y": 0.545,
+        "width": 0.8,
+        "height": 0.04
+      },
+      "timing": {
+        "start": 0.75
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.55
+        }
+      ],
+      "type": "text",
+      "key": "meta",
+      "default": {
+        "en": "12 tracks · 41 minutes",
+        "tr": "12 şarkı · 41 dakika"
+      },
+      "font": {
+        "name": "AvenirNext-Regular",
+        "size": 0.021
+      },
+      "colorRole": "textSecondary",
+      "alignment": "center"
+    },
+    {
+      "id": "num0",
+      "frame": {
+        "x": 0.13,
+        "y": 0.645,
+        "width": 0.1,
+        "height": 0.05
+      },
+      "timing": {
+        "start": 0.85
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.4
+        }
+      ],
+      "type": "text",
+      "key": "track1Num",
+      "default": {
+        "en": "1",
+        "tr": "1"
+      },
+      "font": {
+        "name": "AvenirNext-Heavy",
+        "size": 0.026
+      },
+      "colorRole": "accent",
+      "alignment": "left"
+    },
+    {
+      "id": "song0",
+      "frame": {
+        "x": 0.5,
+        "y": 0.645,
+        "width": 0.56,
+        "height": 0.05
+      },
+      "timing": {
+        "start": 0.9
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "slideIn",
+          "duration": 0.45,
+          "easing": "easeOut",
+          "params": {
+            "direction": "right",
+            "distance": 0.04
+          }
+        }
+      ],
+      "type": "text",
+      "key": "track1",
+      "default": {
+        "en": "Midnight Hour — Mert Kaya",
+        "tr": "Gece Yarısı — Mert Kaya"
+      },
+      "font": {
+        "name": "AvenirNext-Medium",
+        "size": 0.028
+      },
+      "colorRole": "textPrimary",
+      "alignment": "left"
+    },
+    {
+      "id": "len0",
+      "frame": {
+        "x": 0.88,
+        "y": 0.645,
+        "width": 0.16,
+        "height": 0.04
+      },
+      "timing": {
+        "start": 0.95
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.4
+        }
+      ],
+      "type": "text",
+      "key": "track1Len",
+      "default": {
+        "en": "3:42",
+        "tr": "3:42"
+      },
+      "font": {
+        "name": "AvenirNext-Regular",
+        "size": 0.021
+      },
+      "colorRole": "textSecondary",
+      "alignment": "right"
+    },
+    {
+      "id": "num1",
+      "frame": {
+        "x": 0.13,
+        "y": 0.728,
+        "width": 0.1,
+        "height": 0.05
+      },
+      "timing": {
+        "start": 0.94
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.4
+        }
+      ],
+      "type": "text",
+      "key": "track2Num",
+      "default": {
+        "en": "2",
+        "tr": "2"
+      },
+      "font": {
+        "name": "AvenirNext-Heavy",
+        "size": 0.026
+      },
+      "colorRole": "accent",
+      "alignment": "left"
+    },
+    {
+      "id": "song1",
+      "frame": {
+        "x": 0.5,
+        "y": 0.728,
+        "width": 0.56,
+        "height": 0.05
+      },
+      "timing": {
+        "start": 0.99
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "slideIn",
+          "duration": 0.45,
+          "easing": "easeOut",
+          "params": {
+            "direction": "right",
+            "distance": 0.04
+          }
+        }
+      ],
+      "type": "text",
+      "key": "track2",
+      "default": {
+        "en": "Coast Road — Deniz Ay",
+        "tr": "Sahil Yolu — Deniz Ay"
+      },
+      "font": {
+        "name": "AvenirNext-Medium",
+        "size": 0.028
+      },
+      "colorRole": "textPrimary",
+      "alignment": "left"
+    },
+    {
+      "id": "len1",
+      "frame": {
+        "x": 0.88,
+        "y": 0.728,
+        "width": 0.16,
+        "height": 0.04
+      },
+      "timing": {
+        "start": 1.04
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.4
+        }
+      ],
+      "type": "text",
+      "key": "track2Len",
+      "default": {
+        "en": "4:05",
+        "tr": "4:05"
+      },
+      "font": {
+        "name": "AvenirNext-Regular",
+        "size": 0.021
+      },
+      "colorRole": "textSecondary",
+      "alignment": "right"
+    },
+    {
+      "id": "num2",
+      "frame": {
+        "x": 0.13,
+        "y": 0.811,
+        "width": 0.1,
+        "height": 0.05
+      },
+      "timing": {
+        "start": 1.03
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.4
+        }
+      ],
+      "type": "text",
+      "key": "track3Num",
+      "default": {
+        "en": "3",
+        "tr": "3"
+      },
+      "font": {
+        "name": "AvenirNext-Heavy",
+        "size": 0.026
+      },
+      "colorRole": "accent",
+      "alignment": "left"
+    },
+    {
+      "id": "song2",
+      "frame": {
+        "x": 0.5,
+        "y": 0.811,
+        "width": 0.56,
+        "height": 0.05
+      },
+      "timing": {
+        "start": 1.08
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "slideIn",
+          "duration": 0.45,
+          "easing": "easeOut",
+          "params": {
+            "direction": "right",
+            "distance": 0.04
+          }
+        }
+      ],
+      "type": "text",
+      "key": "track3",
+      "default": {
+        "en": "Faraway — Kara Orman",
+        "tr": "Uzak — Kara Orman"
+      },
+      "font": {
+        "name": "AvenirNext-Medium",
+        "size": 0.028
+      },
+      "colorRole": "textPrimary",
+      "alignment": "left"
+    },
+    {
+      "id": "len2",
+      "frame": {
+        "x": 0.88,
+        "y": 0.811,
+        "width": 0.16,
+        "height": 0.04
+      },
+      "timing": {
+        "start": 1.13
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.4
+        }
+      ],
+      "type": "text",
+      "key": "track3Len",
+      "default": {
+        "en": "3:18",
+        "tr": "3:18"
+      },
+      "font": {
+        "name": "AvenirNext-Regular",
+        "size": 0.021
+      },
+      "colorRole": "textSecondary",
+      "alignment": "right"
+    },
+    {
+      "id": "num3",
+      "frame": {
+        "x": 0.13,
+        "y": 0.894,
+        "width": 0.1,
+        "height": 0.05
+      },
+      "timing": {
+        "start": 1.12
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.4
+        }
+      ],
+      "type": "text",
+      "key": "track4Num",
+      "default": {
+        "en": "4",
+        "tr": "4"
+      },
+      "font": {
+        "name": "AvenirNext-Heavy",
+        "size": 0.026
+      },
+      "colorRole": "accent",
+      "alignment": "left"
+    },
+    {
+      "id": "song3",
+      "frame": {
+        "x": 0.5,
+        "y": 0.894,
+        "width": 0.56,
+        "height": 0.05
+      },
+      "timing": {
+        "start": 1.17
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "slideIn",
+          "duration": 0.45,
+          "easing": "easeOut",
+          "params": {
+            "direction": "right",
+            "distance": 0.04
+          }
+        }
+      ],
+      "type": "text",
+      "key": "track4",
+      "default": {
+        "en": "Last Stop — Ela",
+        "tr": "Son Durak — Ela"
+      },
+      "font": {
+        "name": "AvenirNext-Medium",
+        "size": 0.028
+      },
+      "colorRole": "textPrimary",
+      "alignment": "left"
+    },
+    {
+      "id": "len3",
+      "frame": {
+        "x": 0.88,
+        "y": 0.894,
+        "width": 0.16,
+        "height": 0.04
+      },
+      "timing": {
+        "start": 1.22
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.4
+        }
+      ],
+      "type": "text",
+      "key": "track4Len",
+      "default": {
+        "en": "2:57",
+        "tr": "2:57"
+      },
+      "font": {
+        "name": "AvenirNext-Regular",
+        "size": 0.021
+      },
+      "colorRole": "textSecondary",
+      "alignment": "right"
+    },
+    {
+      "id": "footer",
+      "frame": {
+        "x": 0.5,
+        "y": 0.955,
+        "width": 0.7,
+        "height": 0.03
+      },
+      "timing": {
+        "start": 1.2
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.6
+        }
+      ],
+      "type": "text",
+      "key": "footer",
+      "default": {
+        "en": "Link in bio",
+        "tr": "Profildeki bağlantıda"
+      },
+      "font": {
+        "name": "AvenirNext-Regular",
+        "size": 0.019
+      },
+      "colorRole": "textSecondary",
+      "alignment": "center"
+    }
+  ]
+}

@@ -1,0 +1,208 @@
+{
+  "schemaVersion": 1,
+  "id": "spa-calm-01",
+  "name": {
+    "en": "Spa Invite",
+    "tr": "Bakım Daveti"
+  },
+  "category": "beauty",
+  "isPro": false,
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "duration": 6.5,
+  "palette": {
+    "background": "#FBFAF7",
+    "surface": "#FFFFFF",
+    "accent": "#B99566",
+    "textPrimary": "#1A1815",
+    "textSecondary": "#8A857D",
+    "textOnAccent": "#FFFFFF",
+    "scrimClear": "#00000000",
+    "scrimSolid": "#000000CC"
+  },
+  "audio": {
+    "defaultTrackId": "ambient-01",
+    "volume": 0.85
+  },
+  "layers": [
+    {
+      "id": "bg",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "type": "shape",
+      "colorRole": "surface"
+    },
+    {
+      "id": "photo",
+      "frame": {
+        "x": 0.5,
+        "y": 0.3,
+        "width": 1.0,
+        "height": 0.56
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.9
+        },
+        {
+          "role": "loop",
+          "preset": "kenBurns",
+          "duration": 6.5,
+          "params": {
+            "zoom": 1.07,
+            "direction": "down"
+          }
+        }
+      ],
+      "type": "mediaSlot",
+      "slotIndex": 0,
+      "media": "photoOrVideo",
+      "contentMode": "fill",
+      "mask": "rect",
+      "filter": "fade",
+      "filterIntensity": 0.4
+    },
+    {
+      "id": "rule",
+      "frame": {
+        "x": 0.5,
+        "y": 0.655,
+        "width": 0.09,
+        "height": 0.0035
+      },
+      "timing": {
+        "start": 0.6
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "wipeReveal",
+          "duration": 0.6,
+          "easing": "easeOut",
+          "params": {
+            "direction": "right"
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "accent"
+    },
+    {
+      "id": "kicker",
+      "frame": {
+        "x": 0.5,
+        "y": 0.7,
+        "width": 0.72,
+        "height": 0.035
+      },
+      "timing": {
+        "start": 0.7
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.6
+        }
+      ],
+      "type": "text",
+      "key": "kicker",
+      "default": {
+        "en": "A QUIET HOUR",
+        "tr": "HUZUR MOLASI"
+      },
+      "font": {
+        "name": "AvenirNext-Medium",
+        "size": 0.019
+      },
+      "colorRole": "textSecondary",
+      "alignment": "center",
+      "letterSpacing": 0.012,
+      "allCaps": true
+    },
+    {
+      "id": "title",
+      "frame": {
+        "x": 0.5,
+        "y": 0.805,
+        "width": 0.8,
+        "height": 0.16
+      },
+      "timing": {
+        "start": 0.9
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "kineticWords",
+          "duration": 0.9,
+          "params": {
+            "distance": 0.02
+          }
+        },
+        {
+          "role": "loop",
+          "preset": "floatLoop",
+          "duration": 2.6,
+          "params": {
+            "distance": 0.006,
+            "axis": "y"
+          }
+        }
+      ],
+      "type": "text",
+      "key": "title",
+      "default": {
+        "en": "Give yourself\nan hour off",
+        "tr": "Kendine bir\nsaat ayır"
+      },
+      "font": {
+        "name": "Didot",
+        "size": 0.058
+      },
+      "colorRole": "textPrimary",
+      "alignment": "center",
+      "maxLines": 2
+    },
+    {
+      "id": "sub",
+      "frame": {
+        "x": 0.5,
+        "y": 0.925,
+        "width": 0.82,
+        "height": 0.04
+      },
+      "timing": {
+        "start": 1.2
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.6
+        }
+      ],
+      "type": "text",
+      "key": "sub",
+      "default": {
+        "en": "Facials & massage · Saturdays from 10",
+        "tr": "Cilt bakımı & masaj · Cumartesi 10.00"
+      },
+      "font": {
+        "name": "AvenirNext-Regular",
+        "size": 0.021
+      },
+      "colorRole": "textSecondary",
+      "alignment": "center"
+    }
+  ]
+}

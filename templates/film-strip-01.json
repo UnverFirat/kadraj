@@ -1,0 +1,518 @@
+{
+  "schemaVersion": 2,
+  "id": "film-strip-01",
+  "name": {
+    "en": "Film Strip",
+    "tr": "Film Şeridi"
+  },
+  "category": "minimal",
+  "isPro": true,
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "palette": {
+    "background": "#0A0A0A",
+    "surface": "#FFFFFF",
+    "accent": "#FFFFFF",
+    "textPrimary": "#FFFFFF",
+    "textSecondary": "#9A9A9A",
+    "textOnAccent": "#0A0A0A",
+    "scrimClear": "#00000000",
+    "scrimSolid": "#000000CC"
+  },
+  "audio": {
+    "defaultTrackId": "cinematic-01",
+    "volume": 0.85
+  },
+  "scenes": [
+    {
+      "id": "strip",
+      "duration": 7.0,
+      "layers": [
+        {
+          "id": "frame0",
+          "frame": {
+            "x": 0.5,
+            "y": 0.28,
+            "width": 0.82,
+            "height": 0.2
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "fadeIn",
+              "duration": 0.6
+            },
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 7.0,
+              "params": {
+                "zoom": 1.08,
+                "direction": "right"
+              }
+            }
+          ],
+          "type": "mediaSlot",
+          "slotIndex": 0,
+          "media": "photoOrVideo",
+          "contentMode": "fill",
+          "mask": "rect",
+          "filter": "cinematic",
+          "filterIntensity": 0.45
+        },
+        {
+          "id": "frame1",
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 0.82,
+            "height": 0.2
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "fadeIn",
+              "duration": 0.6,
+              "delay": 0.12
+            },
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 7.0,
+              "params": {
+                "zoom": 1.08,
+                "direction": "left"
+              }
+            }
+          ],
+          "type": "mediaSlot",
+          "slotIndex": 1,
+          "media": "photoOrVideo",
+          "contentMode": "fill",
+          "mask": "rect",
+          "filter": "cinematic",
+          "filterIntensity": 0.45
+        },
+        {
+          "id": "frame2",
+          "frame": {
+            "x": 0.5,
+            "y": 0.72,
+            "width": 0.82,
+            "height": 0.2
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "fadeIn",
+              "duration": 0.6,
+              "delay": 0.24
+            },
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 7.0,
+              "params": {
+                "zoom": 1.08,
+                "direction": "right"
+              }
+            }
+          ],
+          "type": "mediaSlot",
+          "slotIndex": 2,
+          "media": "photoOrVideo",
+          "contentMode": "fill",
+          "mask": "rect",
+          "filter": "cinematic",
+          "filterIntensity": 0.45
+        },
+        {
+          "id": "perf-l0",
+          "frame": {
+            "x": 0.06,
+            "y": 0.15,
+            "width": 0.034,
+            "height": 0.017
+          },
+          "opacity": 0.8,
+          "type": "shape",
+          "colorRole": "surface",
+          "cornerRadius": 0.004
+        },
+        {
+          "id": "perf-r0",
+          "frame": {
+            "x": 0.94,
+            "y": 0.15,
+            "width": 0.034,
+            "height": 0.017
+          },
+          "opacity": 0.8,
+          "type": "shape",
+          "colorRole": "surface",
+          "cornerRadius": 0.004
+        },
+        {
+          "id": "perf-l1",
+          "frame": {
+            "x": 0.06,
+            "y": 0.214,
+            "width": 0.034,
+            "height": 0.017
+          },
+          "opacity": 0.8,
+          "type": "shape",
+          "colorRole": "surface",
+          "cornerRadius": 0.004
+        },
+        {
+          "id": "perf-r1",
+          "frame": {
+            "x": 0.94,
+            "y": 0.214,
+            "width": 0.034,
+            "height": 0.017
+          },
+          "opacity": 0.8,
+          "type": "shape",
+          "colorRole": "surface",
+          "cornerRadius": 0.004
+        },
+        {
+          "id": "perf-l2",
+          "frame": {
+            "x": 0.06,
+            "y": 0.278,
+            "width": 0.034,
+            "height": 0.017
+          },
+          "opacity": 0.8,
+          "type": "shape",
+          "colorRole": "surface",
+          "cornerRadius": 0.004
+        },
+        {
+          "id": "perf-r2",
+          "frame": {
+            "x": 0.94,
+            "y": 0.278,
+            "width": 0.034,
+            "height": 0.017
+          },
+          "opacity": 0.8,
+          "type": "shape",
+          "colorRole": "surface",
+          "cornerRadius": 0.004
+        },
+        {
+          "id": "perf-l3",
+          "frame": {
+            "x": 0.06,
+            "y": 0.342,
+            "width": 0.034,
+            "height": 0.017
+          },
+          "opacity": 0.8,
+          "type": "shape",
+          "colorRole": "surface",
+          "cornerRadius": 0.004
+        },
+        {
+          "id": "perf-r3",
+          "frame": {
+            "x": 0.94,
+            "y": 0.342,
+            "width": 0.034,
+            "height": 0.017
+          },
+          "opacity": 0.8,
+          "type": "shape",
+          "colorRole": "surface",
+          "cornerRadius": 0.004
+        },
+        {
+          "id": "perf-l4",
+          "frame": {
+            "x": 0.06,
+            "y": 0.406,
+            "width": 0.034,
+            "height": 0.017
+          },
+          "opacity": 0.8,
+          "type": "shape",
+          "colorRole": "surface",
+          "cornerRadius": 0.004
+        },
+        {
+          "id": "perf-r4",
+          "frame": {
+            "x": 0.94,
+            "y": 0.406,
+            "width": 0.034,
+            "height": 0.017
+          },
+          "opacity": 0.8,
+          "type": "shape",
+          "colorRole": "surface",
+          "cornerRadius": 0.004
+        },
+        {
+          "id": "perf-l5",
+          "frame": {
+            "x": 0.06,
+            "y": 0.47,
+            "width": 0.034,
+            "height": 0.017
+          },
+          "opacity": 0.8,
+          "type": "shape",
+          "colorRole": "surface",
+          "cornerRadius": 0.004
+        },
+        {
+          "id": "perf-r5",
+          "frame": {
+            "x": 0.94,
+            "y": 0.47,
+            "width": 0.034,
+            "height": 0.017
+          },
+          "opacity": 0.8,
+          "type": "shape",
+          "colorRole": "surface",
+          "cornerRadius": 0.004
+        },
+        {
+          "id": "perf-l6",
+          "frame": {
+            "x": 0.06,
+            "y": 0.534,
+            "width": 0.034,
+            "height": 0.017
+          },
+          "opacity": 0.8,
+          "type": "shape",
+          "colorRole": "surface",
+          "cornerRadius": 0.004
+        },
+        {
+          "id": "perf-r6",
+          "frame": {
+            "x": 0.94,
+            "y": 0.534,
+            "width": 0.034,
+            "height": 0.017
+          },
+          "opacity": 0.8,
+          "type": "shape",
+          "colorRole": "surface",
+          "cornerRadius": 0.004
+        },
+        {
+          "id": "perf-l7",
+          "frame": {
+            "x": 0.06,
+            "y": 0.598,
+            "width": 0.034,
+            "height": 0.017
+          },
+          "opacity": 0.8,
+          "type": "shape",
+          "colorRole": "surface",
+          "cornerRadius": 0.004
+        },
+        {
+          "id": "perf-r7",
+          "frame": {
+            "x": 0.94,
+            "y": 0.598,
+            "width": 0.034,
+            "height": 0.017
+          },
+          "opacity": 0.8,
+          "type": "shape",
+          "colorRole": "surface",
+          "cornerRadius": 0.004
+        },
+        {
+          "id": "perf-l8",
+          "frame": {
+            "x": 0.06,
+            "y": 0.662,
+            "width": 0.034,
+            "height": 0.017
+          },
+          "opacity": 0.8,
+          "type": "shape",
+          "colorRole": "surface",
+          "cornerRadius": 0.004
+        },
+        {
+          "id": "perf-r8",
+          "frame": {
+            "x": 0.94,
+            "y": 0.662,
+            "width": 0.034,
+            "height": 0.017
+          },
+          "opacity": 0.8,
+          "type": "shape",
+          "colorRole": "surface",
+          "cornerRadius": 0.004
+        },
+        {
+          "id": "perf-l9",
+          "frame": {
+            "x": 0.06,
+            "y": 0.726,
+            "width": 0.034,
+            "height": 0.017
+          },
+          "opacity": 0.8,
+          "type": "shape",
+          "colorRole": "surface",
+          "cornerRadius": 0.004
+        },
+        {
+          "id": "perf-r9",
+          "frame": {
+            "x": 0.94,
+            "y": 0.726,
+            "width": 0.034,
+            "height": 0.017
+          },
+          "opacity": 0.8,
+          "type": "shape",
+          "colorRole": "surface",
+          "cornerRadius": 0.004
+        },
+        {
+          "id": "perf-l10",
+          "frame": {
+            "x": 0.06,
+            "y": 0.79,
+            "width": 0.034,
+            "height": 0.017
+          },
+          "opacity": 0.8,
+          "type": "shape",
+          "colorRole": "surface",
+          "cornerRadius": 0.004
+        },
+        {
+          "id": "perf-r10",
+          "frame": {
+            "x": 0.94,
+            "y": 0.79,
+            "width": 0.034,
+            "height": 0.017
+          },
+          "opacity": 0.8,
+          "type": "shape",
+          "colorRole": "surface",
+          "cornerRadius": 0.004
+        },
+        {
+          "id": "perf-l11",
+          "frame": {
+            "x": 0.06,
+            "y": 0.854,
+            "width": 0.034,
+            "height": 0.017
+          },
+          "opacity": 0.8,
+          "type": "shape",
+          "colorRole": "surface",
+          "cornerRadius": 0.004
+        },
+        {
+          "id": "perf-r11",
+          "frame": {
+            "x": 0.94,
+            "y": 0.854,
+            "width": 0.034,
+            "height": 0.017
+          },
+          "opacity": 0.8,
+          "type": "shape",
+          "colorRole": "surface",
+          "cornerRadius": 0.004
+        },
+        {
+          "id": "reel",
+          "frame": {
+            "x": 0.5,
+            "y": 0.095,
+            "width": 0.76,
+            "height": 0.055
+          },
+          "timing": {
+            "start": 0.4
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "slideIn",
+              "duration": 0.6,
+              "easing": "easeOut",
+              "params": {
+                "direction": "down",
+                "distance": 0.03
+              }
+            }
+          ],
+          "type": "text",
+          "key": "reel",
+          "default": {
+            "en": "36 FRAMES, ONE DAY",
+            "tr": "36 KARE, TEK GÜN"
+          },
+          "font": {
+            "name": "AvenirNext-Heavy",
+            "size": 0.032
+          },
+          "colorRole": "textPrimary",
+          "alignment": "center",
+          "letterSpacing": 0.012,
+          "allCaps": true
+        },
+        {
+          "id": "roll",
+          "frame": {
+            "x": 0.5,
+            "y": 0.905,
+            "width": 0.7,
+            "height": 0.04
+          },
+          "timing": {
+            "start": 0.9
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "fadeIn",
+              "duration": 0.7
+            }
+          ],
+          "type": "text",
+          "key": "roll",
+          "default": {
+            "en": "roll 01 · august",
+            "tr": "rulo 01 · ağustos"
+          },
+          "font": {
+            "name": "AvenirNext-Medium",
+            "size": 0.02
+          },
+          "colorRole": "textSecondary",
+          "alignment": "center",
+          "letterSpacing": 0.008
+        }
+      ]
+    }
+  ],
+  "layers": []
+}

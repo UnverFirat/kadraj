@@ -1,0 +1,300 @@
+{
+  "schemaVersion": 1,
+  "id": "baby-news-01",
+  "name": {
+    "en": "Baby News",
+    "tr": "Bebek Müjdesi"
+  },
+  "category": "wedding",
+  "isPro": false,
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "duration": 7.0,
+  "palette": {
+    "background": "#F5EFE6",
+    "surface": "#FFFFFF",
+    "accent": "#C0763A",
+    "textPrimary": "#2B231C",
+    "textSecondary": "#7A6A5B",
+    "textOnAccent": "#FFF8F0",
+    "scrimClear": "#00000000",
+    "scrimSolid": "#000000CC",
+    "pastel": "#BCD9E4"
+  },
+  "audio": {
+    "defaultTrackId": "playful-01",
+    "volume": 0.85
+  },
+  "layers": [
+    {
+      "id": "bg",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "type": "shape",
+      "colorRole": "background"
+    },
+    {
+      "id": "wash",
+      "frame": {
+        "x": 0.5,
+        "y": 0.47,
+        "width": 1.0,
+        "height": 0.72
+      },
+      "opacity": 0.35,
+      "type": "shape",
+      "colorRole": "pastel",
+      "gradient": {
+        "from": "pastel",
+        "to": "background",
+        "direction": "down"
+      }
+    },
+    {
+      "id": "baby",
+      "frame": {
+        "x": 0.5,
+        "y": 0.075,
+        "width": 0.11,
+        "height": 0.08
+      },
+      "timing": {
+        "start": 0.3
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "bounce",
+          "duration": 0.7
+        }
+      ],
+      "type": "text",
+      "key": "baby",
+      "default": {
+        "en": "👶",
+        "tr": "👶"
+      },
+      "font": {
+        "name": "AvenirNext-Bold",
+        "size": 0.05
+      },
+      "colorRole": "textPrimary",
+      "alignment": "center"
+    },
+    {
+      "id": "headline",
+      "frame": {
+        "x": 0.5,
+        "y": 0.17,
+        "width": 0.8,
+        "height": 0.05
+      },
+      "timing": {
+        "start": 0.45
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "pop",
+          "duration": 0.55,
+          "params": {
+            "overshoot": 1.1
+          }
+        }
+      ],
+      "type": "text",
+      "key": "headline",
+      "default": {
+        "en": "GOOD NEWS",
+        "tr": "MÜJDE"
+      },
+      "font": {
+        "name": "AvenirNext-Heavy",
+        "size": 0.05
+      },
+      "colorRole": "accent",
+      "alignment": "center",
+      "letterSpacing": 0.02,
+      "allCaps": true
+    },
+    {
+      "id": "sub",
+      "frame": {
+        "x": 0.5,
+        "y": 0.245,
+        "width": 0.82,
+        "height": 0.04
+      },
+      "timing": {
+        "start": 0.6
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.6
+        }
+      ],
+      "type": "text",
+      "key": "sub",
+      "default": {
+        "en": "A little one is joining our family",
+        "tr": "Ailemize küçük bir misafir geliyor"
+      },
+      "font": {
+        "name": "AvenirNext-Regular",
+        "size": 0.022
+      },
+      "colorRole": "textSecondary",
+      "alignment": "center"
+    },
+    {
+      "id": "ring",
+      "frame": {
+        "x": 0.5,
+        "y": 0.47,
+        "width": 0.72,
+        "height": 0.405
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "scaleIn",
+          "duration": 0.8,
+          "easing": "easeOut",
+          "params": {
+            "from": 0.86
+          }
+        },
+        {
+          "role": "loop",
+          "preset": "pulse",
+          "duration": 3.0,
+          "params": {
+            "scale": 1.03
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "pastel",
+      "mask": "circle"
+    },
+    {
+      "id": "portrait",
+      "frame": {
+        "x": 0.5,
+        "y": 0.47,
+        "width": 0.68,
+        "height": 0.3825
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "scaleIn",
+          "duration": 0.7,
+          "easing": "easeOut",
+          "params": {
+            "from": 0.9
+          }
+        },
+        {
+          "role": "loop",
+          "preset": "kenBurns",
+          "duration": 7.0,
+          "params": {
+            "zoom": 1.08,
+            "direction": "up"
+          }
+        }
+      ],
+      "type": "mediaSlot",
+      "slotIndex": 0,
+      "media": "photoOrVideo",
+      "contentMode": "fill",
+      "mask": "circle",
+      "filter": "warm",
+      "filterIntensity": 0.35
+    },
+    {
+      "id": "name",
+      "frame": {
+        "x": 0.5,
+        "y": 0.75,
+        "width": 0.7,
+        "height": 0.11
+      },
+      "timing": {
+        "start": 0.9
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "punchIn",
+          "duration": 0.55,
+          "params": {
+            "from": 1.5
+          }
+        },
+        {
+          "role": "loop",
+          "preset": "floatLoop",
+          "duration": 2.6,
+          "params": {
+            "distance": 0.006,
+            "axis": "y"
+          }
+        }
+      ],
+      "type": "text",
+      "key": "name",
+      "default": {
+        "en": "Deniz",
+        "tr": "Deniz"
+      },
+      "font": {
+        "name": "SnellRoundhand-Bold",
+        "size": 0.075
+      },
+      "colorRole": "textPrimary",
+      "alignment": "center"
+    },
+    {
+      "id": "date",
+      "frame": {
+        "x": 0.5,
+        "y": 0.86,
+        "width": 0.76,
+        "height": 0.04
+      },
+      "timing": {
+        "start": 1.1
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.6
+        }
+      ],
+      "type": "text",
+      "key": "date",
+      "default": {
+        "en": "Arriving October 2026",
+        "tr": "Ekim 2026'da aramızda"
+      },
+      "font": {
+        "name": "AvenirNext-Medium",
+        "size": 0.023
+      },
+      "colorRole": "textSecondary",
+      "alignment": "center"
+    }
+  ]
+}

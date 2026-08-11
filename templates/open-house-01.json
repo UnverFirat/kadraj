@@ -1,0 +1,312 @@
+{
+  "schemaVersion": 1,
+  "id": "open-house-01",
+  "name": {
+    "en": "Open House",
+    "tr": "Açık Ev"
+  },
+  "category": "realestate",
+  "isPro": false,
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "duration": 6.5,
+  "palette": {
+    "background": "#15171C",
+    "surface": "#FFFFFF",
+    "accent": "#8FA3B8",
+    "textPrimary": "#F7F9FC",
+    "textSecondary": "#A9B3C0",
+    "textOnAccent": "#FFFFFF",
+    "scrimClear": "#00000000",
+    "scrimSolid": "#000000CC",
+    "ribbon": "#2F6DF6"
+  },
+  "audio": {
+    "defaultTrackId": "clean-01",
+    "volume": 0.85
+  },
+  "layers": [
+    {
+      "id": "bg",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "type": "shape",
+      "colorRole": "background"
+    },
+    {
+      "id": "photo",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.6
+        },
+        {
+          "role": "loop",
+          "preset": "kenBurns",
+          "duration": 6.5,
+          "params": {
+            "zoom": 1.1,
+            "direction": "left"
+          }
+        }
+      ],
+      "type": "mediaSlot",
+      "slotIndex": 0,
+      "media": "photoOrVideo",
+      "contentMode": "fill",
+      "mask": "rect",
+      "filter": "cool",
+      "filterIntensity": 0.3
+    },
+    {
+      "id": "scrim-top",
+      "frame": {
+        "x": 0.5,
+        "y": 0.16,
+        "width": 1.0,
+        "height": 0.32
+      },
+      "type": "shape",
+      "colorRole": "scrimClear",
+      "gradient": {
+        "from": "scrimClear",
+        "to": "scrimSolid",
+        "direction": "up"
+      }
+    },
+    {
+      "id": "scrim-bottom",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "type": "shape",
+      "colorRole": "scrimClear",
+      "gradient": {
+        "from": "scrimClear",
+        "to": "scrimSolid",
+        "direction": "down"
+      }
+    },
+    {
+      "id": "ribbon-bar",
+      "frame": {
+        "x": 0.5,
+        "y": 0.115,
+        "width": 1.0,
+        "height": 0.088
+      },
+      "timing": {
+        "start": 0.2
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "wipeReveal",
+          "duration": 0.6,
+          "easing": "easeOut",
+          "params": {
+            "direction": "right"
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "ribbon"
+    },
+    {
+      "id": "ribbon-text",
+      "frame": {
+        "x": 0.5,
+        "y": 0.115,
+        "width": 0.9,
+        "height": 0.05
+      },
+      "timing": {
+        "start": 0.5
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.4
+        }
+      ],
+      "type": "text",
+      "key": "ribbon",
+      "default": {
+        "en": "OPEN HOUSE · SUNDAY",
+        "tr": "AÇIK EV · PAZAR"
+      },
+      "font": {
+        "name": "AvenirNext-Heavy",
+        "size": 0.03
+      },
+      "colorRole": "textOnAccent",
+      "alignment": "center",
+      "letterSpacing": 0.012,
+      "allCaps": true
+    },
+    {
+      "id": "summary",
+      "frame": {
+        "x": 0.5,
+        "y": 0.705,
+        "width": 0.86,
+        "height": 0.04
+      },
+      "timing": {
+        "start": 0.7
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.5
+        }
+      ],
+      "type": "text",
+      "key": "summary",
+      "default": {
+        "en": "3 BED · 1,290 FT² · ELEVATOR",
+        "tr": "3+1 DAİRE · 120 m² · ASANSÖRLÜ"
+      },
+      "font": {
+        "name": "AvenirNext-Medium",
+        "size": 0.024
+      },
+      "colorRole": "textSecondary",
+      "alignment": "center",
+      "letterSpacing": 0.008,
+      "allCaps": true
+    },
+    {
+      "id": "date",
+      "frame": {
+        "x": 0.5,
+        "y": 0.78,
+        "width": 0.86,
+        "height": 0.065
+      },
+      "timing": {
+        "start": 0.85
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "slideIn",
+          "duration": 0.55,
+          "easing": "easeOut",
+          "params": {
+            "direction": "up",
+            "distance": 0.04
+          }
+        },
+        {
+          "role": "loop",
+          "preset": "floatLoop",
+          "duration": 2.6,
+          "params": {
+            "distance": 0.006,
+            "axis": "y"
+          }
+        }
+      ],
+      "type": "text",
+      "key": "date",
+      "default": {
+        "en": "Sunday, October 12",
+        "tr": "12 Ekim Pazar"
+      },
+      "font": {
+        "name": "AvenirNext-Bold",
+        "size": 0.04
+      },
+      "colorRole": "textPrimary",
+      "alignment": "center"
+    },
+    {
+      "id": "hours",
+      "frame": {
+        "x": 0.5,
+        "y": 0.848,
+        "width": 0.7,
+        "height": 0.05
+      },
+      "timing": {
+        "start": 1.0
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "slideIn",
+          "duration": 0.5,
+          "easing": "easeOut",
+          "params": {
+            "direction": "up",
+            "distance": 0.03
+          }
+        }
+      ],
+      "type": "text",
+      "key": "hours",
+      "default": {
+        "en": "2 PM – 5 PM",
+        "tr": "14.00 – 17.00"
+      },
+      "font": {
+        "name": "AvenirNext-DemiBold",
+        "size": 0.032
+      },
+      "colorRole": "accent",
+      "alignment": "center",
+      "letterSpacing": 0.01
+    },
+    {
+      "id": "address",
+      "frame": {
+        "x": 0.5,
+        "y": 0.908,
+        "width": 0.86,
+        "height": 0.04
+      },
+      "timing": {
+        "start": 1.15
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.6
+        }
+      ],
+      "type": "text",
+      "key": "address",
+      "default": {
+        "en": "14 Maple Avenue, Riverside",
+        "tr": "Bahariye Cad. No:14, Kadıköy"
+      },
+      "font": {
+        "name": "AvenirNext-Regular",
+        "size": 0.022
+      },
+      "colorRole": "textSecondary",
+      "alignment": "center"
+    }
+  ]
+}

@@ -1,0 +1,335 @@
+{
+  "schemaVersion": 1,
+  "id": "poll-card-01",
+  "name": {
+    "en": "This or That",
+    "tr": "Bu mu Şu mu"
+  },
+  "category": "social",
+  "isPro": true,
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "duration": 6.0,
+  "palette": {
+    "background": "#101014",
+    "surface": "#FFFFFF",
+    "accent": "#FF2E63",
+    "textPrimary": "#FFFFFF",
+    "textSecondary": "#C9C9D1",
+    "textOnAccent": "#FFFFFF",
+    "scrimClear": "#00000000",
+    "scrimSolid": "#000000CC"
+  },
+  "audio": {
+    "defaultTrackId": "punchy-01",
+    "volume": 0.85
+  },
+  "layers": [
+    {
+      "id": "bg",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "type": "shape",
+      "colorRole": "background"
+    },
+    {
+      "id": "top",
+      "frame": {
+        "x": 0.5,
+        "y": 0.25,
+        "width": 1.0,
+        "height": 0.5
+      },
+      "animations": [
+        {
+          "role": "loop",
+          "preset": "kenBurns",
+          "duration": 6.0,
+          "params": {
+            "zoom": 1.1,
+            "direction": "down"
+          }
+        }
+      ],
+      "type": "mediaSlot",
+      "slotIndex": 0,
+      "media": "photo",
+      "contentMode": "fill",
+      "mask": "rect",
+      "filter": "vivid",
+      "filterIntensity": 0.5
+    },
+    {
+      "id": "bottom",
+      "frame": {
+        "x": 0.5,
+        "y": 0.75,
+        "width": 1.0,
+        "height": 0.5
+      },
+      "animations": [
+        {
+          "role": "loop",
+          "preset": "kenBurns",
+          "duration": 6.0,
+          "params": {
+            "zoom": 1.1,
+            "direction": "up"
+          }
+        }
+      ],
+      "type": "mediaSlot",
+      "slotIndex": 1,
+      "media": "photo",
+      "contentMode": "fill",
+      "mask": "rect",
+      "filter": "vivid",
+      "filterIntensity": 0.5
+    },
+    {
+      "id": "top-veil",
+      "frame": {
+        "x": 0.5,
+        "y": 0.25,
+        "width": 1.0,
+        "height": 0.5
+      },
+      "type": "shape",
+      "colorRole": "scrimClear",
+      "gradient": {
+        "from": "scrimClear",
+        "to": "scrimSolid",
+        "direction": "up"
+      }
+    },
+    {
+      "id": "bottom-veil",
+      "frame": {
+        "x": 0.5,
+        "y": 0.75,
+        "width": 1.0,
+        "height": 0.5
+      },
+      "type": "shape",
+      "colorRole": "scrimClear",
+      "gradient": {
+        "from": "scrimClear",
+        "to": "scrimSolid",
+        "direction": "down"
+      }
+    },
+    {
+      "id": "title",
+      "frame": {
+        "x": 0.5,
+        "y": 0.1,
+        "width": 0.86,
+        "height": 0.09
+      },
+      "timing": {
+        "start": 0.2
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "pop",
+          "duration": 0.5,
+          "params": {
+            "overshoot": 1.1
+          }
+        },
+        {
+          "role": "loop",
+          "preset": "floatLoop",
+          "duration": 2.6,
+          "params": {
+            "distance": 0.006,
+            "axis": "y"
+          }
+        }
+      ],
+      "type": "text",
+      "key": "title",
+      "default": {
+        "en": "THIS OR THAT?",
+        "tr": "BU MU, ŞU MU?"
+      },
+      "font": {
+        "name": "AvenirNext-Heavy",
+        "size": 0.052
+      },
+      "colorRole": "textPrimary",
+      "alignment": "center",
+      "letterSpacing": 0.006,
+      "allCaps": true
+    },
+    {
+      "id": "opt-a",
+      "frame": {
+        "x": 0.5,
+        "y": 0.32,
+        "width": 0.6,
+        "height": 0.08
+      },
+      "timing": {
+        "start": 0.5
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "slideIn",
+          "duration": 0.5,
+          "easing": "easeOut",
+          "params": {
+            "direction": "right",
+            "distance": 0.07
+          }
+        }
+      ],
+      "type": "text",
+      "key": "optA",
+      "default": {
+        "en": "BEACH",
+        "tr": "SAHİL"
+      },
+      "font": {
+        "name": "AvenirNext-Bold",
+        "size": 0.046
+      },
+      "colorRole": "textPrimary",
+      "alignment": "center",
+      "letterSpacing": 0.014,
+      "allCaps": true
+    },
+    {
+      "id": "or-circle",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 0.22,
+        "height": 0.124
+      },
+      "timing": {
+        "start": 0.35
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "bounce",
+          "duration": 0.7
+        }
+      ],
+      "type": "shape",
+      "colorRole": "accent",
+      "mask": "circle"
+    },
+    {
+      "id": "or",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 0.2,
+        "height": 0.05
+      },
+      "timing": {
+        "start": 0.55
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.35
+        }
+      ],
+      "type": "text",
+      "key": "or",
+      "default": {
+        "en": "OR",
+        "tr": "VEYA"
+      },
+      "font": {
+        "name": "AvenirNext-Heavy",
+        "size": 0.03
+      },
+      "colorRole": "textOnAccent",
+      "alignment": "center",
+      "allCaps": true
+    },
+    {
+      "id": "opt-b",
+      "frame": {
+        "x": 0.5,
+        "y": 0.68,
+        "width": 0.6,
+        "height": 0.08
+      },
+      "timing": {
+        "start": 0.7
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "slideIn",
+          "duration": 0.5,
+          "easing": "easeOut",
+          "params": {
+            "direction": "left",
+            "distance": 0.07
+          }
+        }
+      ],
+      "type": "text",
+      "key": "optB",
+      "default": {
+        "en": "MOUNTAIN",
+        "tr": "DAĞ"
+      },
+      "font": {
+        "name": "AvenirNext-Bold",
+        "size": 0.046
+      },
+      "colorRole": "textPrimary",
+      "alignment": "center",
+      "letterSpacing": 0.014,
+      "allCaps": true
+    },
+    {
+      "id": "cta",
+      "frame": {
+        "x": 0.5,
+        "y": 0.92,
+        "width": 0.74,
+        "height": 0.04
+      },
+      "timing": {
+        "start": 1.0
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.5
+        }
+      ],
+      "type": "text",
+      "key": "cta",
+      "default": {
+        "en": "Vote in the comments",
+        "tr": "Oyunu yoruma yaz"
+      },
+      "font": {
+        "name": "AvenirNext-Medium",
+        "size": 0.022
+      },
+      "colorRole": "textSecondary",
+      "alignment": "center"
+    }
+  ]
+}

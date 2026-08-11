@@ -1,0 +1,89 @@
+{
+  "schemaVersion": 2,
+  "id": "reel-collage-01",
+  "name": { "en": "Reel Collage", "tr": "Reel Kolaj" },
+  "category": "promo",
+  "isPro": false,
+  "canvas": { "width": 1080, "height": 1920, "fps": 30 },
+  "palette": {
+    "background": "#0B0B0D",
+    "surface": "#1C1C1F",
+    "accent": "#D9A441",
+    "textPrimary": "#FFFFFF",
+    "textSecondary": "#C9C9CC"
+  },
+  "audio": { "defaultTrackId": "upbeat-01", "volume": 0.9 },
+  "scenes": [
+    {
+      "id": "collage",
+      "duration": 4.0,
+      "layers": [
+        { "id": "band-top", "type": "mediaSlot", "slotIndex": 0, "media": "video",
+          "frame": { "x": 0.5, "y": 0.1665, "width": 1.0, "height": 0.333 } },
+        { "id": "band-mid", "type": "mediaSlot", "slotIndex": 1, "media": "video",
+          "frame": { "x": 0.5, "y": 0.5, "width": 1.0, "height": 0.334 } },
+        { "id": "band-bottom", "type": "mediaSlot", "slotIndex": 2, "media": "video",
+          "frame": { "x": 0.5, "y": 0.8335, "width": 1.0, "height": 0.333 } },
+        { "id": "intro-title", "type": "text", "key": "intro",
+          "default": { "en": "SUMMER DIARY", "tr": "YAZ GÜNLÜĞÜ" },
+          "font": { "name": "Archivo-SemiBold", "size": 0.034 },
+          "colorRole": "textPrimary", "alignment": "center", "allCaps": true,
+          "letterSpacing": 0.004,
+          "frame": { "x": 0.5, "y": 0.5, "width": 0.8, "height": 0.08 },
+          "timing": { "start": 0.5 },
+          "animations": [
+            { "role": "in", "preset": "pop", "duration": 0.5 },
+            { "role": "out", "preset": "fadeOut", "duration": 0.3 }
+          ] }
+      ],
+      "transition": { "style": "blurDissolve", "duration": 0.6 }
+    },
+    {
+      "id": "street",
+      "duration": 4.0,
+      "layers": [
+        { "id": "hero-1", "type": "mediaSlot", "slotIndex": 3, "media": "video",
+          "frame": { "x": 0.5, "y": 0.5, "width": 1.0, "height": 1.0 } },
+        { "id": "headline", "type": "text", "key": "headline",
+          "default": { "en": "CITY WALKS", "tr": "ŞEHİR TURU" },
+          "font": { "name": "Archivo-SemiBold", "size": 0.04 },
+          "colorRole": "textPrimary", "alignment": "center", "allCaps": true,
+          "letterSpacing": 0.003,
+          "frame": { "x": 0.5, "y": 0.82, "width": 0.84, "height": 0.09 },
+          "timing": { "start": 0.7 },
+          "animations": [
+            { "role": "in", "preset": "slideIn", "duration": 0.5,
+              "params": { "direction": "up", "distance": 0.04 } },
+            { "role": "out", "preset": "fadeOut", "duration": 0.4 }
+          ] }
+      ],
+      "transition": { "style": "crossDissolve", "duration": 0.5 }
+    },
+    {
+      "id": "outro",
+      "duration": 3.5,
+      "layers": [
+        { "id": "hero-2", "type": "mediaSlot", "slotIndex": 4, "media": "video",
+          "frame": { "x": 0.5, "y": 0.5, "width": 1.0, "height": 1.0 } },
+        { "id": "outro-bar", "type": "shape", "colorRole": "accent",
+          "frame": { "x": 0.5, "y": 0.855, "width": 0.1, "height": 0.004 },
+          "timing": { "start": 0.4 },
+          "animations": [
+            { "role": "in", "preset": "wipeReveal", "duration": 0.4,
+              "params": { "direction": "right" } }
+          ] },
+        { "id": "handle", "type": "text", "key": "handle",
+          "default": { "en": "@yourhandle", "tr": "@kullanici" },
+          "font": { "name": "Archivo-Regular", "size": 0.022 },
+          "colorRole": "textSecondary", "alignment": "center",
+          "letterSpacing": 0.004,
+          "frame": { "x": 0.5, "y": 0.9, "width": 0.7, "height": 0.05 },
+          "timing": { "start": 0.6 },
+          "animations": [
+            { "role": "in", "preset": "fadeIn", "duration": 0.5 }
+          ] }
+      ]
+    }
+  ],
+  "layers": []
+}

@@ -1,0 +1,301 @@
+{
+  "schemaVersion": 1,
+  "id": "save-the-date-01",
+  "name": {
+    "en": "Save the Date",
+    "tr": "Tarihi Ayır"
+  },
+  "category": "wedding",
+  "isPro": false,
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "duration": 7.5,
+  "palette": {
+    "background": "#FBFAF7",
+    "surface": "#FFFFFF",
+    "accent": "#B99566",
+    "textPrimary": "#1A1815",
+    "textSecondary": "#8A857D",
+    "textOnAccent": "#FFFFFF",
+    "scrimClear": "#00000000",
+    "scrimSolid": "#000000CC"
+  },
+  "audio": {
+    "defaultTrackId": "acoustic-01",
+    "volume": 0.85
+  },
+  "layers": [
+    {
+      "id": "bg",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "type": "shape",
+      "colorRole": "textPrimary"
+    },
+    {
+      "id": "photo",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.8
+        },
+        {
+          "role": "loop",
+          "preset": "kenBurns",
+          "duration": 7.5,
+          "params": {
+            "zoom": 1.1,
+            "direction": "up"
+          }
+        }
+      ],
+      "type": "mediaSlot",
+      "slotIndex": 0,
+      "media": "photoOrVideo",
+      "contentMode": "fill",
+      "mask": "rect",
+      "filter": "fade",
+      "filterIntensity": 0.3
+    },
+    {
+      "id": "scrim-top",
+      "frame": {
+        "x": 0.5,
+        "y": 0.18,
+        "width": 1.0,
+        "height": 0.36
+      },
+      "type": "shape",
+      "colorRole": "scrimClear",
+      "gradient": {
+        "from": "scrimClear",
+        "to": "scrimSolid",
+        "direction": "up"
+      }
+    },
+    {
+      "id": "scrim-bottom",
+      "frame": {
+        "x": 0.5,
+        "y": 0.72,
+        "width": 1.0,
+        "height": 0.56
+      },
+      "type": "shape",
+      "colorRole": "scrimClear",
+      "gradient": {
+        "from": "scrimClear",
+        "to": "scrimSolid",
+        "direction": "down"
+      }
+    },
+    {
+      "id": "rule-a",
+      "frame": {
+        "x": 0.5,
+        "y": 0.236,
+        "width": 0.3,
+        "height": 0.0035
+      },
+      "timing": {
+        "start": 0.35
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "wipeReveal",
+          "duration": 0.6,
+          "easing": "easeOut",
+          "params": {
+            "direction": "right"
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "surface"
+    },
+    {
+      "id": "rule-b",
+      "frame": {
+        "x": 0.5,
+        "y": 0.252,
+        "width": 0.3,
+        "height": 0.0035
+      },
+      "timing": {
+        "start": 0.45
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "wipeReveal",
+          "duration": 0.6,
+          "easing": "easeOut",
+          "params": {
+            "direction": "left"
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "surface"
+    },
+    {
+      "id": "kicker",
+      "frame": {
+        "x": 0.5,
+        "y": 0.305,
+        "width": 0.8,
+        "height": 0.045
+      },
+      "timing": {
+        "start": 0.55
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.7
+        }
+      ],
+      "type": "text",
+      "key": "kicker",
+      "default": {
+        "en": "SAVE THE DATE",
+        "tr": "TARİHİ AYIRIN"
+      },
+      "font": {
+        "name": "AvenirNext-Medium",
+        "size": 0.024
+      },
+      "colorRole": "surface",
+      "alignment": "center",
+      "letterSpacing": 0.016,
+      "allCaps": true
+    },
+    {
+      "id": "date",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 0.88,
+        "height": 0.14
+      },
+      "timing": {
+        "start": 0.7
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "scaleIn",
+          "duration": 0.8,
+          "easing": "easeOut",
+          "params": {
+            "from": 0.86
+          }
+        },
+        {
+          "role": "loop",
+          "preset": "floatLoop",
+          "duration": 2.6,
+          "params": {
+            "distance": 0.006,
+            "axis": "y"
+          }
+        }
+      ],
+      "type": "text",
+      "key": "date",
+      "default": {
+        "en": "06.12.2026",
+        "tr": "12.06.2026"
+      },
+      "font": {
+        "name": "Didot",
+        "size": 0.082
+      },
+      "colorRole": "surface",
+      "alignment": "center",
+      "letterSpacing": 0.01
+    },
+    {
+      "id": "names",
+      "frame": {
+        "x": 0.5,
+        "y": 0.76,
+        "width": 0.82,
+        "height": 0.12
+      },
+      "timing": {
+        "start": 0.95
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "kineticWords",
+          "duration": 0.9,
+          "params": {
+            "distance": 0.02
+          }
+        }
+      ],
+      "type": "text",
+      "key": "names",
+      "default": {
+        "en": "Ayşe & Mehmet",
+        "tr": "Ayşe & Mehmet"
+      },
+      "font": {
+        "name": "SnellRoundhand-Bold",
+        "size": 0.066
+      },
+      "colorRole": "surface",
+      "alignment": "center"
+    },
+    {
+      "id": "venue",
+      "frame": {
+        "x": 0.5,
+        "y": 0.865,
+        "width": 0.7,
+        "height": 0.04
+      },
+      "timing": {
+        "start": 1.15
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.6
+        }
+      ],
+      "type": "text",
+      "key": "venue",
+      "default": {
+        "en": "Çeşme, Izmir",
+        "tr": "Çeşme, İzmir"
+      },
+      "font": {
+        "name": "AvenirNext-Regular",
+        "size": 0.022
+      },
+      "colorRole": "surface",
+      "alignment": "center",
+      "letterSpacing": 0.008
+    }
+  ]
+}

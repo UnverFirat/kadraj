@@ -1,0 +1,366 @@
+{
+  "schemaVersion": 2,
+  "id": "travel-mix-01",
+  "name": {
+    "en": "Travel Mix",
+    "tr": "Gezi Karması"
+  },
+  "category": "travel",
+  "isPro": true,
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "palette": {
+    "background": "#0B0B0F",
+    "surface": "#FFFFFF",
+    "accent": "#4ECDC4",
+    "textOnAccent": "#0B0B0F",
+    "textPrimary": "#FFFFFF",
+    "textSecondary": "#C9C9D0"
+  },
+  "audio": {
+    "defaultTrackId": "wanderlust-01",
+    "volume": 0.9
+  },
+  "scenes": [
+    {
+      "id": "intro",
+      "duration": 2.4,
+      "layers": [
+        {
+          "id": "m0",
+          "type": "mediaSlot",
+          "slotIndex": 0,
+          "media": "video",
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 1.0,
+            "height": 1.0
+          },
+          "animations": [
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 2.4,
+              "params": {
+                "zoom": 1.1,
+                "direction": "up"
+              }
+            }
+          ]
+        },
+        {
+          "id": "title",
+          "type": "text",
+          "key": "title",
+          "default": {
+            "en": "SUMMER\nTRIP",
+            "tr": "YAZ\nKAÇAMAĞI"
+          },
+          "font": {
+            "name": "AvenirNext-Heavy",
+            "size": 0.075
+          },
+          "colorRole": "textOnAccent",
+          "highlightColorRole": "accent",
+          "alignment": "center",
+          "allCaps": true,
+          "maxLines": 2,
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 0.8,
+            "height": 0.24
+          },
+          "timing": {
+            "start": 0.4
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "pop",
+              "duration": 0.5,
+              "easing": "spring",
+              "params": {
+                "overshoot": 1.12
+              }
+            },
+            {
+              "role": "out",
+              "preset": "fadeOut",
+              "duration": 0.3
+            }
+          ]
+        }
+      ],
+      "transition": {
+        "style": "slideLeft",
+        "duration": 0.4
+      }
+    },
+    {
+      "id": "photo1",
+      "duration": 1.8,
+      "layers": [
+        {
+          "id": "m1",
+          "type": "mediaSlot",
+          "slotIndex": 1,
+          "media": "photo",
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 1.0,
+            "height": 1.0
+          },
+          "animations": [
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 1.8,
+              "params": {
+                "zoom": 1.14,
+                "direction": "left"
+              }
+            }
+          ]
+        },
+        {
+          "id": "loc1",
+          "type": "text",
+          "key": "loc1",
+          "default": {
+            "en": "DAY 01",
+            "tr": "GÜN 01"
+          },
+          "font": {
+            "name": "AvenirNext-Bold",
+            "size": 0.028
+          },
+          "colorRole": "textOnAccent",
+          "highlightColorRole": "surface",
+          "alignment": "left",
+          "allCaps": true,
+          "letterSpacing": 0.006,
+          "frame": {
+            "x": 0.24,
+            "y": 0.88,
+            "width": 0.32,
+            "height": 0.05
+          },
+          "timing": {
+            "start": 0.3
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "slideIn",
+              "duration": 0.4,
+              "params": {
+                "direction": "left",
+                "distance": 0.05
+              }
+            }
+          ]
+        }
+      ],
+      "transition": {
+        "style": "whip",
+        "duration": 0.35
+      }
+    },
+    {
+      "id": "video2",
+      "duration": 2.0,
+      "layers": [
+        {
+          "id": "m2",
+          "type": "mediaSlot",
+          "slotIndex": 2,
+          "media": "video",
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 1.0,
+            "height": 1.0
+          }
+        }
+      ],
+      "transition": {
+        "style": "zoomIn",
+        "duration": 0.4
+      }
+    },
+    {
+      "id": "photo2",
+      "duration": 1.8,
+      "layers": [
+        {
+          "id": "m3",
+          "type": "mediaSlot",
+          "slotIndex": 3,
+          "media": "photo",
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 1.0,
+            "height": 1.0
+          },
+          "animations": [
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 1.8,
+              "params": {
+                "zoom": 1.12,
+                "direction": "down"
+              }
+            }
+          ]
+        }
+      ],
+      "transition": {
+        "style": "slideUp",
+        "duration": 0.4
+      }
+    },
+    {
+      "id": "outro",
+      "duration": 2.4,
+      "layers": [
+        {
+          "id": "m4",
+          "type": "mediaSlot",
+          "slotIndex": 4,
+          "media": "video",
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 1.0,
+            "height": 1.0
+          },
+          "animations": [
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 2.4,
+              "params": {
+                "zoom": 1.12,
+                "direction": "up"
+              }
+            }
+          ]
+        },
+        {
+          "id": "scrim",
+          "type": "shape",
+          "colorRole": "background",
+          "opacity": 0.35,
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 1.0,
+            "height": 1.0
+          }
+        },
+        {
+          "id": "endtitle",
+          "type": "text",
+          "key": "endtitle",
+          "default": {
+            "en": "MORE SOON",
+            "tr": "DEVAMI YAKINDA"
+          },
+          "font": {
+            "name": "AvenirNext-Bold",
+            "size": 0.04
+          },
+          "colorRole": "textPrimary",
+          "alignment": "center",
+          "allCaps": true,
+          "letterSpacing": 0.004,
+          "frame": {
+            "x": 0.5,
+            "y": 0.47,
+            "width": 0.86,
+            "height": 0.08
+          },
+          "timing": {
+            "start": 0.5
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "slideIn",
+              "duration": 0.4,
+              "params": {
+                "direction": "up",
+                "distance": 0.03
+              }
+            }
+          ]
+        },
+        {
+          "id": "bar",
+          "type": "shape",
+          "colorRole": "accent",
+          "frame": {
+            "x": 0.5,
+            "y": 0.54,
+            "width": 0.12,
+            "height": 0.006
+          },
+          "timing": {
+            "start": 0.7
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "wipeReveal",
+              "duration": 0.4,
+              "params": {
+                "direction": "right"
+              }
+            }
+          ]
+        },
+        {
+          "id": "handle",
+          "type": "text",
+          "key": "handle",
+          "default": {
+            "en": "@yourtravels",
+            "tr": "@gezilerim"
+          },
+          "font": {
+            "name": "AvenirNext-Medium",
+            "size": 0.024
+          },
+          "colorRole": "textSecondary",
+          "alignment": "center",
+          "letterSpacing": 0.004,
+          "frame": {
+            "x": 0.5,
+            "y": 0.59,
+            "width": 0.7,
+            "height": 0.05
+          },
+          "timing": {
+            "start": 0.9
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "fadeIn",
+              "duration": 0.4
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "layers": []
+}

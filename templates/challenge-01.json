@@ -1,0 +1,485 @@
+{
+  "schemaVersion": 1,
+  "id": "challenge-01",
+  "name": {
+    "en": "30-Day Challenge",
+    "tr": "30 Gün Meydan Okuma"
+  },
+  "category": "fitness",
+  "isPro": false,
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "duration": 6.5,
+  "palette": {
+    "background": "#08080C",
+    "surface": "#FFFFFF",
+    "accent": "#00E5A0",
+    "textPrimary": "#FFFFFF",
+    "textSecondary": "#9FB3AC",
+    "textOnAccent": "#06120D",
+    "scrimClear": "#00000000",
+    "scrimSolid": "#000000CC"
+  },
+  "audio": {
+    "defaultTrackId": "punchy-01",
+    "volume": 0.85
+  },
+  "layers": [
+    {
+      "id": "bg",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "type": "shape",
+      "colorRole": "background"
+    },
+    {
+      "id": "glow",
+      "frame": {
+        "x": 0.5,
+        "y": 0.3,
+        "width": 0.94,
+        "height": 0.5
+      },
+      "opacity": 0.13,
+      "animations": [
+        {
+          "role": "in",
+          "preset": "scaleIn",
+          "duration": 1.0,
+          "easing": "easeOut",
+          "params": {
+            "from": 0.85
+          }
+        },
+        {
+          "role": "loop",
+          "preset": "pulse",
+          "duration": 2.6,
+          "params": {
+            "scale": 1.04
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "accent",
+      "cornerRadius": 0.25
+    },
+    {
+      "id": "kicker",
+      "frame": {
+        "x": 0.5,
+        "y": 0.115,
+        "width": 0.82,
+        "height": 0.04
+      },
+      "timing": {
+        "start": 0.2
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.55
+        }
+      ],
+      "type": "text",
+      "key": "kicker",
+      "default": {
+        "en": "THE CHALLENGE",
+        "tr": "MEYDAN OKUMA"
+      },
+      "font": {
+        "name": "AvenirNext-DemiBold",
+        "size": 0.024
+      },
+      "colorRole": "accent",
+      "alignment": "center",
+      "letterSpacing": 0.024,
+      "allCaps": true
+    },
+    {
+      "id": "big",
+      "frame": {
+        "x": 0.5,
+        "y": 0.29,
+        "width": 0.9,
+        "height": 0.22
+      },
+      "timing": {
+        "start": 0.35
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "scaleIn",
+          "duration": 0.7,
+          "easing": "easeOut",
+          "params": {
+            "from": 0.78
+          }
+        },
+        {
+          "role": "loop",
+          "preset": "floatLoop",
+          "duration": 2.6,
+          "params": {
+            "distance": 0.006,
+            "axis": "y"
+          }
+        }
+      ],
+      "type": "text",
+      "key": "big",
+      "default": {
+        "en": "30",
+        "tr": "30"
+      },
+      "font": {
+        "name": "AvenirNext-Heavy",
+        "size": 0.17
+      },
+      "colorRole": "textPrimary",
+      "alignment": "center"
+    },
+    {
+      "id": "word",
+      "frame": {
+        "x": 0.5,
+        "y": 0.445,
+        "width": 0.8,
+        "height": 0.075
+      },
+      "timing": {
+        "start": 0.6
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "punchIn",
+          "duration": 0.55,
+          "params": {
+            "from": 1.5
+          }
+        }
+      ],
+      "type": "text",
+      "key": "word",
+      "default": {
+        "en": "DAYS",
+        "tr": "GÜN"
+      },
+      "font": {
+        "name": "Archivo-SemiBold",
+        "size": 0.05
+      },
+      "colorRole": "textPrimary",
+      "alignment": "center",
+      "letterSpacing": 0.05,
+      "allCaps": true
+    },
+    {
+      "id": "rule",
+      "frame": {
+        "x": 0.5,
+        "y": 0.515,
+        "width": 0.12,
+        "height": 0.005
+      },
+      "timing": {
+        "start": 0.8
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "wipeReveal",
+          "duration": 0.55,
+          "easing": "easeOut",
+          "params": {
+            "direction": "right"
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "accent"
+    },
+    {
+      "id": "mark0",
+      "frame": {
+        "x": 0.145,
+        "y": 0.6,
+        "width": 0.028,
+        "height": 0.0158
+      },
+      "timing": {
+        "start": 0.85
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "pop",
+          "duration": 0.4,
+          "params": {
+            "overshoot": 1.2
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "accent",
+      "mask": "circle"
+    },
+    {
+      "id": "line0",
+      "frame": {
+        "x": 0.585,
+        "y": 0.6,
+        "width": 0.68,
+        "height": 0.05
+      },
+      "timing": {
+        "start": 0.9
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "slideIn",
+          "duration": 0.5,
+          "easing": "easeOut",
+          "params": {
+            "direction": "right",
+            "distance": 0.04
+          }
+        }
+      ],
+      "type": "text",
+      "key": "rule1",
+      "default": {
+        "en": "Twenty push-ups a day",
+        "tr": "Her gün 20 şınav"
+      },
+      "font": {
+        "name": "AvenirNext-Medium",
+        "size": 0.03
+      },
+      "colorRole": "textPrimary",
+      "alignment": "left"
+    },
+    {
+      "id": "mark1",
+      "frame": {
+        "x": 0.145,
+        "y": 0.685,
+        "width": 0.028,
+        "height": 0.0158
+      },
+      "timing": {
+        "start": 1.0
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "pop",
+          "duration": 0.4,
+          "params": {
+            "overshoot": 1.2
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "accent",
+      "mask": "circle"
+    },
+    {
+      "id": "line1",
+      "frame": {
+        "x": 0.585,
+        "y": 0.685,
+        "width": 0.68,
+        "height": 0.05
+      },
+      "timing": {
+        "start": 1.05
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "slideIn",
+          "duration": 0.5,
+          "easing": "easeOut",
+          "params": {
+            "direction": "right",
+            "distance": 0.04
+          }
+        }
+      ],
+      "type": "text",
+      "key": "rule2",
+      "default": {
+        "en": "Three 5K runs a week",
+        "tr": "Haftada 3 koşu · 5 km"
+      },
+      "font": {
+        "name": "AvenirNext-Medium",
+        "size": 0.03
+      },
+      "colorRole": "textPrimary",
+      "alignment": "left"
+    },
+    {
+      "id": "mark2",
+      "frame": {
+        "x": 0.145,
+        "y": 0.77,
+        "width": 0.028,
+        "height": 0.0158
+      },
+      "timing": {
+        "start": 1.15
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "pop",
+          "duration": 0.4,
+          "params": {
+            "overshoot": 1.2
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "accent",
+      "mask": "circle"
+    },
+    {
+      "id": "line2",
+      "frame": {
+        "x": 0.585,
+        "y": 0.77,
+        "width": 0.68,
+        "height": 0.05
+      },
+      "timing": {
+        "start": 1.2
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "slideIn",
+          "duration": 0.5,
+          "easing": "easeOut",
+          "params": {
+            "direction": "right",
+            "distance": 0.04
+          }
+        }
+      ],
+      "type": "text",
+      "key": "rule3",
+      "default": {
+        "en": "Zero added sugar",
+        "tr": "30 gün şeker yok"
+      },
+      "font": {
+        "name": "AvenirNext-Medium",
+        "size": 0.03
+      },
+      "colorRole": "textPrimary",
+      "alignment": "left"
+    },
+    {
+      "id": "cta-chip",
+      "frame": {
+        "x": 0.5,
+        "y": 0.875,
+        "width": 0.68,
+        "height": 0.09
+      },
+      "timing": {
+        "start": 1.2
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "pop",
+          "duration": 0.5,
+          "params": {
+            "overshoot": 1.08
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "accent",
+      "cornerRadius": 0.045
+    },
+    {
+      "id": "cta",
+      "frame": {
+        "x": 0.5,
+        "y": 0.875,
+        "width": 0.64,
+        "height": 0.055
+      },
+      "timing": {
+        "start": 1.2
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.45
+        }
+      ],
+      "type": "text",
+      "key": "cta",
+      "default": {
+        "en": "STARTS SEPTEMBER 1",
+        "tr": "1 EYLÜL'DE BAŞLIYOR"
+      },
+      "font": {
+        "name": "AvenirNext-Heavy",
+        "size": 0.03
+      },
+      "colorRole": "textOnAccent",
+      "alignment": "center",
+      "letterSpacing": 0.008,
+      "allCaps": true
+    },
+    {
+      "id": "footer",
+      "frame": {
+        "x": 0.5,
+        "y": 0.955,
+        "width": 0.86,
+        "height": 0.032
+      },
+      "timing": {
+        "start": 1.2
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.6
+        }
+      ],
+      "type": "text",
+      "key": "footer",
+      "default": {
+        "en": "Comment I'M IN to join",
+        "tr": "Katılmak için yoruma VARIM yaz"
+      },
+      "font": {
+        "name": "AvenirNext-Regular",
+        "size": 0.02
+      },
+      "colorRole": "textSecondary",
+      "alignment": "center"
+    }
+  ]
+}

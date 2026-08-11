@@ -1,0 +1,278 @@
+{
+  "schemaVersion": 1,
+  "id": "neon-sign-01",
+  "name": {
+    "en": "Neon Sign",
+    "tr": "Neon Tabela"
+  },
+  "category": "social",
+  "isPro": true,
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "duration": 6.5,
+  "palette": {
+    "background": "#06060F",
+    "surface": "#FFFFFF",
+    "accent": "#19E1FF",
+    "textPrimary": "#FFFFFF",
+    "textSecondary": "#8FA9B4",
+    "textOnAccent": "#06060F",
+    "scrimClear": "#00000000",
+    "scrimSolid": "#000000CC",
+    "neonPink": "#FF4FD8"
+  },
+  "audio": {
+    "defaultTrackId": "chill-01",
+    "volume": 0.85
+  },
+  "layers": [
+    {
+      "id": "bg",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "type": "shape",
+      "colorRole": "background"
+    },
+    {
+      "id": "halo-wide",
+      "frame": {
+        "x": 0.5,
+        "y": 0.46,
+        "width": 0.86,
+        "height": 0.48
+      },
+      "opacity": 0.14,
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 1.0
+        },
+        {
+          "role": "loop",
+          "preset": "pulse",
+          "duration": 2.8,
+          "params": {
+            "scale": 1.06
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "accent",
+      "mask": "circle"
+    },
+    {
+      "id": "halo-core",
+      "frame": {
+        "x": 0.5,
+        "y": 0.46,
+        "width": 0.56,
+        "height": 0.31
+      },
+      "opacity": 0.22,
+      "animations": [
+        {
+          "role": "in",
+          "preset": "scaleIn",
+          "duration": 0.9,
+          "easing": "easeOut",
+          "params": {
+            "from": 0.75
+          }
+        },
+        {
+          "role": "loop",
+          "preset": "pulse",
+          "duration": 1.8,
+          "params": {
+            "scale": 1.05
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "accent",
+      "mask": "circle"
+    },
+    {
+      "id": "kicker",
+      "frame": {
+        "x": 0.5,
+        "y": 0.325,
+        "width": 0.82,
+        "height": 0.045
+      },
+      "timing": {
+        "start": 0.3
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.6
+        }
+      ],
+      "type": "text",
+      "key": "kicker",
+      "default": {
+        "en": "LIVE MUSIC TONIGHT",
+        "tr": "CANLI MÜZİK VAR"
+      },
+      "font": {
+        "name": "AvenirNext-DemiBold",
+        "size": 0.026
+      },
+      "colorRole": "neonPink",
+      "alignment": "center",
+      "letterSpacing": 0.016,
+      "allCaps": true
+    },
+    {
+      "id": "sign",
+      "frame": {
+        "x": 0.5,
+        "y": 0.46,
+        "width": 0.86,
+        "height": 0.2
+      },
+      "timing": {
+        "start": 0.55
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "pop",
+          "duration": 0.6,
+          "params": {
+            "overshoot": 1.1
+          }
+        },
+        {
+          "role": "loop",
+          "preset": "floatLoop",
+          "duration": 2.6,
+          "params": {
+            "distance": 0.006,
+            "axis": "y"
+          }
+        }
+      ],
+      "type": "text",
+      "key": "sign",
+      "default": {
+        "en": "OPEN\nALL NIGHT",
+        "tr": "GECE\nAÇIĞIZ"
+      },
+      "font": {
+        "name": "AvenirNext-Heavy",
+        "size": 0.088
+      },
+      "colorRole": "accent",
+      "alignment": "center",
+      "maxLines": 2,
+      "letterSpacing": 0.004,
+      "allCaps": true
+    },
+    {
+      "id": "hours",
+      "frame": {
+        "x": 0.5,
+        "y": 0.615,
+        "width": 0.82,
+        "height": 0.04
+      },
+      "timing": {
+        "start": 1.0
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "slideIn",
+          "duration": 0.6,
+          "easing": "easeOut",
+          "params": {
+            "direction": "up",
+            "distance": 0.03
+          }
+        }
+      ],
+      "type": "text",
+      "key": "hours",
+      "default": {
+        "en": "EVERY DAY 8PM — 4AM",
+        "tr": "HER GÜN 20:00 — 04:00"
+      },
+      "font": {
+        "name": "AvenirNext-Medium",
+        "size": 0.023
+      },
+      "colorRole": "textSecondary",
+      "alignment": "center",
+      "letterSpacing": 0.012,
+      "allCaps": true
+    },
+    {
+      "id": "underline",
+      "frame": {
+        "x": 0.5,
+        "y": 0.685,
+        "width": 0.16,
+        "height": 0.005
+      },
+      "opacity": 0.9,
+      "timing": {
+        "start": 1.2
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "wipeReveal",
+          "duration": 0.6,
+          "easing": "easeOut",
+          "params": {
+            "direction": "right"
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "neonPink"
+    },
+    {
+      "id": "where",
+      "frame": {
+        "x": 0.5,
+        "y": 0.745,
+        "width": 0.78,
+        "height": 0.04
+      },
+      "timing": {
+        "start": 1.35
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.7
+        }
+      ],
+      "type": "text",
+      "key": "where",
+      "default": {
+        "en": "Downtown · 12 Moda St.",
+        "tr": "Kadıköy · Moda Cad. 12"
+      },
+      "font": {
+        "name": "AvenirNext-Regular",
+        "size": 0.021
+      },
+      "colorRole": "textSecondary",
+      "alignment": "center"
+    }
+  ]
+}

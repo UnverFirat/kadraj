@@ -1,0 +1,262 @@
+{
+  "schemaVersion": 1,
+  "id": "daily-special-01",
+  "name": {
+    "en": "Daily Special",
+    "tr": "Günün Yemeği"
+  },
+  "category": "food",
+  "isPro": false,
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "duration": 6.0,
+  "palette": {
+    "background": "#2A1B16",
+    "surface": "#F3E4D7",
+    "accent": "#E2703A",
+    "textPrimary": "#FFF6EF",
+    "textSecondary": "#D6B7A4",
+    "textOnAccent": "#FFFFFF",
+    "scrimClear": "#00000000",
+    "scrimSolid": "#000000CC"
+  },
+  "audio": {
+    "defaultTrackId": "acoustic-01",
+    "volume": 0.85
+  },
+  "layers": [
+    {
+      "id": "bg",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "type": "shape",
+      "colorRole": "background"
+    },
+    {
+      "id": "photo",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.5
+        },
+        {
+          "role": "loop",
+          "preset": "kenBurns",
+          "duration": 6.0,
+          "params": {
+            "zoom": 1.14,
+            "direction": "up"
+          }
+        }
+      ],
+      "type": "mediaSlot",
+      "slotIndex": 0,
+      "media": "photoOrVideo",
+      "contentMode": "fill",
+      "mask": "rect",
+      "filter": "warm",
+      "filterIntensity": 0.55
+    },
+    {
+      "id": "scrim-bottom",
+      "frame": {
+        "x": 0.5,
+        "y": 0.75,
+        "width": 1.0,
+        "height": 0.5
+      },
+      "type": "shape",
+      "colorRole": "scrimClear",
+      "gradient": {
+        "from": "scrimClear",
+        "to": "scrimSolid",
+        "direction": "down"
+      }
+    },
+    {
+      "id": "badge",
+      "frame": {
+        "x": 0.27,
+        "y": 0.175,
+        "width": 0.38,
+        "height": 0.1
+      },
+      "rotation": -9,
+      "timing": {
+        "start": 0.3
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "bounce",
+          "duration": 0.7
+        },
+        {
+          "role": "loop",
+          "preset": "shake",
+          "duration": 1.4,
+          "delay": 1.1,
+          "params": {
+            "degrees": 2.0
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "accent",
+      "cornerRadius": 0.05
+    },
+    {
+      "id": "badge-text",
+      "frame": {
+        "x": 0.27,
+        "y": 0.175,
+        "width": 0.34,
+        "height": 0.06
+      },
+      "rotation": -9,
+      "timing": {
+        "start": 0.45
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.4
+        }
+      ],
+      "type": "text",
+      "key": "badge",
+      "default": {
+        "en": "TODAY'S",
+        "tr": "GÜNÜN"
+      },
+      "font": {
+        "name": "AvenirNext-Heavy",
+        "size": 0.034
+      },
+      "colorRole": "textOnAccent",
+      "alignment": "center",
+      "letterSpacing": 0.01,
+      "allCaps": true
+    },
+    {
+      "id": "dish",
+      "frame": {
+        "x": 0.5,
+        "y": 0.785,
+        "width": 0.86,
+        "height": 0.09
+      },
+      "timing": {
+        "start": 0.7
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "kineticWords",
+          "duration": 0.9,
+          "params": {
+            "distance": 0.02
+          }
+        },
+        {
+          "role": "loop",
+          "preset": "floatLoop",
+          "duration": 2.6,
+          "params": {
+            "distance": 0.006,
+            "axis": "y"
+          }
+        }
+      ],
+      "type": "text",
+      "key": "dish",
+      "default": {
+        "en": "Slow-Roast Lamb",
+        "tr": "Fırın Kuzu Tandır"
+      },
+      "font": {
+        "name": "AvenirNext-Heavy",
+        "size": 0.062
+      },
+      "colorRole": "textPrimary",
+      "alignment": "center"
+    },
+    {
+      "id": "price",
+      "frame": {
+        "x": 0.5,
+        "y": 0.87,
+        "width": 0.84,
+        "height": 0.05
+      },
+      "timing": {
+        "start": 0.95
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.55
+        }
+      ],
+      "type": "text",
+      "key": "price",
+      "default": {
+        "en": "$34 — rice and salad included",
+        "tr": "₺289 — pilav ve salata ile"
+      },
+      "font": {
+        "name": "AvenirNext-Medium",
+        "size": 0.026
+      },
+      "colorRole": "accent",
+      "alignment": "center"
+    },
+    {
+      "id": "hours",
+      "frame": {
+        "x": 0.5,
+        "y": 0.935,
+        "width": 0.7,
+        "height": 0.035
+      },
+      "timing": {
+        "start": 1.15
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.6
+        }
+      ],
+      "type": "text",
+      "key": "hours",
+      "default": {
+        "en": "Until 7 pm",
+        "tr": "Akşam 19:00'a kadar"
+      },
+      "font": {
+        "name": "AvenirNext-Regular",
+        "size": 0.02
+      },
+      "colorRole": "textSecondary",
+      "alignment": "center"
+    }
+  ]
+}

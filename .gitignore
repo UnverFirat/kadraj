@@ -1,0 +1,25 @@
+# Derleme çıktıları
+App/build/
+TemplateKit/.build/
+demo-output/
+DerivedData/
+
+# ÜRETİLEN vitrin medyası — depoya girmez, tek komutla yeniden üretilir:
+#   cd TemplateKit && swift run -c release templatekit-assets --make-samples
+#   swift run -c release templatekit-assets        (+ --lang en)
+# Posterler (templates/thumbs) İSTİSNA: uygulama paketine seed olarak giriyor,
+# bu yüzden depoda tutuluyor. Önizleme videoları (139 MB) CDN'e gider.
+templates/previews/
+tools/samples/*.mp4
+tools/contact/
+
+
+# Xcode kullanıcı durumu (paylaşılan scheme'ler xcshareddata'da, o kalır)
+*.xcodeproj/xcuserdata/
+*.xcodeproj/project.xcworkspace/xcuserdata/
+*.xcworkspace/xcuserdata/
+
+.DS_Store
+
+# Kişisel Claude Code ayarları (paylaşılan settings.json kalır)
+.claude/settings.local.json

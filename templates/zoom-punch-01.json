@@ -1,0 +1,512 @@
+{
+  "schemaVersion": 2,
+  "id": "zoom-punch-01",
+  "name": {
+    "en": "Zoom Punch",
+    "tr": "Ritim Zoom"
+  },
+  "category": "social",
+  "isPro": true,
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "palette": {
+    "background": "#101014",
+    "surface": "#FFFFFF",
+    "accent": "#FF2E63",
+    "textPrimary": "#FFFFFF",
+    "textSecondary": "#C9C9D1",
+    "textOnAccent": "#FFFFFF",
+    "scrimClear": "#00000000",
+    "scrimSolid": "#000000CC"
+  },
+  "audio": {
+    "defaultTrackId": "beat-01",
+    "volume": 0.85
+  },
+  "scenes": [
+    {
+      "id": "beat0",
+      "duration": 1.2,
+      "layers": [
+        {
+          "id": "b0-media",
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 1.0,
+            "height": 1.0
+          },
+          "animations": [
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 1.2,
+              "params": {
+                "zoom": 1.16,
+                "direction": "down"
+              }
+            }
+          ],
+          "type": "mediaSlot",
+          "slotIndex": 0,
+          "media": "photoOrVideo",
+          "contentMode": "fill",
+          "mask": "rect",
+          "filter": "vivid",
+          "filterIntensity": 0.55
+        },
+        {
+          "id": "b0-scrim",
+          "frame": {
+            "x": 0.5,
+            "y": 0.72,
+            "width": 1.0,
+            "height": 0.56
+          },
+          "type": "shape",
+          "colorRole": "scrimClear",
+          "gradient": {
+            "from": "scrimClear",
+            "to": "scrimSolid",
+            "direction": "down"
+          }
+        },
+        {
+          "id": "b0-word",
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 0.9,
+            "height": 0.15
+          },
+          "timing": {
+            "start": 0.12
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "pop",
+              "duration": 0.35,
+              "params": {
+                "overshoot": 1.12
+              }
+            }
+          ],
+          "type": "text",
+          "key": "word0",
+          "default": {
+            "en": "STOP",
+            "tr": "DUR"
+          },
+          "font": {
+            "name": "AvenirNext-Heavy",
+            "size": 0.11
+          },
+          "colorRole": "textPrimary",
+          "alignment": "center",
+          "letterSpacing": 0.004,
+          "allCaps": true
+        },
+        {
+          "id": "b0-step",
+          "frame": {
+            "x": 0.5,
+            "y": 0.88,
+            "width": 0.5,
+            "height": 0.04
+          },
+          "timing": {
+            "start": 0.25
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "fadeIn",
+              "duration": 0.3
+            }
+          ],
+          "type": "text",
+          "key": "step0",
+          "default": {
+            "en": "01 / 04",
+            "tr": "01 / 04"
+          },
+          "font": {
+            "name": "AvenirNext-DemiBold",
+            "size": 0.024
+          },
+          "colorRole": "accent",
+          "alignment": "center",
+          "letterSpacing": 0.012
+        }
+      ],
+      "transition": {
+        "style": "zoomIn",
+        "duration": 0.25
+      }
+    },
+    {
+      "id": "beat1",
+      "duration": 1.2,
+      "layers": [
+        {
+          "id": "b1-media",
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 1.0,
+            "height": 1.0
+          },
+          "animations": [
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 1.2,
+              "params": {
+                "zoom": 1.16,
+                "direction": "up"
+              }
+            }
+          ],
+          "type": "mediaSlot",
+          "slotIndex": 1,
+          "media": "photoOrVideo",
+          "contentMode": "fill",
+          "mask": "rect",
+          "filter": "vivid",
+          "filterIntensity": 0.55
+        },
+        {
+          "id": "b1-scrim",
+          "frame": {
+            "x": 0.5,
+            "y": 0.72,
+            "width": 1.0,
+            "height": 0.56
+          },
+          "type": "shape",
+          "colorRole": "scrimClear",
+          "gradient": {
+            "from": "scrimClear",
+            "to": "scrimSolid",
+            "direction": "down"
+          }
+        },
+        {
+          "id": "b1-word",
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 0.9,
+            "height": 0.15
+          },
+          "timing": {
+            "start": 0.12
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "pop",
+              "duration": 0.35,
+              "params": {
+                "overshoot": 1.12
+              }
+            }
+          ],
+          "type": "text",
+          "key": "word1",
+          "default": {
+            "en": "LOOK",
+            "tr": "BAK"
+          },
+          "font": {
+            "name": "AvenirNext-Heavy",
+            "size": 0.11
+          },
+          "colorRole": "textPrimary",
+          "alignment": "center",
+          "letterSpacing": 0.004,
+          "allCaps": true
+        },
+        {
+          "id": "b1-step",
+          "frame": {
+            "x": 0.5,
+            "y": 0.88,
+            "width": 0.5,
+            "height": 0.04
+          },
+          "timing": {
+            "start": 0.25
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "fadeIn",
+              "duration": 0.3
+            }
+          ],
+          "type": "text",
+          "key": "step1",
+          "default": {
+            "en": "02 / 04",
+            "tr": "02 / 04"
+          },
+          "font": {
+            "name": "AvenirNext-DemiBold",
+            "size": 0.024
+          },
+          "colorRole": "accent",
+          "alignment": "center",
+          "letterSpacing": 0.012
+        }
+      ],
+      "transition": {
+        "style": "zoomOut",
+        "duration": 0.25
+      }
+    },
+    {
+      "id": "beat2",
+      "duration": 1.2,
+      "layers": [
+        {
+          "id": "b2-media",
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 1.0,
+            "height": 1.0
+          },
+          "animations": [
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 1.2,
+              "params": {
+                "zoom": 1.16,
+                "direction": "down"
+              }
+            }
+          ],
+          "type": "mediaSlot",
+          "slotIndex": 2,
+          "media": "photoOrVideo",
+          "contentMode": "fill",
+          "mask": "rect",
+          "filter": "vivid",
+          "filterIntensity": 0.55
+        },
+        {
+          "id": "b2-scrim",
+          "frame": {
+            "x": 0.5,
+            "y": 0.72,
+            "width": 1.0,
+            "height": 0.56
+          },
+          "type": "shape",
+          "colorRole": "scrimClear",
+          "gradient": {
+            "from": "scrimClear",
+            "to": "scrimSolid",
+            "direction": "down"
+          }
+        },
+        {
+          "id": "b2-word",
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 0.9,
+            "height": 0.15
+          },
+          "timing": {
+            "start": 0.12
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "pop",
+              "duration": 0.35,
+              "params": {
+                "overshoot": 1.12
+              }
+            }
+          ],
+          "type": "text",
+          "key": "word2",
+          "default": {
+            "en": "SHOOT",
+            "tr": "ÇEK"
+          },
+          "font": {
+            "name": "AvenirNext-Heavy",
+            "size": 0.11
+          },
+          "colorRole": "textPrimary",
+          "alignment": "center",
+          "letterSpacing": 0.004,
+          "allCaps": true
+        },
+        {
+          "id": "b2-step",
+          "frame": {
+            "x": 0.5,
+            "y": 0.88,
+            "width": 0.5,
+            "height": 0.04
+          },
+          "timing": {
+            "start": 0.25
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "fadeIn",
+              "duration": 0.3
+            }
+          ],
+          "type": "text",
+          "key": "step2",
+          "default": {
+            "en": "03 / 04",
+            "tr": "03 / 04"
+          },
+          "font": {
+            "name": "AvenirNext-DemiBold",
+            "size": 0.024
+          },
+          "colorRole": "accent",
+          "alignment": "center",
+          "letterSpacing": 0.012
+        }
+      ],
+      "transition": {
+        "style": "zoomIn",
+        "duration": 0.25
+      }
+    },
+    {
+      "id": "beat3",
+      "duration": 1.2,
+      "layers": [
+        {
+          "id": "b3-media",
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 1.0,
+            "height": 1.0
+          },
+          "animations": [
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 1.2,
+              "params": {
+                "zoom": 1.16,
+                "direction": "up"
+              }
+            }
+          ],
+          "type": "mediaSlot",
+          "slotIndex": 3,
+          "media": "photoOrVideo",
+          "contentMode": "fill",
+          "mask": "rect",
+          "filter": "vivid",
+          "filterIntensity": 0.55
+        },
+        {
+          "id": "b3-scrim",
+          "frame": {
+            "x": 0.5,
+            "y": 0.72,
+            "width": 1.0,
+            "height": 0.56
+          },
+          "type": "shape",
+          "colorRole": "scrimClear",
+          "gradient": {
+            "from": "scrimClear",
+            "to": "scrimSolid",
+            "direction": "down"
+          }
+        },
+        {
+          "id": "b3-word",
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 0.9,
+            "height": 0.15
+          },
+          "timing": {
+            "start": 0.12
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "pop",
+              "duration": 0.35,
+              "params": {
+                "overshoot": 1.12
+              }
+            }
+          ],
+          "type": "text",
+          "key": "word3",
+          "default": {
+            "en": "SHARE",
+            "tr": "PAYLAŞ"
+          },
+          "font": {
+            "name": "AvenirNext-Heavy",
+            "size": 0.11
+          },
+          "colorRole": "textPrimary",
+          "alignment": "center",
+          "letterSpacing": 0.004,
+          "allCaps": true
+        },
+        {
+          "id": "b3-step",
+          "frame": {
+            "x": 0.5,
+            "y": 0.88,
+            "width": 0.5,
+            "height": 0.04
+          },
+          "timing": {
+            "start": 0.25
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "fadeIn",
+              "duration": 0.3
+            }
+          ],
+          "type": "text",
+          "key": "step3",
+          "default": {
+            "en": "04 / 04",
+            "tr": "04 / 04"
+          },
+          "font": {
+            "name": "AvenirNext-DemiBold",
+            "size": 0.024
+          },
+          "colorRole": "accent",
+          "alignment": "center",
+          "letterSpacing": 0.012
+        }
+      ]
+    }
+  ],
+  "layers": []
+}

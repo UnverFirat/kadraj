@@ -1,0 +1,314 @@
+{
+  "schemaVersion": 1,
+  "id": "invite-card-01",
+  "name": {
+    "en": "Invitation",
+    "tr": "Davetiye"
+  },
+  "category": "wedding",
+  "isPro": true,
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "duration": 7.0,
+  "palette": {
+    "background": "#F6F1E9",
+    "surface": "#FFFFFF",
+    "accent": "#A88B5C",
+    "textPrimary": "#2E2A24",
+    "textSecondary": "#7C7264"
+  },
+  "audio": {
+    "defaultTrackId": "acoustic-01",
+    "volume": 0.8
+  },
+  "overlay": {
+    "vignette": 0.22,
+    "grain": 0.06
+  },
+  "layers": [
+    {
+      "id": "bg",
+      "type": "shape",
+      "colorRole": "background",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      }
+    },
+    {
+      "id": "border",
+      "type": "shape",
+      "colorRole": "accent",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 0.86,
+        "height": 0.86
+      },
+      "cornerRadius": 0.004,
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.6
+        }
+      ]
+    },
+    {
+      "id": "card",
+      "type": "shape",
+      "colorRole": "background",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 0.845,
+        "height": 0.848
+      },
+      "cornerRadius": 0.004,
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.6
+        }
+      ]
+    },
+    {
+      "id": "photo",
+      "type": "mediaSlot",
+      "slotIndex": 0,
+      "media": "photo",
+      "contentMode": "fill",
+      "mask": "circle",
+      "frame": {
+        "x": 0.5,
+        "y": 0.3,
+        "width": 0.4,
+        "height": 0.225
+      },
+      "filter": "vintage",
+      "filterIntensity": 0.6,
+      "timing": {
+        "start": 0.2
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "scaleIn",
+          "duration": 0.8,
+          "easing": "easeOut",
+          "params": {
+            "from": 0.9
+          }
+        },
+        {
+          "role": "loop",
+          "preset": "kenBurns",
+          "duration": 6.8,
+          "params": {
+            "zoom": 1.07,
+            "direction": "up"
+          }
+        }
+      ]
+    },
+    {
+      "id": "kicker",
+      "type": "text",
+      "key": "kicker",
+      "default": {
+        "en": "YOU ARE INVITED",
+        "tr": "DAVETLİSİNİZ"
+      },
+      "font": {
+        "name": "AvenirNext-Medium",
+        "size": 0.019
+      },
+      "colorRole": "accent",
+      "alignment": "center",
+      "frame": {
+        "x": 0.5,
+        "y": 0.46,
+        "width": 0.7,
+        "height": 0.03
+      },
+      "allCaps": true,
+      "letterSpacing": 0.022,
+      "timing": {
+        "start": 0.8
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.6
+        }
+      ]
+    },
+    {
+      "id": "names",
+      "type": "text",
+      "key": "names",
+      "default": {
+        "en": "AYSE & MEHMET",
+        "tr": "AYŞE & MEHMET"
+      },
+      "font": {
+        "name": "Didot",
+        "size": 0.046
+      },
+      "colorRole": "textPrimary",
+      "alignment": "center",
+      "frame": {
+        "x": 0.5,
+        "y": 0.55,
+        "width": 0.78,
+        "height": 0.09
+      },
+      "allCaps": true,
+      "letterSpacing": 0.006,
+      "maxLines": 2,
+      "timing": {
+        "start": 1.1
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "slideIn",
+          "duration": 0.7,
+          "easing": "easeOut",
+          "params": {
+            "direction": "up",
+            "distance": 0.025
+          }
+        }
+      ]
+    },
+    {
+      "id": "divider",
+      "type": "shape",
+      "colorRole": "accent",
+      "frame": {
+        "x": 0.5,
+        "y": 0.625,
+        "width": 0.14,
+        "height": 0.0022
+      },
+      "timing": {
+        "start": 1.6
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "wipeReveal",
+          "duration": 0.6,
+          "params": {
+            "direction": "right"
+          }
+        }
+      ]
+    },
+    {
+      "id": "date",
+      "type": "text",
+      "key": "date",
+      "default": {
+        "en": "12 AUGUST 2026",
+        "tr": "12 AĞUSTOS 2026"
+      },
+      "font": {
+        "name": "AvenirNext-Medium",
+        "size": 0.024
+      },
+      "colorRole": "textSecondary",
+      "alignment": "center",
+      "frame": {
+        "x": 0.5,
+        "y": 0.675,
+        "width": 0.7,
+        "height": 0.04
+      },
+      "allCaps": true,
+      "letterSpacing": 0.012,
+      "timing": {
+        "start": 1.9
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.6
+        }
+      ]
+    },
+    {
+      "id": "place",
+      "type": "text",
+      "key": "place",
+      "default": {
+        "en": "Sapanca · Golkoy",
+        "tr": "Sapanca · Gölköy"
+      },
+      "font": {
+        "name": "AvenirNext-Regular",
+        "size": 0.022
+      },
+      "colorRole": "textSecondary",
+      "alignment": "center",
+      "frame": {
+        "x": 0.5,
+        "y": 0.725,
+        "width": 0.7,
+        "height": 0.04
+      },
+      "timing": {
+        "start": 2.2
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.6
+        }
+      ]
+    },
+    {
+      "id": "rsvp",
+      "type": "text",
+      "key": "rsvp",
+      "default": {
+        "en": "PLEASE RSVP",
+        "tr": "LÜTFEN KATILIMINIZI BİLDİRİN"
+      },
+      "font": {
+        "name": "AvenirNext-Medium",
+        "size": 0.016
+      },
+      "colorRole": "accent",
+      "alignment": "center",
+      "frame": {
+        "x": 0.5,
+        "y": 0.85,
+        "width": 0.76,
+        "height": 0.03
+      },
+      "allCaps": true,
+      "letterSpacing": 0.014,
+      "timing": {
+        "start": 2.6
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.7
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,226 @@
+{
+  "schemaVersion": 2,
+  "id": "split-screen-01",
+  "name": {
+    "en": "Split Screen",
+    "tr": "İkiz Ekran"
+  },
+  "category": "promo",
+  "isPro": true,
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "palette": {
+    "background": "#0B0F0E",
+    "surface": "#FFFFFF",
+    "accent": "#2EE6A6",
+    "textPrimary": "#0B0F0E",
+    "textSecondary": "#FFFFFF"
+  },
+  "audio": {
+    "defaultTrackId": "energetic-01",
+    "volume": 0.9
+  },
+  "scenes": [
+    {
+      "id": "split",
+      "duration": 5.0,
+      "layers": [
+        {
+          "id": "top",
+          "type": "mediaSlot",
+          "slotIndex": 0,
+          "media": "video",
+          "frame": {
+            "x": 0.5,
+            "y": 0.25,
+            "width": 1.0,
+            "height": 0.5
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "slideIn",
+              "duration": 0.5,
+              "easing": "easeOut",
+              "params": {
+                "direction": "down",
+                "distance": 0.5
+              }
+            }
+          ]
+        },
+        {
+          "id": "bottom",
+          "type": "mediaSlot",
+          "slotIndex": 1,
+          "media": "video",
+          "frame": {
+            "x": 0.5,
+            "y": 0.75,
+            "width": 1.0,
+            "height": 0.5
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "slideIn",
+              "duration": 0.5,
+              "easing": "easeOut",
+              "params": {
+                "direction": "up",
+                "distance": 0.5
+              }
+            }
+          ]
+        },
+        {
+          "id": "divider",
+          "type": "shape",
+          "colorRole": "accent",
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 1.0,
+            "height": 0.008
+          },
+          "timing": {
+            "start": 0.5
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "wipeReveal",
+              "duration": 0.5,
+              "easing": "easeInOut",
+              "params": {
+                "direction": "right"
+              }
+            }
+          ]
+        },
+        {
+          "id": "pill-top",
+          "type": "shape",
+          "colorRole": "accent",
+          "mask": "rect",
+          "cornerRadius": 0.03,
+          "frame": {
+            "x": 0.5,
+            "y": 0.075,
+            "width": 0.26,
+            "height": 0.055
+          },
+          "timing": {
+            "start": 0.6
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "pop",
+              "duration": 0.4,
+              "params": {
+                "overshoot": 1.1
+              }
+            }
+          ]
+        },
+        {
+          "id": "label-top",
+          "type": "text",
+          "key": "labelTop",
+          "default": {
+            "en": "BEFORE",
+            "tr": "ÖNCE"
+          },
+          "font": {
+            "name": "AvenirNext-Bold",
+            "size": 0.026
+          },
+          "colorRole": "textPrimary",
+          "alignment": "center",
+          "allCaps": true,
+          "letterSpacing": 0.004,
+          "frame": {
+            "x": 0.5,
+            "y": 0.075,
+            "width": 0.26,
+            "height": 0.05
+          },
+          "timing": {
+            "start": 0.7
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "fadeIn",
+              "duration": 0.3
+            }
+          ]
+        },
+        {
+          "id": "pill-bottom",
+          "type": "shape",
+          "colorRole": "surface",
+          "mask": "rect",
+          "cornerRadius": 0.03,
+          "frame": {
+            "x": 0.5,
+            "y": 0.925,
+            "width": 0.26,
+            "height": 0.055
+          },
+          "timing": {
+            "start": 0.6
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "pop",
+              "duration": 0.4,
+              "params": {
+                "overshoot": 1.1
+              }
+            }
+          ]
+        },
+        {
+          "id": "label-bottom",
+          "type": "text",
+          "key": "labelBottom",
+          "default": {
+            "en": "AFTER",
+            "tr": "SONRA"
+          },
+          "font": {
+            "name": "AvenirNext-Bold",
+            "size": 0.026
+          },
+          "colorRole": "textPrimary",
+          "alignment": "center",
+          "allCaps": true,
+          "letterSpacing": 0.004,
+          "frame": {
+            "x": 0.5,
+            "y": 0.925,
+            "width": 0.26,
+            "height": 0.05
+          },
+          "timing": {
+            "start": 0.7
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "fadeIn",
+              "duration": 0.3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "layers": []
+}

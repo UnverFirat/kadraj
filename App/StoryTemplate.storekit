@@ -1,0 +1,82 @@
+{
+  "identifier" : "storytemplate-pro",
+  "nonRenewingSubscriptions" : [],
+  "products" : [],
+  "settings" : {
+    "_applicationInternalID" : "storytemplate",
+    "_developerTeamID" : "",
+    "_lastSynchronizedDate" : 0,
+    "_locale" : "tr_TR",
+    "_storefront" : "TUR",
+    "_storeKitErrors" : []
+  },
+  "subscriptionGroups" : [
+    {
+      "id" : "pro",
+      "localizations" : [],
+      "name" : "StoryTemplate Pro",
+      "subscriptions" : [
+        {
+          "adHocOffers" : [],
+          "codeOffers" : [],
+          "displayPrice" : "79.99",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "pro-monthly",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "Tüm şablonlar, tüm müzikler, filigransız dışa aktarım.",
+              "displayName" : "Pro (Aylık)",
+              "locale" : "tr_TR"
+            },
+            {
+              "description" : "Every template, all music, watermark-free export.",
+              "displayName" : "Pro (Monthly)",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "com.storytemplate.pro.monthly",
+          "recurringSubscriptionPeriod" : "P1M",
+          "referenceName" : "Pro Monthly",
+          "subscriptionGroupID" : "pro",
+          "type" : "RecurringSubscription"
+        },
+        {
+          "adHocOffers" : [],
+          "codeOffers" : [],
+          "displayPrice" : "399.99",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "pro-yearly",
+          "introductoryOffer" : {
+            "internalID" : "pro-yearly-trial",
+            "paymentMode" : "free",
+            "subscriptionPeriod" : "P3D"
+          },
+          "localizations" : [
+            {
+              "description" : "Tüm şablonlar, tüm müzikler, filigransız dışa aktarım.",
+              "displayName" : "Pro (Yıllık)",
+              "locale" : "tr_TR"
+            },
+            {
+              "description" : "Every template, all music, watermark-free export.",
+              "displayName" : "Pro (Yearly)",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "com.storytemplate.pro.yearly",
+          "recurringSubscriptionPeriod" : "P1Y",
+          "referenceName" : "Pro Yearly",
+          "subscriptionGroupID" : "pro",
+          "type" : "RecurringSubscription"
+        }
+      ]
+    }
+  ],
+  "version" : {
+    "major" : 4,
+    "minor" : 0
+  }
+}

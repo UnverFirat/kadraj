@@ -1,0 +1,389 @@
+{
+  "schemaVersion": 1,
+  "id": "bayram-greeting-01",
+  "name": {
+    "en": "Holiday Greeting",
+    "tr": "Bayram Tebriği"
+  },
+  "category": "holiday",
+  "isPro": false,
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "duration": 6.5,
+  "palette": {
+    "background": "#111113",
+    "surface": "#FFFFFF",
+    "accent": "#D9A441",
+    "textPrimary": "#FFFFFF",
+    "textSecondary": "#B0B0B4",
+    "textOnAccent": "#FFFFFF",
+    "scrimClear": "#00000000",
+    "scrimSolid": "#000000CC"
+  },
+  "audio": {
+    "defaultTrackId": "calm-01",
+    "volume": 0.85
+  },
+  "layers": [
+    {
+      "id": "bg",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "type": "shape",
+      "colorRole": "background"
+    },
+    {
+      "id": "halo",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 0.92,
+        "height": 0.5175
+      },
+      "opacity": 0.07,
+      "animations": [
+        {
+          "role": "in",
+          "preset": "scaleIn",
+          "duration": 1.0,
+          "easing": "easeOut",
+          "params": {
+            "from": 0.82
+          }
+        },
+        {
+          "role": "loop",
+          "preset": "pulse",
+          "duration": 3.2,
+          "params": {
+            "scale": 1.04
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "accent",
+      "mask": "circle"
+    },
+    {
+      "id": "ring1-out",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 0.78,
+        "height": 0.4388
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "scaleIn",
+          "duration": 0.7,
+          "easing": "easeOut",
+          "params": {
+            "from": 0.9
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "accent",
+      "mask": "circle"
+    },
+    {
+      "id": "ring1-in",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 0.762,
+        "height": 0.4286
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "scaleIn",
+          "duration": 0.7,
+          "easing": "easeOut",
+          "params": {
+            "from": 0.9
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "background",
+      "mask": "circle"
+    },
+    {
+      "id": "ring2-out",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 0.7,
+        "height": 0.3938
+      },
+      "timing": {
+        "start": 0.25
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "scaleIn",
+          "duration": 0.7,
+          "easing": "easeOut",
+          "params": {
+            "from": 0.88
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "accent",
+      "mask": "circle"
+    },
+    {
+      "id": "ring2-in",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 0.688,
+        "height": 0.387
+      },
+      "timing": {
+        "start": 0.25
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "scaleIn",
+          "duration": 0.7,
+          "easing": "easeOut",
+          "params": {
+            "from": 0.88
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "background",
+      "mask": "circle"
+    },
+    {
+      "id": "gem-top",
+      "frame": {
+        "x": 0.5,
+        "y": 0.2806,
+        "width": 0.026,
+        "height": 0.0146
+      },
+      "timing": {
+        "start": 0.7
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "pop",
+          "duration": 0.45,
+          "params": {
+            "overshoot": 1.2
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "accent",
+      "mask": "circle"
+    },
+    {
+      "id": "gem-bottom",
+      "frame": {
+        "x": 0.5,
+        "y": 0.7194,
+        "width": 0.026,
+        "height": 0.0146
+      },
+      "timing": {
+        "start": 0.8
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "pop",
+          "duration": 0.45,
+          "params": {
+            "overshoot": 1.2
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "accent",
+      "mask": "circle"
+    },
+    {
+      "id": "kicker",
+      "frame": {
+        "x": 0.5,
+        "y": 0.395,
+        "width": 0.66,
+        "height": 0.04
+      },
+      "timing": {
+        "start": 0.55
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.6
+        }
+      ],
+      "type": "text",
+      "key": "kicker",
+      "default": {
+        "en": "SEASON'S BLESSINGS",
+        "tr": "HAYIRLI BAYRAMLAR"
+      },
+      "font": {
+        "name": "AvenirNext-Medium",
+        "size": 0.021
+      },
+      "colorRole": "accent",
+      "alignment": "center",
+      "letterSpacing": 0.012,
+      "allCaps": true
+    },
+    {
+      "id": "title",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 0.68,
+        "height": 0.16
+      },
+      "timing": {
+        "start": 0.7
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "kineticWords",
+          "duration": 0.9,
+          "params": {
+            "distance": 0.02
+          }
+        },
+        {
+          "role": "loop",
+          "preset": "floatLoop",
+          "duration": 2.6,
+          "params": {
+            "distance": 0.006,
+            "axis": "y"
+          }
+        }
+      ],
+      "type": "text",
+      "key": "title",
+      "default": {
+        "en": "A Blessed\nHoliday",
+        "tr": "Bayramınız\nKutlu Olsun"
+      },
+      "font": {
+        "name": "Georgia-Bold",
+        "size": 0.066
+      },
+      "colorRole": "textPrimary",
+      "alignment": "center",
+      "maxLines": 2
+    },
+    {
+      "id": "rule",
+      "frame": {
+        "x": 0.5,
+        "y": 0.6,
+        "width": 0.09,
+        "height": 0.004
+      },
+      "timing": {
+        "start": 1.0
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "wipeReveal",
+          "duration": 0.55,
+          "easing": "easeOut",
+          "params": {
+            "direction": "right"
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "accent"
+    },
+    {
+      "id": "sub",
+      "frame": {
+        "x": 0.5,
+        "y": 0.648,
+        "width": 0.62,
+        "height": 0.04
+      },
+      "timing": {
+        "start": 1.1
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.6
+        }
+      ],
+      "type": "text",
+      "key": "sub",
+      "default": {
+        "en": "To many more, in health and peace",
+        "tr": "Sağlıkla, huzurla nice bayramlara"
+      },
+      "font": {
+        "name": "AvenirNext-Regular",
+        "size": 0.021
+      },
+      "colorRole": "textSecondary",
+      "alignment": "center"
+    },
+    {
+      "id": "sign",
+      "frame": {
+        "x": 0.5,
+        "y": 0.8,
+        "width": 0.76,
+        "height": 0.04
+      },
+      "timing": {
+        "start": 1.2
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.7
+        }
+      ],
+      "type": "text",
+      "key": "sign",
+      "default": {
+        "en": "WITH LOVE FROM OUR FAMILY",
+        "tr": "AİLECEK SEVGİLERİMİZLE"
+      },
+      "font": {
+        "name": "AvenirNext-DemiBold",
+        "size": 0.019
+      },
+      "colorRole": "textSecondary",
+      "alignment": "center",
+      "letterSpacing": 0.01,
+      "allCaps": true
+    }
+  ]
+}

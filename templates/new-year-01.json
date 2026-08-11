@@ -1,0 +1,360 @@
+{
+  "schemaVersion": 1,
+  "id": "new-year-01",
+  "name": {
+    "en": "New Year",
+    "tr": "Yeni Yıl"
+  },
+  "category": "holiday",
+  "isPro": false,
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "duration": 6.0,
+  "palette": {
+    "background": "#111113",
+    "surface": "#FFFFFF",
+    "accent": "#D9A441",
+    "textPrimary": "#FFFFFF",
+    "textSecondary": "#B0B0B4",
+    "textOnAccent": "#FFFFFF",
+    "scrimClear": "#00000000",
+    "scrimSolid": "#000000CC"
+  },
+  "audio": {
+    "defaultTrackId": "impact-01",
+    "volume": 0.85
+  },
+  "layers": [
+    {
+      "id": "bg",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "type": "shape",
+      "colorRole": "background"
+    },
+    {
+      "id": "ny-glow",
+      "frame": {
+        "x": 0.5,
+        "y": 0.44,
+        "width": 0.82,
+        "height": 0.4613
+      },
+      "opacity": 0.16,
+      "animations": [
+        {
+          "role": "in",
+          "preset": "scaleIn",
+          "duration": 0.9,
+          "easing": "easeOut",
+          "params": {
+            "from": 0.8
+          }
+        },
+        {
+          "role": "loop",
+          "preset": "pulse",
+          "duration": 2.6,
+          "params": {
+            "scale": 1.05
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "accent",
+      "mask": "circle"
+    },
+    {
+      "id": "ny-kicker",
+      "frame": {
+        "x": 0.5,
+        "y": 0.3,
+        "width": 0.8,
+        "height": 0.045
+      },
+      "timing": {
+        "start": 0.2
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.6
+        }
+      ],
+      "type": "text",
+      "key": "nyKicker",
+      "default": {
+        "en": "HAPPY NEW YEAR",
+        "tr": "MUTLU YILLAR"
+      },
+      "font": {
+        "name": "AvenirNext-DemiBold",
+        "size": 0.024
+      },
+      "colorRole": "textPrimary",
+      "alignment": "center",
+      "letterSpacing": 0.018,
+      "allCaps": true
+    },
+    {
+      "id": "ny-year",
+      "frame": {
+        "x": 0.5,
+        "y": 0.45,
+        "width": 0.9,
+        "height": 0.2
+      },
+      "timing": {
+        "start": 0.35
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "pop",
+          "duration": 0.6,
+          "params": {
+            "overshoot": 1.12
+          }
+        },
+        {
+          "role": "loop",
+          "preset": "floatLoop",
+          "duration": 2.6,
+          "params": {
+            "distance": 0.006,
+            "axis": "y"
+          }
+        }
+      ],
+      "type": "text",
+      "key": "nyYear",
+      "default": {
+        "en": "2026",
+        "tr": "2026"
+      },
+      "font": {
+        "name": "AvenirNext-Heavy",
+        "size": 0.155
+      },
+      "colorRole": "accent",
+      "alignment": "center",
+      "letterSpacing": 0.004
+    },
+    {
+      "id": "ny-wish",
+      "frame": {
+        "x": 0.5,
+        "y": 0.635,
+        "width": 0.82,
+        "height": 0.13
+      },
+      "timing": {
+        "start": 0.7
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "slideIn",
+          "duration": 0.6,
+          "easing": "easeOut",
+          "params": {
+            "direction": "up",
+            "distance": 0.04
+          }
+        }
+      ],
+      "type": "text",
+      "key": "nyWish",
+      "default": {
+        "en": "May the new year\nbring new stories.",
+        "tr": "Yeni yıl, yeni\nhikâyeler getirsin."
+      },
+      "font": {
+        "name": "Georgia-Bold",
+        "size": 0.038
+      },
+      "colorRole": "textPrimary",
+      "alignment": "center",
+      "maxLines": 2
+    },
+    {
+      "id": "ny-sign",
+      "frame": {
+        "x": 0.5,
+        "y": 0.755,
+        "width": 0.6,
+        "height": 0.04
+      },
+      "timing": {
+        "start": 1.05
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.6
+        }
+      ],
+      "type": "text",
+      "key": "nySign",
+      "default": {
+        "en": "— With love",
+        "tr": "— Sevgiyle"
+      },
+      "font": {
+        "name": "AvenirNext-Regular",
+        "size": 0.022
+      },
+      "colorRole": "textSecondary",
+      "alignment": "center"
+    },
+    {
+      "id": "sp0",
+      "frame": {
+        "x": 0.17,
+        "y": 0.2,
+        "width": 0.154,
+        "height": 0.112
+      },
+      "rotation": -10,
+      "timing": {
+        "start": 0.45
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "pop",
+          "duration": 0.45,
+          "params": {
+            "overshoot": 1.15
+          }
+        }
+      ],
+      "type": "text",
+      "key": "sp0",
+      "default": {
+        "en": "✨",
+        "tr": "✨"
+      },
+      "font": {
+        "name": "AvenirNext-Bold",
+        "size": 0.07
+      },
+      "colorRole": "textPrimary",
+      "alignment": "center"
+    },
+    {
+      "id": "sp1",
+      "frame": {
+        "x": 0.84,
+        "y": 0.22,
+        "width": 0.143,
+        "height": 0.104
+      },
+      "rotation": 12,
+      "timing": {
+        "start": 0.6
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "pop",
+          "duration": 0.45,
+          "params": {
+            "overshoot": 1.15
+          }
+        }
+      ],
+      "type": "text",
+      "key": "sp1",
+      "default": {
+        "en": "✨",
+        "tr": "✨"
+      },
+      "font": {
+        "name": "AvenirNext-Bold",
+        "size": 0.065
+      },
+      "colorRole": "textPrimary",
+      "alignment": "center"
+    },
+    {
+      "id": "sp2",
+      "frame": {
+        "x": 0.16,
+        "y": 0.845,
+        "width": 0.132,
+        "height": 0.096
+      },
+      "rotation": 8,
+      "timing": {
+        "start": 0.9
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "pop",
+          "duration": 0.45,
+          "params": {
+            "overshoot": 1.15
+          }
+        }
+      ],
+      "type": "text",
+      "key": "sp2",
+      "default": {
+        "en": "✨",
+        "tr": "✨"
+      },
+      "font": {
+        "name": "AvenirNext-Bold",
+        "size": 0.06
+      },
+      "colorRole": "textPrimary",
+      "alignment": "center"
+    },
+    {
+      "id": "sp3",
+      "frame": {
+        "x": 0.84,
+        "y": 0.865,
+        "width": 0.121,
+        "height": 0.088
+      },
+      "rotation": -14,
+      "timing": {
+        "start": 1.05
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "pop",
+          "duration": 0.45,
+          "params": {
+            "overshoot": 1.15
+          }
+        }
+      ],
+      "type": "text",
+      "key": "sp3",
+      "default": {
+        "en": "✨",
+        "tr": "✨"
+      },
+      "font": {
+        "name": "AvenirNext-Bold",
+        "size": 0.055
+      },
+      "colorRole": "textPrimary",
+      "alignment": "center"
+    }
+  ]
+}

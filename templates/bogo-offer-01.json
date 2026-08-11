@@ -1,0 +1,312 @@
+{
+  "schemaVersion": 1,
+  "id": "bogo-offer-01",
+  "name": {
+    "en": "Buy One Get One",
+    "tr": "2 Al 1 Öde"
+  },
+  "category": "promo",
+  "isPro": false,
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "duration": 5.5,
+  "palette": {
+    "background": "#12140A",
+    "surface": "#FFFFFF",
+    "accent": "#D8F135",
+    "textPrimary": "#FBFFE6",
+    "textSecondary": "#BDC79A",
+    "textOnAccent": "#12140A",
+    "scrimClear": "#00000000",
+    "scrimSolid": "#000000CC"
+  },
+  "audio": {
+    "defaultTrackId": "energetic-01",
+    "volume": 0.85
+  },
+  "layers": [
+    {
+      "id": "bg",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "type": "shape",
+      "colorRole": "background"
+    },
+    {
+      "id": "left",
+      "frame": {
+        "x": 0.2475,
+        "y": 0.5,
+        "width": 0.495,
+        "height": 1.0
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "slideIn",
+          "duration": 0.6,
+          "easing": "easeOut",
+          "params": {
+            "direction": "right",
+            "distance": 0.06
+          }
+        },
+        {
+          "role": "loop",
+          "preset": "kenBurns",
+          "duration": 5.5,
+          "params": {
+            "zoom": 1.1,
+            "direction": "up"
+          }
+        }
+      ],
+      "type": "mediaSlot",
+      "slotIndex": 0,
+      "media": "photo",
+      "contentMode": "fill",
+      "mask": "rect",
+      "filter": "vivid",
+      "filterIntensity": 0.4
+    },
+    {
+      "id": "right",
+      "frame": {
+        "x": 0.7525,
+        "y": 0.5,
+        "width": 0.495,
+        "height": 1.0
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "slideIn",
+          "duration": 0.6,
+          "easing": "easeOut",
+          "params": {
+            "direction": "left",
+            "distance": 0.06
+          }
+        },
+        {
+          "role": "loop",
+          "preset": "kenBurns",
+          "duration": 5.5,
+          "params": {
+            "zoom": 1.1,
+            "direction": "down"
+          }
+        }
+      ],
+      "type": "mediaSlot",
+      "slotIndex": 1,
+      "media": "photo",
+      "contentMode": "fill",
+      "mask": "rect",
+      "filter": "vivid",
+      "filterIntensity": 0.4
+    },
+    {
+      "id": "scrim-top",
+      "frame": {
+        "x": 0.5,
+        "y": 0.13,
+        "width": 1.0,
+        "height": 0.28
+      },
+      "type": "shape",
+      "colorRole": "scrimClear",
+      "gradient": {
+        "from": "scrimClear",
+        "to": "scrimSolid",
+        "direction": "up"
+      }
+    },
+    {
+      "id": "scrim-bottom",
+      "frame": {
+        "x": 0.5,
+        "y": 0.86,
+        "width": 1.0,
+        "height": 0.28
+      },
+      "type": "shape",
+      "colorRole": "scrimClear",
+      "gradient": {
+        "from": "scrimClear",
+        "to": "scrimSolid",
+        "direction": "down"
+      }
+    },
+    {
+      "id": "kicker",
+      "frame": {
+        "x": 0.5,
+        "y": 0.135,
+        "width": 0.86,
+        "height": 0.05
+      },
+      "timing": {
+        "start": 0.3
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.6
+        }
+      ],
+      "type": "text",
+      "key": "kicker",
+      "default": {
+        "en": "THIS WEEK ONLY",
+        "tr": "SADECE BU HAFTA"
+      },
+      "font": {
+        "name": "AvenirNext-DemiBold",
+        "size": 0.03
+      },
+      "colorRole": "textPrimary",
+      "alignment": "center",
+      "letterSpacing": 0.016,
+      "allCaps": true
+    },
+    {
+      "id": "badge-ring",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 0.44,
+        "height": 0.2475
+      },
+      "opacity": 0.9,
+      "timing": {
+        "start": 0.5
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "scaleIn",
+          "duration": 0.55,
+          "easing": "easeOut",
+          "params": {
+            "from": 0.7
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "textPrimary",
+      "mask": "circle"
+    },
+    {
+      "id": "badge",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 0.4,
+        "height": 0.225
+      },
+      "timing": {
+        "start": 0.6
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "pop",
+          "duration": 0.5,
+          "params": {
+            "overshoot": 1.1
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "accent",
+      "mask": "circle"
+    },
+    {
+      "id": "badge-text",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 0.34,
+        "height": 0.13
+      },
+      "timing": {
+        "start": 0.8
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.4
+        },
+        {
+          "role": "loop",
+          "preset": "floatLoop",
+          "duration": 2.6,
+          "params": {
+            "distance": 0.006,
+            "axis": "y"
+          }
+        }
+      ],
+      "type": "text",
+      "key": "badge",
+      "default": {
+        "en": "BUY 1\nGET 1",
+        "tr": "2 AL\n1 ÖDE"
+      },
+      "font": {
+        "name": "AvenirNext-Heavy",
+        "size": 0.048
+      },
+      "colorRole": "textOnAccent",
+      "alignment": "center",
+      "maxLines": 2,
+      "allCaps": true
+    },
+    {
+      "id": "terms",
+      "frame": {
+        "x": 0.5,
+        "y": 0.885,
+        "width": 0.84,
+        "height": 0.04
+      },
+      "timing": {
+        "start": 1.0
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "slideIn",
+          "duration": 0.5,
+          "easing": "easeOut",
+          "params": {
+            "direction": "up",
+            "distance": 0.03
+          }
+        }
+      ],
+      "type": "text",
+      "key": "terms",
+      "default": {
+        "en": "Second one's on us — all desserts",
+        "tr": "İkinci ürün bizden — tüm tatlılarda"
+      },
+      "font": {
+        "name": "AvenirNext-Medium",
+        "size": 0.021
+      },
+      "colorRole": "textPrimary",
+      "alignment": "center"
+    }
+  ]
+}

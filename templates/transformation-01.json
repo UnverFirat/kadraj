@@ -1,0 +1,413 @@
+{
+  "schemaVersion": 2,
+  "id": "transformation-01",
+  "name": {
+    "en": "Transformation",
+    "tr": "Değişim Hikâyesi"
+  },
+  "category": "fitness",
+  "isPro": true,
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "palette": {
+    "background": "#111113",
+    "surface": "#FFFFFF",
+    "accent": "#D9A441",
+    "textPrimary": "#FFFFFF",
+    "textSecondary": "#B0B0B4",
+    "textOnAccent": "#FFFFFF",
+    "scrimClear": "#00000000",
+    "scrimSolid": "#000000CC"
+  },
+  "audio": {
+    "defaultTrackId": "impact-01",
+    "volume": 0.85
+  },
+  "scenes": [
+    {
+      "id": "week-one",
+      "duration": 2.6,
+      "layers": [
+        {
+          "id": "one-media",
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 1.0,
+            "height": 1.0
+          },
+          "animations": [
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 2.6,
+              "params": {
+                "zoom": 1.12,
+                "direction": "up"
+              }
+            }
+          ],
+          "type": "mediaSlot",
+          "slotIndex": 0,
+          "media": "photoOrVideo",
+          "contentMode": "fill",
+          "mask": "rect",
+          "filter": "mono",
+          "filterIntensity": 0.45
+        },
+        {
+          "id": "one-scrim",
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 1.0,
+            "height": 1.0
+          },
+          "type": "shape",
+          "colorRole": "scrimClear",
+          "gradient": {
+            "from": "scrimClear",
+            "to": "scrimSolid",
+            "direction": "up"
+          }
+        },
+        {
+          "id": "one-title",
+          "frame": {
+            "x": 0.5,
+            "y": 0.16,
+            "width": 0.86,
+            "height": 0.11
+          },
+          "timing": {
+            "start": 0.2
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "pop",
+              "duration": 0.5,
+              "params": {
+                "overshoot": 1.08
+              }
+            }
+          ],
+          "type": "text",
+          "key": "weekOne",
+          "default": {
+            "en": "WEEK 1",
+            "tr": "1. HAFTA"
+          },
+          "font": {
+            "name": "AvenirNext-Heavy",
+            "size": 0.07
+          },
+          "colorRole": "textPrimary",
+          "alignment": "center",
+          "letterSpacing": 0.01,
+          "allCaps": true
+        },
+        {
+          "id": "one-note",
+          "frame": {
+            "x": 0.5,
+            "y": 0.245,
+            "width": 0.8,
+            "height": 0.04
+          },
+          "timing": {
+            "start": 0.55
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "fadeIn",
+              "duration": 0.5
+            }
+          ],
+          "type": "text",
+          "key": "weekOneNote",
+          "default": {
+            "en": "Day one, zero training",
+            "tr": "İlk gün, hiç antrenman yok"
+          },
+          "font": {
+            "name": "AvenirNext-Regular",
+            "size": 0.024
+          },
+          "colorRole": "textSecondary",
+          "alignment": "center"
+        }
+      ],
+      "transition": {
+        "style": "crossDissolve",
+        "duration": 0.5
+      }
+    },
+    {
+      "id": "week-eight",
+      "duration": 2.6,
+      "layers": [
+        {
+          "id": "eight-media",
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 1.0,
+            "height": 1.0
+          },
+          "animations": [
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 2.6,
+              "params": {
+                "zoom": 1.12,
+                "direction": "down"
+              }
+            }
+          ],
+          "type": "mediaSlot",
+          "slotIndex": 1,
+          "media": "photoOrVideo",
+          "contentMode": "fill",
+          "mask": "rect",
+          "filter": "vivid",
+          "filterIntensity": 0.4
+        },
+        {
+          "id": "eight-scrim",
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 1.0,
+            "height": 1.0
+          },
+          "type": "shape",
+          "colorRole": "scrimClear",
+          "gradient": {
+            "from": "scrimClear",
+            "to": "scrimSolid",
+            "direction": "up"
+          }
+        },
+        {
+          "id": "eight-title",
+          "frame": {
+            "x": 0.5,
+            "y": 0.16,
+            "width": 0.86,
+            "height": 0.11
+          },
+          "timing": {
+            "start": 0.2
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "scaleIn",
+              "duration": 0.5,
+              "easing": "easeOut",
+              "params": {
+                "from": 0.85
+              }
+            }
+          ],
+          "type": "text",
+          "key": "weekEight",
+          "default": {
+            "en": "WEEK 8",
+            "tr": "8. HAFTA"
+          },
+          "font": {
+            "name": "AvenirNext-Heavy",
+            "size": 0.07
+          },
+          "colorRole": "accent",
+          "alignment": "center",
+          "letterSpacing": 0.01,
+          "allCaps": true
+        },
+        {
+          "id": "eight-note",
+          "frame": {
+            "x": 0.5,
+            "y": 0.245,
+            "width": 0.8,
+            "height": 0.04
+          },
+          "timing": {
+            "start": 0.55
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "fadeIn",
+              "duration": 0.5
+            }
+          ],
+          "type": "text",
+          "key": "weekEightNote",
+          "default": {
+            "en": "Three days a week, no excuses",
+            "tr": "Haftada üç gün, aksatmadan"
+          },
+          "font": {
+            "name": "AvenirNext-Regular",
+            "size": 0.024
+          },
+          "colorRole": "textSecondary",
+          "alignment": "center"
+        }
+      ],
+      "transition": {
+        "style": "crossDissolve",
+        "duration": 0.5
+      }
+    },
+    {
+      "id": "closing",
+      "duration": 2.8,
+      "layers": [
+        {
+          "id": "end-bg",
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 1.0,
+            "height": 1.0
+          },
+          "type": "shape",
+          "colorRole": "background"
+        },
+        {
+          "id": "end-mark",
+          "frame": {
+            "x": 0.5,
+            "y": 0.36,
+            "width": 0.24,
+            "height": 0.135
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "scaleIn",
+              "duration": 0.6,
+              "easing": "easeOut",
+              "params": {
+                "from": 0.6
+              }
+            }
+          ],
+          "type": "shape",
+          "colorRole": "accent",
+          "mask": "circle"
+        },
+        {
+          "id": "end-spark",
+          "frame": {
+            "x": 0.5,
+            "y": 0.36,
+            "width": 0.154,
+            "height": 0.112
+          },
+          "timing": {
+            "start": 0.3
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "pop",
+              "duration": 0.5,
+              "params": {
+                "overshoot": 1.2
+              }
+            }
+          ],
+          "type": "text",
+          "key": "spark",
+          "default": {
+            "en": "🔥",
+            "tr": "🔥"
+          },
+          "font": {
+            "name": "AvenirNext-Bold",
+            "size": 0.07
+          },
+          "colorRole": "textPrimary",
+          "alignment": "center"
+        },
+        {
+          "id": "end-line",
+          "frame": {
+            "x": 0.5,
+            "y": 0.56,
+            "width": 0.82,
+            "height": 0.17
+          },
+          "timing": {
+            "start": 0.5
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "kineticWords",
+              "duration": 0.9,
+              "params": {
+                "distance": 0.02
+              }
+            }
+          ],
+          "type": "text",
+          "key": "closing",
+          "default": {
+            "en": "Your week one\nstarts today",
+            "tr": "Sen de bugün\nbaşlayabilirsin"
+          },
+          "font": {
+            "name": "AvenirNext-Bold",
+            "size": 0.058
+          },
+          "colorRole": "textPrimary",
+          "alignment": "center",
+          "maxLines": 2
+        },
+        {
+          "id": "end-cta",
+          "frame": {
+            "x": 0.5,
+            "y": 0.7,
+            "width": 0.8,
+            "height": 0.04
+          },
+          "timing": {
+            "start": 0.95
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "fadeIn",
+              "duration": 0.6
+            }
+          ],
+          "type": "text",
+          "key": "closingCta",
+          "default": {
+            "en": "Free trial session · DM us",
+            "tr": "Ücretsiz deneme dersi · DM"
+          },
+          "font": {
+            "name": "AvenirNext-Medium",
+            "size": 0.022
+          },
+          "colorRole": "textSecondary",
+          "alignment": "center"
+        }
+      ]
+    }
+  ],
+  "layers": []
+}

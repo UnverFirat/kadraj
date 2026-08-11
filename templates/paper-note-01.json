@@ -1,0 +1,283 @@
+{
+  "schemaVersion": 1,
+  "id": "paper-note-01",
+  "name": {
+    "en": "Paper Note",
+    "tr": "Not Kâğıdı"
+  },
+  "category": "minimal",
+  "isPro": true,
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "duration": 7.5,
+  "palette": {
+    "background": "#EFEAE2",
+    "surface": "#FFFFFF",
+    "accent": "#1F1D1A",
+    "textPrimary": "#1F1D1A",
+    "textSecondary": "#6F6A62",
+    "textOnAccent": "#FFFFFF",
+    "scrimClear": "#00000000",
+    "scrimSolid": "#000000CC"
+  },
+  "audio": {
+    "defaultTrackId": "typewriter-01",
+    "volume": 0.85
+  },
+  "layers": [
+    {
+      "id": "bg",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "type": "shape",
+      "colorRole": "background"
+    },
+    {
+      "id": "card-shadow",
+      "frame": {
+        "x": 0.515,
+        "y": 0.475,
+        "width": 0.82,
+        "height": 0.6
+      },
+      "rotation": -2.5,
+      "opacity": 0.18,
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.5
+        }
+      ],
+      "type": "shape",
+      "colorRole": "textSecondary",
+      "cornerRadius": 0.008
+    },
+    {
+      "id": "card",
+      "frame": {
+        "x": 0.5,
+        "y": 0.46,
+        "width": 0.82,
+        "height": 0.6
+      },
+      "rotation": -2.5,
+      "animations": [
+        {
+          "role": "in",
+          "preset": "scaleIn",
+          "duration": 0.6,
+          "easing": "easeOut",
+          "params": {
+            "from": 0.94
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "surface",
+      "cornerRadius": 0.008
+    },
+    {
+      "id": "stamp",
+      "frame": {
+        "x": 0.5,
+        "y": 0.235,
+        "width": 0.66,
+        "height": 0.04
+      },
+      "rotation": -2.5,
+      "timing": {
+        "start": 0.4
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.5
+        }
+      ],
+      "type": "text",
+      "key": "stamp",
+      "default": {
+        "en": "AUGUST 10 · TUESDAY",
+        "tr": "10 AĞUSTOS · SALI"
+      },
+      "font": {
+        "name": "Courier-Bold",
+        "size": 0.022
+      },
+      "colorRole": "textSecondary",
+      "alignment": "left",
+      "letterSpacing": 0.006,
+      "allCaps": true
+    },
+    {
+      "id": "rule",
+      "frame": {
+        "x": 0.5,
+        "y": 0.275,
+        "width": 0.66,
+        "height": 0.002
+      },
+      "rotation": -2.5,
+      "timing": {
+        "start": 0.55
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "wipeReveal",
+          "duration": 0.6,
+          "easing": "easeOut",
+          "params": {
+            "direction": "right"
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "accent"
+    },
+    {
+      "id": "note",
+      "frame": {
+        "x": 0.5,
+        "y": 0.405,
+        "width": 0.68,
+        "height": 0.22
+      },
+      "rotation": -2.5,
+      "timing": {
+        "start": 0.7
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "typewriter",
+          "duration": 2.0
+        },
+        {
+          "role": "loop",
+          "preset": "floatLoop",
+          "duration": 2.6,
+          "params": {
+            "distance": 0.006,
+            "axis": "y"
+          }
+        }
+      ],
+      "type": "text",
+      "key": "note",
+      "default": {
+        "en": "Tried one small thing\ntoday and it worked.\nTomorrow I will push\na little further.",
+        "tr": "Bugün küçük bir şey\ndenedim ve işe yaradı.\nYarın biraz daha\nileri gideceğim."
+      },
+      "font": {
+        "name": "Courier-Bold",
+        "size": 0.034
+      },
+      "colorRole": "textPrimary",
+      "alignment": "left",
+      "maxLines": 4
+    },
+    {
+      "id": "sign",
+      "frame": {
+        "x": 0.33,
+        "y": 0.575,
+        "width": 0.46,
+        "height": 0.06
+      },
+      "rotation": -2.5,
+      "timing": {
+        "start": 2.9
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.8
+        }
+      ],
+      "type": "text",
+      "key": "sign",
+      "default": {
+        "en": "love, Ada",
+        "tr": "sevgiler, Ada"
+      },
+      "font": {
+        "name": "SnellRoundhand-Bold",
+        "size": 0.03
+      },
+      "colorRole": "accent",
+      "alignment": "left"
+    },
+    {
+      "id": "polaroid",
+      "frame": {
+        "x": 0.735,
+        "y": 0.735,
+        "width": 0.26,
+        "height": 0.2
+      },
+      "rotation": 5,
+      "animations": [
+        {
+          "role": "in",
+          "preset": "pop",
+          "duration": 0.6,
+          "delay": 1.4,
+          "params": {
+            "overshoot": 1.06
+          }
+        },
+        {
+          "role": "loop",
+          "preset": "kenBurns",
+          "duration": 7.5,
+          "params": {
+            "zoom": 1.06,
+            "direction": "up"
+          }
+        }
+      ],
+      "type": "mediaSlot",
+      "slotIndex": 0,
+      "media": "photo",
+      "contentMode": "fill",
+      "mask": "rect",
+      "cornerRadius": 0.006,
+      "filter": "fade",
+      "filterIntensity": 0.3
+    },
+    {
+      "id": "tape",
+      "frame": {
+        "x": 0.735,
+        "y": 0.645,
+        "width": 0.11,
+        "height": 0.024
+      },
+      "rotation": 5,
+      "opacity": 0.35,
+      "timing": {
+        "start": 1.4
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.4
+        }
+      ],
+      "type": "shape",
+      "colorRole": "textSecondary"
+    }
+  ]
+}

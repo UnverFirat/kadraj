@@ -1,0 +1,181 @@
+{
+  "schemaVersion": 1,
+  "id": "headline-01",
+  "name": {
+    "en": "Bold Headline",
+    "tr": "Vurgu Manşet"
+  },
+  "category": "business",
+  "isPro": true,
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "duration": 4.5,
+  "palette": {
+    "background": "#0A0A0A",
+    "surface": "#FFFFFF",
+    "accent": "#FFE04B",
+    "textPrimary": "#FFFFFF",
+    "textOnAccent": "#0A0A0A",
+    "textSecondary": "#CFCFCF"
+  },
+  "audio": {
+    "defaultTrackId": "impact-01",
+    "volume": 0.9
+  },
+  "layers": [
+    {
+      "id": "photo",
+      "type": "mediaSlot",
+      "slotIndex": 0,
+      "media": "photoOrVideo",
+      "contentMode": "fill",
+      "mask": "rect",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.5
+        },
+        {
+          "role": "loop",
+          "preset": "kenBurns",
+          "duration": 4.5,
+          "params": {
+            "zoom": 1.12,
+            "direction": "down"
+          }
+        }
+      ]
+    },
+    {
+      "id": "scrim",
+      "type": "shape",
+      "colorRole": "background",
+      "opacity": 0.35,
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      }
+    },
+    {
+      "id": "tag",
+      "type": "text",
+      "key": "tag",
+      "default": {
+        "en": "BREAKING",
+        "tr": "SON DAKİKA"
+      },
+      "font": {
+        "name": "AvenirNext-Bold",
+        "size": 0.024
+      },
+      "colorRole": "textOnAccent",
+      "highlightColorRole": "accent",
+      "alignment": "left",
+      "allCaps": true,
+      "letterSpacing": 0.006,
+      "frame": {
+        "x": 0.322,
+        "y": 0.55,
+        "width": 0.44,
+        "height": 0.05
+      },
+      "timing": {
+        "start": 0.4
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "pop",
+          "duration": 0.4,
+          "params": {
+            "overshoot": 1.1
+          }
+        }
+      ]
+    },
+    {
+      "id": "headline",
+      "type": "text",
+      "key": "headline",
+      "default": {
+        "en": "THE STORY\nEVERYONE\nIS TALKING ABOUT",
+        "tr": "HERKESİN\nKONUŞTUĞU\nO HİKAYE"
+      },
+      "font": {
+        "name": "AvenirNext-Heavy",
+        "size": 0.058
+      },
+      "colorRole": "textOnAccent",
+      "highlightColorRole": "surface",
+      "alignment": "left",
+      "allCaps": true,
+      "maxLines": 4,
+      "letterSpacing": 0.001,
+      "frame": {
+        "x": 0.5,
+        "y": 0.68,
+        "width": 0.84,
+        "height": 0.24
+      },
+      "timing": {
+        "start": 0.6
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "slideIn",
+          "duration": 0.6,
+          "easing": "easeOut",
+          "params": {
+            "direction": "left",
+            "distance": 0.05
+          }
+        }
+      ]
+    },
+    {
+      "id": "source",
+      "type": "text",
+      "key": "source",
+      "default": {
+        "en": "@yourchannel · 2 min read",
+        "tr": "@kanalin · 2 dk okuma"
+      },
+      "font": {
+        "name": "AvenirNext-Medium",
+        "size": 0.02
+      },
+      "colorRole": "textSecondary",
+      "alignment": "left",
+      "letterSpacing": 0.004,
+      "frame": {
+        "x": 0.42,
+        "y": 0.86,
+        "width": 0.68,
+        "height": 0.04
+      },
+      "timing": {
+        "start": 1.4
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.6
+        }
+      ]
+    }
+  ]
+}

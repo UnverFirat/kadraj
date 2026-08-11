@@ -1,0 +1,232 @@
+{
+  "schemaVersion": 1,
+  "id": "free-shipping-01",
+  "name": {
+    "en": "Free Shipping",
+    "tr": "Kargo Bedava"
+  },
+  "category": "promo",
+  "isPro": false,
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "duration": 6.0,
+  "palette": {
+    "background": "#EFEAE2",
+    "surface": "#FFFFFF",
+    "accent": "#1F1D1A",
+    "textPrimary": "#1F1D1A",
+    "textSecondary": "#6F6A62",
+    "textOnAccent": "#FFFFFF",
+    "scrimClear": "#00000000",
+    "scrimSolid": "#000000CC"
+  },
+  "audio": {
+    "defaultTrackId": "clean-01",
+    "volume": 0.85
+  },
+  "layers": [
+    {
+      "id": "bg",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "type": "shape",
+      "colorRole": "surface"
+    },
+    {
+      "id": "tint",
+      "frame": {
+        "x": 0.5,
+        "y": 0.3,
+        "width": 1.0,
+        "height": 0.6
+      },
+      "opacity": 0.55,
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.5
+        }
+      ],
+      "type": "shape",
+      "colorRole": "background"
+    },
+    {
+      "id": "photo",
+      "frame": {
+        "x": 0.5,
+        "y": 0.315,
+        "width": 0.78,
+        "height": 0.46
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "scaleIn",
+          "duration": 0.6,
+          "easing": "easeOut",
+          "params": {
+            "from": 0.94
+          }
+        },
+        {
+          "role": "loop",
+          "preset": "kenBurns",
+          "duration": 6.0,
+          "params": {
+            "zoom": 1.08,
+            "direction": "up"
+          }
+        }
+      ],
+      "type": "mediaSlot",
+      "slotIndex": 0,
+      "media": "photoOrVideo",
+      "contentMode": "fill",
+      "mask": "rect",
+      "cornerRadius": 0.012,
+      "filter": "fade",
+      "filterIntensity": 0.3
+    },
+    {
+      "id": "rule",
+      "frame": {
+        "x": 0.5,
+        "y": 0.635,
+        "width": 0.11,
+        "height": 0.004
+      },
+      "timing": {
+        "start": 0.55
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "wipeReveal",
+          "duration": 0.5,
+          "easing": "easeOut",
+          "params": {
+            "direction": "right"
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "accent"
+    },
+    {
+      "id": "headline",
+      "frame": {
+        "x": 0.5,
+        "y": 0.755,
+        "width": 0.86,
+        "height": 0.19
+      },
+      "timing": {
+        "start": 0.65
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "kineticWords",
+          "duration": 0.9,
+          "params": {
+            "distance": 0.02
+          }
+        },
+        {
+          "role": "loop",
+          "preset": "floatLoop",
+          "duration": 2.6,
+          "params": {
+            "distance": 0.006,
+            "axis": "y"
+          }
+        }
+      ],
+      "type": "text",
+      "key": "headline",
+      "default": {
+        "en": "FREE\nSHIPPING",
+        "tr": "KARGO\nBEDAVA"
+      },
+      "font": {
+        "name": "AvenirNext-Heavy",
+        "size": 0.076
+      },
+      "colorRole": "textPrimary",
+      "alignment": "center",
+      "maxLines": 2,
+      "letterSpacing": 0.004,
+      "allCaps": true
+    },
+    {
+      "id": "limit",
+      "frame": {
+        "x": 0.5,
+        "y": 0.885,
+        "width": 0.84,
+        "height": 0.04
+      },
+      "timing": {
+        "start": 0.95
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.55
+        }
+      ],
+      "type": "text",
+      "key": "limit",
+      "default": {
+        "en": "On every order over $50",
+        "tr": "500 TL ve üzeri tüm siparişlerde"
+      },
+      "font": {
+        "name": "AvenirNext-Medium",
+        "size": 0.023
+      },
+      "colorRole": "accent",
+      "alignment": "center"
+    },
+    {
+      "id": "speed",
+      "frame": {
+        "x": 0.5,
+        "y": 0.945,
+        "width": 0.82,
+        "height": 0.035
+      },
+      "timing": {
+        "start": 1.15
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.6
+        }
+      ],
+      "type": "text",
+      "key": "speed",
+      "default": {
+        "en": "Order today, here tomorrow",
+        "tr": "Bugün sipariş ver, yarın kapında"
+      },
+      "font": {
+        "name": "AvenirNext-Regular",
+        "size": 0.019
+      },
+      "colorRole": "textSecondary",
+      "alignment": "center"
+    }
+  ]
+}

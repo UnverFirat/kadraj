@@ -1,0 +1,266 @@
+{
+  "schemaVersion": 1,
+  "id": "testimonial-01",
+  "name": {
+    "en": "Testimonial",
+    "tr": "Müşteri Yorumu"
+  },
+  "category": "business",
+  "isPro": true,
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "duration": 6.5,
+  "palette": {
+    "background": "#0F1420",
+    "surface": "#18213240",
+    "card": "#172032",
+    "accent": "#FFC94A",
+    "textPrimary": "#FFFFFF",
+    "textSecondary": "#A9B4C4"
+  },
+  "audio": {
+    "defaultTrackId": "clean-01",
+    "volume": 0.8
+  },
+  "layers": [
+    {
+      "id": "bg",
+      "type": "shape",
+      "colorRole": "background",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      }
+    },
+    {
+      "id": "card",
+      "type": "shape",
+      "colorRole": "card",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 0.86,
+        "height": 0.62
+      },
+      "cornerRadius": 0.018,
+      "animations": [
+        {
+          "role": "in",
+          "preset": "scaleIn",
+          "duration": 0.6,
+          "easing": "easeOut",
+          "params": {
+            "from": 0.94
+          }
+        },
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.5
+        }
+      ]
+    },
+    {
+      "id": "stars",
+      "type": "text",
+      "key": "stars",
+      "default": {
+        "en": "★★★★★",
+        "tr": "★★★★★"
+      },
+      "font": {
+        "name": "AvenirNext-Bold",
+        "size": 0.032
+      },
+      "colorRole": "accent",
+      "alignment": "center",
+      "frame": {
+        "x": 0.5,
+        "y": 0.28,
+        "width": 0.6,
+        "height": 0.05
+      },
+      "letterSpacing": 0.006,
+      "timing": {
+        "start": 0.4
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "pop",
+          "duration": 0.5,
+          "params": {
+            "overshoot": 1.15
+          }
+        }
+      ]
+    },
+    {
+      "id": "quote",
+      "type": "text",
+      "key": "quote",
+      "default": {
+        "en": "\"They shipped our first campaign in two days.\"",
+        "tr": "\"İlk kampanyamızı iki günde yayına aldılar.\""
+      },
+      "font": {
+        "name": "AvenirNext-Medium",
+        "size": 0.03
+      },
+      "colorRole": "textPrimary",
+      "alignment": "center",
+      "frame": {
+        "x": 0.5,
+        "y": 0.43,
+        "width": 0.72,
+        "height": 0.2
+      },
+      "maxLines": 4,
+      "timing": {
+        "start": 0.7
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "slideIn",
+          "duration": 0.6,
+          "easing": "easeOut",
+          "params": {
+            "direction": "up",
+            "distance": 0.03
+          }
+        }
+      ]
+    },
+    {
+      "id": "avatar",
+      "type": "mediaSlot",
+      "slotIndex": 0,
+      "media": "photo",
+      "contentMode": "fill",
+      "mask": "circle",
+      "frame": {
+        "x": 0.5,
+        "y": 0.6,
+        "width": 0.14,
+        "height": 0.0787
+      },
+      "timing": {
+        "start": 1.2
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "scaleIn",
+          "duration": 0.5,
+          "easing": "easeOut",
+          "params": {
+            "from": 0.8
+          }
+        }
+      ]
+    },
+    {
+      "id": "name",
+      "type": "text",
+      "key": "name",
+      "default": {
+        "en": "AYSE K.",
+        "tr": "AYŞE K."
+      },
+      "font": {
+        "name": "AvenirNext-DemiBold",
+        "size": 0.024
+      },
+      "colorRole": "textPrimary",
+      "alignment": "center",
+      "frame": {
+        "x": 0.5,
+        "y": 0.665,
+        "width": 0.6,
+        "height": 0.04
+      },
+      "allCaps": true,
+      "letterSpacing": 0.008,
+      "timing": {
+        "start": 1.5
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.5
+        }
+      ]
+    },
+    {
+      "id": "role",
+      "type": "text",
+      "key": "role",
+      "default": {
+        "en": "Cafe owner · Izmir",
+        "tr": "Kafe sahibi · İzmir"
+      },
+      "font": {
+        "name": "AvenirNext-Regular",
+        "size": 0.018
+      },
+      "colorRole": "textSecondary",
+      "alignment": "center",
+      "frame": {
+        "x": 0.5,
+        "y": 0.705,
+        "width": 0.6,
+        "height": 0.03
+      },
+      "timing": {
+        "start": 1.7
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.5
+        }
+      ]
+    },
+    {
+      "id": "brand",
+      "type": "text",
+      "key": "brand",
+      "default": {
+        "en": "@yourbrand",
+        "tr": "@markanız"
+      },
+      "font": {
+        "name": "AvenirNext-Medium",
+        "size": 0.018
+      },
+      "colorRole": "accent",
+      "alignment": "center",
+      "frame": {
+        "x": 0.5,
+        "y": 0.9,
+        "width": 0.6,
+        "height": 0.03
+      },
+      "allCaps": true,
+      "letterSpacing": 0.01,
+      "timing": {
+        "start": 2.1
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.6
+        }
+      ]
+    }
+  ]
+}

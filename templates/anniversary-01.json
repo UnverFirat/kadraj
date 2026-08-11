@@ -1,0 +1,250 @@
+{
+  "schemaVersion": 2,
+  "id": "anniversary-01",
+  "name": {
+    "en": "Anniversary",
+    "tr": "Yıl Dönümü"
+  },
+  "category": "wedding",
+  "isPro": true,
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "palette": {
+    "background": "#E8DCC8",
+    "surface": "#FFFDF8",
+    "accent": "#8C6A43",
+    "textPrimary": "#31281E",
+    "textSecondary": "#7C6C58",
+    "textOnAccent": "#FFFFFF",
+    "scrimClear": "#00000000",
+    "scrimSolid": "#000000CC"
+  },
+  "audio": {
+    "defaultTrackId": "dreamy-01",
+    "volume": 0.85
+  },
+  "scenes": [
+    {
+      "id": "then",
+      "duration": 3.5,
+      "layers": [
+        {
+          "id": "then-photo",
+          "frame": {
+            "x": 0.5,
+            "y": 0.44,
+            "width": 0.84,
+            "height": 0.56
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "fadeIn",
+              "duration": 0.6
+            },
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 3.5,
+              "params": {
+                "zoom": 1.08,
+                "direction": "up"
+              }
+            }
+          ],
+          "type": "mediaSlot",
+          "slotIndex": 0,
+          "media": "photoOrVideo",
+          "contentMode": "fill",
+          "mask": "rect",
+          "cornerRadius": 0.012,
+          "filter": "vintage",
+          "filterIntensity": 0.65
+        },
+        {
+          "id": "then-label",
+          "frame": {
+            "x": 0.5,
+            "y": 0.8,
+            "width": 0.82,
+            "height": 0.08
+          },
+          "timing": {
+            "start": 0.35
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "slideIn",
+              "duration": 0.6,
+              "easing": "easeOut",
+              "params": {
+                "direction": "up",
+                "distance": 0.04
+              }
+            }
+          ],
+          "type": "text",
+          "key": "thenLabel",
+          "default": {
+            "en": "ONE YEAR AGO",
+            "tr": "1 YIL ÖNCE"
+          },
+          "font": {
+            "name": "AvenirNext-Heavy",
+            "size": 0.042
+          },
+          "colorRole": "accent",
+          "alignment": "center",
+          "letterSpacing": 0.016,
+          "allCaps": true
+        },
+        {
+          "id": "then-sub",
+          "frame": {
+            "x": 0.5,
+            "y": 0.885,
+            "width": 0.7,
+            "height": 0.04
+          },
+          "timing": {
+            "start": 0.7
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "fadeIn",
+              "duration": 0.6
+            }
+          ],
+          "type": "text",
+          "key": "thenSub",
+          "default": {
+            "en": "Our first day",
+            "tr": "İlk günümüz"
+          },
+          "font": {
+            "name": "AvenirNext-Regular",
+            "size": 0.022
+          },
+          "colorRole": "textSecondary",
+          "alignment": "center"
+        }
+      ],
+      "transition": {
+        "style": "blurDissolve",
+        "duration": 0.6
+      }
+    },
+    {
+      "id": "now",
+      "duration": 3.3,
+      "layers": [
+        {
+          "id": "now-photo",
+          "frame": {
+            "x": 0.5,
+            "y": 0.44,
+            "width": 0.84,
+            "height": 0.56
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "fadeIn",
+              "duration": 0.6
+            },
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 3.3,
+              "params": {
+                "zoom": 1.08,
+                "direction": "down"
+              }
+            }
+          ],
+          "type": "mediaSlot",
+          "slotIndex": 1,
+          "media": "photoOrVideo",
+          "contentMode": "fill",
+          "mask": "rect",
+          "cornerRadius": 0.012,
+          "filter": "warm",
+          "filterIntensity": 0.35
+        },
+        {
+          "id": "now-label",
+          "frame": {
+            "x": 0.5,
+            "y": 0.8,
+            "width": 0.82,
+            "height": 0.09
+          },
+          "timing": {
+            "start": 0.3
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "pop",
+              "duration": 0.55,
+              "params": {
+                "overshoot": 1.08
+              }
+            }
+          ],
+          "type": "text",
+          "key": "nowLabel",
+          "default": {
+            "en": "TODAY",
+            "tr": "BUGÜN"
+          },
+          "font": {
+            "name": "AvenirNext-Heavy",
+            "size": 0.05
+          },
+          "colorRole": "textPrimary",
+          "alignment": "center",
+          "letterSpacing": 0.016,
+          "allCaps": true
+        },
+        {
+          "id": "now-sub",
+          "frame": {
+            "x": 0.5,
+            "y": 0.885,
+            "width": 0.76,
+            "height": 0.04
+          },
+          "timing": {
+            "start": 0.65
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "fadeIn",
+              "duration": 0.6
+            }
+          ],
+          "type": "text",
+          "key": "nowSub",
+          "default": {
+            "en": "Ayşe & Mehmet · Year one",
+            "tr": "Ayşe & Mehmet · 1. yıl"
+          },
+          "font": {
+            "name": "AvenirNext-Medium",
+            "size": 0.022
+          },
+          "colorRole": "textSecondary",
+          "alignment": "center"
+        }
+      ]
+    }
+  ],
+  "layers": []
+}

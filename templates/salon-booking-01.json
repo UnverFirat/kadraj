@@ -1,0 +1,285 @@
+{
+  "schemaVersion": 1,
+  "id": "salon-booking-01",
+  "name": {
+    "en": "Salon Booking",
+    "tr": "Kuaför Randevu"
+  },
+  "category": "beauty",
+  "isPro": false,
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "duration": 6.5,
+  "palette": {
+    "background": "#F7EDEC",
+    "surface": "#FFFFFF",
+    "accent": "#C98B8B",
+    "textPrimary": "#2B1F1F",
+    "textSecondary": "#8E7676",
+    "textOnAccent": "#FFFFFF",
+    "scrimClear": "#00000000",
+    "scrimSolid": "#000000CC"
+  },
+  "audio": {
+    "defaultTrackId": "calm-01",
+    "volume": 0.85
+  },
+  "layers": [
+    {
+      "id": "bg",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "type": "shape",
+      "colorRole": "background"
+    },
+    {
+      "id": "photo",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.7
+        },
+        {
+          "role": "loop",
+          "preset": "kenBurns",
+          "duration": 6.5,
+          "params": {
+            "zoom": 1.11,
+            "direction": "up"
+          }
+        }
+      ],
+      "type": "mediaSlot",
+      "slotIndex": 0,
+      "media": "photoOrVideo",
+      "contentMode": "fill",
+      "mask": "rect",
+      "filter": "warm",
+      "filterIntensity": 0.4
+    },
+    {
+      "id": "scrim",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "type": "shape",
+      "colorRole": "scrimClear",
+      "gradient": {
+        "from": "scrimClear",
+        "to": "scrimSolid",
+        "direction": "down"
+      }
+    },
+    {
+      "id": "card",
+      "frame": {
+        "x": 0.5,
+        "y": 0.79,
+        "width": 0.86,
+        "height": 0.32
+      },
+      "timing": {
+        "start": 0.35
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "slideIn",
+          "duration": 0.6,
+          "easing": "easeOut",
+          "params": {
+            "direction": "up",
+            "distance": 0.06
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "surface",
+      "cornerRadius": 0.042
+    },
+    {
+      "id": "salon",
+      "frame": {
+        "x": 0.5,
+        "y": 0.675,
+        "width": 0.7,
+        "height": 0.035
+      },
+      "timing": {
+        "start": 0.6
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.5
+        }
+      ],
+      "type": "text",
+      "key": "salon",
+      "default": {
+        "en": "HAIR STUDIO",
+        "tr": "GÜZELLİK SALONU"
+      },
+      "font": {
+        "name": "AvenirNext-Medium",
+        "size": 0.02
+      },
+      "colorRole": "textSecondary",
+      "alignment": "center",
+      "letterSpacing": 0.01,
+      "allCaps": true
+    },
+    {
+      "id": "service",
+      "frame": {
+        "x": 0.5,
+        "y": 0.735,
+        "width": 0.78,
+        "height": 0.075
+      },
+      "timing": {
+        "start": 0.75
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "kineticWords",
+          "duration": 0.9,
+          "params": {
+            "distance": 0.02
+          }
+        },
+        {
+          "role": "loop",
+          "preset": "floatLoop",
+          "duration": 2.6,
+          "params": {
+            "distance": 0.006,
+            "axis": "y"
+          }
+        }
+      ],
+      "type": "text",
+      "key": "service",
+      "default": {
+        "en": "Cut, Colour & Blowout",
+        "tr": "Kesim, Boya & Fön"
+      },
+      "font": {
+        "name": "AvenirNext-Bold",
+        "size": 0.05
+      },
+      "colorRole": "textPrimary",
+      "alignment": "center"
+    },
+    {
+      "id": "rule",
+      "frame": {
+        "x": 0.5,
+        "y": 0.788,
+        "width": 0.11,
+        "height": 0.004
+      },
+      "timing": {
+        "start": 0.95
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "wipeReveal",
+          "duration": 0.5,
+          "easing": "easeOut",
+          "params": {
+            "direction": "right"
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "accent"
+    },
+    {
+      "id": "book",
+      "frame": {
+        "x": 0.5,
+        "y": 0.835,
+        "width": 0.74,
+        "height": 0.04
+      },
+      "timing": {
+        "start": 1.0
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.6
+        }
+      ],
+      "type": "text",
+      "key": "book",
+      "default": {
+        "en": "Send a DM to book",
+        "tr": "Randevu için DM gönder"
+      },
+      "font": {
+        "name": "AvenirNext-Regular",
+        "size": 0.024
+      },
+      "colorRole": "textSecondary",
+      "alignment": "center"
+    },
+    {
+      "id": "phone",
+      "frame": {
+        "x": 0.5,
+        "y": 0.895,
+        "width": 0.7,
+        "height": 0.05
+      },
+      "timing": {
+        "start": 1.15
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "pop",
+          "duration": 0.45,
+          "params": {
+            "overshoot": 1.06
+          }
+        }
+      ],
+      "type": "text",
+      "key": "phone",
+      "default": {
+        "en": "555 010 0134",
+        "tr": "0532 000 00 00"
+      },
+      "font": {
+        "name": "AvenirNext-Heavy",
+        "size": 0.032
+      },
+      "colorRole": "accent",
+      "alignment": "center",
+      "letterSpacing": 0.006
+    }
+  ]
+}

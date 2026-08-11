@@ -1,0 +1,313 @@
+{
+  "schemaVersion": 1,
+  "id": "course-promo-01",
+  "name": {
+    "en": "Course Promo",
+    "tr": "Kurs Duyurusu"
+  },
+  "category": "education",
+  "isPro": false,
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "duration": 6.5,
+  "palette": {
+    "background": "#12140A",
+    "surface": "#FFFFFF",
+    "accent": "#D8F135",
+    "textPrimary": "#FBFFE6",
+    "textSecondary": "#BDC79A",
+    "textOnAccent": "#12140A",
+    "scrimClear": "#00000000",
+    "scrimSolid": "#000000CC"
+  },
+  "audio": {
+    "defaultTrackId": "bright-01",
+    "volume": 0.85
+  },
+  "layers": [
+    {
+      "id": "bg",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "type": "shape",
+      "colorRole": "accent"
+    },
+    {
+      "id": "halo",
+      "frame": {
+        "x": 0.5,
+        "y": 0.34,
+        "width": 0.72,
+        "height": 0.405
+      },
+      "opacity": 0.12,
+      "animations": [
+        {
+          "role": "in",
+          "preset": "scaleIn",
+          "duration": 0.9,
+          "easing": "easeOut",
+          "params": {
+            "from": 0.85
+          }
+        },
+        {
+          "role": "loop",
+          "preset": "pulse",
+          "duration": 3.0,
+          "params": {
+            "scale": 1.03
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "background",
+      "mask": "circle"
+    },
+    {
+      "id": "kicker",
+      "frame": {
+        "x": 0.5,
+        "y": 0.1,
+        "width": 0.8,
+        "height": 0.04
+      },
+      "timing": {
+        "start": 0.2
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "slideIn",
+          "duration": 0.5,
+          "easing": "easeOut",
+          "params": {
+            "direction": "down",
+            "distance": 0.04
+          }
+        }
+      ],
+      "type": "text",
+      "key": "kicker",
+      "default": {
+        "en": "NEW TERM",
+        "tr": "YENİ DÖNEM"
+      },
+      "font": {
+        "name": "AvenirNext-Heavy",
+        "size": 0.024
+      },
+      "colorRole": "textOnAccent",
+      "alignment": "center",
+      "letterSpacing": 0.018,
+      "allCaps": true
+    },
+    {
+      "id": "photo",
+      "frame": {
+        "x": 0.5,
+        "y": 0.34,
+        "width": 0.58,
+        "height": 0.3262
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "scaleIn",
+          "duration": 0.7,
+          "easing": "easeOut",
+          "params": {
+            "from": 0.9
+          }
+        },
+        {
+          "role": "loop",
+          "preset": "kenBurns",
+          "duration": 6.5,
+          "params": {
+            "zoom": 1.08,
+            "direction": "up"
+          }
+        }
+      ],
+      "type": "mediaSlot",
+      "slotIndex": 0,
+      "media": "photoOrVideo",
+      "contentMode": "fill",
+      "mask": "circle",
+      "filter": "vivid",
+      "filterIntensity": 0.3
+    },
+    {
+      "id": "course",
+      "frame": {
+        "x": 0.5,
+        "y": 0.635,
+        "width": 0.84,
+        "height": 0.17
+      },
+      "timing": {
+        "start": 0.6
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "kineticWords",
+          "duration": 0.9,
+          "params": {
+            "distance": 0.02
+          }
+        },
+        {
+          "role": "loop",
+          "preset": "floatLoop",
+          "duration": 2.6,
+          "params": {
+            "distance": 0.006,
+            "axis": "y"
+          }
+        }
+      ],
+      "type": "text",
+      "key": "course",
+      "default": {
+        "en": "English Speaking\nfrom Scratch",
+        "tr": "Sıfırdan İngilizce\nKonuşma Kursu"
+      },
+      "font": {
+        "name": "AvenirNext-Heavy",
+        "size": 0.058
+      },
+      "colorRole": "textOnAccent",
+      "alignment": "center",
+      "maxLines": 2
+    },
+    {
+      "id": "panel",
+      "frame": {
+        "x": 0.5,
+        "y": 0.815,
+        "width": 0.72,
+        "height": 0.115
+      },
+      "timing": {
+        "start": 0.85
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "slideIn",
+          "duration": 0.55,
+          "easing": "easeOut",
+          "params": {
+            "direction": "up",
+            "distance": 0.05
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "background",
+      "cornerRadius": 0.03
+    },
+    {
+      "id": "start",
+      "frame": {
+        "x": 0.5,
+        "y": 0.79,
+        "width": 0.66,
+        "height": 0.05
+      },
+      "timing": {
+        "start": 1.0
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.5
+        }
+      ],
+      "type": "text",
+      "key": "start",
+      "default": {
+        "en": "Starts September 8",
+        "tr": "8 Eylül'de başlıyor"
+      },
+      "font": {
+        "name": "AvenirNext-Bold",
+        "size": 0.032
+      },
+      "colorRole": "textPrimary",
+      "alignment": "center"
+    },
+    {
+      "id": "seats",
+      "frame": {
+        "x": 0.5,
+        "y": 0.845,
+        "width": 0.66,
+        "height": 0.035
+      },
+      "timing": {
+        "start": 1.1
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.5
+        }
+      ],
+      "type": "text",
+      "key": "seats",
+      "default": {
+        "en": "12 seats · Live online",
+        "tr": "Kontenjan 12 kişi · Online"
+      },
+      "font": {
+        "name": "AvenirNext-Regular",
+        "size": 0.02
+      },
+      "colorRole": "textSecondary",
+      "alignment": "center"
+    },
+    {
+      "id": "cta",
+      "frame": {
+        "x": 0.5,
+        "y": 0.925,
+        "width": 0.8,
+        "height": 0.04
+      },
+      "timing": {
+        "start": 1.2
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.6
+        }
+      ],
+      "type": "text",
+      "key": "cta",
+      "default": {
+        "en": "Enrol via the link in bio",
+        "tr": "Kayıt: profildeki bağlantı"
+      },
+      "font": {
+        "name": "AvenirNext-DemiBold",
+        "size": 0.021
+      },
+      "colorRole": "textOnAccent",
+      "alignment": "center"
+    }
+  ]
+}

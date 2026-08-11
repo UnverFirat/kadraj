@@ -1,0 +1,292 @@
+{
+  "schemaVersion": 1,
+  "id": "flash-discount-01",
+  "name": {
+    "en": "Hourly Deal",
+    "tr": "Saatlik İndirim"
+  },
+  "category": "promo",
+  "isPro": false,
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "duration": 5.5,
+  "palette": {
+    "background": "#101014",
+    "surface": "#FFFFFF",
+    "accent": "#FF2E63",
+    "textPrimary": "#FFFFFF",
+    "textSecondary": "#C9C9D1",
+    "textOnAccent": "#FFFFFF",
+    "scrimClear": "#00000000",
+    "scrimSolid": "#000000CC"
+  },
+  "audio": {
+    "defaultTrackId": "punchy-01",
+    "volume": 0.85
+  },
+  "layers": [
+    {
+      "id": "bg",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "type": "shape",
+      "colorRole": "accent"
+    },
+    {
+      "id": "halo",
+      "frame": {
+        "x": 0.5,
+        "y": 0.34,
+        "width": 0.94,
+        "height": 0.44
+      },
+      "opacity": 0.14,
+      "animations": [
+        {
+          "role": "in",
+          "preset": "scaleIn",
+          "duration": 0.7,
+          "easing": "easeOut",
+          "params": {
+            "from": 0.86
+          }
+        },
+        {
+          "role": "loop",
+          "preset": "pulse",
+          "duration": 2.2,
+          "params": {
+            "scale": 1.04
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "background",
+      "cornerRadius": 0.24
+    },
+    {
+      "id": "kicker",
+      "frame": {
+        "x": 0.5,
+        "y": 0.195,
+        "width": 0.86,
+        "height": 0.045
+      },
+      "timing": {
+        "start": 0.25
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "slideIn",
+          "duration": 0.55,
+          "easing": "easeOut",
+          "params": {
+            "direction": "down",
+            "distance": 0.04
+          }
+        }
+      ],
+      "type": "text",
+      "key": "kicker",
+      "default": {
+        "en": "HAPPY HOUR",
+        "tr": "İNDİRİM SAATİ"
+      },
+      "font": {
+        "name": "AvenirNext-DemiBold",
+        "size": 0.03
+      },
+      "colorRole": "textOnAccent",
+      "alignment": "center",
+      "letterSpacing": 0.018,
+      "allCaps": true
+    },
+    {
+      "id": "percent",
+      "frame": {
+        "x": 0.5,
+        "y": 0.35,
+        "width": 0.9,
+        "height": 0.2
+      },
+      "timing": {
+        "start": 0.4
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "pop",
+          "duration": 0.6,
+          "params": {
+            "overshoot": 1.14
+          }
+        },
+        {
+          "role": "loop",
+          "preset": "pulse",
+          "duration": 1.8,
+          "params": {
+            "scale": 1.03
+          }
+        }
+      ],
+      "type": "text",
+      "key": "percent",
+      "default": {
+        "en": "50%",
+        "tr": "%50"
+      },
+      "font": {
+        "name": "Archivo-SemiBold",
+        "size": 0.155
+      },
+      "colorRole": "textOnAccent",
+      "alignment": "center"
+    },
+    {
+      "id": "chip",
+      "frame": {
+        "x": 0.5,
+        "y": 0.505,
+        "width": 0.58,
+        "height": 0.08
+      },
+      "timing": {
+        "start": 0.75
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "scaleIn",
+          "duration": 0.5,
+          "easing": "easeOut",
+          "params": {
+            "from": 0.88
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "background",
+      "cornerRadius": 0.04
+    },
+    {
+      "id": "chip-text",
+      "frame": {
+        "x": 0.5,
+        "y": 0.505,
+        "width": 0.55,
+        "height": 0.05
+      },
+      "timing": {
+        "start": 0.9
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.4
+        },
+        {
+          "role": "loop",
+          "preset": "floatLoop",
+          "duration": 2.6,
+          "params": {
+            "distance": 0.006,
+            "axis": "y"
+          }
+        }
+      ],
+      "type": "text",
+      "key": "chip",
+      "default": {
+        "en": "TODAY ONLY",
+        "tr": "SADECE BUGÜN"
+      },
+      "font": {
+        "name": "AvenirNext-Heavy",
+        "size": 0.032
+      },
+      "colorRole": "textPrimary",
+      "alignment": "center",
+      "letterSpacing": 0.012,
+      "allCaps": true
+    },
+    {
+      "id": "strip",
+      "frame": {
+        "x": 0.5,
+        "y": 0.795,
+        "width": 0.86,
+        "height": 0.27
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "wipeReveal",
+          "duration": 0.6,
+          "delay": 0.6,
+          "easing": "easeOut",
+          "params": {
+            "direction": "right"
+          }
+        },
+        {
+          "role": "loop",
+          "preset": "kenBurns",
+          "duration": 5.5,
+          "params": {
+            "zoom": 1.12,
+            "direction": "left"
+          }
+        }
+      ],
+      "type": "mediaSlot",
+      "slotIndex": 0,
+      "media": "photoOrVideo",
+      "contentMode": "fill",
+      "mask": "rect",
+      "cornerRadius": 0.016,
+      "filter": "vivid",
+      "filterIntensity": 0.5
+    },
+    {
+      "id": "terms",
+      "frame": {
+        "x": 0.5,
+        "y": 0.965,
+        "width": 0.82,
+        "height": 0.04
+      },
+      "timing": {
+        "start": 1.15
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.6
+        }
+      ],
+      "type": "text",
+      "key": "terms",
+      "default": {
+        "en": "Valid until 11:59 pm today",
+        "tr": "Bugün 23:59'a kadar geçerli"
+      },
+      "font": {
+        "name": "AvenirNext-Medium",
+        "size": 0.02
+      },
+      "colorRole": "textOnAccent",
+      "alignment": "center"
+    }
+  ]
+}

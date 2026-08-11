@@ -1,0 +1,565 @@
+{
+  "schemaVersion": 1,
+  "id": "coupon-code-01",
+  "name": {
+    "en": "Coupon Code",
+    "tr": "Kupon Kodu"
+  },
+  "category": "promo",
+  "isPro": true,
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "duration": 6.0,
+  "palette": {
+    "background": "#1E1305",
+    "surface": "#F7E7C4",
+    "accent": "#E4A11B",
+    "textPrimary": "#FDF3DD",
+    "textSecondary": "#C9A96B",
+    "textOnAccent": "#1E1305",
+    "scrimClear": "#00000000",
+    "scrimSolid": "#000000CC",
+    "cardInk": "#3A2A0C"
+  },
+  "audio": {
+    "defaultTrackId": "groovy-01",
+    "volume": 0.85
+  },
+  "layers": [
+    {
+      "id": "bg",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "type": "shape",
+      "colorRole": "background"
+    },
+    {
+      "id": "photo",
+      "frame": {
+        "x": 0.5,
+        "y": 0.155,
+        "width": 0.84,
+        "height": 0.29
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.5
+        },
+        {
+          "role": "loop",
+          "preset": "kenBurns",
+          "duration": 6.0,
+          "params": {
+            "zoom": 1.09,
+            "direction": "right"
+          }
+        }
+      ],
+      "type": "mediaSlot",
+      "slotIndex": 0,
+      "media": "photoOrVideo",
+      "contentMode": "fill",
+      "mask": "rect",
+      "cornerRadius": 0.016,
+      "filter": "vintage",
+      "filterIntensity": 0.45
+    },
+    {
+      "id": "card",
+      "frame": {
+        "x": 0.5,
+        "y": 0.6,
+        "width": 0.84,
+        "height": 0.5
+      },
+      "timing": {
+        "start": 0.35
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "scaleIn",
+          "duration": 0.6,
+          "easing": "easeOut",
+          "params": {
+            "from": 0.93
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "surface",
+      "cornerRadius": 0.022
+    },
+    {
+      "id": "notch-left",
+      "frame": {
+        "x": 0.08,
+        "y": 0.6,
+        "width": 0.07,
+        "height": 0.0394
+      },
+      "timing": {
+        "start": 0.55
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.35
+        }
+      ],
+      "type": "shape",
+      "colorRole": "background",
+      "mask": "circle"
+    },
+    {
+      "id": "notch-right",
+      "frame": {
+        "x": 0.92,
+        "y": 0.6,
+        "width": 0.07,
+        "height": 0.0394
+      },
+      "timing": {
+        "start": 0.55
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.35
+        }
+      ],
+      "type": "shape",
+      "colorRole": "background",
+      "mask": "circle"
+    },
+    {
+      "id": "dash0",
+      "frame": {
+        "x": 0.175,
+        "y": 0.6,
+        "width": 0.034,
+        "height": 0.0035
+      },
+      "opacity": 0.45,
+      "timing": {
+        "start": 0.6
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.3
+        }
+      ],
+      "type": "shape",
+      "colorRole": "cardInk"
+    },
+    {
+      "id": "dash1",
+      "frame": {
+        "x": 0.24,
+        "y": 0.6,
+        "width": 0.034,
+        "height": 0.0035
+      },
+      "opacity": 0.45,
+      "timing": {
+        "start": 0.62
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.3
+        }
+      ],
+      "type": "shape",
+      "colorRole": "cardInk"
+    },
+    {
+      "id": "dash2",
+      "frame": {
+        "x": 0.305,
+        "y": 0.6,
+        "width": 0.034,
+        "height": 0.0035
+      },
+      "opacity": 0.45,
+      "timing": {
+        "start": 0.64
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.3
+        }
+      ],
+      "type": "shape",
+      "colorRole": "cardInk"
+    },
+    {
+      "id": "dash3",
+      "frame": {
+        "x": 0.37,
+        "y": 0.6,
+        "width": 0.034,
+        "height": 0.0035
+      },
+      "opacity": 0.45,
+      "timing": {
+        "start": 0.66
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.3
+        }
+      ],
+      "type": "shape",
+      "colorRole": "cardInk"
+    },
+    {
+      "id": "dash4",
+      "frame": {
+        "x": 0.435,
+        "y": 0.6,
+        "width": 0.034,
+        "height": 0.0035
+      },
+      "opacity": 0.45,
+      "timing": {
+        "start": 0.68
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.3
+        }
+      ],
+      "type": "shape",
+      "colorRole": "cardInk"
+    },
+    {
+      "id": "dash5",
+      "frame": {
+        "x": 0.5,
+        "y": 0.6,
+        "width": 0.034,
+        "height": 0.0035
+      },
+      "opacity": 0.45,
+      "timing": {
+        "start": 0.7
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.3
+        }
+      ],
+      "type": "shape",
+      "colorRole": "cardInk"
+    },
+    {
+      "id": "dash6",
+      "frame": {
+        "x": 0.565,
+        "y": 0.6,
+        "width": 0.034,
+        "height": 0.0035
+      },
+      "opacity": 0.45,
+      "timing": {
+        "start": 0.72
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.3
+        }
+      ],
+      "type": "shape",
+      "colorRole": "cardInk"
+    },
+    {
+      "id": "dash7",
+      "frame": {
+        "x": 0.63,
+        "y": 0.6,
+        "width": 0.034,
+        "height": 0.0035
+      },
+      "opacity": 0.45,
+      "timing": {
+        "start": 0.74
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.3
+        }
+      ],
+      "type": "shape",
+      "colorRole": "cardInk"
+    },
+    {
+      "id": "dash8",
+      "frame": {
+        "x": 0.695,
+        "y": 0.6,
+        "width": 0.034,
+        "height": 0.0035
+      },
+      "opacity": 0.45,
+      "timing": {
+        "start": 0.76
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.3
+        }
+      ],
+      "type": "shape",
+      "colorRole": "cardInk"
+    },
+    {
+      "id": "dash9",
+      "frame": {
+        "x": 0.76,
+        "y": 0.6,
+        "width": 0.034,
+        "height": 0.0035
+      },
+      "opacity": 0.45,
+      "timing": {
+        "start": 0.78
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.3
+        }
+      ],
+      "type": "shape",
+      "colorRole": "cardInk"
+    },
+    {
+      "id": "dash10",
+      "frame": {
+        "x": 0.825,
+        "y": 0.6,
+        "width": 0.034,
+        "height": 0.0035
+      },
+      "opacity": 0.45,
+      "timing": {
+        "start": 0.8
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.3
+        }
+      ],
+      "type": "shape",
+      "colorRole": "cardInk"
+    },
+    {
+      "id": "label",
+      "frame": {
+        "x": 0.5,
+        "y": 0.415,
+        "width": 0.7,
+        "height": 0.04
+      },
+      "timing": {
+        "start": 0.6
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.5
+        }
+      ],
+      "type": "text",
+      "key": "label",
+      "default": {
+        "en": "COUPON CODE",
+        "tr": "KUPON KODU"
+      },
+      "font": {
+        "name": "AvenirNext-DemiBold",
+        "size": 0.024
+      },
+      "colorRole": "cardInk",
+      "alignment": "center",
+      "letterSpacing": 0.02,
+      "allCaps": true
+    },
+    {
+      "id": "code",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 0.78,
+        "height": 0.11
+      },
+      "timing": {
+        "start": 0.75
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "pop",
+          "duration": 0.55,
+          "params": {
+            "overshoot": 1.08
+          }
+        },
+        {
+          "role": "loop",
+          "preset": "floatLoop",
+          "duration": 2.6,
+          "params": {
+            "distance": 0.006,
+            "axis": "y"
+          }
+        }
+      ],
+      "type": "text",
+      "key": "code",
+      "default": {
+        "en": "LEZZET25",
+        "tr": "LEZZET25"
+      },
+      "font": {
+        "name": "Courier-Bold",
+        "size": 0.072
+      },
+      "colorRole": "cardInk",
+      "alignment": "center",
+      "letterSpacing": 0.02,
+      "allCaps": true
+    },
+    {
+      "id": "value",
+      "frame": {
+        "x": 0.5,
+        "y": 0.685,
+        "width": 0.76,
+        "height": 0.045
+      },
+      "timing": {
+        "start": 0.95
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "slideIn",
+          "duration": 0.5,
+          "easing": "easeOut",
+          "params": {
+            "direction": "up",
+            "distance": 0.03
+          }
+        }
+      ],
+      "type": "text",
+      "key": "value",
+      "default": {
+        "en": "25% off your whole order",
+        "tr": "Tüm siparişlerde %25 indirim"
+      },
+      "font": {
+        "name": "AvenirNext-Bold",
+        "size": 0.026
+      },
+      "colorRole": "cardInk",
+      "alignment": "center"
+    },
+    {
+      "id": "valid",
+      "frame": {
+        "x": 0.5,
+        "y": 0.755,
+        "width": 0.74,
+        "height": 0.038
+      },
+      "timing": {
+        "start": 1.1
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.55
+        }
+      ],
+      "type": "text",
+      "key": "valid",
+      "default": {
+        "en": "Valid through August 31",
+        "tr": "31 Ağustos'a kadar geçerli"
+      },
+      "font": {
+        "name": "AvenirNext-Regular",
+        "size": 0.02
+      },
+      "colorRole": "cardInk",
+      "alignment": "center"
+    },
+    {
+      "id": "where",
+      "frame": {
+        "x": 0.5,
+        "y": 0.93,
+        "width": 0.82,
+        "height": 0.035
+      },
+      "timing": {
+        "start": 1.2
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.6
+        }
+      ],
+      "type": "text",
+      "key": "where",
+      "default": {
+        "en": "Show at the counter or use online",
+        "tr": "Kasada göster ya da siteye yaz"
+      },
+      "font": {
+        "name": "AvenirNext-Medium",
+        "size": 0.019
+      },
+      "colorRole": "textSecondary",
+      "alignment": "center"
+    }
+  ]
+}

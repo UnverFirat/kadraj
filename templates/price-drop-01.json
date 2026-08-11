@@ -1,0 +1,372 @@
+{
+  "schemaVersion": 1,
+  "id": "price-drop-01",
+  "name": {
+    "en": "Price Drop",
+    "tr": "Fiyat Düştü"
+  },
+  "category": "realestate",
+  "isPro": true,
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "duration": 7.0,
+  "palette": {
+    "background": "#0F1216",
+    "surface": "#E8EEF5",
+    "accent": "#4C9BE8",
+    "textPrimary": "#F3F7FC",
+    "textSecondary": "#9AA9BB",
+    "textOnAccent": "#FFFFFF",
+    "scrimClear": "#00000000",
+    "scrimSolid": "#000000CC"
+  },
+  "audio": {
+    "defaultTrackId": "clean-01",
+    "volume": 0.85
+  },
+  "layers": [
+    {
+      "id": "bg",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "type": "shape",
+      "colorRole": "background"
+    },
+    {
+      "id": "photo",
+      "frame": {
+        "x": 0.5,
+        "y": 0.3,
+        "width": 0.96,
+        "height": 0.56
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.6
+        },
+        {
+          "role": "loop",
+          "preset": "kenBurns",
+          "duration": 7.0,
+          "params": {
+            "zoom": 1.08,
+            "direction": "down"
+          }
+        }
+      ],
+      "type": "mediaSlot",
+      "slotIndex": 0,
+      "media": "photo",
+      "contentMode": "fill",
+      "mask": "rect",
+      "cornerRadius": 0.014,
+      "filter": "cool",
+      "filterIntensity": 0.3
+    },
+    {
+      "id": "kicker",
+      "frame": {
+        "x": 0.5,
+        "y": 0.622,
+        "width": 0.88,
+        "height": 0.04
+      },
+      "timing": {
+        "start": 0.45
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "wipeReveal",
+          "duration": 0.6,
+          "easing": "easeOut",
+          "params": {
+            "direction": "right"
+          }
+        }
+      ],
+      "type": "text",
+      "key": "kicker",
+      "default": {
+        "en": "PRICE JUST DROPPED",
+        "tr": "FİYAT GÜNCELLENDİ"
+      },
+      "font": {
+        "name": "AvenirNext-Heavy",
+        "size": 0.024
+      },
+      "colorRole": "accent",
+      "alignment": "center",
+      "letterSpacing": 0.018,
+      "allCaps": true
+    },
+    {
+      "id": "old-label",
+      "frame": {
+        "x": 0.3,
+        "y": 0.665,
+        "width": 0.4,
+        "height": 0.03
+      },
+      "timing": {
+        "start": 0.65
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.45
+        }
+      ],
+      "type": "text",
+      "key": "oldLabel",
+      "default": {
+        "en": "WAS",
+        "tr": "ESKİ FİYAT"
+      },
+      "font": {
+        "name": "AvenirNext-Medium",
+        "size": 0.018
+      },
+      "colorRole": "textSecondary",
+      "alignment": "left",
+      "letterSpacing": 0.016,
+      "allCaps": true
+    },
+    {
+      "id": "new-label",
+      "frame": {
+        "x": 0.72,
+        "y": 0.665,
+        "width": 0.4,
+        "height": 0.03
+      },
+      "timing": {
+        "start": 0.75
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.45
+        }
+      ],
+      "type": "text",
+      "key": "newLabel",
+      "default": {
+        "en": "NOW",
+        "tr": "YENİ FİYAT"
+      },
+      "font": {
+        "name": "AvenirNext-Medium",
+        "size": 0.018
+      },
+      "colorRole": "accent",
+      "alignment": "right",
+      "letterSpacing": 0.016,
+      "allCaps": true
+    },
+    {
+      "id": "old-price",
+      "frame": {
+        "x": 0.3,
+        "y": 0.755,
+        "width": 0.4,
+        "height": 0.06
+      },
+      "timing": {
+        "start": 0.8
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.5
+        }
+      ],
+      "type": "text",
+      "key": "oldPrice",
+      "default": {
+        "en": "$389,000",
+        "tr": "4.950.000 ₺"
+      },
+      "font": {
+        "name": "AvenirNext-DemiBold",
+        "size": 0.044
+      },
+      "colorRole": "textSecondary",
+      "alignment": "left"
+    },
+    {
+      "id": "strike",
+      "frame": {
+        "x": 0.255,
+        "y": 0.755,
+        "width": 0.29,
+        "height": 0.004
+      },
+      "timing": {
+        "start": 1.0
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "wipeReveal",
+          "duration": 0.45,
+          "easing": "easeOut",
+          "params": {
+            "direction": "right"
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "textSecondary"
+    },
+    {
+      "id": "new-price",
+      "frame": {
+        "x": 0.74,
+        "y": 0.75,
+        "width": 0.44,
+        "height": 0.115
+      },
+      "timing": {
+        "start": 0.9
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "scaleIn",
+          "duration": 0.6,
+          "easing": "easeOut",
+          "params": {
+            "from": 0.85
+          }
+        },
+        {
+          "role": "loop",
+          "preset": "floatLoop",
+          "duration": 2.6,
+          "params": {
+            "distance": 0.006,
+            "axis": "y"
+          }
+        }
+      ],
+      "type": "text",
+      "key": "newPrice",
+      "default": {
+        "en": "$342,000",
+        "tr": "4.350.000 ₺"
+      },
+      "font": {
+        "name": "AvenirNext-Heavy",
+        "size": 0.072
+      },
+      "colorRole": "textPrimary",
+      "alignment": "right"
+    },
+    {
+      "id": "rule",
+      "frame": {
+        "x": 0.5,
+        "y": 0.835,
+        "width": 0.88,
+        "height": 0.002
+      },
+      "opacity": 0.5,
+      "timing": {
+        "start": 1.05
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "wipeReveal",
+          "duration": 0.6,
+          "easing": "easeOut",
+          "params": {
+            "direction": "left"
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "accent"
+    },
+    {
+      "id": "info",
+      "frame": {
+        "x": 0.5,
+        "y": 0.878,
+        "width": 0.9,
+        "height": 0.045
+      },
+      "timing": {
+        "start": 1.1
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "slideIn",
+          "duration": 0.5,
+          "easing": "easeOut",
+          "params": {
+            "direction": "up",
+            "distance": 0.03
+          }
+        }
+      ],
+      "type": "text",
+      "key": "info",
+      "default": {
+        "en": "3 bed · 1,378 ft² · Ataşehir · 5th floor",
+        "tr": "3+1 · 128 m² · Ataşehir · 5. kat"
+      },
+      "font": {
+        "name": "AvenirNext-Medium",
+        "size": 0.024
+      },
+      "colorRole": "textPrimary",
+      "alignment": "center"
+    },
+    {
+      "id": "cta",
+      "frame": {
+        "x": 0.5,
+        "y": 0.94,
+        "width": 0.9,
+        "height": 0.04
+      },
+      "timing": {
+        "start": 1.2
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.6
+        }
+      ],
+      "type": "text",
+      "key": "cta",
+      "default": {
+        "en": "Call today · 555 010 0134",
+        "tr": "Fırsat için arayın · 0532 000 00 00"
+      },
+      "font": {
+        "name": "AvenirNext-Regular",
+        "size": 0.02
+      },
+      "colorRole": "textSecondary",
+      "alignment": "center"
+    }
+  ]
+}

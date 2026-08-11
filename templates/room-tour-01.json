@@ -1,0 +1,739 @@
+{
+  "schemaVersion": 2,
+  "id": "room-tour-01",
+  "name": {
+    "en": "Room Tour",
+    "tr": "Oda Oda Gezi"
+  },
+  "category": "realestate",
+  "isPro": true,
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "palette": {
+    "background": "#15171C",
+    "surface": "#FFFFFF",
+    "accent": "#8FA3B8",
+    "textPrimary": "#F7F9FC",
+    "textSecondary": "#A9B3C0",
+    "textOnAccent": "#FFFFFF",
+    "scrimClear": "#00000000",
+    "scrimSolid": "#000000CC"
+  },
+  "audio": {
+    "defaultTrackId": "smooth-01",
+    "volume": 0.85
+  },
+  "scenes": [
+    {
+      "id": "room0",
+      "duration": 2.6,
+      "layers": [
+        {
+          "id": "r0-media",
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 1.0,
+            "height": 1.0
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "fadeIn",
+              "duration": 0.4
+            },
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 2.6,
+              "params": {
+                "zoom": 1.09,
+                "direction": "up"
+              }
+            }
+          ],
+          "type": "mediaSlot",
+          "slotIndex": 0,
+          "media": "photoOrVideo",
+          "contentMode": "fill",
+          "mask": "rect",
+          "filter": "cool",
+          "filterIntensity": 0.25
+        },
+        {
+          "id": "r0-scrim-top",
+          "frame": {
+            "x": 0.5,
+            "y": 0.11,
+            "width": 1.0,
+            "height": 0.22
+          },
+          "type": "shape",
+          "colorRole": "scrimClear",
+          "gradient": {
+            "from": "scrimClear",
+            "to": "scrimSolid",
+            "direction": "up"
+          }
+        },
+        {
+          "id": "r0-scrim",
+          "frame": {
+            "x": 0.5,
+            "y": 0.8,
+            "width": 1.0,
+            "height": 0.4
+          },
+          "type": "shape",
+          "colorRole": "scrimClear",
+          "gradient": {
+            "from": "scrimClear",
+            "to": "scrimSolid",
+            "direction": "down"
+          }
+        },
+        {
+          "id": "r0-chip",
+          "frame": {
+            "x": 0.155,
+            "y": 0.135,
+            "width": 0.17,
+            "height": 0.068
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "scaleIn",
+              "duration": 0.4,
+              "easing": "easeOut",
+              "params": {
+                "from": 0.75
+              }
+            },
+            {
+              "role": "loop",
+              "preset": "shake",
+              "duration": 1.4,
+              "delay": 0.8,
+              "params": {
+                "degrees": 2.0
+              }
+            }
+          ],
+          "type": "shape",
+          "colorRole": "accent",
+          "cornerRadius": 0.012
+        },
+        {
+          "id": "r0-num",
+          "frame": {
+            "x": 0.155,
+            "y": 0.135,
+            "width": 0.15,
+            "height": 0.045
+          },
+          "timing": {
+            "start": 0.15
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "fadeIn",
+              "duration": 0.35
+            }
+          ],
+          "type": "text",
+          "key": "roomNumber",
+          "default": {
+            "en": "01",
+            "tr": "01"
+          },
+          "font": {
+            "name": "Archivo-SemiBold",
+            "size": 0.028
+          },
+          "colorRole": "background",
+          "alignment": "center"
+        },
+        {
+          "id": "r0-tour",
+          "frame": {
+            "x": 0.72,
+            "y": 0.135,
+            "width": 0.44,
+            "height": 0.04
+          },
+          "timing": {
+            "start": 0.2
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "fadeIn",
+              "duration": 0.4
+            }
+          ],
+          "type": "text",
+          "key": "tourLabel",
+          "default": {
+            "en": "ROOM TOUR",
+            "tr": "ODA ODA GEZİ"
+          },
+          "font": {
+            "name": "AvenirNext-Medium",
+            "size": 0.022
+          },
+          "colorRole": "textPrimary",
+          "alignment": "right",
+          "letterSpacing": 0.014,
+          "allCaps": true
+        },
+        {
+          "id": "r0-name",
+          "frame": {
+            "x": 0.5,
+            "y": 0.845,
+            "width": 0.88,
+            "height": 0.1
+          },
+          "timing": {
+            "start": 0.3
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "punchIn",
+              "duration": 0.5,
+              "params": {
+                "from": 1.5
+              }
+            }
+          ],
+          "type": "text",
+          "key": "roomName",
+          "default": {
+            "en": "LIVING ROOM",
+            "tr": "SALON"
+          },
+          "font": {
+            "name": "AvenirNext-Heavy",
+            "size": 0.058
+          },
+          "colorRole": "textPrimary",
+          "alignment": "center",
+          "letterSpacing": 0.01,
+          "allCaps": true
+        },
+        {
+          "id": "r0-note",
+          "frame": {
+            "x": 0.5,
+            "y": 0.92,
+            "width": 0.86,
+            "height": 0.04
+          },
+          "timing": {
+            "start": 0.5
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "fadeIn",
+              "duration": 0.5
+            }
+          ],
+          "type": "text",
+          "key": "roomNote",
+          "default": {
+            "en": "344 ft² · south-west facing",
+            "tr": "32 m² · güneybatı cephe"
+          },
+          "font": {
+            "name": "AvenirNext-Regular",
+            "size": 0.023
+          },
+          "colorRole": "textSecondary",
+          "alignment": "center"
+        }
+      ],
+      "transition": {
+        "style": "slideLeft",
+        "duration": 0.4
+      }
+    },
+    {
+      "id": "room1",
+      "duration": 2.6,
+      "layers": [
+        {
+          "id": "r1-media",
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 1.0,
+            "height": 1.0
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "fadeIn",
+              "duration": 0.4
+            },
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 2.6,
+              "params": {
+                "zoom": 1.09,
+                "direction": "right"
+              }
+            }
+          ],
+          "type": "mediaSlot",
+          "slotIndex": 1,
+          "media": "photoOrVideo",
+          "contentMode": "fill",
+          "mask": "rect",
+          "filter": "cool",
+          "filterIntensity": 0.25
+        },
+        {
+          "id": "r1-scrim-top",
+          "frame": {
+            "x": 0.5,
+            "y": 0.11,
+            "width": 1.0,
+            "height": 0.22
+          },
+          "type": "shape",
+          "colorRole": "scrimClear",
+          "gradient": {
+            "from": "scrimClear",
+            "to": "scrimSolid",
+            "direction": "up"
+          }
+        },
+        {
+          "id": "r1-scrim",
+          "frame": {
+            "x": 0.5,
+            "y": 0.8,
+            "width": 1.0,
+            "height": 0.4
+          },
+          "type": "shape",
+          "colorRole": "scrimClear",
+          "gradient": {
+            "from": "scrimClear",
+            "to": "scrimSolid",
+            "direction": "down"
+          }
+        },
+        {
+          "id": "r1-chip",
+          "frame": {
+            "x": 0.155,
+            "y": 0.135,
+            "width": 0.17,
+            "height": 0.068
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "scaleIn",
+              "duration": 0.4,
+              "easing": "easeOut",
+              "params": {
+                "from": 0.75
+              }
+            },
+            {
+              "role": "loop",
+              "preset": "shake",
+              "duration": 1.4,
+              "delay": 0.8,
+              "params": {
+                "degrees": 2.0
+              }
+            }
+          ],
+          "type": "shape",
+          "colorRole": "accent",
+          "cornerRadius": 0.012
+        },
+        {
+          "id": "r1-num",
+          "frame": {
+            "x": 0.155,
+            "y": 0.135,
+            "width": 0.15,
+            "height": 0.045
+          },
+          "timing": {
+            "start": 0.15
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "fadeIn",
+              "duration": 0.35
+            }
+          ],
+          "type": "text",
+          "key": "roomNumber",
+          "default": {
+            "en": "02",
+            "tr": "02"
+          },
+          "font": {
+            "name": "Archivo-SemiBold",
+            "size": 0.028
+          },
+          "colorRole": "background",
+          "alignment": "center"
+        },
+        {
+          "id": "r1-tour",
+          "frame": {
+            "x": 0.72,
+            "y": 0.135,
+            "width": 0.44,
+            "height": 0.04
+          },
+          "timing": {
+            "start": 0.2
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "fadeIn",
+              "duration": 0.4
+            }
+          ],
+          "type": "text",
+          "key": "tourLabel",
+          "default": {
+            "en": "ROOM TOUR",
+            "tr": "ODA ODA GEZİ"
+          },
+          "font": {
+            "name": "AvenirNext-Medium",
+            "size": 0.022
+          },
+          "colorRole": "textPrimary",
+          "alignment": "right",
+          "letterSpacing": 0.014,
+          "allCaps": true
+        },
+        {
+          "id": "r1-name",
+          "frame": {
+            "x": 0.5,
+            "y": 0.845,
+            "width": 0.88,
+            "height": 0.1
+          },
+          "timing": {
+            "start": 0.3
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "punchIn",
+              "duration": 0.5,
+              "params": {
+                "from": 1.5
+              }
+            }
+          ],
+          "type": "text",
+          "key": "roomName",
+          "default": {
+            "en": "KITCHEN",
+            "tr": "MUTFAK"
+          },
+          "font": {
+            "name": "AvenirNext-Heavy",
+            "size": 0.058
+          },
+          "colorRole": "textPrimary",
+          "alignment": "center",
+          "letterSpacing": 0.01,
+          "allCaps": true
+        },
+        {
+          "id": "r1-note",
+          "frame": {
+            "x": 0.5,
+            "y": 0.92,
+            "width": 0.86,
+            "height": 0.04
+          },
+          "timing": {
+            "start": 0.5
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "fadeIn",
+              "duration": 0.5
+            }
+          ],
+          "type": "text",
+          "key": "roomNote",
+          "default": {
+            "en": "Island counter · fitted appliances",
+            "tr": "Ada tezgâh · ankastre set"
+          },
+          "font": {
+            "name": "AvenirNext-Regular",
+            "size": 0.023
+          },
+          "colorRole": "textSecondary",
+          "alignment": "center"
+        }
+      ],
+      "transition": {
+        "style": "slideLeft",
+        "duration": 0.4
+      }
+    },
+    {
+      "id": "room2",
+      "duration": 2.8,
+      "layers": [
+        {
+          "id": "r2-media",
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 1.0,
+            "height": 1.0
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "fadeIn",
+              "duration": 0.4
+            },
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 2.8,
+              "params": {
+                "zoom": 1.09,
+                "direction": "up"
+              }
+            }
+          ],
+          "type": "mediaSlot",
+          "slotIndex": 2,
+          "media": "photoOrVideo",
+          "contentMode": "fill",
+          "mask": "rect",
+          "filter": "cool",
+          "filterIntensity": 0.25
+        },
+        {
+          "id": "r2-scrim-top",
+          "frame": {
+            "x": 0.5,
+            "y": 0.11,
+            "width": 1.0,
+            "height": 0.22
+          },
+          "type": "shape",
+          "colorRole": "scrimClear",
+          "gradient": {
+            "from": "scrimClear",
+            "to": "scrimSolid",
+            "direction": "up"
+          }
+        },
+        {
+          "id": "r2-scrim",
+          "frame": {
+            "x": 0.5,
+            "y": 0.8,
+            "width": 1.0,
+            "height": 0.4
+          },
+          "type": "shape",
+          "colorRole": "scrimClear",
+          "gradient": {
+            "from": "scrimClear",
+            "to": "scrimSolid",
+            "direction": "down"
+          }
+        },
+        {
+          "id": "r2-chip",
+          "frame": {
+            "x": 0.155,
+            "y": 0.135,
+            "width": 0.17,
+            "height": 0.068
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "scaleIn",
+              "duration": 0.4,
+              "easing": "easeOut",
+              "params": {
+                "from": 0.75
+              }
+            },
+            {
+              "role": "loop",
+              "preset": "shake",
+              "duration": 1.4,
+              "delay": 0.8,
+              "params": {
+                "degrees": 2.0
+              }
+            }
+          ],
+          "type": "shape",
+          "colorRole": "accent",
+          "cornerRadius": 0.012
+        },
+        {
+          "id": "r2-num",
+          "frame": {
+            "x": 0.155,
+            "y": 0.135,
+            "width": 0.15,
+            "height": 0.045
+          },
+          "timing": {
+            "start": 0.15
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "fadeIn",
+              "duration": 0.35
+            }
+          ],
+          "type": "text",
+          "key": "roomNumber",
+          "default": {
+            "en": "03",
+            "tr": "03"
+          },
+          "font": {
+            "name": "Archivo-SemiBold",
+            "size": 0.028
+          },
+          "colorRole": "background",
+          "alignment": "center"
+        },
+        {
+          "id": "r2-tour",
+          "frame": {
+            "x": 0.72,
+            "y": 0.135,
+            "width": 0.44,
+            "height": 0.04
+          },
+          "timing": {
+            "start": 0.2
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "fadeIn",
+              "duration": 0.4
+            }
+          ],
+          "type": "text",
+          "key": "tourLabel",
+          "default": {
+            "en": "ROOM TOUR",
+            "tr": "ODA ODA GEZİ"
+          },
+          "font": {
+            "name": "AvenirNext-Medium",
+            "size": 0.022
+          },
+          "colorRole": "textPrimary",
+          "alignment": "right",
+          "letterSpacing": 0.014,
+          "allCaps": true
+        },
+        {
+          "id": "r2-name",
+          "frame": {
+            "x": 0.5,
+            "y": 0.845,
+            "width": 0.88,
+            "height": 0.1
+          },
+          "timing": {
+            "start": 0.3
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "kineticWords",
+              "duration": 0.9,
+              "params": {
+                "distance": 0.02
+              }
+            }
+          ],
+          "type": "text",
+          "key": "roomName",
+          "default": {
+            "en": "BEDROOM",
+            "tr": "YATAK ODASI"
+          },
+          "font": {
+            "name": "AvenirNext-Heavy",
+            "size": 0.058
+          },
+          "colorRole": "textPrimary",
+          "alignment": "center",
+          "letterSpacing": 0.01,
+          "allCaps": true
+        },
+        {
+          "id": "r2-note",
+          "frame": {
+            "x": 0.5,
+            "y": 0.92,
+            "width": 0.86,
+            "height": 0.04
+          },
+          "timing": {
+            "start": 0.5
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "fadeIn",
+              "duration": 0.5
+            }
+          ],
+          "type": "text",
+          "key": "roomNote",
+          "default": {
+            "en": "DM us for the full tour",
+            "tr": "Tamamını görmek için DM"
+          },
+          "font": {
+            "name": "AvenirNext-Regular",
+            "size": 0.023
+          },
+          "colorRole": "textSecondary",
+          "alignment": "center"
+        }
+      ]
+    }
+  ],
+  "layers": []
+}

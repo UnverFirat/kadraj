@@ -1,0 +1,455 @@
+{
+  "schemaVersion": 1,
+  "id": "quiz-card-01",
+  "name": {
+    "en": "Quiz Card",
+    "tr": "Mini Test"
+  },
+  "category": "education",
+  "isPro": true,
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "duration": 8.0,
+  "palette": {
+    "background": "#160B2B",
+    "surface": "#FFFFFF",
+    "accent": "#B06BFF",
+    "textPrimary": "#F6F0FF",
+    "textSecondary": "#B9A9D4",
+    "textOnAccent": "#FFFFFF",
+    "scrimClear": "#00000000",
+    "scrimSolid": "#000000CC"
+  },
+  "audio": {
+    "defaultTrackId": "playful-01",
+    "volume": 0.85
+  },
+  "layers": [
+    {
+      "id": "bg",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "type": "shape",
+      "colorRole": "background"
+    },
+    {
+      "id": "glow",
+      "frame": {
+        "x": 0.5,
+        "y": 0.28,
+        "width": 0.94,
+        "height": 0.44
+      },
+      "opacity": 0.15,
+      "animations": [
+        {
+          "role": "in",
+          "preset": "scaleIn",
+          "duration": 0.95,
+          "easing": "easeOut",
+          "params": {
+            "from": 0.85
+          }
+        },
+        {
+          "role": "loop",
+          "preset": "pulse",
+          "duration": 2.8,
+          "params": {
+            "scale": 1.04
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "accent",
+      "cornerRadius": 0.22
+    },
+    {
+      "id": "kicker",
+      "frame": {
+        "x": 0.5,
+        "y": 0.155,
+        "width": 0.8,
+        "height": 0.045
+      },
+      "timing": {
+        "start": 0.2
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "slideIn",
+          "duration": 0.5,
+          "easing": "easeOut",
+          "params": {
+            "direction": "down",
+            "distance": 0.04
+          }
+        }
+      ],
+      "type": "text",
+      "key": "kicker",
+      "default": {
+        "en": "QUICK QUIZ",
+        "tr": "MİNİ TEST"
+      },
+      "font": {
+        "name": "AvenirNext-Heavy",
+        "size": 0.026
+      },
+      "colorRole": "accent",
+      "alignment": "center",
+      "letterSpacing": 0.022,
+      "allCaps": true
+    },
+    {
+      "id": "question",
+      "frame": {
+        "x": 0.5,
+        "y": 0.3,
+        "width": 0.84,
+        "height": 0.18
+      },
+      "timing": {
+        "start": 0.35
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "kineticWords",
+          "duration": 0.9,
+          "params": {
+            "distance": 0.02
+          }
+        },
+        {
+          "role": "loop",
+          "preset": "floatLoop",
+          "duration": 2.6,
+          "params": {
+            "distance": 0.006,
+            "axis": "y"
+          }
+        }
+      ],
+      "type": "text",
+      "key": "question",
+      "default": {
+        "en": "Which planet orbits\nclosest to the Sun?",
+        "tr": "Güneş'e en yakın\ngezegen hangisidir?"
+      },
+      "font": {
+        "name": "AvenirNext-Bold",
+        "size": 0.05
+      },
+      "colorRole": "textPrimary",
+      "alignment": "center",
+      "maxLines": 2
+    },
+    {
+      "id": "box0",
+      "frame": {
+        "x": 0.5,
+        "y": 0.52,
+        "width": 0.8,
+        "height": 0.105
+      },
+      "timing": {
+        "start": 0.55
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "slideIn",
+          "duration": 0.5,
+          "easing": "easeOut",
+          "params": {
+            "direction": "up",
+            "distance": 0.04
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "surface",
+      "cornerRadius": 0.052
+    },
+    {
+      "id": "letter0",
+      "frame": {
+        "x": 0.19,
+        "y": 0.52,
+        "width": 0.1,
+        "height": 0.055
+      },
+      "timing": {
+        "start": 0.63
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.35
+        }
+      ],
+      "type": "text",
+      "key": "option1Letter",
+      "default": {
+        "en": "A",
+        "tr": "A"
+      },
+      "font": {
+        "name": "AvenirNext-Heavy",
+        "size": 0.034
+      },
+      "colorRole": "accent",
+      "alignment": "center"
+    },
+    {
+      "id": "option0",
+      "frame": {
+        "x": 0.58,
+        "y": 0.52,
+        "width": 0.58,
+        "height": 0.055
+      },
+      "timing": {
+        "start": 0.63
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.4
+        }
+      ],
+      "type": "text",
+      "key": "option1",
+      "default": {
+        "en": "Venus",
+        "tr": "Venüs"
+      },
+      "font": {
+        "name": "AvenirNext-DemiBold",
+        "size": 0.032
+      },
+      "colorRole": "background",
+      "alignment": "left"
+    },
+    {
+      "id": "box1",
+      "frame": {
+        "x": 0.5,
+        "y": 0.65,
+        "width": 0.8,
+        "height": 0.105
+      },
+      "timing": {
+        "start": 0.77
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "slideIn",
+          "duration": 0.5,
+          "easing": "easeOut",
+          "params": {
+            "direction": "up",
+            "distance": 0.04
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "surface",
+      "cornerRadius": 0.052
+    },
+    {
+      "id": "letter1",
+      "frame": {
+        "x": 0.19,
+        "y": 0.65,
+        "width": 0.1,
+        "height": 0.055
+      },
+      "timing": {
+        "start": 0.85
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.35
+        }
+      ],
+      "type": "text",
+      "key": "option2Letter",
+      "default": {
+        "en": "B",
+        "tr": "B"
+      },
+      "font": {
+        "name": "AvenirNext-Heavy",
+        "size": 0.034
+      },
+      "colorRole": "accent",
+      "alignment": "center"
+    },
+    {
+      "id": "option1",
+      "frame": {
+        "x": 0.58,
+        "y": 0.65,
+        "width": 0.58,
+        "height": 0.055
+      },
+      "timing": {
+        "start": 0.85
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.4
+        }
+      ],
+      "type": "text",
+      "key": "option2",
+      "default": {
+        "en": "Mercury",
+        "tr": "Merkür"
+      },
+      "font": {
+        "name": "AvenirNext-DemiBold",
+        "size": 0.032
+      },
+      "colorRole": "background",
+      "alignment": "left"
+    },
+    {
+      "id": "box2",
+      "frame": {
+        "x": 0.5,
+        "y": 0.78,
+        "width": 0.8,
+        "height": 0.105
+      },
+      "timing": {
+        "start": 0.99
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "slideIn",
+          "duration": 0.5,
+          "easing": "easeOut",
+          "params": {
+            "direction": "up",
+            "distance": 0.04
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "surface",
+      "cornerRadius": 0.052
+    },
+    {
+      "id": "letter2",
+      "frame": {
+        "x": 0.19,
+        "y": 0.78,
+        "width": 0.1,
+        "height": 0.055
+      },
+      "timing": {
+        "start": 1.07
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.35
+        }
+      ],
+      "type": "text",
+      "key": "option3Letter",
+      "default": {
+        "en": "C",
+        "tr": "C"
+      },
+      "font": {
+        "name": "AvenirNext-Heavy",
+        "size": 0.034
+      },
+      "colorRole": "accent",
+      "alignment": "center"
+    },
+    {
+      "id": "option2",
+      "frame": {
+        "x": 0.58,
+        "y": 0.78,
+        "width": 0.58,
+        "height": 0.055
+      },
+      "timing": {
+        "start": 1.07
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.4
+        }
+      ],
+      "type": "text",
+      "key": "option3",
+      "default": {
+        "en": "Mars",
+        "tr": "Mars"
+      },
+      "font": {
+        "name": "AvenirNext-DemiBold",
+        "size": 0.032
+      },
+      "colorRole": "background",
+      "alignment": "left"
+    },
+    {
+      "id": "footer",
+      "frame": {
+        "x": 0.5,
+        "y": 0.9,
+        "width": 0.86,
+        "height": 0.045
+      },
+      "timing": {
+        "start": 1.2
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.6
+        }
+      ],
+      "type": "text",
+      "key": "footer",
+      "default": {
+        "en": "Drop your answer in the comments 👇",
+        "tr": "Cevabı yorumlara yaz 👇"
+      },
+      "font": {
+        "name": "AvenirNext-Medium",
+        "size": 0.024
+      },
+      "colorRole": "textSecondary",
+      "alignment": "center"
+    }
+  ]
+}

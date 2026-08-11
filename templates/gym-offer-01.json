@@ -1,0 +1,264 @@
+{
+  "schemaVersion": 1,
+  "id": "gym-offer-01",
+  "name": {
+    "en": "Gym Offer",
+    "tr": "Spor Salonu Kampanya"
+  },
+  "category": "fitness",
+  "isPro": false,
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "duration": 6.0,
+  "palette": {
+    "background": "#101014",
+    "surface": "#FFFFFF",
+    "accent": "#FF2E63",
+    "textPrimary": "#FFFFFF",
+    "textSecondary": "#C9C9D1",
+    "textOnAccent": "#FFFFFF",
+    "scrimClear": "#00000000",
+    "scrimSolid": "#000000CC"
+  },
+  "audio": {
+    "defaultTrackId": "energetic-01",
+    "volume": 0.85
+  },
+  "layers": [
+    {
+      "id": "bg",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "type": "shape",
+      "colorRole": "background"
+    },
+    {
+      "id": "photo",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.5
+        },
+        {
+          "role": "loop",
+          "preset": "kenBurns",
+          "duration": 6.0,
+          "params": {
+            "zoom": 1.14,
+            "direction": "up"
+          }
+        }
+      ],
+      "type": "mediaSlot",
+      "slotIndex": 0,
+      "media": "photoOrVideo",
+      "contentMode": "fill",
+      "mask": "rect",
+      "filter": "cinematic",
+      "filterIntensity": 0.5
+    },
+    {
+      "id": "scrim",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "type": "shape",
+      "colorRole": "scrimClear",
+      "gradient": {
+        "from": "scrimClear",
+        "to": "scrimSolid",
+        "direction": "down"
+      }
+    },
+    {
+      "id": "badge",
+      "frame": {
+        "x": 0.71,
+        "y": 0.24,
+        "width": 0.46,
+        "height": 0.115
+      },
+      "rotation": -9,
+      "timing": {
+        "start": 0.45
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "bounce",
+          "duration": 0.65
+        },
+        {
+          "role": "loop",
+          "preset": "shake",
+          "duration": 1.4,
+          "delay": 1.05,
+          "params": {
+            "degrees": 2.0
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "accent",
+      "cornerRadius": 0.057
+    },
+    {
+      "id": "badge-text",
+      "frame": {
+        "x": 0.71,
+        "y": 0.24,
+        "width": 0.42,
+        "height": 0.095
+      },
+      "rotation": -9,
+      "timing": {
+        "start": 0.6
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.35
+        }
+      ],
+      "type": "text",
+      "key": "badge",
+      "default": {
+        "en": "FIRST MONTH\nFREE",
+        "tr": "İLK AY\nÜCRETSİZ"
+      },
+      "font": {
+        "name": "AvenirNext-Heavy",
+        "size": 0.032
+      },
+      "colorRole": "textOnAccent",
+      "alignment": "center",
+      "maxLines": 2,
+      "allCaps": true
+    },
+    {
+      "id": "headline",
+      "frame": {
+        "x": 0.5,
+        "y": 0.755,
+        "width": 0.86,
+        "height": 0.19
+      },
+      "timing": {
+        "start": 0.75
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "kineticWords",
+          "duration": 0.9,
+          "params": {
+            "distance": 0.02
+          }
+        },
+        {
+          "role": "loop",
+          "preset": "floatLoop",
+          "duration": 2.6,
+          "params": {
+            "distance": 0.006,
+            "axis": "y"
+          }
+        }
+      ],
+      "type": "text",
+      "key": "headline",
+      "default": {
+        "en": "TRAIN\nHARDER",
+        "tr": "GÜCÜNÜ\nKEŞFET"
+      },
+      "font": {
+        "name": "AvenirNext-Heavy",
+        "size": 0.08
+      },
+      "colorRole": "textPrimary",
+      "alignment": "center",
+      "maxLines": 2,
+      "allCaps": true
+    },
+    {
+      "id": "terms",
+      "frame": {
+        "x": 0.5,
+        "y": 0.885,
+        "width": 0.84,
+        "height": 0.04
+      },
+      "timing": {
+        "start": 1.05
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.6
+        }
+      ],
+      "type": "text",
+      "key": "terms",
+      "default": {
+        "en": "New members only · through Aug 31",
+        "tr": "Yeni üyelere özel · 31 Ağustos'a kadar"
+      },
+      "font": {
+        "name": "AvenirNext-Regular",
+        "size": 0.022
+      },
+      "colorRole": "textSecondary",
+      "alignment": "center"
+    },
+    {
+      "id": "handle",
+      "frame": {
+        "x": 0.5,
+        "y": 0.94,
+        "width": 0.6,
+        "height": 0.035
+      },
+      "timing": {
+        "start": 1.2
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.5
+        }
+      ],
+      "type": "text",
+      "key": "handle",
+      "default": {
+        "en": "@yourgym",
+        "tr": "@spor.salonu"
+      },
+      "font": {
+        "name": "AvenirNext-DemiBold",
+        "size": 0.02
+      },
+      "colorRole": "accent",
+      "alignment": "center"
+    }
+  ]
+}

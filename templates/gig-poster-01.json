@@ -1,0 +1,301 @@
+{
+  "schemaVersion": 1,
+  "id": "gig-poster-01",
+  "name": {
+    "en": "Gig Poster",
+    "tr": "Konser Afişi"
+  },
+  "category": "music",
+  "isPro": false,
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "duration": 8.0,
+  "palette": {
+    "background": "#08080C",
+    "surface": "#FFFFFF",
+    "accent": "#00E5A0",
+    "textPrimary": "#FFFFFF",
+    "textSecondary": "#9FB3AC",
+    "textOnAccent": "#06120D",
+    "scrimClear": "#00000000",
+    "scrimSolid": "#000000CC"
+  },
+  "audio": {
+    "defaultTrackId": "groovy-01",
+    "volume": 0.85
+  },
+  "layers": [
+    {
+      "id": "bg",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "type": "shape",
+      "colorRole": "background"
+    },
+    {
+      "id": "band",
+      "frame": {
+        "x": 0.5,
+        "y": 0.18,
+        "width": 0.92,
+        "height": 0.2
+      },
+      "timing": {
+        "start": 0.25
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "kineticWords",
+          "duration": 0.9,
+          "params": {
+            "distance": 0.02
+          }
+        },
+        {
+          "role": "loop",
+          "preset": "floatLoop",
+          "duration": 2.6,
+          "params": {
+            "distance": 0.006,
+            "axis": "y"
+          }
+        }
+      ],
+      "type": "text",
+      "key": "band",
+      "default": {
+        "en": "NIGHT\nORCHESTRA",
+        "tr": "GECE\nORKESTRASI"
+      },
+      "font": {
+        "name": "AvenirNext-Heavy",
+        "size": 0.078
+      },
+      "colorRole": "textPrimary",
+      "alignment": "center",
+      "maxLines": 2,
+      "letterSpacing": 0.006,
+      "allCaps": true
+    },
+    {
+      "id": "rule-top",
+      "frame": {
+        "x": 0.5,
+        "y": 0.31,
+        "width": 0.92,
+        "height": 0.005
+      },
+      "timing": {
+        "start": 0.6
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "wipeReveal",
+          "duration": 0.7,
+          "easing": "easeOut",
+          "params": {
+            "direction": "right"
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "accent"
+    },
+    {
+      "id": "photo",
+      "frame": {
+        "x": 0.5,
+        "y": 0.475,
+        "width": 0.92,
+        "height": 0.28
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.6
+        },
+        {
+          "role": "loop",
+          "preset": "kenBurns",
+          "duration": 8.0,
+          "params": {
+            "zoom": 1.1,
+            "direction": "left"
+          }
+        }
+      ],
+      "type": "mediaSlot",
+      "slotIndex": 0,
+      "media": "photoOrVideo",
+      "contentMode": "fill",
+      "mask": "rect",
+      "cornerRadius": 0.006,
+      "filter": "mono",
+      "filterIntensity": 0.7
+    },
+    {
+      "id": "rule-bottom",
+      "frame": {
+        "x": 0.5,
+        "y": 0.645,
+        "width": 0.92,
+        "height": 0.005
+      },
+      "timing": {
+        "start": 0.75
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "wipeReveal",
+          "duration": 0.7,
+          "easing": "easeOut",
+          "params": {
+            "direction": "left"
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "accent"
+    },
+    {
+      "id": "date",
+      "frame": {
+        "x": 0.5,
+        "y": 0.71,
+        "width": 0.9,
+        "height": 0.08
+      },
+      "timing": {
+        "start": 0.85
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "slideIn",
+          "duration": 0.6,
+          "easing": "easeOut",
+          "params": {
+            "direction": "up",
+            "distance": 0.04
+          }
+        }
+      ],
+      "type": "text",
+      "key": "date",
+      "default": {
+        "en": "SEPTEMBER 12, 2026",
+        "tr": "12 EYLÜL 2026"
+      },
+      "font": {
+        "name": "Archivo-SemiBold",
+        "size": 0.046
+      },
+      "colorRole": "textPrimary",
+      "alignment": "center",
+      "letterSpacing": 0.01,
+      "allCaps": true
+    },
+    {
+      "id": "venue",
+      "frame": {
+        "x": 0.5,
+        "y": 0.79,
+        "width": 0.92,
+        "height": 0.045
+      },
+      "timing": {
+        "start": 1.0
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.6
+        }
+      ],
+      "type": "text",
+      "key": "venue",
+      "default": {
+        "en": "ISTANBUL · KUCUKCIFTLIK PARK",
+        "tr": "İSTANBUL · KÜÇÜKÇİFTLİK PARK"
+      },
+      "font": {
+        "name": "AvenirNext-Medium",
+        "size": 0.024
+      },
+      "colorRole": "textSecondary",
+      "alignment": "center",
+      "letterSpacing": 0.012,
+      "allCaps": true
+    },
+    {
+      "id": "ticket-chip",
+      "frame": {
+        "x": 0.5,
+        "y": 0.885,
+        "width": 0.84,
+        "height": 0.085
+      },
+      "timing": {
+        "start": 1.05
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "pop",
+          "duration": 0.55,
+          "params": {
+            "overshoot": 1.06
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "accent",
+      "cornerRadius": 0.0425
+    },
+    {
+      "id": "ticket",
+      "frame": {
+        "x": 0.5,
+        "y": 0.885,
+        "width": 0.8,
+        "height": 0.05
+      },
+      "timing": {
+        "start": 1.2
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.45
+        }
+      ],
+      "type": "text",
+      "key": "ticket",
+      "default": {
+        "en": "TICKETS SELLING FAST",
+        "tr": "BİLETLER TÜKENMEK ÜZERE"
+      },
+      "font": {
+        "name": "AvenirNext-Heavy",
+        "size": 0.026
+      },
+      "colorRole": "textOnAccent",
+      "alignment": "center",
+      "letterSpacing": 0.01,
+      "allCaps": true
+    }
+  ]
+}

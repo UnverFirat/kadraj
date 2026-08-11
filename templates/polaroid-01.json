@@ -1,0 +1,176 @@
+{
+  "schemaVersion": 1,
+  "id": "polaroid-01",
+  "name": {
+    "en": "Polaroid",
+    "tr": "Polaroid"
+  },
+  "category": "minimal",
+  "isPro": false,
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "duration": 5.0,
+  "palette": {
+    "background": "#EDE7DA",
+    "surface": "#FFFFFF",
+    "accent": "#C6503C",
+    "textPrimary": "#2B2A28",
+    "textSecondary": "#8A857C"
+  },
+  "audio": {
+    "defaultTrackId": "acoustic-01",
+    "volume": 0.8
+  },
+  "layers": [
+    {
+      "id": "frame-shadow",
+      "type": "shape",
+      "colorRole": "textPrimary",
+      "opacity": 0.12,
+      "rotation": -4,
+      "cornerRadius": 0.004,
+      "frame": {
+        "x": 0.515,
+        "y": 0.455,
+        "width": 0.74,
+        "height": 0.66
+      }
+    },
+    {
+      "id": "frame",
+      "type": "shape",
+      "colorRole": "surface",
+      "rotation": -4,
+      "cornerRadius": 0.004,
+      "frame": {
+        "x": 0.5,
+        "y": 0.45,
+        "width": 0.74,
+        "height": 0.66
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "pop",
+          "duration": 0.6,
+          "easing": "spring",
+          "params": {
+            "overshoot": 1.05
+          }
+        }
+      ]
+    },
+    {
+      "id": "photo",
+      "type": "mediaSlot",
+      "slotIndex": 0,
+      "media": "photoOrVideo",
+      "contentMode": "fill",
+      "mask": "rect",
+      "cornerRadius": 0.002,
+      "rotation": -4,
+      "frame": {
+        "x": 0.5,
+        "y": 0.41,
+        "width": 0.66,
+        "height": 0.52
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "pop",
+          "duration": 0.6,
+          "easing": "spring",
+          "params": {
+            "overshoot": 1.05
+          }
+        },
+        {
+          "role": "loop",
+          "preset": "kenBurns",
+          "duration": 5.0,
+          "params": {
+            "zoom": 1.08,
+            "direction": "up"
+          }
+        }
+      ],
+      "filter": "vintage",
+      "filterIntensity": 0.6
+    },
+    {
+      "id": "caption",
+      "type": "text",
+      "key": "caption",
+      "default": {
+        "en": "sweet moments",
+        "tr": "güzel anlar"
+      },
+      "font": {
+        "name": "SnellRoundhand-Bold",
+        "size": 0.05
+      },
+      "colorRole": "textPrimary",
+      "alignment": "center",
+      "rotation": -4,
+      "frame": {
+        "x": 0.5,
+        "y": 0.69,
+        "width": 0.6,
+        "height": 0.08
+      },
+      "timing": {
+        "start": 0.6
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "slideIn",
+          "duration": 0.6,
+          "easing": "easeOut",
+          "params": {
+            "direction": "up",
+            "distance": 0.02
+          }
+        }
+      ]
+    },
+    {
+      "id": "date",
+      "type": "text",
+      "key": "date",
+      "default": {
+        "en": "JULY 2026",
+        "tr": "TEMMUZ 2026"
+      },
+      "font": {
+        "name": "AvenirNext-Medium",
+        "size": 0.018
+      },
+      "colorRole": "textSecondary",
+      "alignment": "center",
+      "allCaps": true,
+      "letterSpacing": 0.01,
+      "rotation": -4,
+      "frame": {
+        "x": 0.5,
+        "y": 0.745,
+        "width": 0.5,
+        "height": 0.03
+      },
+      "timing": {
+        "start": 0.9
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.5
+        }
+      ]
+    }
+  ]
+}

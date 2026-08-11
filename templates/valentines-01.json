@@ -1,0 +1,438 @@
+{
+  "schemaVersion": 1,
+  "id": "valentines-01",
+  "name": {
+    "en": "Valentine's",
+    "tr": "Sevgililer Günü"
+  },
+  "category": "holiday",
+  "isPro": true,
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "duration": 7.0,
+  "palette": {
+    "background": "#1C0F14",
+    "surface": "#FFF0F4",
+    "accent": "#F0698E",
+    "textPrimary": "#FFF0F4",
+    "textSecondary": "#D6A9B7",
+    "textOnAccent": "#FFFFFF",
+    "scrimClear": "#00000000",
+    "scrimSolid": "#000000CC"
+  },
+  "audio": {
+    "defaultTrackId": "sweet-01",
+    "volume": 0.85
+  },
+  "layers": [
+    {
+      "id": "bg",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "type": "shape",
+      "colorRole": "background"
+    },
+    {
+      "id": "glow",
+      "frame": {
+        "x": 0.5,
+        "y": 0.4,
+        "width": 0.96,
+        "height": 0.54
+      },
+      "opacity": 0.16,
+      "animations": [
+        {
+          "role": "in",
+          "preset": "scaleIn",
+          "duration": 0.9,
+          "easing": "easeOut",
+          "params": {
+            "from": 0.85
+          }
+        },
+        {
+          "role": "loop",
+          "preset": "pulse",
+          "duration": 2.6,
+          "params": {
+            "scale": 1.05
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "accent",
+      "mask": "circle"
+    },
+    {
+      "id": "portrait",
+      "frame": {
+        "x": 0.5,
+        "y": 0.4,
+        "width": 0.74,
+        "height": 0.42
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "scaleIn",
+          "duration": 0.7,
+          "easing": "easeOut",
+          "params": {
+            "from": 0.88
+          }
+        },
+        {
+          "role": "loop",
+          "preset": "kenBurns",
+          "duration": 7.0,
+          "params": {
+            "zoom": 1.1,
+            "direction": "up"
+          }
+        }
+      ],
+      "type": "mediaSlot",
+      "slotIndex": 0,
+      "media": "photoOrVideo",
+      "contentMode": "fill",
+      "mask": "heart",
+      "filter": "warm",
+      "filterIntensity": 0.5
+    },
+    {
+      "id": "scrim",
+      "frame": {
+        "x": 0.5,
+        "y": 0.78,
+        "width": 1.0,
+        "height": 0.44
+      },
+      "type": "shape",
+      "colorRole": "scrimClear",
+      "gradient": {
+        "from": "scrimClear",
+        "to": "scrimSolid",
+        "direction": "down"
+      }
+    },
+    {
+      "id": "kicker",
+      "frame": {
+        "x": 0.5,
+        "y": 0.115,
+        "width": 0.8,
+        "height": 0.04
+      },
+      "timing": {
+        "start": 0.35
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.6
+        }
+      ],
+      "type": "text",
+      "key": "kicker",
+      "default": {
+        "en": "VALENTINE'S DAY",
+        "tr": "SEVGİLİLER GÜNÜ"
+      },
+      "font": {
+        "name": "AvenirNext-DemiBold",
+        "size": 0.022
+      },
+      "colorRole": "accent",
+      "alignment": "center",
+      "letterSpacing": 0.014,
+      "allCaps": true
+    },
+    {
+      "id": "h1",
+      "frame": {
+        "x": 0.14,
+        "y": 0.22,
+        "width": 0.099,
+        "height": 0.072
+      },
+      "rotation": -14,
+      "timing": {
+        "start": 0.5
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "pop",
+          "duration": 0.5,
+          "params": {
+            "overshoot": 1.25
+          }
+        },
+        {
+          "role": "loop",
+          "preset": "pulse",
+          "duration": 2.0,
+          "params": {
+            "scale": 1.08
+          }
+        }
+      ],
+      "type": "text",
+      "key": "h1",
+      "default": {
+        "en": "❤️",
+        "tr": "❤️"
+      },
+      "font": {
+        "name": "AvenirNext-Bold",
+        "size": 0.045
+      },
+      "colorRole": "textPrimary",
+      "alignment": "center"
+    },
+    {
+      "id": "h2",
+      "frame": {
+        "x": 0.86,
+        "y": 0.26,
+        "width": 0.099,
+        "height": 0.072
+      },
+      "rotation": 12,
+      "timing": {
+        "start": 0.65
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "pop",
+          "duration": 0.5,
+          "params": {
+            "overshoot": 1.25
+          }
+        },
+        {
+          "role": "loop",
+          "preset": "pulse",
+          "duration": 2.0,
+          "params": {
+            "scale": 1.08
+          }
+        }
+      ],
+      "type": "text",
+      "key": "h2",
+      "default": {
+        "en": "❤️",
+        "tr": "❤️"
+      },
+      "font": {
+        "name": "AvenirNext-Bold",
+        "size": 0.045
+      },
+      "colorRole": "textPrimary",
+      "alignment": "center"
+    },
+    {
+      "id": "h3",
+      "frame": {
+        "x": 0.1,
+        "y": 0.55,
+        "width": 0.099,
+        "height": 0.072
+      },
+      "rotation": 10,
+      "timing": {
+        "start": 0.8
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "pop",
+          "duration": 0.5,
+          "params": {
+            "overshoot": 1.25
+          }
+        },
+        {
+          "role": "loop",
+          "preset": "pulse",
+          "duration": 2.0,
+          "params": {
+            "scale": 1.08
+          }
+        }
+      ],
+      "type": "text",
+      "key": "h3",
+      "default": {
+        "en": "❤️",
+        "tr": "❤️"
+      },
+      "font": {
+        "name": "AvenirNext-Bold",
+        "size": 0.045
+      },
+      "colorRole": "textPrimary",
+      "alignment": "center"
+    },
+    {
+      "id": "h4",
+      "frame": {
+        "x": 0.9,
+        "y": 0.58,
+        "width": 0.099,
+        "height": 0.072
+      },
+      "rotation": -8,
+      "timing": {
+        "start": 0.95
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "pop",
+          "duration": 0.5,
+          "params": {
+            "overshoot": 1.25
+          }
+        },
+        {
+          "role": "loop",
+          "preset": "pulse",
+          "duration": 2.0,
+          "params": {
+            "scale": 1.08
+          }
+        }
+      ],
+      "type": "text",
+      "key": "h4",
+      "default": {
+        "en": "❤️",
+        "tr": "❤️"
+      },
+      "font": {
+        "name": "AvenirNext-Bold",
+        "size": 0.045
+      },
+      "colorRole": "textPrimary",
+      "alignment": "center"
+    },
+    {
+      "id": "names",
+      "frame": {
+        "x": 0.5,
+        "y": 0.72,
+        "width": 0.8,
+        "height": 0.12
+      },
+      "timing": {
+        "start": 0.9
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "kineticWords",
+          "duration": 0.9,
+          "params": {
+            "distance": 0.02
+          }
+        },
+        {
+          "role": "loop",
+          "preset": "floatLoop",
+          "duration": 2.6,
+          "params": {
+            "distance": 0.006,
+            "axis": "y"
+          }
+        }
+      ],
+      "type": "text",
+      "key": "names",
+      "default": {
+        "en": "Ayşe & Mehmet",
+        "tr": "Ayşe & Mehmet"
+      },
+      "font": {
+        "name": "SnellRoundhand-Bold",
+        "size": 0.072
+      },
+      "colorRole": "textPrimary",
+      "alignment": "center"
+    },
+    {
+      "id": "note",
+      "frame": {
+        "x": 0.5,
+        "y": 0.82,
+        "width": 0.7,
+        "height": 0.04
+      },
+      "timing": {
+        "start": 1.1
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.6
+        }
+      ],
+      "type": "text",
+      "key": "note",
+      "default": {
+        "en": "Glad you're mine",
+        "tr": "İyi ki varsın"
+      },
+      "font": {
+        "name": "AvenirNext-Medium",
+        "size": 0.024
+      },
+      "colorRole": "textSecondary",
+      "alignment": "center"
+    },
+    {
+      "id": "date",
+      "frame": {
+        "x": 0.5,
+        "y": 0.9,
+        "width": 0.6,
+        "height": 0.035
+      },
+      "timing": {
+        "start": 1.2
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.6
+        }
+      ],
+      "type": "text",
+      "key": "date",
+      "default": {
+        "en": "February 14, 2026",
+        "tr": "14 Şubat 2026"
+      },
+      "font": {
+        "name": "AvenirNext-Regular",
+        "size": 0.02
+      },
+      "colorRole": "textSecondary",
+      "alignment": "center",
+      "letterSpacing": 0.006
+    }
+  ]
+}

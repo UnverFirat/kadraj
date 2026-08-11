@@ -1,0 +1,521 @@
+{
+  "schemaVersion": 1,
+  "id": "travel-checklist-01",
+  "name": {
+    "en": "Packing List",
+    "tr": "Valiz Listesi"
+  },
+  "category": "travel",
+  "isPro": true,
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "duration": 8.0,
+  "palette": {
+    "background": "#0D1A12",
+    "surface": "#F0F7F1",
+    "accent": "#3FA06A",
+    "textPrimary": "#F3FAF4",
+    "textSecondary": "#A6C2AE",
+    "textOnAccent": "#FFFFFF",
+    "scrimClear": "#00000000",
+    "scrimSolid": "#000000CC"
+  },
+  "audio": {
+    "defaultTrackId": "typewriter-01",
+    "volume": 0.85
+  },
+  "layers": [
+    {
+      "id": "bg",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "type": "shape",
+      "colorRole": "background"
+    },
+    {
+      "id": "sheet",
+      "frame": {
+        "x": 0.5,
+        "y": 0.52,
+        "width": 0.86,
+        "height": 0.68
+      },
+      "opacity": 0.07,
+      "animations": [
+        {
+          "role": "in",
+          "preset": "scaleIn",
+          "duration": 0.7,
+          "easing": "easeOut",
+          "params": {
+            "from": 0.94
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "surface",
+      "cornerRadius": 0.03
+    },
+    {
+      "id": "pl-title",
+      "frame": {
+        "x": 0.5,
+        "y": 0.215,
+        "width": 0.86,
+        "height": 0.09
+      },
+      "timing": {
+        "start": 0.2
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "typewriter",
+          "duration": 1.3
+        },
+        {
+          "role": "loop",
+          "preset": "floatLoop",
+          "duration": 2.6,
+          "params": {
+            "distance": 0.006,
+            "axis": "y"
+          }
+        }
+      ],
+      "type": "text",
+      "key": "plTitle",
+      "default": {
+        "en": "PACKING LIST",
+        "tr": "VALİZ LİSTESİ"
+      },
+      "font": {
+        "name": "AvenirNext-Heavy",
+        "size": 0.062
+      },
+      "colorRole": "textPrimary",
+      "alignment": "center",
+      "letterSpacing": 0.008,
+      "allCaps": true
+    },
+    {
+      "id": "pl-sub",
+      "frame": {
+        "x": 0.5,
+        "y": 0.29,
+        "width": 0.78,
+        "height": 0.04
+      },
+      "timing": {
+        "start": 0.45
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.6
+        }
+      ],
+      "type": "text",
+      "key": "plSub",
+      "default": {
+        "en": "A 3-day city escape",
+        "tr": "3 günlük şehir kaçamağı"
+      },
+      "font": {
+        "name": "AvenirNext-Regular",
+        "size": 0.023
+      },
+      "colorRole": "textSecondary",
+      "alignment": "center"
+    },
+    {
+      "id": "tick0",
+      "frame": {
+        "x": 0.2,
+        "y": 0.4,
+        "width": 0.062,
+        "height": 0.045
+      },
+      "timing": {
+        "start": 0.6
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "pop",
+          "duration": 0.4,
+          "params": {
+            "overshoot": 1.2
+          }
+        }
+      ],
+      "type": "text",
+      "key": "tick0",
+      "default": {
+        "en": "✓",
+        "tr": "✓"
+      },
+      "font": {
+        "name": "AvenirNext-Heavy",
+        "size": 0.028
+      },
+      "colorRole": "accent",
+      "alignment": "center"
+    },
+    {
+      "id": "pl-item0",
+      "frame": {
+        "x": 0.6,
+        "y": 0.4,
+        "width": 0.6,
+        "height": 0.06
+      },
+      "timing": {
+        "start": 0.6
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "slideIn",
+          "duration": 0.45,
+          "easing": "easeOut",
+          "params": {
+            "direction": "left",
+            "distance": 0.05
+          }
+        }
+      ],
+      "type": "text",
+      "key": "item0",
+      "default": {
+        "en": "Camera and a spare battery",
+        "tr": "Fotoğraf makinesi + yedek pil"
+      },
+      "font": {
+        "name": "AvenirNext-Medium",
+        "size": 0.027
+      },
+      "colorRole": "textPrimary",
+      "alignment": "left"
+    },
+    {
+      "id": "tick1",
+      "frame": {
+        "x": 0.2,
+        "y": 0.49,
+        "width": 0.062,
+        "height": 0.045
+      },
+      "timing": {
+        "start": 0.8
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "pop",
+          "duration": 0.4,
+          "params": {
+            "overshoot": 1.2
+          }
+        }
+      ],
+      "type": "text",
+      "key": "tick1",
+      "default": {
+        "en": "✓",
+        "tr": "✓"
+      },
+      "font": {
+        "name": "AvenirNext-Heavy",
+        "size": 0.028
+      },
+      "colorRole": "accent",
+      "alignment": "center"
+    },
+    {
+      "id": "pl-item1",
+      "frame": {
+        "x": 0.6,
+        "y": 0.49,
+        "width": 0.6,
+        "height": 0.06
+      },
+      "timing": {
+        "start": 0.8
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "slideIn",
+          "duration": 0.45,
+          "easing": "easeOut",
+          "params": {
+            "direction": "left",
+            "distance": 0.05
+          }
+        }
+      ],
+      "type": "text",
+      "key": "item1",
+      "default": {
+        "en": "Three tees, two pants",
+        "tr": "Üç tişört, iki pantolon"
+      },
+      "font": {
+        "name": "AvenirNext-Medium",
+        "size": 0.027
+      },
+      "colorRole": "textPrimary",
+      "alignment": "left"
+    },
+    {
+      "id": "tick2",
+      "frame": {
+        "x": 0.2,
+        "y": 0.58,
+        "width": 0.062,
+        "height": 0.045
+      },
+      "timing": {
+        "start": 1.0
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "pop",
+          "duration": 0.4,
+          "params": {
+            "overshoot": 1.2
+          }
+        }
+      ],
+      "type": "text",
+      "key": "tick2",
+      "default": {
+        "en": "✓",
+        "tr": "✓"
+      },
+      "font": {
+        "name": "AvenirNext-Heavy",
+        "size": 0.028
+      },
+      "colorRole": "accent",
+      "alignment": "center"
+    },
+    {
+      "id": "pl-item2",
+      "frame": {
+        "x": 0.6,
+        "y": 0.58,
+        "width": 0.6,
+        "height": 0.06
+      },
+      "timing": {
+        "start": 1.0
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "slideIn",
+          "duration": 0.45,
+          "easing": "easeOut",
+          "params": {
+            "direction": "left",
+            "distance": 0.05
+          }
+        }
+      ],
+      "type": "text",
+      "key": "item2",
+      "default": {
+        "en": "Sunscreen and a hat",
+        "tr": "Güneş kremi ve şapka"
+      },
+      "font": {
+        "name": "AvenirNext-Medium",
+        "size": 0.027
+      },
+      "colorRole": "textPrimary",
+      "alignment": "left"
+    },
+    {
+      "id": "tick3",
+      "frame": {
+        "x": 0.2,
+        "y": 0.67,
+        "width": 0.062,
+        "height": 0.045
+      },
+      "timing": {
+        "start": 1.2
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "pop",
+          "duration": 0.4,
+          "params": {
+            "overshoot": 1.2
+          }
+        }
+      ],
+      "type": "text",
+      "key": "tick3",
+      "default": {
+        "en": "✓",
+        "tr": "✓"
+      },
+      "font": {
+        "name": "AvenirNext-Heavy",
+        "size": 0.028
+      },
+      "colorRole": "accent",
+      "alignment": "center"
+    },
+    {
+      "id": "pl-item3",
+      "frame": {
+        "x": 0.6,
+        "y": 0.67,
+        "width": 0.6,
+        "height": 0.06
+      },
+      "timing": {
+        "start": 1.2
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "slideIn",
+          "duration": 0.45,
+          "easing": "easeOut",
+          "params": {
+            "direction": "left",
+            "distance": 0.05
+          }
+        }
+      ],
+      "type": "text",
+      "key": "item3",
+      "default": {
+        "en": "Charger and a power bank",
+        "tr": "Şarj aleti ve powerbank"
+      },
+      "font": {
+        "name": "AvenirNext-Medium",
+        "size": 0.027
+      },
+      "colorRole": "textPrimary",
+      "alignment": "left"
+    },
+    {
+      "id": "tick4",
+      "frame": {
+        "x": 0.2,
+        "y": 0.76,
+        "width": 0.062,
+        "height": 0.045
+      },
+      "timing": {
+        "start": 1.4
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "pop",
+          "duration": 0.4,
+          "params": {
+            "overshoot": 1.2
+          }
+        }
+      ],
+      "type": "text",
+      "key": "tick4",
+      "default": {
+        "en": "✓",
+        "tr": "✓"
+      },
+      "font": {
+        "name": "AvenirNext-Heavy",
+        "size": 0.028
+      },
+      "colorRole": "accent",
+      "alignment": "center"
+    },
+    {
+      "id": "pl-item4",
+      "frame": {
+        "x": 0.6,
+        "y": 0.76,
+        "width": 0.6,
+        "height": 0.06
+      },
+      "timing": {
+        "start": 1.4
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "slideIn",
+          "duration": 0.45,
+          "easing": "easeOut",
+          "params": {
+            "direction": "left",
+            "distance": 0.05
+          }
+        }
+      ],
+      "type": "text",
+      "key": "item4",
+      "default": {
+        "en": "Passport and cards",
+        "tr": "Pasaport ve kart"
+      },
+      "font": {
+        "name": "AvenirNext-Medium",
+        "size": 0.027
+      },
+      "colorRole": "textPrimary",
+      "alignment": "left"
+    },
+    {
+      "id": "pl-foot",
+      "frame": {
+        "x": 0.5,
+        "y": 0.87,
+        "width": 0.74,
+        "height": 0.04
+      },
+      "timing": {
+        "start": 1.7
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.6
+        }
+      ],
+      "type": "text",
+      "key": "plFoot",
+      "default": {
+        "en": "What would you add?",
+        "tr": "Sen ne eklerdin?"
+      },
+      "font": {
+        "name": "AvenirNext-Regular",
+        "size": 0.022
+      },
+      "colorRole": "textSecondary",
+      "alignment": "center"
+    }
+  ]
+}

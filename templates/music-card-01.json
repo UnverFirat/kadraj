@@ -1,0 +1,283 @@
+{
+  "schemaVersion": 1,
+  "id": "music-card-01",
+  "name": {
+    "en": "Now Playing",
+    "tr": "Şimdi Çalıyor"
+  },
+  "category": "social",
+  "isPro": true,
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "duration": 5.0,
+  "palette": {
+    "background": "#181022",
+    "surface": "#2A1E3A",
+    "accent": "#B69DF8",
+    "track": "#3A2E4C",
+    "textPrimary": "#FFFFFF",
+    "textSecondary": "#B9AECD"
+  },
+  "audio": {
+    "defaultTrackId": "dreamy-01",
+    "volume": 0.9
+  },
+  "layers": [
+    {
+      "id": "bg",
+      "type": "shape",
+      "colorRole": "background",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      }
+    },
+    {
+      "id": "cover",
+      "type": "mediaSlot",
+      "slotIndex": 0,
+      "media": "photoOrVideo",
+      "contentMode": "fill",
+      "mask": "rect",
+      "cornerRadius": 0.025,
+      "frame": {
+        "x": 0.5,
+        "y": 0.38,
+        "width": 0.62,
+        "height": 0.35
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "scaleIn",
+          "duration": 0.6,
+          "easing": "easeOut",
+          "params": {
+            "from": 0.85
+          }
+        },
+        {
+          "role": "loop",
+          "preset": "kenBurns",
+          "duration": 5.0,
+          "params": {
+            "zoom": 1.06,
+            "direction": "up"
+          }
+        }
+      ]
+    },
+    {
+      "id": "now",
+      "type": "text",
+      "key": "now",
+      "default": {
+        "en": "NOW PLAYING",
+        "tr": "ŞİMDİ ÇALIYOR"
+      },
+      "font": {
+        "name": "AvenirNext-Medium",
+        "size": 0.019
+      },
+      "colorRole": "accent",
+      "alignment": "center",
+      "allCaps": true,
+      "letterSpacing": 0.016,
+      "frame": {
+        "x": 0.5,
+        "y": 0.6,
+        "width": 0.8,
+        "height": 0.03
+      },
+      "timing": {
+        "start": 0.5
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.5
+        }
+      ]
+    },
+    {
+      "id": "title",
+      "type": "text",
+      "key": "title",
+      "default": {
+        "en": "Midnight Drive",
+        "tr": "Gece Yolculuğu"
+      },
+      "font": {
+        "name": "AvenirNext-Bold",
+        "size": 0.045
+      },
+      "colorRole": "textPrimary",
+      "alignment": "center",
+      "frame": {
+        "x": 0.5,
+        "y": 0.655,
+        "width": 0.86,
+        "height": 0.07
+      },
+      "timing": {
+        "start": 0.7
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "slideIn",
+          "duration": 0.5,
+          "params": {
+            "direction": "up",
+            "distance": 0.02
+          }
+        }
+      ]
+    },
+    {
+      "id": "artist",
+      "type": "text",
+      "key": "artist",
+      "default": {
+        "en": "The Wanderers",
+        "tr": "Gezginler"
+      },
+      "font": {
+        "name": "AvenirNext-Regular",
+        "size": 0.026
+      },
+      "colorRole": "textSecondary",
+      "alignment": "center",
+      "frame": {
+        "x": 0.5,
+        "y": 0.705,
+        "width": 0.8,
+        "height": 0.05
+      },
+      "timing": {
+        "start": 0.85
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.5
+        }
+      ]
+    },
+    {
+      "id": "track-bg",
+      "type": "shape",
+      "colorRole": "track",
+      "mask": "rect",
+      "cornerRadius": 0.004,
+      "frame": {
+        "x": 0.5,
+        "y": 0.79,
+        "width": 0.76,
+        "height": 0.006
+      },
+      "timing": {
+        "start": 1.0
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.4
+        }
+      ]
+    },
+    {
+      "id": "track-fill",
+      "type": "shape",
+      "colorRole": "accent",
+      "mask": "rect",
+      "cornerRadius": 0.004,
+      "frame": {
+        "x": 0.36,
+        "y": 0.79,
+        "width": 0.46,
+        "height": 0.006
+      },
+      "timing": {
+        "start": 1.1
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "wipeReveal",
+          "duration": 1.2,
+          "easing": "easeInOut",
+          "params": {
+            "direction": "right"
+          }
+        }
+      ]
+    },
+    {
+      "id": "knob",
+      "type": "shape",
+      "colorRole": "textPrimary",
+      "mask": "circle",
+      "frame": {
+        "x": 0.59,
+        "y": 0.79,
+        "width": 0.03,
+        "height": 0.017
+      },
+      "timing": {
+        "start": 1.1
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "wipeReveal",
+          "duration": 1.2,
+          "easing": "easeInOut",
+          "params": {
+            "direction": "right"
+          }
+        }
+      ]
+    },
+    {
+      "id": "time",
+      "type": "text",
+      "key": "time",
+      "default": {
+        "en": "1:42          3:05",
+        "tr": "1:42          3:05"
+      },
+      "font": {
+        "name": "AvenirNext-Medium",
+        "size": 0.018
+      },
+      "colorRole": "textSecondary",
+      "alignment": "center",
+      "letterSpacing": 0.002,
+      "frame": {
+        "x": 0.5,
+        "y": 0.82,
+        "width": 0.78,
+        "height": 0.03
+      },
+      "timing": {
+        "start": 1.4
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.5
+        }
+      ]
+    }
+  ]
+}

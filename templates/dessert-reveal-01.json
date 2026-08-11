@@ -1,0 +1,303 @@
+{
+  "schemaVersion": 2,
+  "id": "dessert-reveal-01",
+  "name": {
+    "en": "Dessert Reveal",
+    "tr": "Tatlı Vitrin"
+  },
+  "category": "food",
+  "isPro": false,
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "palette": {
+    "background": "#F7EDEC",
+    "surface": "#FFFFFF",
+    "accent": "#C98B8B",
+    "textPrimary": "#2B1F1F",
+    "textSecondary": "#8E7676",
+    "textOnAccent": "#FFFFFF",
+    "scrimClear": "#00000000",
+    "scrimSolid": "#000000CC"
+  },
+  "audio": {
+    "defaultTrackId": "sweet-01",
+    "volume": 0.85
+  },
+  "scenes": [
+    {
+      "id": "close",
+      "duration": 3.0,
+      "layers": [
+        {
+          "id": "close-media",
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 1.0,
+            "height": 1.0
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "fadeIn",
+              "duration": 0.5
+            },
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 3.0,
+              "params": {
+                "zoom": 1.22,
+                "direction": "down"
+              }
+            }
+          ],
+          "type": "mediaSlot",
+          "slotIndex": 0,
+          "media": "photoOrVideo",
+          "contentMode": "fill",
+          "mask": "rect",
+          "filter": "warm",
+          "filterIntensity": 0.4
+        },
+        {
+          "id": "close-scrim",
+          "frame": {
+            "x": 0.5,
+            "y": 0.24,
+            "width": 1.0,
+            "height": 0.48
+          },
+          "type": "shape",
+          "colorRole": "scrimClear",
+          "gradient": {
+            "from": "scrimClear",
+            "to": "scrimSolid",
+            "direction": "up"
+          }
+        },
+        {
+          "id": "tease",
+          "frame": {
+            "x": 0.5,
+            "y": 0.2,
+            "width": 0.8,
+            "height": 0.06
+          },
+          "timing": {
+            "start": 0.3
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "fadeIn",
+              "duration": 0.6
+            }
+          ],
+          "type": "text",
+          "key": "tease",
+          "default": {
+            "en": "COMING UP…",
+            "tr": "AZ SONRA…"
+          },
+          "font": {
+            "name": "AvenirNext-DemiBold",
+            "size": 0.034
+          },
+          "colorRole": "textPrimary",
+          "alignment": "center",
+          "letterSpacing": 0.014,
+          "allCaps": true
+        },
+        {
+          "id": "cake",
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 0.165,
+            "height": 0.12
+          },
+          "rotation": -8,
+          "timing": {
+            "start": 0.9
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "pop",
+              "duration": 0.5,
+              "params": {
+                "overshoot": 1.15
+              }
+            }
+          ],
+          "type": "text",
+          "key": "cake",
+          "default": {
+            "en": "🍰",
+            "tr": "🍰"
+          },
+          "font": {
+            "name": "AvenirNext-Bold",
+            "size": 0.075
+          },
+          "colorRole": "textPrimary",
+          "alignment": "center"
+        }
+      ],
+      "transition": {
+        "style": "zoomOut",
+        "duration": 0.5
+      }
+    },
+    {
+      "id": "wide",
+      "duration": 3.4,
+      "layers": [
+        {
+          "id": "wide-media",
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 1.0,
+            "height": 1.0
+          },
+          "animations": [
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 3.4,
+              "params": {
+                "zoom": 1.06,
+                "direction": "up"
+              }
+            }
+          ],
+          "type": "mediaSlot",
+          "slotIndex": 1,
+          "media": "photo",
+          "contentMode": "fill",
+          "mask": "rect",
+          "filter": "vivid",
+          "filterIntensity": 0.35
+        },
+        {
+          "id": "wide-scrim",
+          "frame": {
+            "x": 0.5,
+            "y": 0.76,
+            "width": 1.0,
+            "height": 0.48
+          },
+          "type": "shape",
+          "colorRole": "scrimClear",
+          "gradient": {
+            "from": "scrimClear",
+            "to": "scrimSolid",
+            "direction": "down"
+          }
+        },
+        {
+          "id": "name",
+          "frame": {
+            "x": 0.5,
+            "y": 0.795,
+            "width": 0.86,
+            "height": 0.08
+          },
+          "timing": {
+            "start": 0.35
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "kineticWords",
+              "duration": 0.9,
+              "params": {
+                "distance": 0.02
+              }
+            }
+          ],
+          "type": "text",
+          "key": "name",
+          "default": {
+            "en": "Raspberry Cheesecake",
+            "tr": "Frambuazlı Cheesecake"
+          },
+          "font": {
+            "name": "Georgia-Bold",
+            "size": 0.052
+          },
+          "colorRole": "textPrimary",
+          "alignment": "center"
+        },
+        {
+          "id": "price",
+          "frame": {
+            "x": 0.5,
+            "y": 0.875,
+            "width": 0.7,
+            "height": 0.045
+          },
+          "timing": {
+            "start": 0.65
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "fadeIn",
+              "duration": 0.5
+            }
+          ],
+          "type": "text",
+          "key": "price",
+          "default": {
+            "en": "$16 a slice",
+            "tr": "Dilimi ₺135"
+          },
+          "font": {
+            "name": "AvenirNext-Medium",
+            "size": 0.026
+          },
+          "colorRole": "accent",
+          "alignment": "center"
+        },
+        {
+          "id": "note",
+          "frame": {
+            "x": 0.5,
+            "y": 0.935,
+            "width": 0.7,
+            "height": 0.035
+          },
+          "timing": {
+            "start": 0.95
+          },
+          "animations": [
+            {
+              "role": "in",
+              "preset": "fadeIn",
+              "duration": 0.55
+            }
+          ],
+          "type": "text",
+          "key": "note",
+          "default": {
+            "en": "Baked fresh daily",
+            "tr": "Her gün taze yapılır"
+          },
+          "font": {
+            "name": "AvenirNext-Regular",
+            "size": 0.019
+          },
+          "colorRole": "textSecondary",
+          "alignment": "center"
+        }
+      ]
+    }
+  ],
+  "layers": []
+}

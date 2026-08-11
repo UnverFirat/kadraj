@@ -1,0 +1,226 @@
+{
+  "schemaVersion": 1,
+  "id": "vlog-intro-01",
+  "name": {
+    "en": "Cinematic Intro",
+    "tr": "Sinematik Açılış"
+  },
+  "category": "travel",
+  "isPro": false,
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "duration": 5.0,
+  "palette": {
+    "background": "#000000",
+    "surface": "#1A1A1A",
+    "accent": "#E8C37E",
+    "textPrimary": "#FFFFFF",
+    "textSecondary": "#D8D8D8"
+  },
+  "audio": {
+    "defaultTrackId": "cinematic-01",
+    "volume": 0.8
+  },
+  "layers": [
+    {
+      "id": "photo",
+      "type": "mediaSlot",
+      "slotIndex": 0,
+      "media": "photoOrVideo",
+      "contentMode": "fill",
+      "mask": "rect",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.8
+        },
+        {
+          "role": "loop",
+          "preset": "kenBurns",
+          "duration": 5.0,
+          "params": {
+            "zoom": 1.16,
+            "direction": "up"
+          }
+        }
+      ],
+      "filter": "cinematic",
+      "filterIntensity": 0.85
+    },
+    {
+      "id": "scrim",
+      "type": "shape",
+      "colorRole": "background",
+      "opacity": 0.4,
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.8
+        }
+      ]
+    },
+    {
+      "id": "kicker",
+      "type": "text",
+      "key": "kicker",
+      "default": {
+        "en": "A FILM BY",
+        "tr": "BİR FİLM"
+      },
+      "font": {
+        "name": "AvenirNext-Medium",
+        "size": 0.019
+      },
+      "colorRole": "accent",
+      "alignment": "center",
+      "allCaps": true,
+      "letterSpacing": 0.012,
+      "frame": {
+        "x": 0.5,
+        "y": 0.42,
+        "width": 0.8,
+        "height": 0.04
+      },
+      "timing": {
+        "start": 0.7
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.5
+        },
+        {
+          "role": "out",
+          "preset": "fadeOut",
+          "duration": 0.4
+        }
+      ]
+    },
+    {
+      "id": "title",
+      "type": "text",
+      "key": "title",
+      "default": {
+        "en": "WANDERLUST",
+        "tr": "SEYAHAT"
+      },
+      "font": {
+        "name": "AvenirNext-Bold",
+        "size": 0.058
+      },
+      "colorRole": "textPrimary",
+      "alignment": "center",
+      "allCaps": true,
+      "letterSpacing": 0.004,
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 0.9,
+        "height": 0.14
+      },
+      "timing": {
+        "start": 0.9
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "scaleIn",
+          "duration": 0.9,
+          "easing": "easeOut",
+          "params": {
+            "from": 1.15
+          }
+        },
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.7
+        },
+        {
+          "role": "out",
+          "preset": "fadeOut",
+          "duration": 0.4
+        }
+      ]
+    },
+    {
+      "id": "bar",
+      "type": "shape",
+      "colorRole": "accent",
+      "frame": {
+        "x": 0.5,
+        "y": 0.575,
+        "width": 0.09,
+        "height": 0.004
+      },
+      "timing": {
+        "start": 1.4
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "wipeReveal",
+          "duration": 0.5,
+          "easing": "easeInOut",
+          "params": {
+            "direction": "right"
+          }
+        }
+      ]
+    },
+    {
+      "id": "location",
+      "type": "text",
+      "key": "location",
+      "default": {
+        "en": "İSTANBUL · 2026",
+        "tr": "İSTANBUL · 2026"
+      },
+      "font": {
+        "name": "AvenirNext-Medium",
+        "size": 0.02
+      },
+      "colorRole": "textSecondary",
+      "alignment": "center",
+      "letterSpacing": 0.008,
+      "frame": {
+        "x": 0.5,
+        "y": 0.61,
+        "width": 0.8,
+        "height": 0.04
+      },
+      "timing": {
+        "start": 1.6
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.6
+        }
+      ]
+    }
+  ],
+  "overlay": {
+    "vignette": 0.55,
+    "grain": 0.35
+  }
+}

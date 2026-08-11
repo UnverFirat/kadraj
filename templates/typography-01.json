@@ -1,0 +1,215 @@
+{
+  "schemaVersion": 1,
+  "id": "typography-01",
+  "name": {
+    "en": "Kinetic Title",
+    "tr": "Kinetik Başlık"
+  },
+  "category": "social",
+  "isPro": true,
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "duration": 4.5,
+  "palette": {
+    "background": "#101014",
+    "surface": "#1C1C22",
+    "accent": "#FFD84D",
+    "textPrimary": "#FFFFFF",
+    "textSecondary": "#9A9AA6"
+  },
+  "audio": {
+    "defaultTrackId": "punchy-01",
+    "volume": 0.95
+  },
+  "layers": [
+    {
+      "id": "photo",
+      "type": "mediaSlot",
+      "slotIndex": 0,
+      "media": "photoOrVideo",
+      "contentMode": "fill",
+      "mask": "rect",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.5
+        },
+        {
+          "role": "loop",
+          "preset": "kenBurns",
+          "duration": 4.5,
+          "params": {
+            "zoom": 1.15,
+            "direction": "left"
+          }
+        }
+      ]
+    },
+    {
+      "id": "scrim",
+      "type": "shape",
+      "colorRole": "background",
+      "opacity": 0.5,
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      }
+    },
+    {
+      "id": "word1",
+      "type": "text",
+      "key": "word1",
+      "default": {
+        "en": "MAKE",
+        "tr": "YENİ"
+      },
+      "font": {
+        "name": "AvenirNext-Heavy",
+        "size": 0.09
+      },
+      "colorRole": "textPrimary",
+      "alignment": "center",
+      "allCaps": true,
+      "letterSpacing": 0.002,
+      "frame": {
+        "x": 0.5,
+        "y": 0.4,
+        "width": 0.9,
+        "height": 0.12
+      },
+      "timing": {
+        "start": 0.3
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "slideIn",
+          "duration": 0.45,
+          "easing": "easeOut",
+          "params": {
+            "direction": "left",
+            "distance": 0.12
+          }
+        }
+      ]
+    },
+    {
+      "id": "word2",
+      "type": "text",
+      "key": "word2",
+      "default": {
+        "en": "IT",
+        "tr": "BİR"
+      },
+      "font": {
+        "name": "AvenirNext-Heavy",
+        "size": 0.09
+      },
+      "colorRole": "textPrimary",
+      "alignment": "center",
+      "allCaps": true,
+      "letterSpacing": 0.002,
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 0.9,
+        "height": 0.12
+      },
+      "timing": {
+        "start": 0.55
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "slideIn",
+          "duration": 0.45,
+          "easing": "easeOut",
+          "params": {
+            "direction": "right",
+            "distance": 0.12
+          }
+        }
+      ]
+    },
+    {
+      "id": "word3",
+      "type": "text",
+      "key": "word3",
+      "default": {
+        "en": "COUNT",
+        "tr": "GÜN"
+      },
+      "font": {
+        "name": "AvenirNext-Heavy",
+        "size": 0.09
+      },
+      "colorRole": "accent",
+      "alignment": "center",
+      "allCaps": true,
+      "letterSpacing": 0.002,
+      "frame": {
+        "x": 0.5,
+        "y": 0.6,
+        "width": 0.9,
+        "height": 0.12
+      },
+      "timing": {
+        "start": 0.8
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "pop",
+          "duration": 0.5,
+          "params": {
+            "overshoot": 1.12
+          }
+        }
+      ]
+    },
+    {
+      "id": "sub",
+      "type": "text",
+      "key": "sub",
+      "default": {
+        "en": "every single day",
+        "tr": "her yeni gün"
+      },
+      "font": {
+        "name": "AvenirNext-Medium",
+        "size": 0.022
+      },
+      "colorRole": "textSecondary",
+      "alignment": "center",
+      "letterSpacing": 0.008,
+      "frame": {
+        "x": 0.5,
+        "y": 0.7,
+        "width": 0.8,
+        "height": 0.04
+      },
+      "timing": {
+        "start": 1.3
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.6
+        }
+      ]
+    }
+  ]
+}

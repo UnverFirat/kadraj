@@ -1,0 +1,310 @@
+{
+  "schemaVersion": 1,
+  "id": "sale-rack-01",
+  "name": {
+    "en": "Sale Rack",
+    "tr": "İndirim Reyonu"
+  },
+  "category": "fashion",
+  "isPro": false,
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "duration": 6.0,
+  "palette": {
+    "background": "#12140A",
+    "surface": "#FFFFFF",
+    "accent": "#D8F135",
+    "textPrimary": "#FBFFE6",
+    "textSecondary": "#BDC79A",
+    "textOnAccent": "#12140A",
+    "scrimClear": "#00000000",
+    "scrimSolid": "#000000CC"
+  },
+  "audio": {
+    "defaultTrackId": "energetic-01",
+    "volume": 0.85
+  },
+  "layers": [
+    {
+      "id": "bg",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "type": "shape",
+      "colorRole": "background"
+    },
+    {
+      "id": "photo",
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.4
+        },
+        {
+          "role": "loop",
+          "preset": "kenBurns",
+          "duration": 6.0,
+          "params": {
+            "zoom": 1.14,
+            "direction": "left"
+          }
+        }
+      ],
+      "type": "mediaSlot",
+      "slotIndex": 0,
+      "media": "photoOrVideo",
+      "contentMode": "fill",
+      "mask": "rect",
+      "filter": "vivid",
+      "filterIntensity": 0.55
+    },
+    {
+      "id": "scrim-top",
+      "frame": {
+        "x": 0.5,
+        "y": 0.18,
+        "width": 1.0,
+        "height": 0.36
+      },
+      "type": "shape",
+      "colorRole": "scrimClear",
+      "gradient": {
+        "from": "scrimClear",
+        "to": "scrimSolid",
+        "direction": "up"
+      }
+    },
+    {
+      "id": "scrim",
+      "frame": {
+        "x": 0.5,
+        "y": 0.74,
+        "width": 1.0,
+        "height": 0.52
+      },
+      "type": "shape",
+      "colorRole": "scrimClear",
+      "gradient": {
+        "from": "scrimClear",
+        "to": "scrimSolid",
+        "direction": "down"
+      }
+    },
+    {
+      "id": "kicker",
+      "frame": {
+        "x": 0.5,
+        "y": 0.26,
+        "width": 0.82,
+        "height": 0.045
+      },
+      "timing": {
+        "start": 0.25
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "slideIn",
+          "duration": 0.5,
+          "easing": "easeOut",
+          "params": {
+            "direction": "down",
+            "distance": 0.04
+          }
+        }
+      ],
+      "type": "text",
+      "key": "kicker",
+      "default": {
+        "en": "END OF SEASON",
+        "tr": "SEZON SONU"
+      },
+      "font": {
+        "name": "AvenirNext-DemiBold",
+        "size": 0.028
+      },
+      "colorRole": "accent",
+      "alignment": "center",
+      "letterSpacing": 0.02,
+      "allCaps": true
+    },
+    {
+      "id": "percent",
+      "frame": {
+        "x": 0.5,
+        "y": 0.42,
+        "width": 0.92,
+        "height": 0.24
+      },
+      "rotation": -8,
+      "timing": {
+        "start": 0.4
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "pop",
+          "duration": 0.6,
+          "params": {
+            "overshoot": 1.12
+          }
+        },
+        {
+          "role": "loop",
+          "preset": "floatLoop",
+          "duration": 2.6,
+          "params": {
+            "distance": 0.006,
+            "axis": "y"
+          }
+        }
+      ],
+      "type": "text",
+      "key": "percent",
+      "default": {
+        "en": "50%",
+        "tr": "%50"
+      },
+      "font": {
+        "name": "AvenirNext-Heavy",
+        "size": 0.168
+      },
+      "colorRole": "textPrimary",
+      "alignment": "center"
+    },
+    {
+      "id": "band",
+      "frame": {
+        "x": 0.5,
+        "y": 0.68,
+        "width": 1.0,
+        "height": 0.1
+      },
+      "timing": {
+        "start": 0.7
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "wipeReveal",
+          "duration": 0.55,
+          "easing": "easeOut",
+          "params": {
+            "direction": "right"
+          }
+        }
+      ],
+      "type": "shape",
+      "colorRole": "accent"
+    },
+    {
+      "id": "band-text",
+      "frame": {
+        "x": 0.5,
+        "y": 0.68,
+        "width": 0.92,
+        "height": 0.07
+      },
+      "timing": {
+        "start": 0.9
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.4
+        }
+      ],
+      "type": "text",
+      "key": "bandText",
+      "default": {
+        "en": "ALL SUMMER STYLES",
+        "tr": "TÜM YAZLIKLAR"
+      },
+      "font": {
+        "name": "AvenirNext-Heavy",
+        "size": 0.042
+      },
+      "colorRole": "textOnAccent",
+      "alignment": "center",
+      "letterSpacing": 0.01,
+      "allCaps": true
+    },
+    {
+      "id": "note",
+      "frame": {
+        "x": 0.5,
+        "y": 0.8,
+        "width": 0.9,
+        "height": 0.04
+      },
+      "timing": {
+        "start": 1.05
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.6
+        }
+      ],
+      "type": "text",
+      "key": "note",
+      "default": {
+        "en": "Until August 31 · In store and online",
+        "tr": "31 Ağustos'a kadar · Mağazada ve online"
+      },
+      "font": {
+        "name": "AvenirNext-Medium",
+        "size": 0.021
+      },
+      "colorRole": "textSecondary",
+      "alignment": "center"
+    },
+    {
+      "id": "handle",
+      "frame": {
+        "x": 0.5,
+        "y": 0.89,
+        "width": 0.7,
+        "height": 0.035
+      },
+      "timing": {
+        "start": 1.15
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.6
+        }
+      ],
+      "type": "text",
+      "key": "handle",
+      "default": {
+        "en": "@yourbrand",
+        "tr": "@markaniz"
+      },
+      "font": {
+        "name": "AvenirNext-Regular",
+        "size": 0.02
+      },
+      "colorRole": "textSecondary",
+      "alignment": "center",
+      "letterSpacing": 0.006
+    }
+  ]
+}
