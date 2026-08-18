@@ -6,8 +6,14 @@
 	     ihracat beyanı muaf. Bu anahtar olmadan her yüklemede sorulur. -->
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
+	<!-- Geliştirme bölgesi = YEDEK dil. iOS, cihazın dili pakette yoksa
+	     (Almanca, Fransızca, Japonca…) buraya düşer. `tr` iken global
+	     kullanıcı tamamen Türkçe bir uygulama görüyordu — simulator'da
+	     -AppleLanguages "(de)" ile doğrulandı. `en` yedek dil olarak
+	     doğru olan; Türkçe cihazlar tr.lproj'u eşleşmeyle almaya devam
+	     eder. Kaynak dil (xcstrings sourceLanguage) ayrı bir şey, tr kalır. -->
 	<key>CFBundleDevelopmentRegion</key>
-	<string>tr</string>
+	<string>en</string>
 	<key>CFBundleDisplayName</key>
 	<string>Kadraj</string>
 	<key>CFBundleExecutable</key>
