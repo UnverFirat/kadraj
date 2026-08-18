@@ -27,19 +27,30 @@ enum Legal {
     /// standart EULA'sına da bağlanıyor, App Store Connect'te "standart EULA"
     /// seçili kalabilir. Guideline 3.1.2 satın alma ekranında bu bağlantıyı
     /// arıyor.
-    static let termsURL = URL(string:
-        "https://unverfirat.github.io/kadraj/kosullar.html")!
+    static let termsURL = page("kosullar.html")
 
     /// Gizlilik politikası — kaynağı `docs/gizlilik.html`, GitHub Pages'ten
     /// yayınlanıyor. App Store Connect bu URL'i ayrı bir alan olarak da istiyor
     /// ve erişilemezse uygulama reddediliyor.
     /// (Kendi alan adı alınırsa üç URL birlikte değişir.)
-    static let privacyPolicyURL = URL(string:
-        "https://unverfirat.github.io/kadraj/gizlilik.html")!
+    static let privacyPolicyURL = page("gizlilik.html")
 
     /// Destek sayfası — kaynağı `docs/destek.html`.
-    static let supportURL = URL(string:
-        "https://unverfirat.github.io/kadraj/destek.html")!
+    static let supportURL = page("destek.html")
+
+
+    /// Yasal sayfalar TEK dosyada iki dilli: önce Türkçe, `<hr id="english">`
+    /// ayracından sonra İngilizce. İki ayrı dosya tutmuyoruz — hukuk metni
+    /// çoğaltmak, zamanla iki sürümün ayrışması demek; App Store'a verilen
+    /// gizlilik URL'i de tek kalsın.
+    ///
+    /// Türkçe olmayan cihazda `#english` çapasıyla açılır, yani kullanıcı
+    /// Türkçe metni kaydırmak zorunda kalmaz. ASC'ye verilen URL çapasız
+    /// halidir (her dilden okunabilir olmalı).
+    private static func page(_ file: String) -> URL {
+        let base = "https://unverfirat.github.io/kadraj/" + file
+        return URL(string: AppLanguage.isTurkish ? base : base + "#english")!
+    }
 
     /// Aboneliğini yöneten/iptal eden kullanıcı için sistem sayfası.
     static let manageSubscriptionsURL = URL(string:

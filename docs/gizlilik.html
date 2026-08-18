@@ -23,11 +23,14 @@
   .lead { background:rgba(232,54,93,0.08); border-left:3px solid var(--accent);
           padding:14px 16px; border-radius:0 8px 8px 0; }
   .back { display:inline-block; margin-bottom:24px; color:var(--muted); text-decoration:none; }
+  .lang { display:inline-block; margin:0 0 24px 12px; font-size:0.94rem; }
+  .lang a { text-decoration:none; }
 </style>
 </head>
 <body>
-<div class="wrap">
+<div class="wrap" id="top">
 <a class="back" href="./">← Kadraj</a>
+<span class="lang"><a href="#english">English ↓</a></span>
 
 <h1>Gizlilik Politikası</h1>
 <p class="date">Son güncelleme: 11 Ağustos 2026</p>
@@ -88,9 +91,11 @@ bulunmuyor. Uygulamayı silmen cihazdaki tüm proje ve videolarını kaldırır.
 <h2>10. İletişim</h2>
 <p>Sorular için: <a href="mailto:destek@kadraj.app">destek@kadraj.app</a></p>
 
-<hr>
+<hr id="english">
+<section lang="en">
 
 <h1>Privacy Policy</h1>
+<p class="date"><a href="#top">↑ Türkçe</a></p>
 <p class="date">Last updated: 11 August 2026</p>
 
 <p class="lead"><strong>Short answer: Kadraj collects no personal data.</strong> No account
@@ -148,6 +153,7 @@ Deleting the app removes all projects and videos from your device.</p>
 <h2>10. Contact</h2>
 <p>Questions: <a href="mailto:destek@kadraj.app">destek@kadraj.app</a></p>
 
+</section>
 </div>
 </body>
 </html>

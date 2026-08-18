@@ -755,7 +755,8 @@ Yayın öncesi KALAN (kod dışı ya da cihaz/hesap gerektiren):
       öneki. Kodda uygulandı; ASC'de uygulama oluşturulduktan sonra değişmez.
 - [x] **İkon** — 1024×1024 commit'li (hikâye kartı destesi + oynat üçgeni).
       Markaya özel bir işaret istenirse yeniden tasarlanabilir, eksik değil.
-- [ ] **Gizlilik politikası + destek sayfası** yayınlanacak. Sayfalar yazıldı
+- [ ] **Gizlilik politikası + destek sayfası** yayınlanacak (sayfalar iki dilli:
+      Türkçe, sonra `#english` çapasından İngilizce tam metin). Sayfalar yazıldı
       ve commit'li (`docs/{gizlilik,kosullar,destek}.html`), `Legal.swift` de
       onları gösteriyor — ama **GitHub Pages ayarı açık değil**: 2026-08-16'da
       üç adres de 404 döndü. Depo ayarlarından Source: `main` / `/docs`.

@@ -22,11 +22,14 @@
   .lead { background:rgba(232,54,93,0.08); border-left:3px solid var(--accent);
           padding:14px 16px; border-radius:0 8px 8px 0; }
   .back { display:inline-block; margin-bottom:24px; color:var(--muted); text-decoration:none; }
+  .lang { display:inline-block; margin:0 0 24px 12px; font-size:0.94rem; }
+  .lang a { text-decoration:none; }
 </style>
 </head>
 <body>
-<div class="wrap">
+<div class="wrap" id="top">
 <a class="back" href="./">← Kadraj</a>
+<span class="lang"><a href="#english">English ↓</a></span>
 
 <h1>Destek</h1>
 <p class="lead">Sorun, öneri veya hata bildirimi için:
@@ -69,9 +72,11 @@ cihaz modeli + iOS sürümü + şablon adıyla bize yaz.</p>
 <p class="q">Uygulama hangi dillerde?</p>
 <p>Türkçe ve İngilizce. Uygulama cihazının diline göre otomatik açılır.</p>
 
-<hr>
+<hr id="english">
+<section lang="en">
 
 <h1>Support</h1>
+<p class="date"><a href="#top">↑ Türkçe</a></p>
 <p class="lead">Questions, feedback or bug reports:
 <a href="mailto:destek@kadraj.app">destek@kadraj.app</a><br>
 We usually reply within 2 business days. For bugs, please include your device model, iOS
@@ -111,6 +116,7 @@ with your device model, iOS version and the template name.</p>
 <p class="q">Which languages are supported?</p>
 <p>Turkish and English, selected automatically from your device language.</p>
 
+</section>
 </div>
 </body>
 </html>

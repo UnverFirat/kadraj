@@ -22,11 +22,14 @@
   .lead { background:rgba(232,54,93,0.08); border-left:3px solid var(--accent);
           padding:14px 16px; border-radius:0 8px 8px 0; }
   .back { display:inline-block; margin-bottom:24px; color:var(--muted); text-decoration:none; }
+  .lang { display:inline-block; margin:0 0 24px 12px; font-size:0.94rem; }
+  .lang a { text-decoration:none; }
 </style>
 </head>
 <body>
-<div class="wrap">
+<div class="wrap" id="top">
 <a class="back" href="./">← Kadraj</a>
+<span class="lang"><a href="#english">English ↓</a></span>
 
 <h1>Kullanım Koşulları</h1>
 <p class="date">Son güncelleme: 11 Ağustos 2026</p>
@@ -87,9 +90,11 @@ kullanıcının sorumluluğundadır.</p>
 <h2>8. İletişim</h2>
 <p><a href="mailto:destek@kadraj.app">destek@kadraj.app</a></p>
 
-<hr>
+<hr id="english">
+<section lang="en">
 
 <h1>Terms of Use</h1>
+<p class="date"><a href="#top">↑ Türkçe</a></p>
 <p class="date">Last updated: 11 August 2026</p>
 
 <p class="lead">By downloading and using Kadraj you agree to these terms. The app is also
@@ -146,6 +151,7 @@ responsibility.</p>
 <h2>8. Contact</h2>
 <p><a href="mailto:destek@kadraj.app">destek@kadraj.app</a></p>
 
+</section>
 </div>
 </body>
 </html>

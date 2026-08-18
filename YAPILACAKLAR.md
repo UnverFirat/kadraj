@@ -18,6 +18,38 @@ tarafı. Üçü de **Bitti** bölümlerinde; kalanlar aşağıda.
 
 ---
 
+## 0. Dil / global hazırlık — 2026-08-19
+
+Uygulama iki dilli ve **İngilizce tarafı eksiksiz**: arayüz 239/239 anahtar,
+şablon içeriği 873/873 alan, 21/21 müzik parçası, iki dilde ayrı poster ve
+önizleme seti, `MAGAZA.md`'de İngilizce mağaza metni.
+
+Bu turda düzeltilen iki şey:
+
+1. **Yedek dil hatası (ciddiydi).** `CFBundleDevelopmentRegion` `tr` olduğu
+   için cihazın dili pakette yoksa iOS Türkçe'ye düşüyordu — Almanca,
+   Fransızca, Japonca bir kullanıcı uygulamayı BAŞTAN SONA Türkçe görüyordu
+   (simulator'da `-AppleLanguages "(de)"` ile doğrulandı). `en` yapıldı;
+   Türkçe cihazlar eşleşmeyle tr'yi almaya devam ediyor, regresyon yok.
+2. **İngilizce demoda Türkçe sızıntısı.** ₺ fiyatlar, Türk isimleri ve yer
+   adları İngilizce posterlerde görünüyordu; 73 alan temizlendi (Türkçe taraf
+   hiç değişmedi). Kalıcı ders: düzenli ifade taraması YETMİYOR — Türkçe
+   harfleri silinmiş ("Sapanca · Golkoy") ya da küçük harfli ("@mertkaya.music")
+   olanlar ancak 127 posterin tamamına gözle bakınca çıktı.
+
+Yasal sayfalar hakkında bir DÜZELTME: "yalnız Türkçe" sanılıyordu, değil —
+`docs/{gizlilik,kosullar,destek}.html` üçü de TEK dosyada iki dilli (Türkçe,
+sonra `<hr id="english">`, sonra İngilizce tam metin). Kopya `docs/en/`
+açılmadı: hukuk metnini çoğaltmak iki sürümün zamanla ayrışması demek.
+Bunun yerine üstte "English ↓" bağlantısı ve `#english` çapası eklendi;
+`Legal.swift` Türkçe olmayan cihazda URL'i çapayla açıyor.
+
+**Kalan dil işi yok.** (Üçüncü bir dil eklenecekse: `Localizable.xcstrings`'e
+dil eklemek + şablonlardaki `LocalizedText`lere anahtar eklemek + o dil için
+poster/önizleme üretmek gerekir — üçü birden.)
+
+---
+
 ## 1. Katalog ritmi — BİTTİ (borç 9, hepsi tasarım kararı)
 
 | Ölçüt | Önce | Şimdi |
