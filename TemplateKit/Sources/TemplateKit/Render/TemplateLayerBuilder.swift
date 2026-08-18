@@ -64,7 +64,12 @@ public enum TemplateLayerBuilder {
             videoSlotLayer = montageLayer
         }
 
-        for layer in template.flattenedLayersForRender(edits: edits) {
+        let renderLayers = template.flattenedLayersForRender(edits: edits)
+        let scrimTargets = legibilityScrimTargets(template: template, edits: edits,
+                                                  renderLayers: renderLayers,
+                                                  context: context)
+
+        for layer in renderLayers {
             let window = layer.timing.window(templateDuration: context.duration)
             let frameRect = context.rect(layer.frame)
 
@@ -125,7 +130,9 @@ public enum TemplateLayerBuilder {
 
             case .text(let text):
                 let resolved = configureText(text, on: content, layer: layer, edits: edits,
-                                             context: context, warnings: &warnings)
+                                             context: context,
+                                             needsScrim: scrimTargets.contains(layer.id),
+                                             warnings: &warnings)
                 resolvedTexts[layer.id] = resolved
 
             case .lottie(let lottie):
@@ -262,6 +269,212 @@ public enum TemplateLayerBuilder {
         }
     }
 
+    // MARK: - Okunabilirlik (metin / kullanıcı medyası)
+
+    /// Hangi metin katmanları okunabilirlik hapı alır? Ağaç kurmadan
+    /// cevaplanabilsin diye ayrı: kararın kendisi PİKSELE bakmadan
+    /// doğrulanabilir olmalı — bu sezgisel yanlış pozitif ürettiğinde
+    /// (`spa-calm-01`, `makeup-look-01`) poster üretilene kadar fark
+    /// edilmemişti; artık testler katman adlarını doğrudan kilitliyor.
+    static func legibilityScrimTargets(template: Template,
+                                       edits: UserEdits,
+                                       renderLayers: [Layer]? = nil,
+                                       context: RenderContext) -> Set<String> {
+        textsOverMedia(in: renderLayers ?? template.flattenedLayersForRender(edits: edits),
+                       mediaRegions: template.prerenderedMediaRegions(),
+                       mode: template.legibility,
+                       edits: edits,
+                       context: context)
+    }
+
+    /// Altında KULLANICI MEDYASI kalan metin katmanlarının id'leri.
+    ///
+    /// SORUN: şablonun tipografisi tasarlanırken zemin bilinir (palet), ama
+    /// medya slotunun üstündeki metnin zemini kullanıcının fotoğrafıdır ve
+    /// önceden bilinemez. Ölçülen bir export'ta beyaz "YAZ İNDİRİMİ" başlığı
+    /// açık renkli bir fotoğrafın üstüne düşüp tamamen okunmaz oldu.
+    ///
+    /// ÇÖZÜM filigranınkiyle AYNI (bkz. `TemplateExporter.makeWatermarkLayer`
+    /// üstündeki gerekçe): palet tahmini ya da fotoğraf analizi DEĞİL —
+    /// yazının arkasına satır bazlı koyu yarı saydam hap + tam opak yazı.
+    /// Fotoğrafı örneklemek (ortalama parlaklık ölç, ona göre renk seç) hem
+    /// video karesi başına değişir hem de "ortalama açık" bir karede koyu bir
+    /// leke üstüne düşen yazıyı kurtarmaz; sabit hap her karede bir kontrast
+    /// TABANI garanti eder.
+    ///
+    /// NEDEN HERKESE DEĞİL: düz renk ya da gradyan zemin üstündeki metin
+    /// (tipografi şablonlarının tamamı) zaten paletle birlikte tasarlanmış ve
+    /// kontrastlı; oraya hap koymak tasarımı bozar. **Yanlış hap, kaçırılan
+    /// haptan çok daha pahalı** — tasarımı bozar ve metni okunmaz yapar; bu
+    /// yüzden her eşik "şüphe varsa hap KOYMA" yönünde ayarlıdır.
+    ///
+    /// Metnin ALTINDA ne olduğu ŞABLONUN KATMAN SIRASINDAN çıkarılır: en altta
+    /// medyanın kapladığı ORAN, sonra çizim sırasıyla yürüyüp "zemin ne kadar
+    /// garanti" durumu taşınır.
+    ///   - Medya kapsaması `Template.mediaRegions()`'dan gelir — SLOTLARIN
+    ///     KADRAJINDAN, "montaj tabanı tüm kanvası kaplıyor"dan DEĞİL. Taban
+    ///     video tüm kanvası doldurur ama slot dışında sahne arka plan rengi
+    ///     vardır (`spa-calm-01`: medya üst %56, alt yarı krem zemin; eskiden
+    ///     alttaki üç metin de haplanıyordu).
+    ///   - Kapsama, metin kutusunun ALANINA ORANLA ölçülür ve `mediaCoverageFloor`
+    ///     eşiğini geçmelidir. "Sıfırdan büyük kesişim" ölçütü yanlıştı:
+    ///     `makeup-look-01`'de sol etiketler portre slotuna 2,8e-17 birim
+    ///     değiyordu (0,115+0,105 ile 0,5−0,28 ikili tabanda aynı sayı değil) —
+    ///     kıl payı bir kayan nokta artığı yüzünden hap alıyorlardı, sağdaki
+    ///     simetrikleri tam 0,0 çıktığı için almıyordu. Poster bu yüzden sol/sağ
+    ///     asimetrik görünüyordu. Kutunun yarısından azını örten medya zaten
+    ///     harflerin altına düşmüyor olabilir (metin kutunun içinde hizalanır ve
+    ///     auto-shrink ile küçülür); oraya satır boyu hap koymak tasarımı boşuna
+    ///     bozar.
+    ///   - Metni tümüyle örten TAM OPAK bir şekil (kart, hap, bant) zemini
+    ///     yeniden BİLİNİR yapar → hap yok (kontrast artık şablon yazarının
+    ///     kararı, motorun değil).
+    ///   - Yarı saydam koyu scrim'ler (#000000CC) tek başına zemini bilinir
+    ///     yapmaz ama medyayı KARARTIR. Yeterince karartıyorsa hap gereksizdir:
+    ///     alfa a'lık siyah bir örtü en kötü durumu (bembeyaz kare) 1−a
+    ///     parlaklığına indirir; beyaz yazının 3:1 kontrastı (büyük/kalın
+    ///     tipografi için WCAG eşiği) için 1,05/(L+0,05) ≥ 3 → L ≤ 0,3 → a ≥ 0,7
+    ///     gerekir. Bu yüzden birikmiş örtü alfası 0,7'yi geçen metinlere
+    ///     dokunulmaz (`sale-promo-01`'de alt kenardaki `@markanız` böyle
+    ///     kurtulur, kadrajın ortasındaki başlık kurtulmaz).
+    private static func textsOverMedia(in layers: [Layer],
+                                       mediaRegions: [MediaRegion],
+                                       mode: TextLegibility,
+                                       edits: UserEdits,
+                                       context: RenderContext) -> Set<String> {
+        guard mode != .off else { return [] }
+        var result: Set<String> = []
+
+        for (index, layer) in layers.enumerated() {
+            guard case .text(let text) = layer.content else { continue }
+            // Şablon zaten satır vurgusu koyuyorsa zemin bilinir renktedir.
+            guard text.highlightColorRole == nil else { continue }
+            guard !isSticker(edits.textOverrides[layer.id] ?? text.default.resolved()) else {
+                continue
+            }
+            if mode == .always {
+                result.insert(layer.id)
+                continue
+            }
+
+            let window = layer.timing.window(templateDuration: context.duration)
+            let area = max(layer.frame.width * layer.frame.height, 1e-9)
+            let wantsDarkBacking = resolvedTextColor(text, layer: layer, edits: edits,
+                                                     context: context).isLight
+
+            // En altta: metin kutusunun ne kadarı kullanıcı medyasının üstünde?
+            // (Montajda medya slotları düzleştirilmiş listede yoktur, taban
+            // video en alt katmandır — bu yüzden başlangıç durumu.)
+            var coverage = mediaRegions.reduce(0.0) { total, region in
+                guard region.start < window.end, window.start < region.end else { return total }
+                return total + region.frame.intersectionArea(layer.frame) / area
+            }
+            // Metnin altında biriken YARI SAYDAM örtünün toplam alfası.
+            var veil = 0.0
+
+            for below in layers[0..<index] {
+                let other = below.timing.window(templateDuration: context.duration)
+                switch below.content {
+                case .mediaSlot:
+                    guard other.start < window.end, window.start < other.end else { continue }
+                    let ratio = below.frame.intersectionArea(layer.frame) / area
+                    guard ratio > 0 else { continue }
+                    coverage += ratio
+                    veil = 0                      // medya birikeni siler
+                case .shape(let shape):
+                    // Metin, şeklin bir an bile dışında kalıyorsa zemin garanti değil.
+                    guard other.start <= window.start, other.end >= window.end,
+                          below.rotation == layer.rotation,
+                          below.frame.contains(layer.frame, tolerance: 0.005) else { continue }
+                    let alpha = coveringAlpha(below, shape: shape, under: layer,
+                                              darkening: wantsDarkBacking, context: context)
+                    if alpha >= 0.99 {
+                        coverage = 0              // zemin yeniden bilinir
+                        veil = 0
+                    } else {
+                        // Üst üste binen saydam örtüler: 1 − Π(1 − aᵢ).
+                        veil = 1 - (1 - veil) * (1 - alpha)
+                    }
+                default:
+                    continue
+                }
+            }
+            if coverage >= mediaCoverageFloor && veil < 0.7 { result.insert(layer.id) }
+        }
+        return result
+    }
+
+    /// Metin kutusunun en az bu kadarı medyanın üstünde olmalı ki hap konsun.
+    ///
+    /// 0,85 — yani "neredeyse tamamen medyanın üstünde". Daha gevşek bir eşik
+    /// SINIRDA duran metinleri keyfî biçimde ayırıyor: `valentines-01`'de
+    /// portrenin sağ ve sol kenarına simetrik oturan dört kalp sticker'ından
+    /// biri 0,60, öbürü 0,55 kapsama çıkıyor — 0,6 eşiğinde ikisinden YALNIZ
+    /// BİRİ hap alıyor ve simetrik tasarım gözle görülür biçimde bozuluyor.
+    /// Kutunun kenarından taşan metin zaten çoğunlukla bilinen zeminde okunur;
+    /// yanlış hap, kaçırılan haptan pahalıdır.
+    static let mediaCoverageFloor = 0.85
+
+    /// Harf ya da rakam taşımayan metin (❤️ ✨ 🎉 gibi emoji sticker'lar) hap
+    /// ALMAZ: emoji kendi rengini ve konturunu taşır, arkasına kutu koymak
+    /// sticker'ı kadraja yapıştırılmış bir etikete çevirir. Şablonlar emoji'yi
+    /// ayrı bir katman tipi olarak değil `text` olarak taşıdığı için
+    /// (bkz. template-format.md) ayrımı burada yapmak zorundayız.
+    private static func isSticker(_ string: String) -> Bool {
+        !string.contains { $0.isLetter || $0.isNumber }
+    }
+
+    /// Şeklin, metnin bulunduğu yerdeki EN KÖTÜ (en saydam) kapatma alfası.
+    /// Doğru tonda değilse 0: açık yazının altındaki açık renkli saydam örtü
+    /// okunabilirliği artırmaz, azaltır.
+    private static func coveringAlpha(_ layer: Layer,
+                                      shape: ShapeContent,
+                                      under label: Layer,
+                                      darkening: Bool,
+                                      context: RenderContext) -> Double {
+        func alpha(of role: String) -> Double {
+            guard let color = context.palette[role] else { return 0 }
+            if color.alpha >= 0.99 { return Double(layer.opacity) }
+            let luminance = 0.2126 * color.red + 0.7152 * color.green + 0.0722 * color.blue
+            guard darkening ? luminance <= 0.25 : luminance >= 0.75 else { return 0 }
+            return color.alpha * layer.opacity
+        }
+        guard let gradient = shape.gradient else { return alpha(of: shape.colorRole) }
+
+        let from = alpha(of: gradient.from), to = alpha(of: gradient.to)
+        // Dikey geçişte örtü metnin bulunduğu banda göre değişir: metnin
+        // kutusunun İKİ kenarında da hesaplanıp en zayıfı alınır. (Yatay ve
+        // çapraz geçişlerde en kötü durum doğrudan zayıf uçtur.)
+        guard gradient.direction == "down" || gradient.direction == "up" else {
+            return min(from, to)
+        }
+        let height = max(layer.frame.height, 0.0001)
+        let near = ((label.frame.minY - layer.frame.minY) / height).clampedToUnit
+        let far = ((label.frame.maxY - layer.frame.minY) / height).clampedToUnit
+        let (start, end) = gradient.direction == "down" ? (from, to) : (to, from)
+        return min(start + (end - start) * near, start + (end - start) * far)
+    }
+
+    /// Metnin ekrandaki gerçek rengi (kullanıcı override'ı dahil) — hem hap
+    /// tonu hem örtü tonu kararı bunu okur, ikisi ayrışmasın diye tek yerde.
+    private static func resolvedTextColor(_ text: TextContent, layer: Layer,
+                                          edits: UserEdits,
+                                          context: RenderContext) -> CGColor {
+        edits.textStyles[layer.id]?.colorHex.flatMap(RGBAColor.init(hex:))?.cgColor
+            ?? context.color(text.colorRole)
+            ?? CGColor(gray: 1, alpha: 1)
+    }
+
+    /// Hap rengi metnin KENDİ renginden türetilir — zemin tahmini değil.
+    private static func scrimColor(behind text: CGColor) -> CGColor {
+        // Açık yazı → siyah hap %45 (bembeyaz kareyi ~0,55 griye indirir, tam
+        // opak beyaz yazı ~3:1 kontrast tutar). Koyu yazı → beyaz hap %60: aynı
+        // kontrastı vermek için daha yoğun olmalı, çünkü karanlık bir kareyi
+        // aydınlatmak aydınlık bir kareyi karartmaktan zordur.
+        text.isLight ? CGColor(gray: 0, alpha: 0.45)
+                     : CGColor(gray: 1, alpha: 0.60)
+    }
+
     // MARK: - Text
 
     /// Metin, CoreText ile görüntüye rasterize edilip contents olarak taşınır —
@@ -272,6 +485,7 @@ public enum TemplateLayerBuilder {
                                       layer: Layer,
                                       edits: UserEdits,
                                       context: RenderContext,
+                                      needsScrim: Bool,
                                       warnings: inout [String]) -> String {
         var string = edits.textOverrides[layer.id] ?? text.default.resolved()
         // Locale'li uppercase: Türkçe i -> İ (locale'siz uppercased() I üretir).
@@ -280,18 +494,26 @@ public enum TemplateLayerBuilder {
         let highlight = text.highlightColorRole.flatMap {
             resolvedColor($0, context: context, layerID: layer.id, warnings: &warnings)
         }
+        // Kullanıcının stil değişikliği (boyut/renk/yazı tipi). Şablonun
+        // tipografisi varsayılan; burada yalnız dokunulan alan değişir.
+        let style = edits.textStyles[layer.id] ?? TextStyleOverride()
+        let fontName = TextFontFamily.from(style.fontFamily)?
+            .postScriptName(preservingWeightOf: text.font.name) ?? text.font.name
+        let color = style.colorHex.flatMap(RGBAColor.init(hex:))?.cgColor
+            ?? resolvedColor(text.colorRole, context: context,
+                             layerID: layer.id, warnings: &warnings)
+            ?? CGColor(gray: 1, alpha: 1)
         let spec = TextRasterizer.Spec(
             text: string,
-            fontName: text.font.name,
-            fontSize: context.points(text.font.size),
-            color: resolvedColor(text.colorRole, context: context,
-                                 layerID: layer.id, warnings: &warnings)
-                ?? CGColor(gray: 1, alpha: 1),
+            fontName: fontName,
+            fontSize: context.points(text.font.size) * TextStyleOverride.clampScale(style.scale),
+            color: color,
             alignment: text.alignment,
             kern: context.points(text.letterSpacing),
             size: content.bounds.size,
             scale: max(1, context.displayScale),
-            highlightColor: highlight)
+            highlightColor: highlight,
+            scrimColor: needsScrim ? scrimColor(behind: color) : nil)
 
         // Kelime kelime giriş: metin TEK yerleşimden çıkar, sonra her kelime
         // kendi katmanına ayrılıp sırayla girer.
@@ -469,5 +691,9 @@ public enum TemplateLayerBuilder {
             x: layer.position.x + (new.x - old.x) * layer.bounds.width,
             y: layer.position.y + (new.y - old.y) * layer.bounds.height)
     }
+}
+
+private extension Double {
+    var clampedToUnit: Double { Swift.min(Swift.max(self, 0), 1) }
 }
 #endif

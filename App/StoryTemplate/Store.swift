@@ -20,15 +20,24 @@ final class Store: ObservableObject {
     /// Mağazadan gelen ürünler. Gerçek mağazada ilk anda BOŞ olabilir —
     /// paywall bu durumda fiyat yerine yükleniyor gösterir.
     @Published private(set) var products: [SubscriptionProduct] = []
+    /// Bir kerelik "ilk videon bizden" hakkı harcandı mı (diskten okunur).
+    @Published private(set) var didUseFirstFreeExport = false
 
     let backend: BillingBackend
     private let provider: EntitlementProvider
     /// Yerel sağlayıcı takılıysa demo bayraklarını (`--pro`) uygulayabilmek için.
     private let local: LocalEntitlementProvider?
+    /// İlk ücretsiz export hakkının kalıcı defteri (abonelikten bağımsız).
+    private let firstFreeExport: FirstFreeExportLedger
 
     init(backend: BillingBackend = .resolved) {
         self.backend = backend
         let arguments = ProcessInfo.processInfo.arguments
+        // Defter YEREL bir değişken üzerinden kullanılır: aşağıdaki demo
+        // bayrakları `provider`/`local` atanmadan önce çalışıyor, o noktada
+        // `self`'e dokunmak henüz serbest değil.
+        let ledger = FirstFreeExportLedger()
+        firstFreeExport = ledger
         switch backend {
         case .storeKit:
             local = nil
@@ -39,6 +48,11 @@ final class Store: ObservableObject {
             // Demo/screenshot bayrakları YALNIZ debug derlemede: yayınlanan
             // uygulamada bir başlatma argümanı Pro açamamalı.
             if arguments.contains("--free") { localProvider.reset() }
+            // "--free" temiz bir kurulum taklidi olmalı: ilk ücretsiz hak da
+            // geri gelsin. Bandı ve filigranı görmek isteyen ekran görüntüsü
+            // akışı için ayrıca "--used-free-export" var.
+            if arguments.contains("--free") { ledger.reset() }
+            if arguments.contains("--used-free-export") { ledger.markUsed() }
             if arguments.contains("--pro") {
                 // Mağazadan geçmeden Pro başlat. Senkron — hemen başlayan
                 // otomatik export doğru durumu görsün.
@@ -50,6 +64,7 @@ final class Store: ObservableObject {
         }
         status = provider.status
         products = provider.products
+        didUseFirstFreeExport = ledger.isUsed
     }
 
     /// Gerçek mağazada ürünleri ve hakları çeker (yerel sağlayıcıda anında
@@ -60,7 +75,27 @@ final class Store: ObservableObject {
         products = storeKit.products
     }
 
-    var entitlements: Entitlements { Entitlements(status: status) }
+    var entitlements: Entitlements {
+        Entitlements(status: status, didUseFirstFreeExport: didUseFirstFreeExport)
+    }
+
+    /// Kullanıcı en az bir videoyu BİTİRDİ mi.
+    ///
+    /// Pro davetlerinin (galeri üst bandı) sırası buna bağlı: değer görülmeden
+    /// yapılan teklif dönüşmüyor. İlk ücretsiz hak tam da ilk başarılı
+    /// export'ta tükendiği için tek bayrak iki soruya birden cevap veriyor.
+    var hasFinishedAVideo: Bool { didUseFirstFreeExport }
+
+    /// Bir kerelik ücretsiz hakkı tüketir.
+    ///
+    /// Yalnız export BAŞARIYLA bittiğinde çağrılır — başlarken değil: render
+    /// yarıda patlarsa ya da kullanıcı iptal ederse hediyesini kaybetmemeli.
+    /// Pro'da hiç devreye girmez (bkz. `Entitlements.hasFirstFreeExport`).
+    func markFirstFreeExportUsed() {
+        guard !status.isPro, !didUseFirstFreeExport else { return }
+        firstFreeExport.markUsed()
+        didUseFirstFreeExport = true
+    }
 
     func showPaywall(reason: String) {
         paywallReason = reason

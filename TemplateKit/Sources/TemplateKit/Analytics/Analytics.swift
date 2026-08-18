@@ -18,6 +18,8 @@ public enum AnalyticsEvent: Equatable, Sendable {
     case templateOpened(id: String, isPro: Bool)
     /// Kullanıcı bir slota kendi medyasını koydu (`photo` / `video`).
     case mediaPicked(slot: Int, kind: String)
+    /// Kullanıcı bir klibin hızını değiştirdi (1 = normal).
+    case clipSpeedChanged(slot: Int, speed: Double)
     /// nil = "Müziksiz" seçildi.
     case musicSelected(trackID: String?)
     case exportStarted(templateID: String, isPro: Bool)
@@ -38,6 +40,7 @@ public enum AnalyticsEvent: Equatable, Sendable {
         case .catalogLoaded:      return "catalog_loaded"
         case .templateOpened:     return "template_opened"
         case .mediaPicked:        return "media_picked"
+        case .clipSpeedChanged:   return "clip_speed_changed"
         case .musicSelected:      return "music_selected"
         case .exportStarted:      return "export_started"
         case .exportFinished:     return "export_finished"
@@ -61,6 +64,8 @@ public enum AnalyticsEvent: Equatable, Sendable {
             return ["template": id, "pro": String(isPro)]
         case .mediaPicked(let slot, let kind):
             return ["slot": String(slot), "kind": kind]
+        case .clipSpeedChanged(let slot, let speed):
+            return ["slot": String(slot), "speed": String(format: "%.2f", speed)]
         case .musicSelected(let trackID):
             return ["track": trackID ?? "none"]
         case .exportStarted(let templateID, let isPro):

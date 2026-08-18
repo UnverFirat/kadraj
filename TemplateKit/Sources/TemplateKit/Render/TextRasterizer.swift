@@ -29,11 +29,17 @@ public enum TextRasterizer {
         public var scale: CGFloat
         /// Metnin arkasına satır bazlı renkli vurgu (CapCut tarzı). nil = yok.
         public var highlightColor: CGColor?
+        /// Okunabilirlik hapı: metnin arkasına satır bazlı yarı saydam plaka.
+        /// `highlightColor`'dan farkı NİYETİ — vurgu bir tasarım öğesidir ve
+        /// opaktır, hap ise kullanıcının medyasına karşı bir kontrast tabanıdır
+        /// ve dolgusu daha geniştir. nil = yok.
+        public var scrimColor: CGColor?
 
         public init(text: String, fontName: String, fontSize: CGFloat,
                     color: CGColor, alignment: TextAlignment = .center,
                     kern: CGFloat = 0, size: CGSize, scale: CGFloat = 1,
-                    highlightColor: CGColor? = nil) {
+                    highlightColor: CGColor? = nil,
+                    scrimColor: CGColor? = nil) {
             self.text = text
             self.fontName = fontName
             self.fontSize = fontSize
@@ -43,6 +49,7 @@ public enum TextRasterizer {
             self.size = size
             self.scale = scale
             self.highlightColor = highlightColor
+            self.scrimColor = scrimColor
         }
     }
 
@@ -182,36 +189,84 @@ public enum TextRasterizer {
 
         let frame = fitted.frame
 
-        // Satır bazlı vurgu: her metin satırının arkasına yuvarlak dikdörtgen.
-        // Metinden ÖNCE çizilir ki metin üstte kalsın.
-        if let highlight = spec.highlightColor,
-           let lines = CTFrameGetLines(frame) as? [CTLine], !lines.isEmpty {
-            var origins = [CGPoint](repeating: .zero, count: lines.count)
-            CTFrameGetLineOrigins(frame, CFRange(location: 0, length: 0), &origins)
-            let padX = fitted.spec.fontSize * 0.20
-            let padY = fitted.spec.fontSize * 0.10
-            let radius = fitted.spec.fontSize * 0.14
-            context.setFillColor(highlight)
-            for (i, line) in lines.enumerated() {
-                var ascent: CGFloat = 0, descent: CGFloat = 0, leading: CGFloat = 0
-                let width = CGFloat(CTLineGetTypographicBounds(line, &ascent, &descent, &leading))
-                if width < 1 { continue }   // boş satırda vurgu çizme
-                // Satır origin'leri çerçeve YOLUNA görelidir; yol dikey ortalandığı
-                // için (bkz. fit) yolun origin'i eklenmezse vurgu satırın altına kayar.
-                let origin = CGPoint(x: fitted.drawRect.minX + origins[i].x,
-                                     y: fitted.drawRect.minY + origins[i].y)
-                let rect = CGRect(x: origin.x - padX,
-                                  y: origin.y - descent - padY,
-                                  width: width + padX * 2,
-                                  height: ascent + descent + padY * 2)
-                context.addPath(CGPath(roundedRect: rect, cornerWidth: radius,
-                                       cornerHeight: radius, transform: nil))
-                context.fillPath()
-            }
+        // Satır bazlı plakalar (vurgu ve/veya okunabilirlik hapı) metinden
+        // ÖNCE çizilir ki metin üstte kalsın. Hap, vurgu VARSA çizilmez: opak
+        // vurgu zemini zaten bilinen bir renge sabitliyor, üstüne bir de hap
+        // koymak tasarımı karartır.
+        if let highlight = spec.highlightColor {
+            drawLinePlates(frame, in: context, fitted: fitted, color: highlight,
+                           padXEm: 0.20, padYEm: 0.10, radiusEm: 0.14)
+        } else if let scrim = spec.scrimColor {
+            // Hapın dolgusu vurgudan geniş: kullanıcının medyası harfin hemen
+            // dibinde de parlak olabilir, kontrast tabanı gövdeyi taşmalı.
+            // padY, satır aralığının yarısından büyük seçilir ki ÇOK SATIRLI
+            // metinde satır hapları birbirine DEĞSİN — aralarında boşluk kalan
+            // iki ayrı kutu tasarım değil, hata gibi görünüyordu.
+            drawLinePlates(frame, in: context, fitted: fitted, color: scrim,
+                           padXEm: 0.34, padYEm: 0.22, radiusEm: 0.30)
         }
 
+        // Harflerin çevresine yumuşak koyu hale. Hap kontrast TABANINI verir,
+        // hale harfin KENARINI ayırır; ikisi birlikte olduğu için hap %45'te
+        // kalabiliyor (tek başına yeterli olması için %65 gerekirdi ve o
+        // yoğunlukta kadraj kararıyordu). Hap yoksa hale de yok — düz renk
+        // zemindeki tipografiye dokunmuyoruz.
+        if spec.scrimColor != nil {
+            let halo = fitted.spec.color.isLight ? CGColor(gray: 0, alpha: 0.55)
+                                                 : CGColor(gray: 1, alpha: 0.55)
+            context.setShadow(offset: .zero, blur: fitted.spec.fontSize * 0.10, color: halo)
+        }
         CTFrameDraw(frame, context)
         return context.makeImage()
+    }
+
+    /// Her metin satırının arkasına yuvarlak dikdörtgen çizer.
+    /// Dolgular `em` cinsindendir (fontla birlikte ölçeklensin diye).
+    private static func drawLinePlates(_ frame: CTFrame, in context: CGContext,
+                                       fitted: (spec: Spec, frame: CTFrame, drawRect: CGRect),
+                                       color: CGColor,
+                                       padXEm: CGFloat, padYEm: CGFloat, radiusEm: CGFloat) {
+        guard let lines = CTFrameGetLines(frame) as? [CTLine], !lines.isEmpty else { return }
+        var origins = [CGPoint](repeating: .zero, count: lines.count)
+        CTFrameGetLineOrigins(frame, CFRange(location: 0, length: 0), &origins)
+        let em = fitted.spec.fontSize
+        let radius = em * radiusEm
+        context.setFillColor(color)
+        for (i, line) in lines.enumerated() {
+            var ascent: CGFloat = 0, descent: CGFloat = 0, leading: CGFloat = 0
+            let width = CGFloat(CTLineGetTypographicBounds(line, &ascent, &descent, &leading))
+            if width < 1 { continue }   // boş satırda plaka çizme
+            // Satır origin'leri çerçeve YOLUNA görelidir; yol dikey ortalandığı
+            // için (bkz. fit) yolun origin'i eklenmezse plaka satırın altına kayar.
+            let origin = CGPoint(x: fitted.drawRect.minX + origins[i].x,
+                                 y: fitted.drawRect.minY + origins[i].y)
+            // Dolgu kutuya sığdırılır: satır kutunun tamamını dolduruyorsa
+            // dolgu dışarı taşar ve KIRPILIR — yuvarlak hap birden düz kenarlı
+            // bir banda dönüşür. Sığmıyorsa hap yazıya daha çok yapışır,
+            // ama kırpılmış görünmez.
+            let padX = max(0, min(em * padXEm,
+                                  (fitted.spec.size.width - width) / 2))
+            let rect = CGRect(x: origin.x - padX,
+                              y: origin.y - descent - em * padYEm,
+                              width: width + padX * 2,
+                              height: ascent + descent + em * padYEm * 2)
+            context.addPath(CGPath(roundedRect: rect, cornerWidth: radius,
+                                   cornerHeight: radius, transform: nil))
+            context.fillPath()
+        }
+    }
+}
+
+extension CGColor {
+    /// Rölatif parlaklık eşiği 0,3: doygun vurgu renkleri (pembe, turuncu)
+    /// 0,3-0,45 bandındadır ve koyu zeminde okunur — "açık" sayılmalılar.
+    var isLight: Bool {
+        let c = components ?? []
+        switch c.count {
+        case 2: return c[0] >= 0.3
+        case 3, 4: return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2] >= 0.3
+        default: return true
+        }
     }
 }
 #endif

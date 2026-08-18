@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "id": "quote-01",
   "name": {
     "en": "Quote Card",
@@ -12,7 +12,6 @@
     "height": 1920,
     "fps": 30
   },
-  "duration": 5.0,
   "palette": {
     "background": "#12100E",
     "surface": "#1E1B18",
@@ -25,38 +24,6 @@
     "volume": 0.75
   },
   "layers": [
-    {
-      "id": "photo",
-      "type": "mediaSlot",
-      "slotIndex": 0,
-      "media": "photoOrVideo",
-      "contentMode": "fill",
-      "mask": "rect",
-      "frame": {
-        "x": 0.5,
-        "y": 0.5,
-        "width": 1.0,
-        "height": 1.0
-      },
-      "animations": [
-        {
-          "role": "in",
-          "preset": "fadeIn",
-          "duration": 0.8
-        },
-        {
-          "role": "loop",
-          "preset": "kenBurns",
-          "duration": 5.0,
-          "params": {
-            "zoom": 1.12,
-            "direction": "down"
-          }
-        }
-      ],
-      "filter": "fade",
-      "filterIntensity": 0.7
-    },
     {
       "id": "scrim",
       "type": "shape",
@@ -210,5 +177,155 @@
   "overlay": {
     "vignette": 0.4,
     "grain": 0.25
-  }
+  },
+  "scenes": [
+    {
+      "id": "beat1",
+      "duration": 1.25,
+      "layers": [
+        {
+          "id": "photo",
+          "type": "mediaSlot",
+          "slotIndex": 0,
+          "media": "photoOrVideo",
+          "contentMode": "fill",
+          "mask": "rect",
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 1.0,
+            "height": 1.0
+          },
+          "animations": [
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 1.25,
+              "params": {
+                "zoom": 1.1,
+                "direction": "up"
+              }
+            }
+          ],
+          "filter": "fade",
+          "filterIntensity": 0.7,
+          "timing": {}
+        }
+      ],
+      "transition": {
+        "style": "cut",
+        "duration": 0.0
+      }
+    },
+    {
+      "id": "beat2",
+      "duration": 1.25,
+      "layers": [
+        {
+          "id": "photo-b2",
+          "type": "mediaSlot",
+          "slotIndex": 0,
+          "media": "photoOrVideo",
+          "contentMode": "fill",
+          "mask": "rect",
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 1.0,
+            "height": 1.0
+          },
+          "animations": [
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 1.25,
+              "params": {
+                "zoom": 1.2,
+                "direction": "left"
+              }
+            }
+          ],
+          "filter": "fade",
+          "filterIntensity": 0.7,
+          "timing": {}
+        }
+      ],
+      "transition": {
+        "style": "cut",
+        "duration": 0.0
+      }
+    },
+    {
+      "id": "beat3",
+      "duration": 1.25,
+      "layers": [
+        {
+          "id": "photo-b3",
+          "type": "mediaSlot",
+          "slotIndex": 0,
+          "media": "photoOrVideo",
+          "contentMode": "fill",
+          "mask": "rect",
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 1.0,
+            "height": 1.0
+          },
+          "animations": [
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 1.25,
+              "params": {
+                "zoom": 1.1,
+                "direction": "down"
+              }
+            }
+          ],
+          "filter": "fade",
+          "filterIntensity": 0.7,
+          "timing": {}
+        }
+      ],
+      "transition": {
+        "style": "cut",
+        "duration": 0.0
+      }
+    },
+    {
+      "id": "beat4",
+      "duration": 1.25,
+      "layers": [
+        {
+          "id": "photo-b4",
+          "type": "mediaSlot",
+          "slotIndex": 0,
+          "media": "photoOrVideo",
+          "contentMode": "fill",
+          "mask": "rect",
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 1.0,
+            "height": 1.0
+          },
+          "animations": [
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 1.25,
+              "params": {
+                "zoom": 1.2,
+                "direction": "right"
+              }
+            }
+          ],
+          "filter": "fade",
+          "filterIntensity": 0.7,
+          "timing": {}
+        }
+      ]
+    }
+  ]
 }

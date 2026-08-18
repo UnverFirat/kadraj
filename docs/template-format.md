@@ -57,6 +57,7 @@ Android'e geçersek şablonlar aynen taşınır, sadece motor yeniden yazılır.
 | `duration` | Saniye. Toplam şablon süresi. |
 | `palette` | Rol → hex (`#RRGGBB` veya `#RRGGBBAA`). Roller serbest isimli; katmanların referansladığı her rol var olmak zorunda (validasyon kuralı). |
 | `overlay` | Sinematik overlay: `{ "vignette": 0-1, "grain": 0-1 }`. Tüm karenin üstüne uygulanır (kenar karartma + film tanesi). Yoksa efekt yok. |
+| `textLegibility` | **Opsiyonel.** Kullanıcının medyası üstüne düşen metinlerin okunabilirlik koruması: `auto` (varsayılan — alan yoksa bu), `off` (motor dokunmaz), `always` (zeminden bağımsız hep uygular). Bkz. "Okunabilirlik koruması". Bilinmeyen değer `auto`'ya düşer. |
 | `audio` | Varsayılan müzik önerisi. Kullanıcı değiştirebilir; `defaultTrackId` telifsiz kütüphanemizdeki parça kimliği (`MusicLibrary`, aşağıya bkz.). `volume` 0–1. |
 | `layers` | Çizim sırasına göre (ilk eleman en altta). |
 
@@ -82,6 +83,10 @@ Android'e geçersek şablonlar aynen taşınır, sadece motor yeniden yazılır.
 - `timing` — katmanın sahnede olduğu aralık (saniye). `start` yoksa 0, `duration`
   yoksa şablon sonuna kadar. Motor, aralık dışında katmanı görünmez yapar
   ("presence" mantığı animasyonlardan bağımsızdır).
+  **Plaka kuralı:** bir metni saran DAR bir `shape` (rozet, hap, çip) o metnin
+  plakasıdır ve motor ikisini birlikte girdirir — plakanın `start`'ı etiketininkine
+  çekilir. Yani plakaya etiketinden farklı bir `start` yazmak etkisizdir; boş
+  renkli kutu görünmesin diye (bkz. `render-engine.md`, "Plaka ve etiketi").
 - `animations` — `role`: `in` (start'ta), `out` (bitişten geriye hizalı), `loop`
   (aralık boyunca tekrar). `delay` role göre göreli. `easing`: `linear`, `easeIn`,
   `easeOut`, `easeInOut`, `spring`.
@@ -110,7 +115,11 @@ sert bir bantla kesiyordu, metin okunurluğu için gradient tercih edin.
   "contentMode": "fill", "mask": "rect", "cornerRadius": 0.02 }
 ```
 - `slotIndex` — kullanıcının doldurduğu slotun sırası (editörde "1. medya" vb.).
-  Şablon içinde benzersiz olmalı.
+  AYNI SAHNE içinde benzersiz olmalı; **farklı sahnelerde tekrar edebilir** ve
+  ritimli şablonların temeli budur: tek klip, dört kesme. Motor aynı klibi
+  sahneler arasında kaldığı yerden sürdürür (baştan başlamaz), her sahne kendi
+  `kenBurns`'üyle farklı bir kadraj gösterir. Kullanıcıdan yalnız BİR medya
+  istenir (`Template.mediaSlots` tekilleştirir).
 - `media` — `photo` | `video` | `photoOrVideo`.
 - `mask` — `rect` | `circle` | `star` | `heart`. `star`/`heart` path tabanlı
   maskelerdir (MaskShape); medya bu şekle kırpılır. `contentMode` — MVP'de sadece
@@ -142,6 +151,34 @@ sert bir bantla kesiyordu, metin okunurluğu için gradient tercih edin.
 - **Emoji sticker:** `default` bir emoji (❤️ ✨ 🎉…) içerebilir — CoreText emoji'yi
   renkli render eder. `rotation` + `pop`/`scaleIn` animasyonuyla birlikte sticker
   etkisi verir; ayrı bir katman tipi gerekmez.
+
+### Okunabilirlik koruması (`textLegibility`)
+
+Şablonun tipografisi tasarlanırken zemin bilinir (palet), ama **medya slotunun
+üstündeki metnin zemini kullanıcının fotoğrafıdır** ve önceden bilinemez: beyaz
+bir başlık, açık renkli bir fotoğrafın üstünde tamamen kaybolur. Motor bu
+durumdaki metinlerin arkasına satır bazlı **koyu yarı saydam hap** koyar ve
+yazıyı tam opak çizer (filigranın kanıtlanmış yöntemi — bkz. `render-engine.md`).
+
+Şablon yazarının bilmesi gerekenler:
+
+- Kural **yalnız metin kutusunun ≥%85'i medya slotunun kadrajına düşüyorsa**
+  işler. Düz renk/gradyan zemin üstündeki tipografiye ve slotun kenarından
+  taşan/değen etiketlere dokunulmaz — "altında ne var" bilgisi katman
+  sırasından çıkarılır (bkz. `render-engine.md`, "Okunabilirlik").
+  Montaj şablonunda da ölçü SLOTUN KADRAJIDIR; taban videonun tüm kanvası
+  doldurması slot dışını medya yapmaz.
+- Metni tümüyle örten **tam opak** bir `shape` (kart, hap, bant) korumayı
+  kapatır: zemin yeniden bilinir renktedir, kontrast şablonun kararıdır.
+- `highlightColorRole` taşıyan metne de dokunulmaz (zaten opak vurgusu var).
+- Yeterince koyu **yarı saydam** scrim (birikmiş alfa ≥ 0,7) de korumayı
+  gereksiz kılar; daha hafif scrim'ler kılmaz.
+- **Emoji sticker'a asla hap konmaz**: harf ya da rakam içermeyen metin
+  (❤️ ✨ 🎉) sticker sayılır; arkasına kutu koymak onu etikete çevirir.
+- Tasarımı bunu kendi çözen şablon `"textLegibility": "off"` yazar; bilinçli
+  "sticker" tipografisi `"always"` ile zeminden bağımsız hap ister.
+- Alan **opsiyoneldir**: yoksa `auto` geçerlidir, yani var olan şablonlar
+  değişmeden korunur.
 
 ### `lottie`
 ```json
@@ -335,11 +372,27 @@ sahneler arası geçişler.
   karışık foto+video kolaj yapılabilir. `kenBurns` preset'i hem foto hem video
   slotlarında sahne boyunca yavaş zoom + yönlü kayma uygular.
 
+## Kullanıcı düzenlemeleri (`UserEdits`)
+
+Şablon dosyası hiç değişmez; kullanıcının yaptığı her şey bu yapıda durur ve
+taslak kaydı bunun serialize'ıdır.
+
+| Alan | Ne yapar |
+|---|---|
+| `slots[i].crop` | Kadraj: `scale` yakınlaştırır, `offsetX/offsetY` kaydırır. **Yön sözleşmesi:** offsetY büyüdükçe görüntü AŞAĞI, offsetX büyüdükçe SAĞA (iki export yolunda da aynı, `CropAndTrimTests` ile kilitli) |
+| `slots[i].videoStart` | Klibin hangi saniyesinden başlanacağı (trim) |
+| `slots[i].speed` | Klip hızı 0,25x–4x. Videonun SÜRESİNİ değiştirmez; sahneye sığdırılan kaynak bölümünü değiştirir (bkz. `docs/render-engine.md`) |
+| `textOverrides[layerID]` | Kullanıcı metni |
+| `textStyles[layerID]` | Metin stili: `scale` (0,6–1,8), `colorHex`, `fontFamily` (`sans`/`serif`/`round`/`display` — şablonun KALINLIĞI korunur) |
+| `paletteOverride` | Rol bazlı renk şeması (tek dokunuşla tüm vurgular) |
+| `music` | Seçilen parça / kullanıcının kendi sesi |
+
 ## Validasyon kuralları (motor yüklerken kontrol eder)
 
 1. `schemaVersion` destekleniyor (1–2).
 2. Referanslanan her `colorRole` palette mevcut.
-3. `slotIndex`'ler benzersiz.
+3. `slotIndex`'ler bir kapsam içinde (sahne ya da global katmanlar) benzersiz;
+   sahneler arasında tekrar serbest (aynı klibi birden çok kesmede göstermek).
 4. `timing.start ≥ 0` ve katmanın penceresi kapsayıcı süreye (sahne ya da toplam)
    sığıyor (küçük taşmalar kırpılır, negatifler hata).
 5. Katman `id`'leri benzersiz (kullanıcı metin düzenlemeleri `id` ile eşleşir).

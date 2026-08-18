@@ -73,8 +73,10 @@ final class TemplateCatalogTests: XCTestCase {
                                name: LocalizedText(["en": id]))
     }
 
-    private func writeManifest(at directory: URL, entries: [TemplateManifest.Entry]) throws {
-        let data = try JSONEncoder().encode(TemplateManifest(templates: entries))
+    private func writeManifest(at directory: URL, entries: [TemplateManifest.Entry],
+                               revision: Int = 0) throws {
+        let data = try JSONEncoder().encode(TemplateManifest(revision: revision,
+                                                             templates: entries))
         try data.write(to: directory.appendingPathComponent("manifest.json"))
     }
 
@@ -175,6 +177,91 @@ final class TemplateCatalogTests: XCTestCase {
         // Seed şablonu ağsız da açılabilmeli.
         let template = try await fresh.template(for: seeded.entries[0])
         XCTAssertEqual(template.id, "minimal-fade-01")
+    }
+
+    // MARK: Cache mi seed mi (yayın numarası)
+
+    /// Uygulama güncellendi: paket yeni şablonlar taşıyor ama diskte eski bir
+    /// CDN indirmesi var. Sessiz ama ürünü bozan hata buydu — eski indirme
+    /// kazanıyor, kullanıcı yeni şablonları HİÇ görmüyordu.
+    func testNewerSeedBeatsStaleCachedManifest() async throws {
+        try writeManifest(at: remote, entries: [entry(id: "minimal-fade-01", version: 1)],
+                          revision: 1)
+        let fetcher = StubFetcher()
+        _ = try await makeCatalog(fetcher: fetcher).refresh()   // cache'i doldur
+
+        // "Uygulama güncellendi": seed daha yeni bir yayın ve iki şablon taşıyor.
+        try FileManager.default.copyItem(
+            at: repoTemplates.appendingPathComponent("reel-collage-01.json"),
+            to: seed.appendingPathComponent("reel-collage-01.json"))
+        try writeManifest(at: seed, entries: [entry(id: "minimal-fade-01", version: 1),
+                                              entry(id: "reel-collage-01", version: 1)],
+                          revision: 2)
+
+        fetcher.offline = true
+        let snapshot = try await makeCatalog(fetcher: fetcher).current()
+        XCTAssertEqual(snapshot.origin, .seed, "yeni paket bayat cache'i yenmeli")
+        XCTAssertEqual(snapshot.entries.map(\.id), ["minimal-fade-01", "reel-collage-01"])
+    }
+
+    /// Alanı hiç tanımayan eski bir indirme (revision yok → 0) de seed'e kaybeder.
+    func testCachedManifestWithoutRevisionLosesToSeed() async throws {
+        let legacy = """
+        {"manifestVersion": 1, "templates": [
+          {"id": "minimal-fade-01", "version": 1, "category": "minimal",
+           "template": "minimal-fade-01.json", "name": {"en": "eski"}}]}
+        """
+        try FileManager.default.createDirectory(at: cache, withIntermediateDirectories: true)
+        try Data(legacy.utf8).write(to: cache.appendingPathComponent("manifest.json"))
+        try writeManifest(at: seed, entries: [entry(id: "minimal-fade-01", version: 1),
+                                              entry(id: "reel-collage-01", version: 1)],
+                          revision: 1)
+
+        let snapshot = try await makeCatalog(fetcher: StubFetcher()).current()
+        XCTAssertEqual(snapshot.origin, .seed)
+        XCTAssertEqual(snapshot.entries.count, 2)
+    }
+
+    /// CDN yayını paketten yeniyse (normal durum) cache kazanır — düzeltme
+    /// katalogun sunucudan yönetilmesini bozmamalı.
+    func testCachedManifestWinsWhenItIsTheNewerRelease() async throws {
+        try writeManifest(at: seed, entries: [entry(id: "minimal-fade-01", version: 1)],
+                          revision: 2)
+        try writeManifest(at: remote, entries: [entry(id: "minimal-fade-01", version: 1),
+                                                entry(id: "reel-collage-01", version: 1)],
+                          revision: 3)
+        let fetcher = StubFetcher()
+        _ = try await makeCatalog(fetcher: fetcher).refresh()
+
+        fetcher.offline = true
+        let snapshot = try await makeCatalog(fetcher: fetcher).current()
+        XCTAssertEqual(snapshot.origin, .cache)
+        XCTAssertEqual(snapshot.entries.count, 2)
+    }
+
+    /// CDN geride kaldıysa taze indirme de seed'i ezmemeli.
+    func testRefreshFallsBackToSeedWhenServerIsBehind() async throws {
+        try writeManifest(at: remote, entries: [entry(id: "minimal-fade-01", version: 1)],
+                          revision: 1)
+        try FileManager.default.copyItem(
+            at: repoTemplates.appendingPathComponent("reel-collage-01.json"),
+            to: seed.appendingPathComponent("reel-collage-01.json"))
+        try writeManifest(at: seed, entries: [entry(id: "minimal-fade-01", version: 1),
+                                              entry(id: "reel-collage-01", version: 1)],
+                          revision: 5)
+
+        let snapshot = try await makeCatalog(fetcher: StubFetcher()).refresh()
+        XCTAssertEqual(snapshot.origin, .seed)
+        XCTAssertEqual(snapshot.entries.count, 2)
+    }
+
+    /// Depodaki manifest yayın numarası taşımalı — `make-manifest.py`
+    /// çalıştırılmayı unutulursa güncelleyen kullanıcı yeni şablonları görmez.
+    func testRepoManifestCarriesARevision() throws {
+        let data = try Data(contentsOf: repoTemplates.appendingPathComponent("manifest.json"))
+        let manifest = try JSONDecoder().decode(TemplateManifest.self, from: data)
+        XCTAssertGreaterThan(manifest.revision, 0,
+                             "manifest `revision` taşımalı — `python3 tools/make-manifest.py`")
     }
 
     func testNotModifiedKeepsCachedList() async throws {

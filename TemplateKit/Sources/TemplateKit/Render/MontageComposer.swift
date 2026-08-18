@@ -52,6 +52,14 @@ public enum MontageComposer {
 
         let composition = AVMutableComposition()
         var itemsByScene: [Int: [MontageInstruction.MediaItem]] = [:]
+        /// slotIndex -> o klipten şu ana kadar TÜKETİLEN süre.
+        ///
+        /// Aynı slot birden çok sahnede geçebiliyor (ritimli şablonların temeli:
+        /// tek klip, dört kesme). Eskiden her sahne klibi BAŞTAN oynatıyordu ve
+        /// sonuç aynı yarım saniyenin tekrar tekrar takılması gibi görünüyordu.
+        /// Artık klip kaldığı yerden devam eder — kesmeler gerçek bir kurgu
+        /// gibi ilerler.
+        var consumed: [Int: CMTime] = [:]
 
         for window in timeline.windows {
             let scene = scenes[window.index]
@@ -89,20 +97,35 @@ public enum MontageComposer {
                     }
 
                     let assetDuration = try await source.asset.load(.duration)
-                    let clipStart = snap(source.start)
+                    // Klip kaldığı yerden devam eder; tükendiyse başa sarar
+                    // (kısa bir klip çok sahneli şablonu boş bırakmasın).
+                    var clipStart = snap(source.start) + (consumed[slot.slotIndex] ?? .zero)
+                    if clipStart >= assetDuration {
+                        clipStart = snap(source.start)
+                        consumed[slot.slotIndex] = .zero
+                    }
                     // Sahne penceresini frame sınırlarından türet (start/end ayrı
                     // snap → süre ikisinin farkı, komşu sahnelerle kilitli).
                     let at = snap(window.start)
                     let needed = snap(window.end) - at
                     let available = assetDuration - clipStart
-                    let insertDuration = min(available, needed)
+                    // HIZ: sahne penceresi sabit, değişen KAYNAKTAN alınan süre.
+                    // 2x → pencerenin iki katı kadar klip alınıp pencereye
+                    // sıkıştırılır; 0,5x → yarısı alınıp yayılır. Böylece montaj
+                    // süresi (ve müzik hizası) hiç kaymaz.
+                    let speed = SlotAssignment.clampSpeed(assignment?.speed ?? 1)
+                    let sourceNeeded = speed == 1 ? needed : snap(needed.seconds * speed)
+                    let insertDuration = min(available, sourceNeeded)
                     try track.insertTimeRange(
                         CMTimeRange(start: clipStart, duration: insertDuration),
                         of: sourceTrack, at: at)
-                    if insertDuration < needed {
+                    // Alınan bölüm pencereye yayılır. (Klip istenenden kısaysa
+                    // eskiden olduğu gibi uzatılır — pencerede boşluk kalmaz.)
+                    if insertDuration != needed {
                         track.scaleTimeRange(CMTimeRange(start: at, duration: insertDuration),
                                              toDuration: needed)
                     }
+                    consumed[slot.slotIndex] = (consumed[slot.slotIndex] ?? .zero) + insertDuration
 
                     let preferredTransform = try await sourceTrack.load(.preferredTransform)
                     itemsByScene[window.index, default: []].append(

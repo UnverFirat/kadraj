@@ -1,5 +1,6 @@
 {
   "manifestVersion": 1,
+  "revision": 2,
   "templates": [
     {
       "id": "reel-collage-01",
@@ -20,7 +21,7 @@
     },
     {
       "id": "sale-promo-01",
-      "version": 1,
+      "version": 2,
       "category": "promo",
       "isPro": false,
       "tags": [
@@ -54,7 +55,7 @@
     },
     {
       "id": "recipe-steps-01",
-      "version": 1,
+      "version": 2,
       "category": "food",
       "isPro": false,
       "tags": [
@@ -107,7 +108,7 @@
       "id": "grid-four-01",
       "version": 1,
       "category": "social",
-      "isPro": true,
+      "isPro": false,
       "tags": [],
       "minAppVersion": "1.0.0",
       "template": "grid-four-01.json",
@@ -233,7 +234,7 @@
     },
     {
       "id": "vlog-intro-01",
-      "version": 1,
+      "version": 2,
       "category": "travel",
       "isPro": false,
       "tags": [],
@@ -248,7 +249,7 @@
     },
     {
       "id": "quote-01",
-      "version": 1,
+      "version": 2,
       "category": "minimal",
       "isPro": false,
       "tags": [],
@@ -263,7 +264,7 @@
     },
     {
       "id": "typography-01",
-      "version": 1,
+      "version": 2,
       "category": "social",
       "isPro": true,
       "tags": [],
@@ -278,9 +279,9 @@
     },
     {
       "id": "headline-01",
-      "version": 1,
+      "version": 2,
       "category": "business",
-      "isPro": true,
+      "isPro": false,
       "tags": [],
       "minAppVersion": "1.0.0",
       "template": "headline-01.json",
@@ -293,7 +294,7 @@
     },
     {
       "id": "product-01",
-      "version": 1,
+      "version": 2,
       "category": "business",
       "isPro": true,
       "tags": [],
@@ -323,7 +324,7 @@
     },
     {
       "id": "typewriter-note-01",
-      "version": 1,
+      "version": 2,
       "category": "minimal",
       "isPro": true,
       "tags": [],
@@ -368,9 +369,9 @@
     },
     {
       "id": "sticker-fun-01",
-      "version": 1,
+      "version": 2,
       "category": "social",
-      "isPro": true,
+      "isPro": false,
       "tags": [],
       "minAppVersion": "1.0.0",
       "template": "sticker-fun-01.json",
@@ -383,7 +384,7 @@
     },
     {
       "id": "countdown-01",
-      "version": 1,
+      "version": 2,
       "category": "wedding",
       "isPro": false,
       "tags": [],
@@ -400,7 +401,7 @@
       "id": "list-five-01",
       "version": 1,
       "category": "social",
-      "isPro": true,
+      "isPro": false,
       "tags": [],
       "minAppVersion": "1.0.0",
       "template": "list-five-01.json",
@@ -428,7 +429,7 @@
     },
     {
       "id": "minimal-fade-01",
-      "version": 1,
+      "version": 2,
       "category": "minimal",
       "isPro": false,
       "tags": [],
@@ -443,7 +444,7 @@
     },
     {
       "id": "celebrate-01",
-      "version": 1,
+      "version": 2,
       "category": "social",
       "isPro": true,
       "tags": [],
@@ -535,7 +536,7 @@
     },
     {
       "id": "bogo-offer-01",
-      "version": 1,
+      "version": 2,
       "category": "promo",
       "isPro": false,
       "tags": [],
@@ -584,7 +585,7 @@
     },
     {
       "id": "caption-bar-01",
-      "version": 1,
+      "version": 2,
       "category": "social",
       "isPro": false,
       "tags": [],
@@ -663,7 +664,7 @@
     },
     {
       "id": "daily-special-01",
-      "version": 1,
+      "version": 2,
       "category": "food",
       "isPro": false,
       "tags": [
@@ -774,7 +775,7 @@
     },
     {
       "id": "food-delivery-01",
-      "version": 1,
+      "version": 2,
       "category": "food",
       "isPro": true,
       "tags": [],
@@ -789,7 +790,7 @@
     },
     {
       "id": "for-rent-01",
-      "version": 1,
+      "version": 2,
       "category": "realestate",
       "isPro": false,
       "tags": [],
@@ -804,7 +805,7 @@
     },
     {
       "id": "free-shipping-01",
-      "version": 1,
+      "version": 2,
       "category": "promo",
       "isPro": false,
       "tags": [],
@@ -834,7 +835,7 @@
     },
     {
       "id": "graduation-01",
-      "version": 1,
+      "version": 2,
       "category": "wedding",
       "isPro": false,
       "tags": [],
@@ -849,7 +850,7 @@
     },
     {
       "id": "gym-offer-01",
-      "version": 1,
+      "version": 2,
       "category": "fitness",
       "isPro": false,
       "tags": [
@@ -928,7 +929,7 @@
     },
     {
       "id": "lyric-card-01",
-      "version": 1,
+      "version": 2,
       "category": "music",
       "isPro": true,
       "tags": [
@@ -945,7 +946,7 @@
     },
     {
       "id": "mono-frame-01",
-      "version": 1,
+      "version": 2,
       "category": "minimal",
       "isPro": false,
       "tags": [],
@@ -1037,7 +1038,7 @@
     },
     {
       "id": "open-house-01",
-      "version": 1,
+      "version": 2,
       "category": "realestate",
       "isPro": false,
       "tags": [
@@ -1084,7 +1085,7 @@
     },
     {
       "id": "pet-star-01",
-      "version": 1,
+      "version": 2,
       "category": "social",
       "isPro": false,
       "tags": [],
@@ -1116,7 +1117,7 @@
     },
     {
       "id": "poll-card-01",
-      "version": 1,
+      "version": 2,
       "category": "social",
       "isPro": true,
       "tags": [],
@@ -1131,7 +1132,7 @@
     },
     {
       "id": "property-specs-01",
-      "version": 1,
+      "version": 2,
       "category": "realestate",
       "isPro": true,
       "tags": [],
@@ -1146,7 +1147,7 @@
     },
     {
       "id": "qa-card-01",
-      "version": 1,
+      "version": 2,
       "category": "social",
       "isPro": false,
       "tags": [],
@@ -1176,7 +1177,7 @@
     },
     {
       "id": "recipe-quick-01",
-      "version": 1,
+      "version": 2,
       "category": "food",
       "isPro": false,
       "tags": [],
@@ -1206,7 +1207,7 @@
     },
     {
       "id": "retro-vhs-01",
-      "version": 1,
+      "version": 2,
       "category": "social",
       "isPro": true,
       "tags": [],
@@ -1236,7 +1237,7 @@
     },
     {
       "id": "run-stats-01",
-      "version": 1,
+      "version": 2,
       "category": "fitness",
       "isPro": false,
       "tags": [],
@@ -1251,7 +1252,7 @@
     },
     {
       "id": "sale-rack-01",
-      "version": 1,
+      "version": 2,
       "category": "fashion",
       "isPro": false,
       "tags": [],
@@ -1266,7 +1267,7 @@
     },
     {
       "id": "salon-booking-01",
-      "version": 1,
+      "version": 2,
       "category": "beauty",
       "isPro": false,
       "tags": [
@@ -1283,7 +1284,7 @@
     },
     {
       "id": "save-the-date-01",
-      "version": 1,
+      "version": 2,
       "category": "wedding",
       "isPro": false,
       "tags": [
@@ -1315,7 +1316,7 @@
     },
     {
       "id": "spa-calm-01",
-      "version": 1,
+      "version": 2,
       "category": "beauty",
       "isPro": false,
       "tags": [],
@@ -1332,7 +1333,7 @@
       "id": "stat-card-01",
       "version": 1,
       "category": "business",
-      "isPro": true,
+      "isPro": false,
       "tags": [],
       "minAppVersion": "1.0.0",
       "template": "stat-card-01.json",
@@ -1345,7 +1346,7 @@
     },
     {
       "id": "sunset-diary-01",
-      "version": 1,
+      "version": 2,
       "category": "travel",
       "isPro": false,
       "tags": [],
@@ -1360,7 +1361,7 @@
     },
     {
       "id": "team-hiring-01",
-      "version": 1,
+      "version": 2,
       "category": "business",
       "isPro": false,
       "tags": [
@@ -1392,9 +1393,9 @@
     },
     {
       "id": "three-things-01",
-      "version": 1,
+      "version": 2,
       "category": "social",
-      "isPro": true,
+      "isPro": false,
       "tags": [
         "new"
       ],
@@ -1409,7 +1410,7 @@
     },
     {
       "id": "throwback-01",
-      "version": 1,
+      "version": 2,
       "category": "social",
       "isPro": true,
       "tags": [],
@@ -1499,7 +1500,7 @@
     },
     {
       "id": "webinar-invite-01",
-      "version": 1,
+      "version": 2,
       "category": "education",
       "isPro": false,
       "tags": [],
@@ -1516,7 +1517,7 @@
       "id": "weekly-recap-01",
       "version": 1,
       "category": "social",
-      "isPro": true,
+      "isPro": false,
       "tags": [],
       "minAppVersion": "1.0.0",
       "template": "weekly-recap-01.json",
@@ -1529,7 +1530,7 @@
     },
     {
       "id": "workout-steps-01",
-      "version": 1,
+      "version": 2,
       "category": "fitness",
       "isPro": true,
       "tags": [],
@@ -1623,7 +1624,7 @@
     },
     {
       "id": "class-schedule-01",
-      "version": 1,
+      "version": 2,
       "category": "fitness",
       "isPro": false,
       "tags": [
@@ -1670,7 +1671,7 @@
     },
     {
       "id": "hair-color-01",
-      "version": 1,
+      "version": 2,
       "category": "beauty",
       "isPro": false,
       "tags": [
@@ -1687,7 +1688,7 @@
     },
     {
       "id": "just-sold-01",
-      "version": 1,
+      "version": 2,
       "category": "realestate",
       "isPro": false,
       "tags": [
@@ -1734,7 +1735,7 @@
     },
     {
       "id": "nutrition-tip-01",
-      "version": 1,
+      "version": 2,
       "category": "fitness",
       "isPro": true,
       "tags": [],
@@ -1749,7 +1750,7 @@
     },
     {
       "id": "open-mic-01",
-      "version": 1,
+      "version": 2,
       "category": "music",
       "isPro": false,
       "tags": [],
@@ -1781,7 +1782,7 @@
     },
     {
       "id": "pr-card-01",
-      "version": 1,
+      "version": 2,
       "category": "fitness",
       "isPro": true,
       "tags": [
@@ -1798,7 +1799,7 @@
     },
     {
       "id": "price-drop-01",
-      "version": 1,
+      "version": 2,
       "category": "realestate",
       "isPro": true,
       "tags": [],
@@ -1877,7 +1878,7 @@
     },
     {
       "id": "skincare-steps-01",
-      "version": 1,
+      "version": 2,
       "category": "beauty",
       "isPro": false,
       "tags": [],
@@ -1892,7 +1893,7 @@
     },
     {
       "id": "student-work-01",
-      "version": 1,
+      "version": 2,
       "category": "education",
       "isPro": false,
       "tags": [],
@@ -1939,7 +1940,7 @@
     },
     {
       "id": "style-tip-01",
-      "version": 1,
+      "version": 2,
       "category": "fashion",
       "isPro": false,
       "tags": [],

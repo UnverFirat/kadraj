@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "id": "pet-star-01",
   "name": {
     "en": "Pet Star",
@@ -12,7 +12,6 @@
     "height": 1920,
     "fps": 30
   },
-  "duration": 6.5,
   "palette": {
     "background": "#12140A",
     "surface": "#FFFFFF",
@@ -28,49 +27,6 @@
     "volume": 0.85
   },
   "layers": [
-    {
-      "id": "bg",
-      "frame": {
-        "x": 0.5,
-        "y": 0.5,
-        "width": 1.0,
-        "height": 1.0
-      },
-      "type": "shape",
-      "colorRole": "background"
-    },
-    {
-      "id": "pet",
-      "frame": {
-        "x": 0.5,
-        "y": 0.5,
-        "width": 1.0,
-        "height": 1.0
-      },
-      "animations": [
-        {
-          "role": "in",
-          "preset": "fadeIn",
-          "duration": 0.5
-        },
-        {
-          "role": "loop",
-          "preset": "kenBurns",
-          "duration": 6.5,
-          "params": {
-            "zoom": 1.12,
-            "direction": "up"
-          }
-        }
-      ],
-      "type": "mediaSlot",
-      "slotIndex": 0,
-      "media": "photoOrVideo",
-      "contentMode": "fill",
-      "mask": "rect",
-      "filter": "vivid",
-      "filterIntensity": 0.5
-    },
     {
       "id": "pet-veil",
       "frame": {
@@ -105,15 +61,6 @@
           "duration": 0.5,
           "params": {
             "overshoot": 1.08
-          }
-        },
-        {
-          "role": "loop",
-          "preset": "shake",
-          "duration": 1.4,
-          "delay": 0.9,
-          "params": {
-            "degrees": 2.0
           }
         }
       ],
@@ -173,15 +120,6 @@
           "duration": 0.5,
           "params": {
             "overshoot": 1.12
-          }
-        },
-        {
-          "role": "loop",
-          "preset": "floatLoop",
-          "duration": 2.6,
-          "params": {
-            "distance": 0.006,
-            "axis": "y"
           }
         }
       ],
@@ -279,10 +217,12 @@
       "animations": [
         {
           "role": "in",
-          "preset": "punchIn",
+          "preset": "slideIn",
           "duration": 0.55,
+          "easing": "easeOut",
           "params": {
-            "from": 1.5
+            "direction": "up",
+            "distance": 0.05
           }
         }
       ],
@@ -329,6 +269,194 @@
       },
       "colorRole": "textSecondary",
       "alignment": "center"
+    }
+  ],
+  "scenes": [
+    {
+      "id": "beat1",
+      "duration": 1.3,
+      "layers": [
+        {
+          "id": "pet",
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 1.0,
+            "height": 1.0
+          },
+          "animations": [
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 1.3,
+              "params": {
+                "zoom": 1.1,
+                "direction": "up"
+              }
+            }
+          ],
+          "type": "mediaSlot",
+          "slotIndex": 0,
+          "media": "photoOrVideo",
+          "contentMode": "fill",
+          "mask": "rect",
+          "filter": "vivid",
+          "filterIntensity": 0.5,
+          "timing": {}
+        }
+      ],
+      "transition": {
+        "style": "cut",
+        "duration": 0.0
+      }
+    },
+    {
+      "id": "beat2",
+      "duration": 1.3,
+      "layers": [
+        {
+          "id": "pet-b2",
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 1.0,
+            "height": 1.0
+          },
+          "animations": [
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 1.3,
+              "params": {
+                "zoom": 1.2,
+                "direction": "left"
+              }
+            }
+          ],
+          "type": "mediaSlot",
+          "slotIndex": 0,
+          "media": "photoOrVideo",
+          "contentMode": "fill",
+          "mask": "rect",
+          "filter": "vivid",
+          "filterIntensity": 0.5,
+          "timing": {}
+        }
+      ],
+      "transition": {
+        "style": "cut",
+        "duration": 0.0
+      }
+    },
+    {
+      "id": "beat3",
+      "duration": 1.3,
+      "layers": [
+        {
+          "id": "pet-b3",
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 1.0,
+            "height": 1.0
+          },
+          "animations": [
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 1.3,
+              "params": {
+                "zoom": 1.1,
+                "direction": "down"
+              }
+            }
+          ],
+          "type": "mediaSlot",
+          "slotIndex": 0,
+          "media": "photoOrVideo",
+          "contentMode": "fill",
+          "mask": "rect",
+          "filter": "vivid",
+          "filterIntensity": 0.5,
+          "timing": {}
+        }
+      ],
+      "transition": {
+        "style": "cut",
+        "duration": 0.0
+      }
+    },
+    {
+      "id": "beat4",
+      "duration": 1.3,
+      "layers": [
+        {
+          "id": "pet-b4",
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 1.0,
+            "height": 1.0
+          },
+          "animations": [
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 1.3,
+              "params": {
+                "zoom": 1.2,
+                "direction": "right"
+              }
+            }
+          ],
+          "type": "mediaSlot",
+          "slotIndex": 0,
+          "media": "photoOrVideo",
+          "contentMode": "fill",
+          "mask": "rect",
+          "filter": "vivid",
+          "filterIntensity": 0.5,
+          "timing": {}
+        }
+      ],
+      "transition": {
+        "style": "cut",
+        "duration": 0.0
+      }
+    },
+    {
+      "id": "beat5",
+      "duration": 1.3,
+      "layers": [
+        {
+          "id": "pet-b5",
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 1.0,
+            "height": 1.0
+          },
+          "animations": [
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 1.3,
+              "params": {
+                "zoom": 1.1,
+                "direction": "up"
+              }
+            }
+          ],
+          "type": "mediaSlot",
+          "slotIndex": 0,
+          "media": "photoOrVideo",
+          "contentMode": "fill",
+          "mask": "rect",
+          "filter": "vivid",
+          "filterIntensity": 0.5,
+          "timing": {}
+        }
+      ]
     }
   ]
 }

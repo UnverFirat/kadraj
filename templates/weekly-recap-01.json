@@ -6,7 +6,7 @@
     "tr": "Haftalık Özet"
   },
   "category": "social",
-  "isPro": true,
+  "isPro": false,
   "canvas": {
     "width": 1080,
     "height": 1920,

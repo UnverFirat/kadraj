@@ -44,3 +44,38 @@ public struct EntitlementCache: @unchecked Sendable {
         defaults.removeObject(forKey: key)
     }
 }
+
+// MARK: - İlk ücretsiz export hakkı
+
+/// Bir kerelik "ilk videon bizden" hakkının defteri (bkz.
+/// `Entitlements.hasFirstFreeExport`).
+///
+/// NEDEN ABONELİK ÖNBELLEĞİNDEN AYRI: `EntitlementCache` mağazadan gelen
+/// bilginin kopyasıdır ve mağaza cevabı geldiğinde ÜSTÜNE YAZILIR. Bu hak ise
+/// tamamen yereldir ve tek yönlüdür — bir kez harcanınca uygulama silinene
+/// kadar geri gelmez. İkisini aynı sözlükte tutmak, ilk mağaza cevabında hakkın
+/// sessizce sıfırlanması (yani sonsuz filigransız export) riskini doğururdu.
+public struct FirstFreeExportLedger: @unchecked Sendable {
+    private let defaults: UserDefaults
+    private let key: String
+
+    public init(defaults: UserDefaults = .standard,
+                key: String = "export.firstFreeUsed") {
+        self.defaults = defaults
+        self.key = key
+    }
+
+    /// Kayıt yokken `false` döner — yeni kurulumda hak duruyor demektir.
+    public var isUsed: Bool { defaults.bool(forKey: key) }
+
+    /// Hak tüketildi. YALNIZ export başarıyla bittiğinde çağrılmalı: render
+    /// yarıda patlarsa ya da kullanıcı iptal ederse hakkını kaybetmemeli.
+    public func markUsed() {
+        defaults.set(true, forKey: key)
+    }
+
+    /// Testler ve demo/ekran görüntüsü akışı için (temiz kurulum taklidi).
+    public func reset() {
+        defaults.removeObject(forKey: key)
+    }
+}

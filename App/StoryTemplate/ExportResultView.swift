@@ -18,10 +18,17 @@ import TemplateKit
 struct ExportResultView<Overlay: View>: View {
     let url: URL
     let templateID: String
+    /// Şablonun kullanıcıya görünen adı — farklı oran çıktıları "Videolarım"da
+    /// hangi işten geldiği belli olsun diye bu adla kaydediliyor.
+    let templateName: String
     let duration: Double
     let accentHex: String
     /// Ücretsiz kullanıcıya filigranı kaldırma yolu burada da açık dursun.
     let showsProUpsell: Bool
+    /// Bu video bir kerelik "ilk videon bizden" hakkıyla filigransız çıktı mı.
+    /// Öyleyse asıl Pro daveti BURADA yapılır: kullanıcı emeğinin sonucunu tam
+    /// ekran görmüş, sevmiş ve neyi kaybedeceğini artık biliyor.
+    var gotFirstFreeExport: Bool = false
     let onUpgrade: () -> Void
     let onEditAgain: () -> Void
     let onNewVideo: () -> Void
@@ -30,7 +37,13 @@ struct ExportResultView<Overlay: View>: View {
     @ViewBuilder var overlay: (AVPlayer) -> Overlay
 
     @Environment(\.dismiss) private var dismiss
+    /// Farklı orandaki çıktılar buraya eklenir (kullanıcının kütüphanesi).
+    @EnvironmentObject private var exports: ExportLibrary
     @State private var player: AVPlayer?
+    /// Hangi oran hazırlanıyor (nil = yok).
+    @State private var reframing: AspectReframer.Preset?
+    /// Üretilmiş oranlar — aynı oranı iki kez üretmeye gerek yok.
+    @State private var reframed: Set<String> = []
     @State private var loopToken: NSObjectProtocol?
     @State private var isSaving = false
     @State private var saveMessage: String?
@@ -92,7 +105,7 @@ struct ExportResultView<Overlay: View>: View {
                 .font(.system(size: 19))
                 .foregroundStyle(Color(hex: accentHex))
             VStack(alignment: .leading, spacing: 1) {
-                Text("Videon hazır")
+                Text(gotFirstFreeExport ? "İlk videon hazır" : "Videon hazır")
                     .font(.system(size: 17, weight: .bold))
                 Text("Videolarım'a kaydedildi")
                     .font(.system(size: 12))
@@ -137,22 +150,28 @@ struct ExportResultView<Overlay: View>: View {
                 .foregroundStyle(.black)
             }
 
+            aspectRow
+
             if showsProUpsell {
-                // Filigranı kaldırmanın en doğal anı: kullanıcı filigranlı
-                // videosunu ilk kez tam ekran gördüğü an.
-                Button {
-                    Haptics.tap()
-                    onUpgrade()
-                } label: {
-                    HStack(spacing: 7) {
-                        Image(systemName: "crown.fill").font(.system(size: 11))
-                        Text("Filigranı kaldır").font(.system(size: 13, weight: .semibold))
+                if gotFirstFreeExport {
+                    firstFreeCard
+                } else {
+                    // Filigranı kaldırmanın en doğal anı: kullanıcı filigranlı
+                    // videosunu ilk kez tam ekran gördüğü an.
+                    Button {
+                        Haptics.tap()
+                        onUpgrade()
+                    } label: {
+                        HStack(spacing: 7) {
+                            Image(systemName: "crown.fill").font(.system(size: 11))
+                            Text("Filigranı kaldır").font(.system(size: 13, weight: .semibold))
+                        }
+                        .foregroundStyle(Color(hex: "#F2C14E"))
+                        .padding(.vertical, 8).padding(.horizontal, 16)
+                        .background(Color(hex: "#F2C14E").opacity(0.12), in: Capsule())
                     }
-                    .foregroundStyle(Color(hex: "#F2C14E"))
-                    .padding(.vertical, 8).padding(.horizontal, 16)
-                    .background(Color(hex: "#F2C14E").opacity(0.12), in: Capsule())
+                    .buttonStyle(.plain)
                 }
-                .buttonStyle(.plain)
             }
 
             // MÜZİK İPUCU. Üçüncü parti bir editör kullanıcıya popüler şarkı
@@ -186,6 +205,125 @@ struct ExportResultView<Overlay: View>: View {
             .font(.system(size: 13, weight: .medium))
             .foregroundStyle(.white.opacity(0.6))
             .buttonStyle(.plain)
+        }
+    }
+
+    /// İLK VİDEO HEDİYESİ + asıl Pro daveti.
+    ///
+    /// Huninin can alıcı noktası burası: kullanıcı emeğinin sonucunu tam ekran
+    /// izledi, sevdi ve elindeki videoda filigran YOK. Hediyeyi açıkça söylemek
+    /// iki işi birden yapıyor — kullanıcı neden bu videonun temiz olduğunu
+    /// anlıyor ve sonrakinin ne olacağını sürpriz yaşamadan öğreniyor. Teklif
+    /// bu yüzden burada, ilk dokunuşta değil.
+    private var firstFreeCard: some View {
+        VStack(spacing: 8) {
+            HStack(spacing: 7) {
+                Image(systemName: "gift.fill").font(.system(size: 12))
+                Text("İlk videon filigransız")
+                    .font(.system(size: 14, weight: .bold))
+            }
+            .foregroundStyle(Color(hex: "#F2C14E"))
+
+            Text("Bundan sonraki videolarına küçük bir filigran eklenecek. Pro'da hepsi filigransız kalır.")
+                .font(.system(size: 12))
+                .foregroundStyle(.white.opacity(0.6))
+                .multilineTextAlignment(.center)
+                .fixedSize(horizontal: false, vertical: true)
+
+            Button {
+                Haptics.tap()
+                onUpgrade()
+            } label: {
+                HStack(spacing: 7) {
+                    Image(systemName: "crown.fill").font(.system(size: 11))
+                    Text("Pro'ya geç").font(.system(size: 13, weight: .semibold))
+                }
+                .foregroundStyle(.black)
+                .padding(.vertical, 9).padding(.horizontal, 18)
+                .background(Color(hex: "#F2C14E"), in: Capsule())
+            }
+            .buttonStyle(.plain)
+        }
+        .frame(maxWidth: .infinity)
+        .padding(.vertical, 12).padding(.horizontal, 14)
+        .background(Color(hex: "#F2C14E").opacity(0.10),
+                    in: RoundedRectangle(cornerRadius: 14))
+        .overlay(RoundedRectangle(cornerRadius: 14)
+            .stroke(Color(hex: "#F2C14E").opacity(0.35), lineWidth: 1))
+    }
+
+    /// FARKLI ORAN. Şablonlar 9:16 (hikâye) için tasarlandı, ama kullanıcı aynı
+    /// işi gönderi ve kare olarak da paylaşmak istiyor. Tasarımı yeniden dizmek
+    /// yerine biten video yeni kadraja oturtuluyor; artan alanı kendi bulanık
+    /// kopyası dolduruyor (bkz. AspectReframer) — tasarım hiç bozulmuyor.
+    private var aspectRow: some View {
+        HStack(spacing: 8) {
+            Image(systemName: "aspectratio")
+                .font(.system(size: 11))
+                .foregroundStyle(.white.opacity(0.45))
+            Text("Farklı oran:")
+                .font(.system(size: 11))
+                .foregroundStyle(.white.opacity(0.45))
+            ForEach(AspectReframer.Preset.allCases, id: \.rawValue) { preset in
+                Button {
+                    Haptics.tap()
+                    reframe(preset)
+                } label: {
+                    HStack(spacing: 5) {
+                        if reframing == preset {
+                            ProgressView().tint(.white).scaleEffect(0.55)
+                        } else if reframed.contains(preset.rawValue) {
+                            Image(systemName: "checkmark")
+                                .font(.system(size: 9, weight: .bold))
+                        }
+                        Text(Self.title(for: preset))
+                            .font(.system(size: 11, weight: .semibold))
+                    }
+                    .foregroundStyle(.white.opacity(0.9))
+                    .padding(.horizontal, 10).padding(.vertical, 6)
+                    .background(.white.opacity(0.12), in: Capsule())
+                }
+                .buttonStyle(.plain)
+                .disabled(reframing != nil)
+            }
+        }
+    }
+
+    static func title(for preset: AspectReframer.Preset) -> String {
+        switch preset {
+        case .post: return String(localized: "Gönderi 4:5")
+        case .square: return String(localized: "Kare 1:1")
+        }
+    }
+
+    /// Videoyu istenen orana çevirip kütüphaneye ekler.
+    private func reframe(_ preset: AspectReframer.Preset) {
+        guard reframing == nil else { return }
+        reframing = preset
+        saveMessage = nil
+        Task {
+            let output = FileManager.default.temporaryDirectory
+                .appendingPathComponent("reframe-\(UUID().uuidString)-\(preset.fileSuffix).mp4")
+            do {
+                _ = try await AspectReframer.render(source: url, preset: preset,
+                                                    outputURL: output)
+                let duration = try await AVURLAsset(url: output).load(.duration).seconds
+                exports.add(videoAt: output, templateID: templateID,
+                            templateName: "\(templateName) · \(Self.title(for: preset))",
+                            duration: duration)
+                try? FileManager.default.removeItem(at: output)
+                reframed.insert(preset.rawValue)
+                Haptics.success()
+                withAnimation {
+                    saveMessage = String(localized: "\(Self.title(for: preset)) çıktısı Videolarım'a eklendi")
+                }
+            } catch {
+                Haptics.warning()
+                withAnimation {
+                    saveMessage = String(localized: "Bu oran hazırlanamadı. Tekrar dener misin?")
+                }
+            }
+            reframing = nil
         }
     }
 
@@ -243,11 +381,14 @@ struct ExportResultView<Overlay: View>: View {
 }
 
 extension ExportResultView where Overlay == EmptyView {
-    init(url: URL, templateID: String, duration: Double, accentHex: String,
-         showsProUpsell: Bool, onUpgrade: @escaping () -> Void,
+    init(url: URL, templateID: String, templateName: String, duration: Double,
+         accentHex: String, showsProUpsell: Bool, gotFirstFreeExport: Bool = false,
+         onUpgrade: @escaping () -> Void,
          onEditAgain: @escaping () -> Void, onNewVideo: @escaping () -> Void) {
-        self.init(url: url, templateID: templateID, duration: duration, accentHex: accentHex,
-                  showsProUpsell: showsProUpsell, onUpgrade: onUpgrade,
+        self.init(url: url, templateID: templateID, templateName: templateName,
+                  duration: duration, accentHex: accentHex,
+                  showsProUpsell: showsProUpsell,
+                  gotFirstFreeExport: gotFirstFreeExport, onUpgrade: onUpgrade,
                   onEditAgain: onEditAgain, onNewVideo: onNewVideo) { _ in EmptyView() }
     }
 }

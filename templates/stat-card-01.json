@@ -6,7 +6,7 @@
     "tr": "Rakam Kartı"
   },
   "category": "business",
-  "isPro": true,
+  "isPro": false,
   "canvas": {
     "width": 1080,
     "height": 1920,

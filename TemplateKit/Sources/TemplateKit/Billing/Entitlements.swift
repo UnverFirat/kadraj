@@ -83,8 +83,22 @@ public protocol EntitlementProvider: AnyObject, Sendable {
 public struct Entitlements: Equatable, Sendable {
     public var status: EntitlementStatus
 
-    public init(status: EntitlementStatus) {
+    /// Bir kerelik "ilk videon bizden" hakkı HARCANDI mı.
+    ///
+    /// HUNİ KARARI: eski akışta teklif değerden önce geliyordu — kullanıcı
+    /// uygulamayı açıyor, ilgisini çeken ilk şablona dokunuyor ve daha tek bir
+    /// video üretmeden paywall'a çarpıyordu. Kimse görmediği bir şey için ödemez.
+    /// Dönüşüm, kullanıcı işi bir kez BİTİRİP sonucu sevdiğinde olur; bu yüzden
+    /// ilk video filigransız veriliyor, teklif ondan sonra geliyor.
+    ///
+    /// Varsayılan `true` (= hak yok): bu alanı bilmeyen bir çağıran bugünkü
+    /// "ücretsiz kullanıcı filigran alır" davranışını görsün. Yeni bir alan
+    /// eklemek kimseye sessizce sınırsız filigransız export dağıtmamalı.
+    public var didUseFirstFreeExport: Bool
+
+    public init(status: EntitlementStatus, didUseFirstFreeExport: Bool = true) {
         self.status = status
+        self.didUseFirstFreeExport = didUseFirstFreeExport
     }
 
     public var isPro: Bool { status.isPro }
@@ -99,8 +113,19 @@ public struct Entitlements: Equatable, Sendable {
         track.isPro && !isPro
     }
 
-    /// Ücretsiz kullanıcının çıktısına filigran eklenir.
-    public var includeWatermark: Bool { !isPro }
+    /// Bir kerelik ücretsiz (filigransız) export hakkı hâlâ duruyor mu.
+    ///
+    /// Pro'da HER ZAMAN `false`: Pro'nun çıktısı zaten filigransız, hakkı
+    /// harcamanın da anlamı yok — abonelik biterse kullanıcı bu hakkı hâlâ
+    /// elinde bulmalı. Yani mekanizma Pro kullanıcıda hiç devreye girmez.
+    public var hasFirstFreeExport: Bool { !isPro && !didUseFirstFreeExport }
+
+    /// Motorun filigran hakkında bildiği TEK şey bu `Bool` — kural burada,
+    /// render katmanında değil.
+    ///
+    /// Ücretsiz kullanıcı ilk videosunu filigransız alır (bkz.
+    /// `didUseFirstFreeExport`), sonrakiler filigranlı çıkar.
+    public var includeWatermark: Bool { !isPro && didUseFirstFreeExport }
 
     /// Kilitli parça seçiliyse ücretsiz bir alternatife düşer (export
     /// kilitliyken sessizce Pro içerik kullanılmasın).

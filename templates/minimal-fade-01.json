@@ -1,11 +1,17 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "id": "minimal-fade-01",
-  "name": { "en": "Minimal Fade", "tr": "Minimal Geçiş" },
+  "name": {
+    "en": "Minimal Fade",
+    "tr": "Minimal Geçiş"
+  },
   "category": "minimal",
   "isPro": false,
-  "canvas": { "width": 1080, "height": 1920, "fps": 30 },
-  "duration": 6.0,
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
   "palette": {
     "background": "#0E0E10",
     "surface": "#1C1C1F",
@@ -13,76 +19,263 @@
     "textPrimary": "#FFFFFF",
     "textSecondary": "#B0B0B4"
   },
-  "audio": { "defaultTrackId": "calm-01", "volume": 0.8 },
+  "audio": {
+    "defaultTrackId": "calm-01",
+    "volume": 0.8
+  },
   "layers": [
-    {
-      "id": "bg",
-      "type": "shape",
-      "frame": { "x": 0.5, "y": 0.5, "width": 1.0, "height": 1.0 },
-      "colorRole": "background",
-      "animations": []
-    },
-    {
-      "id": "photo-main",
-      "type": "mediaSlot",
-      "slotIndex": 0,
-      "media": "photoOrVideo",
-      "contentMode": "fill",
-      "mask": "rect",
-      "cornerRadius": 0.015,
-      "frame": { "x": 0.5, "y": 0.36, "width": 0.86, "height": 0.52 },
-      "timing": { "start": 0.0, "duration": 6.0 },
-      "animations": [
-        { "role": "in", "preset": "fadeIn", "duration": 0.8, "easing": "easeOut" },
-        { "role": "loop", "preset": "kenBurns", "duration": 6.0,
-          "params": { "zoom": 1.1, "direction": "up" } }
-      ]
-    },
     {
       "id": "accent-bar",
       "type": "shape",
       "colorRole": "accent",
-      "frame": { "x": 0.5, "y": 0.685, "width": 0.12, "height": 0.004 },
-      "timing": { "start": 0.5 },
+      "frame": {
+        "x": 0.5,
+        "y": 0.685,
+        "width": 0.12,
+        "height": 0.004
+      },
+      "timing": {
+        "start": 0.5
+      },
       "animations": [
-        { "role": "in", "preset": "wipeReveal", "duration": 0.5,
-          "easing": "easeInOut", "params": { "direction": "right" } }
+        {
+          "role": "in",
+          "preset": "wipeReveal",
+          "duration": 0.5,
+          "easing": "easeInOut",
+          "params": {
+            "direction": "right"
+          }
+        }
       ]
     },
     {
       "id": "headline",
       "type": "text",
       "key": "headline",
-      "default": { "en": "YOUR TITLE HERE", "tr": "BAŞLIĞINIZ BURADA" },
-      "font": { "name": "Archivo-SemiBold", "size": 0.042 },
+      "default": {
+        "en": "YOUR TITLE HERE",
+        "tr": "BAŞLIĞINIZ BURADA"
+      },
+      "font": {
+        "name": "Archivo-SemiBold",
+        "size": 0.042
+      },
       "colorRole": "textPrimary",
       "alignment": "center",
       "maxLines": 2,
       "letterSpacing": 0.003,
       "allCaps": true,
-      "frame": { "x": 0.5, "y": 0.76, "width": 0.84, "height": 0.1 },
-      "timing": { "start": 0.8 },
+      "frame": {
+        "x": 0.5,
+        "y": 0.76,
+        "width": 0.84,
+        "height": 0.1
+      },
+      "timing": {
+        "start": 0.8
+      },
       "animations": [
-        { "role": "in", "preset": "slideIn", "duration": 0.6, "easing": "easeOut",
-          "params": { "direction": "up", "distance": 0.04 } },
-        { "role": "out", "preset": "fadeOut", "duration": 0.4 }
+        {
+          "role": "in",
+          "preset": "slideIn",
+          "duration": 0.6,
+          "easing": "easeOut",
+          "params": {
+            "direction": "up",
+            "distance": 0.04
+          }
+        },
+        {
+          "role": "out",
+          "preset": "fadeOut",
+          "duration": 0.4
+        }
       ]
     },
     {
       "id": "subtitle",
       "type": "text",
       "key": "subtitle",
-      "default": { "en": "A short caption", "tr": "Kısa bir alt yazı" },
-      "font": { "name": "Archivo-Regular", "size": 0.02 },
+      "default": {
+        "en": "A short caption",
+        "tr": "Kısa bir alt yazı"
+      },
+      "font": {
+        "name": "Archivo-Regular",
+        "size": 0.02
+      },
       "colorRole": "textSecondary",
       "alignment": "center",
       "maxLines": 1,
       "letterSpacing": 0.006,
-      "frame": { "x": 0.5, "y": 0.83, "width": 0.7, "height": 0.05 },
-      "timing": { "start": 1.2 },
+      "frame": {
+        "x": 0.5,
+        "y": 0.83,
+        "width": 0.7,
+        "height": 0.05
+      },
+      "timing": {
+        "start": 1.2
+      },
       "animations": [
-        { "role": "in", "preset": "fadeIn", "duration": 0.6, "delay": 0.1 },
-        { "role": "out", "preset": "fadeOut", "duration": 0.4 }
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.6,
+          "delay": 0.1
+        },
+        {
+          "role": "out",
+          "preset": "fadeOut",
+          "duration": 0.4
+        }
+      ]
+    }
+  ],
+  "scenes": [
+    {
+      "id": "beat1",
+      "duration": 1.5,
+      "layers": [
+        {
+          "id": "photo-main",
+          "type": "mediaSlot",
+          "slotIndex": 0,
+          "media": "photoOrVideo",
+          "contentMode": "fill",
+          "mask": "rect",
+          "cornerRadius": 0.015,
+          "frame": {
+            "x": 0.5,
+            "y": 0.36,
+            "width": 0.86,
+            "height": 0.52
+          },
+          "timing": {},
+          "animations": [
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 1.5,
+              "params": {
+                "zoom": 1.1,
+                "direction": "up"
+              }
+            }
+          ]
+        }
+      ],
+      "transition": {
+        "style": "cut",
+        "duration": 0.0
+      }
+    },
+    {
+      "id": "beat2",
+      "duration": 1.5,
+      "layers": [
+        {
+          "id": "photo-main-b2",
+          "type": "mediaSlot",
+          "slotIndex": 0,
+          "media": "photoOrVideo",
+          "contentMode": "fill",
+          "mask": "rect",
+          "cornerRadius": 0.015,
+          "frame": {
+            "x": 0.5,
+            "y": 0.36,
+            "width": 0.86,
+            "height": 0.52
+          },
+          "timing": {},
+          "animations": [
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 1.5,
+              "params": {
+                "zoom": 1.2,
+                "direction": "left"
+              }
+            }
+          ]
+        }
+      ],
+      "transition": {
+        "style": "cut",
+        "duration": 0.0
+      }
+    },
+    {
+      "id": "beat3",
+      "duration": 1.5,
+      "layers": [
+        {
+          "id": "photo-main-b3",
+          "type": "mediaSlot",
+          "slotIndex": 0,
+          "media": "photoOrVideo",
+          "contentMode": "fill",
+          "mask": "rect",
+          "cornerRadius": 0.015,
+          "frame": {
+            "x": 0.5,
+            "y": 0.36,
+            "width": 0.86,
+            "height": 0.52
+          },
+          "timing": {},
+          "animations": [
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 1.5,
+              "params": {
+                "zoom": 1.1,
+                "direction": "down"
+              }
+            }
+          ]
+        }
+      ],
+      "transition": {
+        "style": "cut",
+        "duration": 0.0
+      }
+    },
+    {
+      "id": "beat4",
+      "duration": 1.5,
+      "layers": [
+        {
+          "id": "photo-main-b4",
+          "type": "mediaSlot",
+          "slotIndex": 0,
+          "media": "photoOrVideo",
+          "contentMode": "fill",
+          "mask": "rect",
+          "cornerRadius": 0.015,
+          "frame": {
+            "x": 0.5,
+            "y": 0.36,
+            "width": 0.86,
+            "height": 0.52
+          },
+          "timing": {},
+          "animations": [
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 1.5,
+              "params": {
+                "zoom": 1.2,
+                "direction": "right"
+              }
+            }
+          ]
+        }
       ]
     }
   ]

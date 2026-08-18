@@ -19,7 +19,12 @@ struct MediaPicker: UIViewControllerRepresentable {
     enum Kind { case photo, video, any }
 
     let kind: Kind
-    let onPick: (PickedMedia) -> Void
+    /// Kaç medya birden seçilebilir. 5 klipli bir şablonda seçiciyi beş kez
+    /// açıp kapatmak (her seferinde tam ekran sheet) gereksiz bir sürtünmeydi;
+    /// çoklu seçim rakiplerde standart. Tek slot düzenlemede 1 kalır.
+    var selectionLimit: Int = 1
+    /// Seçilenler, kullanıcının seçtiği SIRAYLA.
+    let onPick: ([PickedMedia]) -> Void
     /// Seçim yapıldı, dosya HENÜZ hazır değil. iCloud'daki bir video birkaç
     /// saniye sürebiliyor; o sırada editör "alınıyor" göstersin.
     var onStart: () -> Void = {}
@@ -36,7 +41,10 @@ struct MediaPicker: UIViewControllerRepresentable {
         case .video: config.filter = .videos
         case .any: config.filter = .any(of: [.images, .videos])
         }
-        config.selectionLimit = 1
+        config.selectionLimit = max(1, selectionLimit)
+        // Çoklu seçimde kullanıcının dokunma SIRASI korunsun: slotlara o sırayla
+        // dağıtacağız, alfabetik/tarih sırası kullanıcının kurduğu anlatıyı bozar.
+        if selectionLimit > 1 { config.selection = .ordered }
         config.preferredAssetRepresentationMode = .current
         let picker = PHPickerViewController(configuration: config)
         picker.delegate = context.coordinator
@@ -75,39 +83,54 @@ struct MediaPicker: UIViewControllerRepresentable {
                     didFinishPicking results: [PHPickerResult]) {
             parent.dismiss()
             // Kullanıcı "İptal"e bastı: hata değil, sessizce çık.
-            guard let provider = results.first?.itemProvider else { return }
-            let finish: @Sendable (PickedMedia?) -> Void = { picked in
-                Task { @MainActor in
-                    if let picked { self.parent.onPick(picked) } else { self.parent.onError() }
+            guard !results.isEmpty else { return }
+            let providers = results.map(\.itemProvider)
+            Task { @MainActor in
+                self.parent.onStart()
+                // SIRAYLA yükle: seçim sırası slot sırası olacak. (Paralel
+                // yüklemede sıra kaybolur; üstelik birden çok iCloud videosunu
+                // aynı anda indirmek belleği de zorluyor.)
+                var picked: [PickedMedia] = []
+                for provider in providers {
+                    if let media = await Self.load(provider) { picked.append(media) }
+                }
+                // Hiçbiri okunamadıysa hata; bir kısmı okunduysa onlarla devam
+                // et — kullanıcı 5 seçtiyse 4'ü için akış durmasın.
+                if picked.isEmpty { self.parent.onError() } else { self.parent.onPick(picked) }
+            }
+        }
+
+        /// Tek bir seçimi `PickedMedia`'ya çevirir (okunamazsa nil).
+        private static func load(_ provider: NSItemProvider) async -> PickedMedia? {
+            if provider.canLoadObject(ofClass: UIImage.self) {
+                return await withCheckedContinuation { continuation in
+                    provider.loadObject(ofClass: UIImage.self) { object, _ in
+                        guard let image = object as? UIImage,
+                              let cg = MediaPicker.upright(image) else {
+                            return continuation.resume(returning: nil)
+                        }
+                        continuation.resume(returning: .photo(cg))
+                    }
                 }
             }
-            Task { @MainActor in self.parent.onStart() }
-
-            if provider.canLoadObject(ofClass: UIImage.self) {
-                provider.loadObject(ofClass: UIImage.self) { object, _ in
-                    guard let image = object as? UIImage,
-                          let cg = MediaPicker.upright(image) else {
-                        return finish(nil)
-                    }
-                    finish(.photo(cg))
-                }
-            } else if provider.hasItemConformingToTypeIdentifier(UTType.movie.identifier) {
-                // loadFileRepresentation geçici URL verir ve callback dönünce siler;
-                // kalıcı bir konuma kopyalarız.
+            guard provider.hasItemConformingToTypeIdentifier(UTType.movie.identifier) else {
+                return nil
+            }
+            // loadFileRepresentation geçici URL verir ve callback dönünce siler;
+            // kalıcı bir konuma kopyalarız.
+            return await withCheckedContinuation { continuation in
                 provider.loadFileRepresentation(
                     forTypeIdentifier: UTType.movie.identifier) { url, _ in
-                    guard let url else { return finish(nil) }
+                    guard let url else { return continuation.resume(returning: nil) }
                     let dest = FileManager.default.temporaryDirectory
                         .appendingPathComponent("picked-\(UUID().uuidString).mov")
                     do {
                         try FileManager.default.copyItem(at: url, to: dest)
                     } catch {
-                        return finish(nil)
+                        return continuation.resume(returning: nil)
                     }
-                    finish(.video(dest))
+                    continuation.resume(returning: .video(dest))
                 }
-            } else {
-                finish(nil)
             }
         }
     }

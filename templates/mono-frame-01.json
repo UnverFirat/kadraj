@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "id": "mono-frame-01",
   "name": {
     "en": "Mono Frame",
@@ -12,7 +12,6 @@
     "height": 1920,
     "fps": 30
   },
-  "duration": 6.5,
   "palette": {
     "background": "#0A0A0A",
     "surface": "#FFFFFF",
@@ -28,49 +27,6 @@
     "volume": 0.85
   },
   "layers": [
-    {
-      "id": "bg",
-      "frame": {
-        "x": 0.5,
-        "y": 0.5,
-        "width": 1.0,
-        "height": 1.0
-      },
-      "type": "shape",
-      "colorRole": "background"
-    },
-    {
-      "id": "shot",
-      "frame": {
-        "x": 0.5,
-        "y": 0.5,
-        "width": 1.0,
-        "height": 1.0
-      },
-      "animations": [
-        {
-          "role": "in",
-          "preset": "fadeIn",
-          "duration": 0.8
-        },
-        {
-          "role": "loop",
-          "preset": "kenBurns",
-          "duration": 6.5,
-          "params": {
-            "zoom": 1.07,
-            "direction": "up"
-          }
-        }
-      ],
-      "type": "mediaSlot",
-      "slotIndex": 0,
-      "media": "photoOrVideo",
-      "contentMode": "fill",
-      "mask": "rect",
-      "filter": "mono",
-      "filterIntensity": 1.0
-    },
     {
       "id": "veil",
       "frame": {
@@ -193,19 +149,12 @@
       "animations": [
         {
           "role": "in",
-          "preset": "kineticWords",
-          "duration": 0.9,
+          "preset": "slideIn",
+          "duration": 0.7,
+          "easing": "easeOut",
           "params": {
-            "distance": 0.02
-          }
-        },
-        {
-          "role": "loop",
-          "preset": "floatLoop",
-          "duration": 2.6,
-          "params": {
-            "distance": 0.006,
-            "axis": "y"
+            "direction": "up",
+            "distance": 0.03
           }
         }
       ],
@@ -255,6 +204,194 @@
       "alignment": "center",
       "letterSpacing": 0.014,
       "allCaps": true
+    }
+  ],
+  "scenes": [
+    {
+      "id": "beat1",
+      "duration": 1.3,
+      "layers": [
+        {
+          "id": "shot",
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 1.0,
+            "height": 1.0
+          },
+          "animations": [
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 1.3,
+              "params": {
+                "zoom": 1.1,
+                "direction": "up"
+              }
+            }
+          ],
+          "type": "mediaSlot",
+          "slotIndex": 0,
+          "media": "photoOrVideo",
+          "contentMode": "fill",
+          "mask": "rect",
+          "filter": "mono",
+          "filterIntensity": 1.0,
+          "timing": {}
+        }
+      ],
+      "transition": {
+        "style": "cut",
+        "duration": 0.0
+      }
+    },
+    {
+      "id": "beat2",
+      "duration": 1.3,
+      "layers": [
+        {
+          "id": "shot-b2",
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 1.0,
+            "height": 1.0
+          },
+          "animations": [
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 1.3,
+              "params": {
+                "zoom": 1.2,
+                "direction": "left"
+              }
+            }
+          ],
+          "type": "mediaSlot",
+          "slotIndex": 0,
+          "media": "photoOrVideo",
+          "contentMode": "fill",
+          "mask": "rect",
+          "filter": "mono",
+          "filterIntensity": 1.0,
+          "timing": {}
+        }
+      ],
+      "transition": {
+        "style": "cut",
+        "duration": 0.0
+      }
+    },
+    {
+      "id": "beat3",
+      "duration": 1.3,
+      "layers": [
+        {
+          "id": "shot-b3",
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 1.0,
+            "height": 1.0
+          },
+          "animations": [
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 1.3,
+              "params": {
+                "zoom": 1.1,
+                "direction": "down"
+              }
+            }
+          ],
+          "type": "mediaSlot",
+          "slotIndex": 0,
+          "media": "photoOrVideo",
+          "contentMode": "fill",
+          "mask": "rect",
+          "filter": "mono",
+          "filterIntensity": 1.0,
+          "timing": {}
+        }
+      ],
+      "transition": {
+        "style": "cut",
+        "duration": 0.0
+      }
+    },
+    {
+      "id": "beat4",
+      "duration": 1.3,
+      "layers": [
+        {
+          "id": "shot-b4",
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 1.0,
+            "height": 1.0
+          },
+          "animations": [
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 1.3,
+              "params": {
+                "zoom": 1.2,
+                "direction": "right"
+              }
+            }
+          ],
+          "type": "mediaSlot",
+          "slotIndex": 0,
+          "media": "photoOrVideo",
+          "contentMode": "fill",
+          "mask": "rect",
+          "filter": "mono",
+          "filterIntensity": 1.0,
+          "timing": {}
+        }
+      ],
+      "transition": {
+        "style": "cut",
+        "duration": 0.0
+      }
+    },
+    {
+      "id": "beat5",
+      "duration": 1.3,
+      "layers": [
+        {
+          "id": "shot-b5",
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 1.0,
+            "height": 1.0
+          },
+          "animations": [
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 1.3,
+              "params": {
+                "zoom": 1.1,
+                "direction": "up"
+              }
+            }
+          ],
+          "type": "mediaSlot",
+          "slotIndex": 0,
+          "media": "photoOrVideo",
+          "contentMode": "fill",
+          "mask": "rect",
+          "filter": "mono",
+          "filterIntensity": 1.0,
+          "timing": {}
+        }
+      ]
     }
   ]
 }

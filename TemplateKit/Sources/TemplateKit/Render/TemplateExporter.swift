@@ -42,11 +42,16 @@ public final class TemplateExporter {
         public var asset: AVAsset
         public var start: Double
         public var volume: Float
+        /// Sesin hız çarpanı. Yalnız KULLANICININ KENDİ KLİBİNİN sesi için 1'den
+        /// farklı olur: klip hızlandırıldıysa sesi de aynı oranda hızlanmalı,
+        /// yoksa görüntüyle ses saniyeler içinde ayrışır. Müzikte her zaman 1.
+        public var speed: Double
 
-        public init(asset: AVAsset, start: Double = 0, volume: Float = 1) {
+        public init(asset: AVAsset, start: Double = 0, volume: Float = 1, speed: Double = 1) {
             self.asset = asset
             self.start = start
             self.volume = volume
+            self.speed = speed
         }
     }
 
@@ -75,7 +80,7 @@ public final class TemplateExporter {
                     audio: AudioInput? = nil,
                     includeWatermark: Bool,
                     watermarkImage: CGImage? = nil,
-                    watermarkText: String = "Made with StoryTemplate",
+                    watermarkText: String = "Made with Kadraj",
                     workDirectory: URL,
                     outputURL: URL) {
             self.template = template
@@ -174,10 +179,17 @@ public final class TemplateExporter {
             let start = CMTime(seconds: base.start, preferredTimescale: 600)
             let available = assetDuration - start
             let wanted = fullRange.duration
-            let range = CMTimeRange(start: start, duration: min(available, wanted))
+            // Kullanıcının seçtiği hız (montaj tabanında 1: hız 1. geçişte
+            // klip klip uygulanmış olarak geliyor). Şablonun süresi
+            // değişmez — kaynaktan alınan bölüm değişir.
+            let speed = base.slotIndex.flatMap { request.edits.slots[$0]?.speed } ?? 1
+            let sourceWanted = speed == 1 ? wanted
+                : CMTimeMultiplyByFloat64(wanted, multiplier: SlotAssignment.clampSpeed(speed))
+            let range = CMTimeRange(start: start, duration: min(available, sourceWanted))
             try videoTrack.insertTimeRange(range, of: sourceTrack, at: .zero)
-            // Klip şablondan kısaysa son bölümü uzat (son karede donma etkisi).
-            if range.duration < wanted {
+            // Alınan bölümü şablon süresine yay. (Klip kısaysa uzatılır — son
+            // karede donma etkisi; hızlandırmada ise sıkıştırılır.)
+            if range.duration != wanted {
                 videoTrack.scaleTimeRange(CMTimeRange(start: .zero, duration: range.duration),
                                           toDuration: wanted)
             }
@@ -205,9 +217,20 @@ public final class TemplateExporter {
                    withMediaType: .audio, preferredTrackID: kCMPersistentTrackID_Invalid) {
                 let start = CMTime(seconds: audio.start, preferredTimescale: 600)
                 let assetDuration = try await audio.asset.load(.duration)
+                let speed = SlotAssignment.clampSpeed(audio.speed)
+                let wanted = speed == 1 ? fullRange.duration
+                    : CMTimeMultiplyByFloat64(fullRange.duration, multiplier: speed)
                 let range = CMTimeRange(start: start,
-                                        duration: min(assetDuration - start, fullRange.duration))
+                                        duration: min(assetDuration - start, wanted))
                 try audioTrack.insertTimeRange(range, of: sourceTrack, at: .zero)
+                // Görüntüyle aynı oranda sıkıştır/yay — klip hızlandırıldığında
+                // sesin görüntüden ayrışmaması için. Hız 1'de HİÇ ölçeklenmez:
+                // videodan kısa bir müzik parçası uzatılmamalı, olduğu yerde
+                // bitip fade'e girmeli.
+                if speed != 1, range.duration != fullRange.duration {
+                    audioTrack.scaleTimeRange(CMTimeRange(start: .zero, duration: range.duration),
+                                              toDuration: fullRange.duration)
+                }
 
                 let parameters = AVMutableAudioMixInputParameters(track: audioTrack)
                 parameters.setVolume(audio.volume, at: .zero)
@@ -345,6 +368,20 @@ public final class TemplateExporter {
             .concatenating(CGAffineTransform(translationX: tx, y: ty))
     }
 
+    /// Filigran katmanı (sağ alt köşe).
+    ///
+    /// ZEMİNDEN BAĞIMSIZ OKUNMALI. Sağ alt köşede ne olduğunu bilemeyiz:
+    /// kullanıcının kendi fotoğrafı, krem bir şablon zemini ya da siyah bir
+    /// kadraj. Eskiden filigran tek renkli, yarı saydam beyaz bir yazıydı ve
+    /// açık zeminlerde tamamen kayboluyordu ("Tarif Adımları" export'unda
+    /// kırpıp 2x büyütmeye rağmen okunmuyordu) — oysa filigran Pro'ya geçmenin
+    /// ANA motivasyonu, görünmezse dönüşüm de olmaz.
+    ///
+    /// Çözüm palet tahmini DEĞİL (palet zemini o köşede geçerli olmayabilir):
+    /// yazının arkasına koyu yarı saydam bir hap + tam opak beyaz yazı. En kötü
+    /// durumda — bembeyaz bir zemin — hap %50 siyahla ~orta griye düşer ve
+    /// beyaz yazı ~4:1 kontrast korur; koyu zeminde hap görünmez olur, yazı
+    /// yine okunur.
     private func makeWatermarkLayer(canvasSize: CGSize, image: CGImage?,
                                     text: String) -> CALayer {
         // Ağaç isGeometryFlipped (y aşağı) olduğundan sağ alt = büyük y.
@@ -354,26 +391,56 @@ public final class TemplateExporter {
             let width = canvasSize.width * 0.22
             let height = width * CGFloat(image.height) / CGFloat(image.width)
             layer.contents = image
-            layer.opacity = 0.7
+            // Logo filigranı 0.7'de zaten silikti; kontrastı yumuşak koyu bir
+            // halo taşır (logoda hap yok — şeklini bozar).
+            layer.opacity = 0.85
+            layer.shadowColor = CGColor(gray: 0, alpha: 1)
+            layer.shadowOpacity = 0.6
+            layer.shadowRadius = canvasSize.width * 0.007
+            layer.shadowOffset = .zero
             layer.frame = CGRect(x: canvasSize.width - width - margin,
                                  y: canvasSize.height - height - margin,
                                  width: width, height: height)
             return layer
         }
+        let fontSize = canvasSize.height * 0.016
         let size = CGSize(width: canvasSize.width * 0.5,
                           height: canvasSize.height * 0.03)
         let spec = TextRasterizer.Spec(
             text: text,
             fontName: "HelveticaNeue-Medium",
-            fontSize: canvasSize.height * 0.016,
-            color: CGColor(gray: 1, alpha: 0.6),
+            fontSize: fontSize,
+            color: CGColor(gray: 1, alpha: 1),
             alignment: .right,
             size: size,
             scale: 1)
-        layer.contents = TextRasterizer.rasterize(spec)
         layer.frame = CGRect(x: canvasSize.width - size.width - margin,
                              y: canvasSize.height - size.height - margin,
                              width: size.width, height: size.height)
+
+        // Hap, rasterizer'ın `highlightColor`'ıyla DEĞİL ayrı bir katmanla
+        // çizilir: yazı sağa dayalı olduğu için hapın sağ dolgusu rasterize
+        // kutusunun dışına düşüyor ve kırpılıyordu (harfe bitişik, tek yanı
+        // dolgulu bir kutu). Kelime kutuları ölçülüp hap kendi katmanına
+        // konunca dolgu her iki yanda eşit ve kırpılmıyor.
+        if let layout = TextRasterizer.layout(spec), let first = layout.words.first {
+            let bounds = layout.words.dropFirst().reduce(first) { $0.union($1) }
+            let pill = CALayer()
+            pill.frame = bounds.insetBy(dx: -fontSize * 0.45, dy: -fontSize * 0.30)
+            pill.backgroundColor = CGColor(gray: 0, alpha: 0.5)
+            pill.cornerRadius = min(pill.frame.height, pill.frame.width) / 2
+            // Hapın kenarını açık zeminden ayıran yumuşak halo.
+            pill.shadowColor = CGColor(gray: 0, alpha: 1)
+            pill.shadowOpacity = 0.45
+            pill.shadowRadius = canvasSize.width * 0.005
+            pill.shadowOffset = .zero
+            layer.addSublayer(pill)
+        }
+
+        let textLayer = CALayer()
+        textLayer.frame = CGRect(origin: .zero, size: size)
+        textLayer.contents = TextRasterizer.rasterize(spec)
+        layer.addSublayer(textLayer)
         return layer
     }
 }

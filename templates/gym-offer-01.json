@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "id": "gym-offer-01",
   "name": {
     "en": "Gym Offer",
@@ -12,7 +12,6 @@
     "height": 1920,
     "fps": 30
   },
-  "duration": 6.0,
   "palette": {
     "background": "#101014",
     "surface": "#FFFFFF",
@@ -28,49 +27,6 @@
     "volume": 0.85
   },
   "layers": [
-    {
-      "id": "bg",
-      "frame": {
-        "x": 0.5,
-        "y": 0.5,
-        "width": 1.0,
-        "height": 1.0
-      },
-      "type": "shape",
-      "colorRole": "background"
-    },
-    {
-      "id": "photo",
-      "frame": {
-        "x": 0.5,
-        "y": 0.5,
-        "width": 1.0,
-        "height": 1.0
-      },
-      "animations": [
-        {
-          "role": "in",
-          "preset": "fadeIn",
-          "duration": 0.5
-        },
-        {
-          "role": "loop",
-          "preset": "kenBurns",
-          "duration": 6.0,
-          "params": {
-            "zoom": 1.14,
-            "direction": "up"
-          }
-        }
-      ],
-      "type": "mediaSlot",
-      "slotIndex": 0,
-      "media": "photoOrVideo",
-      "contentMode": "fill",
-      "mask": "rect",
-      "filter": "cinematic",
-      "filterIntensity": 0.5
-    },
     {
       "id": "scrim",
       "frame": {
@@ -104,15 +60,6 @@
           "role": "in",
           "preset": "bounce",
           "duration": 0.65
-        },
-        {
-          "role": "loop",
-          "preset": "shake",
-          "duration": 1.4,
-          "delay": 1.05,
-          "params": {
-            "degrees": 2.0
-          }
         }
       ],
       "type": "shape",
@@ -167,19 +114,12 @@
       "animations": [
         {
           "role": "in",
-          "preset": "kineticWords",
-          "duration": 0.9,
+          "preset": "slideIn",
+          "duration": 0.6,
+          "easing": "easeOut",
           "params": {
-            "distance": 0.02
-          }
-        },
-        {
-          "role": "loop",
-          "preset": "floatLoop",
-          "duration": 2.6,
-          "params": {
-            "distance": 0.006,
-            "axis": "y"
+            "direction": "up",
+            "distance": 0.05
           }
         }
       ],
@@ -259,6 +199,156 @@
       },
       "colorRole": "accent",
       "alignment": "center"
+    }
+  ],
+  "scenes": [
+    {
+      "id": "beat1",
+      "duration": 1.5,
+      "layers": [
+        {
+          "id": "photo",
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 1.0,
+            "height": 1.0
+          },
+          "animations": [
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 1.5,
+              "params": {
+                "zoom": 1.1,
+                "direction": "up"
+              }
+            }
+          ],
+          "type": "mediaSlot",
+          "slotIndex": 0,
+          "media": "photoOrVideo",
+          "contentMode": "fill",
+          "mask": "rect",
+          "filter": "cinematic",
+          "filterIntensity": 0.5,
+          "timing": {}
+        }
+      ],
+      "transition": {
+        "style": "cut",
+        "duration": 0.0
+      }
+    },
+    {
+      "id": "beat2",
+      "duration": 1.5,
+      "layers": [
+        {
+          "id": "photo-b2",
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 1.0,
+            "height": 1.0
+          },
+          "animations": [
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 1.5,
+              "params": {
+                "zoom": 1.2,
+                "direction": "left"
+              }
+            }
+          ],
+          "type": "mediaSlot",
+          "slotIndex": 0,
+          "media": "photoOrVideo",
+          "contentMode": "fill",
+          "mask": "rect",
+          "filter": "cinematic",
+          "filterIntensity": 0.5,
+          "timing": {}
+        }
+      ],
+      "transition": {
+        "style": "cut",
+        "duration": 0.0
+      }
+    },
+    {
+      "id": "beat3",
+      "duration": 1.5,
+      "layers": [
+        {
+          "id": "photo-b3",
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 1.0,
+            "height": 1.0
+          },
+          "animations": [
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 1.5,
+              "params": {
+                "zoom": 1.1,
+                "direction": "down"
+              }
+            }
+          ],
+          "type": "mediaSlot",
+          "slotIndex": 0,
+          "media": "photoOrVideo",
+          "contentMode": "fill",
+          "mask": "rect",
+          "filter": "cinematic",
+          "filterIntensity": 0.5,
+          "timing": {}
+        }
+      ],
+      "transition": {
+        "style": "cut",
+        "duration": 0.0
+      }
+    },
+    {
+      "id": "beat4",
+      "duration": 1.5,
+      "layers": [
+        {
+          "id": "photo-b4",
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 1.0,
+            "height": 1.0
+          },
+          "animations": [
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 1.5,
+              "params": {
+                "zoom": 1.2,
+                "direction": "right"
+              }
+            }
+          ],
+          "type": "mediaSlot",
+          "slotIndex": 0,
+          "media": "photoOrVideo",
+          "contentMode": "fill",
+          "mask": "rect",
+          "filter": "cinematic",
+          "filterIntensity": 0.5,
+          "timing": {}
+        }
+      ]
     }
   ]
 }

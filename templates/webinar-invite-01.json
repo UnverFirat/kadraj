@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "id": "webinar-invite-01",
   "name": {
     "en": "Webinar Invite",
@@ -12,7 +12,6 @@
     "height": 1920,
     "fps": 30
   },
-  "duration": 7.0,
   "palette": {
     "background": "#06202B",
     "surface": "#EAF7FB",
@@ -29,49 +28,6 @@
     "volume": 0.85
   },
   "layers": [
-    {
-      "id": "bg",
-      "frame": {
-        "x": 0.5,
-        "y": 0.5,
-        "width": 1.0,
-        "height": 1.0
-      },
-      "type": "shape",
-      "colorRole": "background"
-    },
-    {
-      "id": "photo",
-      "frame": {
-        "x": 0.5,
-        "y": 0.245,
-        "width": 1.0,
-        "height": 0.49
-      },
-      "animations": [
-        {
-          "role": "in",
-          "preset": "fadeIn",
-          "duration": 0.6
-        },
-        {
-          "role": "loop",
-          "preset": "kenBurns",
-          "duration": 7.0,
-          "params": {
-            "zoom": 1.09,
-            "direction": "down"
-          }
-        }
-      ],
-      "type": "mediaSlot",
-      "slotIndex": 0,
-      "media": "photoOrVideo",
-      "contentMode": "fill",
-      "mask": "rect",
-      "filter": "cool",
-      "filterIntensity": 0.4
-    },
     {
       "id": "scrim",
       "frame": {
@@ -168,15 +124,6 @@
           "params": {
             "direction": "up",
             "distance": 0.03
-          }
-        },
-        {
-          "role": "loop",
-          "preset": "floatLoop",
-          "duration": 2.6,
-          "params": {
-            "distance": 0.006,
-            "axis": "y"
           }
         }
       ],
@@ -346,15 +293,6 @@
           "params": {
             "overshoot": 1.08
           }
-        },
-        {
-          "role": "loop",
-          "preset": "shake",
-          "duration": 1.4,
-          "delay": 0.9,
-          "params": {
-            "degrees": 2.0
-          }
         }
       ],
       "type": "shape",
@@ -391,6 +329,194 @@
       },
       "colorRole": "textOnAccent",
       "alignment": "center"
+    }
+  ],
+  "scenes": [
+    {
+      "id": "beat1",
+      "duration": 1.4,
+      "layers": [
+        {
+          "id": "photo",
+          "frame": {
+            "x": 0.5,
+            "y": 0.245,
+            "width": 1.0,
+            "height": 0.49
+          },
+          "animations": [
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 1.4,
+              "params": {
+                "zoom": 1.1,
+                "direction": "up"
+              }
+            }
+          ],
+          "type": "mediaSlot",
+          "slotIndex": 0,
+          "media": "photoOrVideo",
+          "contentMode": "fill",
+          "mask": "rect",
+          "filter": "cool",
+          "filterIntensity": 0.4,
+          "timing": {}
+        }
+      ],
+      "transition": {
+        "style": "cut",
+        "duration": 0.0
+      }
+    },
+    {
+      "id": "beat2",
+      "duration": 1.4,
+      "layers": [
+        {
+          "id": "photo-b2",
+          "frame": {
+            "x": 0.5,
+            "y": 0.245,
+            "width": 1.0,
+            "height": 0.49
+          },
+          "animations": [
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 1.4,
+              "params": {
+                "zoom": 1.2,
+                "direction": "left"
+              }
+            }
+          ],
+          "type": "mediaSlot",
+          "slotIndex": 0,
+          "media": "photoOrVideo",
+          "contentMode": "fill",
+          "mask": "rect",
+          "filter": "cool",
+          "filterIntensity": 0.4,
+          "timing": {}
+        }
+      ],
+      "transition": {
+        "style": "cut",
+        "duration": 0.0
+      }
+    },
+    {
+      "id": "beat3",
+      "duration": 1.4,
+      "layers": [
+        {
+          "id": "photo-b3",
+          "frame": {
+            "x": 0.5,
+            "y": 0.245,
+            "width": 1.0,
+            "height": 0.49
+          },
+          "animations": [
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 1.4,
+              "params": {
+                "zoom": 1.1,
+                "direction": "down"
+              }
+            }
+          ],
+          "type": "mediaSlot",
+          "slotIndex": 0,
+          "media": "photoOrVideo",
+          "contentMode": "fill",
+          "mask": "rect",
+          "filter": "cool",
+          "filterIntensity": 0.4,
+          "timing": {}
+        }
+      ],
+      "transition": {
+        "style": "cut",
+        "duration": 0.0
+      }
+    },
+    {
+      "id": "beat4",
+      "duration": 1.4,
+      "layers": [
+        {
+          "id": "photo-b4",
+          "frame": {
+            "x": 0.5,
+            "y": 0.245,
+            "width": 1.0,
+            "height": 0.49
+          },
+          "animations": [
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 1.4,
+              "params": {
+                "zoom": 1.2,
+                "direction": "right"
+              }
+            }
+          ],
+          "type": "mediaSlot",
+          "slotIndex": 0,
+          "media": "photoOrVideo",
+          "contentMode": "fill",
+          "mask": "rect",
+          "filter": "cool",
+          "filterIntensity": 0.4,
+          "timing": {}
+        }
+      ],
+      "transition": {
+        "style": "cut",
+        "duration": 0.0
+      }
+    },
+    {
+      "id": "beat5",
+      "duration": 1.4,
+      "layers": [
+        {
+          "id": "photo-b5",
+          "frame": {
+            "x": 0.5,
+            "y": 0.245,
+            "width": 1.0,
+            "height": 0.49
+          },
+          "animations": [
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 1.4,
+              "params": {
+                "zoom": 1.1,
+                "direction": "up"
+              }
+            }
+          ],
+          "type": "mediaSlot",
+          "slotIndex": 0,
+          "media": "photoOrVideo",
+          "contentMode": "fill",
+          "mask": "rect",
+          "filter": "cool",
+          "filterIntensity": 0.4,
+          "timing": {}
+        }
+      ]
     }
   ]
 }

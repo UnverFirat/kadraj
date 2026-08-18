@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "id": "product-01",
   "name": {
     "en": "Product Drop",
@@ -12,7 +12,6 @@
     "height": 1920,
     "fps": 30
   },
-  "duration": 4.5,
   "palette": {
     "background": "#F4F1EC",
     "surface": "#FFFFFF",
@@ -26,52 +25,6 @@
     "volume": 0.8
   },
   "layers": [
-    {
-      "id": "bg",
-      "type": "shape",
-      "colorRole": "background",
-      "frame": {
-        "x": 0.5,
-        "y": 0.5,
-        "width": 1.0,
-        "height": 1.0
-      }
-    },
-    {
-      "id": "photo",
-      "type": "mediaSlot",
-      "slotIndex": 0,
-      "media": "photoOrVideo",
-      "contentMode": "fill",
-      "mask": "rect",
-      "cornerRadius": 0.02,
-      "frame": {
-        "x": 0.5,
-        "y": 0.42,
-        "width": 0.82,
-        "height": 0.56
-      },
-      "animations": [
-        {
-          "role": "in",
-          "preset": "scaleIn",
-          "duration": 0.6,
-          "easing": "easeOut",
-          "params": {
-            "from": 0.9
-          }
-        },
-        {
-          "role": "loop",
-          "preset": "kenBurns",
-          "duration": 4.5,
-          "params": {
-            "zoom": 1.08,
-            "direction": "up"
-          }
-        }
-      ]
-    },
     {
       "id": "new-pill",
       "type": "shape",
@@ -289,6 +242,115 @@
           "role": "in",
           "preset": "fadeIn",
           "duration": 0.4
+        }
+      ]
+    }
+  ],
+  "scenes": [
+    {
+      "id": "beat1",
+      "duration": 1.5,
+      "layers": [
+        {
+          "id": "photo",
+          "type": "mediaSlot",
+          "slotIndex": 0,
+          "media": "photoOrVideo",
+          "contentMode": "fill",
+          "mask": "rect",
+          "cornerRadius": 0.02,
+          "frame": {
+            "x": 0.5,
+            "y": 0.42,
+            "width": 0.82,
+            "height": 0.56
+          },
+          "animations": [
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 1.5,
+              "params": {
+                "zoom": 1.1,
+                "direction": "up"
+              }
+            }
+          ],
+          "timing": {}
+        }
+      ],
+      "transition": {
+        "style": "cut",
+        "duration": 0.0
+      }
+    },
+    {
+      "id": "beat2",
+      "duration": 1.5,
+      "layers": [
+        {
+          "id": "photo-b2",
+          "type": "mediaSlot",
+          "slotIndex": 0,
+          "media": "photoOrVideo",
+          "contentMode": "fill",
+          "mask": "rect",
+          "cornerRadius": 0.02,
+          "frame": {
+            "x": 0.5,
+            "y": 0.42,
+            "width": 0.82,
+            "height": 0.56
+          },
+          "animations": [
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 1.5,
+              "params": {
+                "zoom": 1.2,
+                "direction": "left"
+              }
+            }
+          ],
+          "timing": {}
+        }
+      ],
+      "transition": {
+        "style": "cut",
+        "duration": 0.0
+      }
+    },
+    {
+      "id": "beat3",
+      "duration": 1.5,
+      "layers": [
+        {
+          "id": "photo-b3",
+          "type": "mediaSlot",
+          "slotIndex": 0,
+          "media": "photoOrVideo",
+          "contentMode": "fill",
+          "mask": "rect",
+          "cornerRadius": 0.02,
+          "frame": {
+            "x": 0.5,
+            "y": 0.42,
+            "width": 0.82,
+            "height": 0.56
+          },
+          "animations": [
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 1.5,
+              "params": {
+                "zoom": 1.1,
+                "direction": "down"
+              }
+            }
+          ],
+          "timing": {}
         }
       ]
     }

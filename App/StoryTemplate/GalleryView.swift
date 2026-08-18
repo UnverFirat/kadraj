@@ -4,6 +4,7 @@ import TemplateKit
 struct GalleryView: View {
     @EnvironmentObject var library: DemoLibrary
     @EnvironmentObject var store: Store
+    @EnvironmentObject var drafts: DraftStore
     /// nil = tüm kategoriler.
     @State private var category: String?
     @State private var query: String = ""
@@ -35,12 +36,22 @@ struct GalleryView: View {
                 searchField
                     .padding(.bottom, 12)
 
-                if !store.entitlements.isPro { proBanner }
+                // TEKLİF DEĞERDEN SONRA GELİR. Kullanıcı henüz tek bir video
+                // üretmediyse bu bant, karşılığını görmediği bir şeyin
+                // reklamıdır — ilk açılışta ekranda şablonlar olmalı, satış
+                // değil. İlk video bitince (bkz. `Store.hasFinishedAVideo`)
+                // bant belirir: artık neyi satın aldığı belli.
+                if !store.entitlements.isPro, store.hasFinishedAVideo { proBanner }
                 if library.projects.isEmpty {
                     catalogPlaceholder
                 }
             }
             .padding(.horizontal, 20)
+
+            // YARIM KALMIŞ İŞLER en üstte: kullanıcının geri dönme sebebi bu.
+            // Katalogun en tepesinde durur çünkü "devam et", "yeni bir şablon
+            // seç"ten daha değerli bir eylem.
+            if !drafts.drafts.isEmpty, isBrowsingAll { draftStrip }
 
             // Çipler kenardan kenara kaysın: 20 pt'lik gövde dolgusunun içine
             // hapsedilince son çip kenarda YARIM kalıyor ve kaydırılabilir
@@ -77,6 +88,47 @@ struct GalleryView: View {
     /// Süzgeçsiz gezinme: kategori seçili değil ve arama boş.
     private var isBrowsingAll: Bool {
         category == nil && query.trimmingCharacters(in: .whitespaces).isEmpty
+    }
+
+    // MARK: - Devam et (taslaklar)
+
+    private var draftStrip: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            HStack(alignment: .firstTextBaseline, spacing: 8) {
+                Text("Devam et")
+                    .font(.system(size: 20, weight: .bold))
+                Text("\(drafts.drafts.count)")
+                    .font(.system(size: 13, weight: .semibold))
+                    .foregroundStyle(.white.opacity(0.35))
+            }
+            .padding(.horizontal, 20)
+
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 12) {
+                    ForEach(drafts.drafts) { draft in
+                        // Taslağın şablonu katalogdan kalkmış olabilir (CDN'den
+                        // çekilmiş bir şablon kaldırıldı): o kartı gösterme.
+                        if library.project(templateID: draft.templateID) != nil {
+                            NavigationLink(value: Route.editor(templateID: draft.templateID,
+                                                               autoExport: false)) {
+                                DraftCard(draft: draft)
+                            }
+                            .buttonStyle(.plain)
+                            .simultaneousGesture(TapGesture().onEnded { Haptics.tap() })
+                            .contextMenu {
+                                Button(role: .destructive) {
+                                    drafts.remove(templateID: draft.templateID)
+                                } label: {
+                                    Label("Taslağı sil", systemImage: "trash")
+                                }
+                            }
+                        }
+                    }
+                }
+                .padding(.horizontal, 20)
+            }
+        }
+        .padding(.bottom, 20)
     }
 
     private struct Section {
@@ -404,5 +456,71 @@ extension Color {
                   green: Double((rgb >> 8) & 0xFF) / 255,
                   blue: Double(rgb & 0xFF) / 255,
                   opacity: hasAlpha ? Double(value & 0xFF) / 255 : 1)
+    }
+}
+
+
+/// "Devam et" şeridindeki kart: taslağın ilk medyası + şablon adı + ne zaman.
+private struct DraftCard: View {
+    let draft: Draft
+    @EnvironmentObject var drafts: DraftStore
+    @State private var image: CGImage?
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            ZStack(alignment: .bottomLeading) {
+                if let image {
+                    Image(decorative: image, scale: 1)
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                } else {
+                    Color.white.opacity(0.08)
+                }
+                LinearGradient(colors: [.clear, .black.opacity(0.65)],
+                               startPoint: .center, endPoint: .bottom)
+                HStack(spacing: 4) {
+                    Image(systemName: "square.stack.3d.up")
+                        .font(.system(size: 9, weight: .bold))
+                    Text("\(draft.mediaCount)")
+                        .font(.system(size: 10, weight: .heavy))
+                }
+                .foregroundStyle(.white)
+                .padding(8)
+            }
+            .frame(width: 104, height: 148)
+            .clipShape(RoundedRectangle(cornerRadius: 12))
+            .overlay(RoundedRectangle(cornerRadius: 12)
+                .stroke(.white.opacity(0.14), lineWidth: 1))
+
+            Text(draft.templateName)
+                .font(.system(size: 12, weight: .semibold))
+                .lineLimit(1)
+            Text(Self.relative(draft.updatedAt))
+                .font(.system(size: 10))
+                .foregroundStyle(.secondary)
+        }
+        .frame(width: 104)
+        .task(id: draft.updatedAt) {
+            // Poster çözmek (özellikle video karesi) ana iş parçacığında
+            // yapılmamalı: galeri kaydırılırken takılıyor.
+            guard let first = draft.slots.first else { return }
+            let url = drafts.fileURL(first.fileName)
+            let isPhoto = first.kind == .photo
+            image = await Task.detached(priority: .userInitiated) {
+                isPhoto ? DraftStore.decodePhoto(at: url) : VideoPoster.firstFrame(of: url)
+            }.value
+        }
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(Text("\(draft.templateName), yarım kalmış iş, \(draft.mediaCount) medya"))
+    }
+
+    private static func relative(_ date: Date) -> String {
+        // Bir dakikadan yeni kayıtlar "az önce": formatter sıfıra yuvarlayınca
+        // "0 sn. sonra" gibi (gelecek zamanlı!) bir metin üretiyor.
+        let elapsed = Date().timeIntervalSince(date)
+        if elapsed < 60 { return String(localized: "az önce") }
+        let formatter = RelativeDateTimeFormatter()
+        formatter.unitsStyle = .short
+        return formatter.localizedString(for: date, relativeTo: Date())
     }
 }

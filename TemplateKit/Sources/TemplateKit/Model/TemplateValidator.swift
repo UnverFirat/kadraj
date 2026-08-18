@@ -72,6 +72,14 @@ public enum TemplateValidator {
         }
 
         var layerIDs = Set<String>()
+        // Slot indeksleri AYNI KAPSAMDA (bir sahne ya da global katmanlar)
+        // benzersiz olmalı; FARKLI SAHNELERDE tekrar serbesttir.
+        //
+        // Ritimli şablonların temeli bu: tek klip, dört kesme — her sahne aynı
+        // slotu kendi kadrajı/kenBurns'üyle gösterir, motor da klibi kaldığı
+        // yerden sürdürür (`MontageComposer`). `Template.mediaSlots` bu durumu
+        // ta başından beri tekilleştiriyor; kural yalnız burada fazla katıydı
+        // ve dönüşen şablonları katalogdan tümüyle düşürüyordu.
         var slotIndexes = Set<Int>()
 
         if let scenes = template.scenes {
@@ -100,12 +108,14 @@ public enum TemplateValidator {
                 }
 
                 var videoCapableInScene = 0
+                var slotsInScene = Set<Int>()
                 for layer in scene.layers {
                     try validateLayer(layer, in: template,
                                       containerDuration: scene.duration,
-                                      layerIDs: &layerIDs, slotIndexes: &slotIndexes,
+                                      layerIDs: &layerIDs, slotIndexes: &slotsInScene,
                                       videoCapableCount: &videoCapableInScene)
                 }
+                slotIndexes.formUnion(slotsInScene)
                 guard videoCapableInScene <= maxVideoSlotsPerScene else {
                     throw TemplateValidationError.tooManyVideoSlotsInScene(sceneID: scene.id)
                 }

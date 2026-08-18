@@ -2,14 +2,16 @@ import SwiftUI
 import TemplateKit
 import TemplateKitLottie
 
-/// Uygulama giriş noktası. Üç uzun ömürlü durum sahibi env'e konur:
+/// Uygulama giriş noktası. Uzun ömürlü durum sahipleri env'e konur:
 /// `DemoLibrary` (katalog), `Store` (abonelik), `ExportLibrary` (kullanıcının
-/// videoları). Hepsi sekmeler arasında paylaşılır.
+/// videoları), `DraftStore` (yarım kalmış işler). Hepsi sekmeler arasında
+/// paylaşılır.
 @main
 struct StoryTemplateApp: App {
     @StateObject private var library = DemoLibrary()
     @StateObject private var store = Store()
     @StateObject private var exports = ExportLibrary()
+    @StateObject private var drafts = DraftStore()
 
     init() {
         AppAnalytics.install()
@@ -24,6 +26,7 @@ struct StoryTemplateApp: App {
                 .environmentObject(library)
                 .environmentObject(store)
                 .environmentObject(exports)
+                .environmentObject(drafts)
                 // Galeri posterleri katalogla aynı kaynaktan gelir; store
                 // library'ye ait, env'e ayrıca konur ki poster gelince yalnız
                 // ilgili kart yeniden çizilsin.

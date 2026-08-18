@@ -15,6 +15,15 @@ import ImageIO
 /// bokeh, tanecik). İnsan yok, marka yok, gerçek yer yok — hak zinciri
 /// tamamen bizde.
 ///
+/// İNSAN FİGÜRÜ ÇİZMİYORUZ — ne gerçeğini ne de silüetini. Kişilik hakkı
+/// refleksi doğruydu ama çözümü yanlıştı: insan gereken slotlara bir süre
+/// "omuz elipsi + kafa elipsi" konuldu ve vitrinde yüzsüz, koyu bir gövde
+/// oluştu. Kullanıcı bunu üslup değil ARIZA olarak okuyor (eksik avatar ya da
+/// ürkütücü bir figür), üstelik tam da satan kategorilerde: güzellik, kuaför,
+/// makyaj, öncesi/sonrası, düğün, mezuniyet, müşteri yorumu, deneme kabini.
+/// Doğru cevap figürü inandırıcılaştırmak değil, KADRAJI figürsüz kurmak:
+/// portrenin çekileceği YERİ göster, portreyi değil (bkz. `drawStudioSet`).
+///
 /// Kullanım:
 ///   swift run -c release templatekit-assets --make-samples
 enum SampleClipGenerator {
@@ -26,15 +35,19 @@ enum SampleClipGenerator {
     /// "gökyüzü + güneş + dağ silüeti" iskeleti çıkıyordu — renkler değişiyor
     /// ama kadraj aynı kaldığı için şablonlar birbirine benziyor gibi
     /// görünüyordu. Oysa ayırt edici olan kompozisyondur: bir kafe iç mekânı,
-    /// tepeden çekilmiş bir tabak ve bir portre kadrajı, aynı şablonu bambaşka
-    /// gösterir. Yemek/moda/güzellik şablonlarının vitrini de artık konusuna
-    /// yakın bir görüntüyle çıkıyor.
+    /// tepeden çekilmiş bir tabak ve boş bir çekim platosu, aynı şablonu
+    /// bambaşka gösterir. Yemek/moda/güzellik şablonlarının vitrini de artık
+    /// konusuna yakın bir görüntüyle çıkıyor.
+    ///
+    /// `studio` sahnesinin rawValue'suna DOKUNMA: `MediaPool` klip türünü
+    /// dosya adından ("sample-08-studio.mp4") okuyup kategori eşleştirmesi
+    /// yapıyor, yani ad burada veri.
     enum Scene: String, CaseIterable {
         case sunset, ocean, forest, night, desert
         case city, cafe, plate, studio, fabric
 
         /// Hangi çizim rutini kullanılacak.
-        enum Kind { case landscape, city, interior, tableTop, portrait, weave }
+        enum Kind { case landscape, city, interior, tableTop, studioSet, weave }
 
         var kind: Kind {
             switch self {
@@ -42,7 +55,7 @@ enum SampleClipGenerator {
             case .city:   return .city
             case .cafe:   return .interior
             case .plate:  return .tableTop
-            case .studio: return .portrait
+            case .studio: return .studioSet
             case .fabric: return .weave
             }
         }
@@ -58,7 +71,11 @@ enum SampleClipGenerator {
             case .city:   return [(0.05, 0.06, 0.13), (0.16, 0.13, 0.28), (0.42, 0.26, 0.36)]
             case .cafe:   return [(0.20, 0.13, 0.09), (0.46, 0.31, 0.20), (0.83, 0.68, 0.48)]
             case .plate:  return [(0.88, 0.84, 0.78), (0.80, 0.75, 0.68), (0.70, 0.64, 0.56)]
-            case .studio: return [(0.30, 0.26, 0.30), (0.55, 0.48, 0.50), (0.80, 0.74, 0.72)]
+            // Sonsuz fonun (seamless) kendi tonu: üstte ışık düşüşü, ortada
+            // anahtar ışığın vurduğu bant. Üst uç bilerek 0.30'dan 0.38'e
+            // açıldı — global vinyet 0.45 siyah bindiriyor ve köşeler
+            // neredeyse siyaha kapanıyordu.
+            case .studio: return [(0.38, 0.33, 0.36), (0.58, 0.51, 0.52), (0.82, 0.76, 0.73)]
             case .fabric: return [(0.14, 0.25, 0.32), (0.22, 0.40, 0.47), (0.40, 0.60, 0.63)]
             }
         }
@@ -74,7 +91,11 @@ enum SampleClipGenerator {
             case .city:   return (0.03, 0.04, 0.10)
             case .cafe:   return (0.13, 0.08, 0.05)
             case .plate:  return (0.52, 0.46, 0.38)
-            case .studio: return (0.22, 0.19, 0.21)
+            // `studio`da bu artık silüet DEĞİL, platonun zemin tonu. Eski
+            // 0.22'lik değer figürün gövdesiydi ve kadrajın altını siyah bir
+            // kütleye çeviriyordu; ışık alan bir stüdyo zemini bu kadar koyu
+            // olmaz, açıldı.
+            case .studio: return (0.31, 0.27, 0.28)
             case .fabric: return (0.08, 0.16, 0.21)
             }
         }
@@ -347,9 +368,9 @@ enum SampleClipGenerator {
         case .tableTop:
             drawTableTop(scene: scene, progress: progress, bokeh: &bokeh,
                          context: context, size: size, space: space)
-        case .portrait:
-            drawPortrait(scene: scene, progress: progress, bokeh: &bokeh,
-                         context: context, size: size, space: space)
+        case .studioSet:
+            drawStudioSet(scene: scene, progress: progress, bokeh: &bokeh,
+                          context: context, size: size, space: space)
         case .weave:
             drawWeave(scene: scene, progress: progress,
                       context: context, size: size, space: space)
@@ -596,39 +617,76 @@ enum SampleClipGenerator {
         bokeh.draw(in: context, progress: progress)
     }
 
-    // MARK: Portre kadrajı — yumuşak fon, ortada soyut figür (yüz YOK)
+    // MARK: Çekim platosu — kadraj kurulu, özne YOK
 
-    private static func drawPortrait(scene: Scene, progress: Double, bokeh: inout Bokeh,
-                                     context: CGContext, size: CGSize, space: CGColorSpace) {
+    /// Boş bir portre platosu: sonsuz fon (cyclorama), zemine düşen anahtar ışık
+    /// havuzu ve kadrajın dışından sızan softbox parıltısı.
+    ///
+    /// Burada İNSAN ÇİZİLMEZ. Önceki hal omuz + baş elipsiyle bir figür kuruyordu
+    /// ve vitrinde yüzsüz koyu bir gövde olarak okunuyordu — üslup değil arıza.
+    /// Bunun doğru cevabı figürü iyileştirmek değil: bu klip zaten KULLANICININ
+    /// fotoğrafının gireceği slotun yer tutucusu, yani işi "buraya bir portre
+    /// gelecek" dedirtmek. Boş bir plato bunu figür uydurmadan söyler ve
+    /// kullanıcının kendi karesini hayal etmesini kolaylaştırır.
+    private static func drawStudioSet(scene: Scene, progress: Double, bokeh: inout Bokeh,
+                                      context: CGContext, size: CGSize, space: CGColorSpace) {
         fillSky(scene, context: context, size: size, space: space)
         let light = scene.light
-        let key = CGPoint(x: size.width * 0.30, y: size.height * 0.74)
+
+        // Sonsuz fon: arka duvarın zemine döndüğü yumuşak kavis. Düz bir çizgi
+        // "duvar" der, kavis "plato" der — aradaki fark bu sahnenin tamamı.
+        let floorTop = size.height * 0.30
+        let floor = scene.silhouette   // sahnenin koyu tonu; artık figürün değil zeminin rengi
+        context.saveGState()
+        let sweep = CGMutablePath()
+        sweep.move(to: CGPoint(x: 0, y: 0))
+        sweep.addLine(to: CGPoint(x: 0, y: floorTop))
+        sweep.addQuadCurve(to: CGPoint(x: size.width, y: floorTop),
+                           control: CGPoint(x: size.width / 2, y: floorTop + size.height * 0.055))
+        sweep.addLine(to: CGPoint(x: size.width, y: 0))
+        sweep.closeSubpath()
+        context.addPath(sweep)
+        context.setFillColor(CGColor(srgbRed: floor.0, green: floor.1, blue: floor.2, alpha: 0.55))
+        context.fillPath()
+        context.restoreGState()
+
+        // Anahtar ışık: fonda göz hizasında bir havuz. Hafifçe nefes alır —
+        // klip 6 saniye döndüğü için tamamen durağan bir kare ölü görünüyor.
+        let breathe = CGFloat(sin(progress * .pi * 2)) * size.width * 0.010
+        let key = CGPoint(x: size.width * 0.50 + breathe, y: size.height * 0.60)
         let glow = CGGradient(colorsSpace: space, colors: [
-            CGColor(srgbRed: light.color.0, green: light.color.1, blue: light.color.2, alpha: 0.42),
+            CGColor(srgbRed: light.color.0, green: light.color.1, blue: light.color.2, alpha: 0.40),
             CGColor(srgbRed: light.color.0, green: light.color.1, blue: light.color.2, alpha: 0)
         ] as CFArray, locations: [0, 1])!
         context.drawRadialGradient(glow, startCenter: key, startRadius: 0,
-                                   endCenter: key, endRadius: size.width * 0.9, options: [])
+                                   endCenter: key, endRadius: size.width * 0.78, options: [])
 
-        // Omuz + baş silüeti; hafifçe sallanır (nefes).
-        let sway = CGFloat(sin(progress * .pi * 2)) * size.width * 0.006
-        let body = scene.silhouette
-        context.setFillColor(CGColor(srgbRed: body.0, green: body.1, blue: body.2, alpha: 1))
-        let shoulderW = size.width * 0.86
-        context.fillEllipse(in: CGRect(x: size.width / 2 - shoulderW / 2 + sway,
-                                       y: -size.height * 0.12,
-                                       width: shoulderW, height: size.height * 0.52))
-        let headW = size.width * 0.30
-        context.fillEllipse(in: CGRect(x: size.width / 2 - headW / 2 + sway,
-                                       y: size.height * 0.34,
-                                       width: headW, height: headW * 1.22))
-        // Kenar ışığı: figürün sağ konturu.
-        context.setStrokeColor(CGColor(srgbRed: light.color.0, green: light.color.1,
-                                       blue: light.color.2, alpha: 0.30))
-        context.setLineWidth(size.width * 0.012)
-        context.strokeEllipse(in: CGRect(x: size.width / 2 - headW / 2 + sway,
-                                         y: size.height * 0.34,
-                                         width: headW, height: headW * 1.22))
+        // Zeminde ışığın yayvan yansıması — havuzun altına basık bir elips.
+        context.saveGState()
+        context.translateBy(x: size.width * 0.50 + breathe, y: size.height * 0.22)
+        context.scaleBy(x: 1, y: 0.30)
+        let pool = CGGradient(colorsSpace: space, colors: [
+            CGColor(srgbRed: light.color.0, green: light.color.1, blue: light.color.2, alpha: 0.26),
+            CGColor(srgbRed: light.color.0, green: light.color.1, blue: light.color.2, alpha: 0)
+        ] as CFArray, locations: [0, 1])!
+        context.drawRadialGradient(pool, startCenter: .zero, startRadius: 0,
+                                   endCenter: .zero, endRadius: size.width * 0.55, options: [])
+        context.restoreGState()
+
+        // Kadrajın dışındaki softbox: üst köşeden giren yumuşak dikdörtgen
+        // parıltı. Işığın bir KAYNAĞI olduğunu ima ediyor; sahneyi gradyan
+        // olmaktan çıkarıp mekân yapan ayrıntı bu.
+        context.saveGState()
+        let boxW = size.width * 0.42, boxH = size.height * 0.16
+        let box = CGRect(x: size.width * 0.62, y: size.height * 0.80, width: boxW, height: boxH)
+        context.setShadow(offset: .zero, blur: size.width * 0.16,
+                          color: CGColor(srgbRed: light.color.0, green: light.color.1,
+                                         blue: light.color.2, alpha: 0.55))
+        context.setFillColor(CGColor(srgbRed: light.color.0, green: light.color.1,
+                                     blue: light.color.2, alpha: 0.18))
+        context.fill(box)
+        context.restoreGState()
+
         bokeh.draw(in: context, progress: progress)
     }
 

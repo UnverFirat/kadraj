@@ -5,13 +5,17 @@ import TemplateKit
 ///
 /// Şablon sekmesi kendi `NavigationStack`'ini taşır (galeri → editör). Yığın
 /// burada tutulur ki hem launch bayrakları (`--route`) hem de deep link
-/// (`storytemplate://sablon/<id>`) aynı yoldan editöre gidebilsin.
+/// (`kadraj://sablon/<id>`) aynı yoldan editöre gidebilsin.
 struct RootView: View {
     @EnvironmentObject var library: DemoLibrary
     @EnvironmentObject var store: Store
 
     @State private var tab: Tab = .templates
     @State private var path: [Route] = []
+    /// Karar AÇILIŞTA BİR KEZ verilir (bkz. `OnboardingGate.shouldPresent`).
+    /// `onAppear` içinde hesaplamak, kapatıldıktan sonra sekme değişimiyle
+    /// yeniden tetiklenme riski taşıyordu.
+    @State private var showOnboarding = OnboardingGate.shouldPresent()
 
     enum Tab: Hashable { case templates, videos, settings }
 
@@ -51,6 +55,24 @@ struct RootView: View {
                                     set: { if !$0 { store.paywallReason = nil } })) {
             PaywallView(reason: store.paywallReason)
         }
+        // İLK AÇILIŞ KARŞILAMASI. Sekmelerin ÜSTÜNDE durur, yerine geçmez:
+        // kapandığı anda kullanıcı zaten galeriye bakıyor olur, yeniden
+        // yönlendirme (ve o yönlendirmenin gecikmesi) yok.
+        //
+        // Bitirince ne olur: "Hadi başlayalım" da "Atla" da yalnız örtüyü
+        // kaldırır — `tab`/`path` ELLENMEZ. Kullanıcıyı önerilen bir şablonun
+        // editörüne düşürmek denendi ama iki sebeple bırakıldı: (1) uygulamanın
+        // ilk vaadi "işine uyanı seç", onu bizim seçmemiz karşılamada anlatılan
+        // adımı hemen yalanlıyor; (2) editör açılır açılmaz medya istiyor, yani
+        // kullanıcı daha ne olduğunu görmeden fotoğraf izni istemiyle
+        // karşılaşıyor. Ayrıca örtü açıkken gelen bir deep link (`kadraj://`)
+        // yığını çoktan kurmuş olabilir — burada `path`'i sıfırlamak onu ezerdi.
+        .fullScreenCover(isPresented: $showOnboarding) {
+            OnboardingView {
+                OnboardingGate().markSeen()
+                showOnboarding = false
+            }
+        }
         .onOpenURL { open($0) }
         .onAppear {
             applyLaunchRoute()
@@ -60,11 +82,11 @@ struct RootView: View {
         }
     }
 
-    /// `storytemplate://sablon/<id>` → şablon sekmesinde o şablonun editörü.
+    /// `kadraj://sablon/<id>` → şablon sekmesinde o şablonun editörü.
     /// Katalog henüz yüklenmediyse yığına yine de itilir; hedef ekran şablonu
     /// bulamazsa `MissingTemplateView` gösterir.
     private func open(_ url: URL) {
-        guard url.scheme == "storytemplate", url.host == "sablon" else { return }
+        guard url.scheme == "kadraj", url.host == "sablon" else { return }
         let id = url.pathComponents.filter { $0 != "/" }.first
         guard let id, !id.isEmpty else { return }
         tab = .templates
@@ -74,6 +96,11 @@ struct RootView: View {
     /// Screenshot otomasyonu: belirli bir ekranla başlat.
     ///   --route editor:<templateId>   editörü o şablonla aç
     ///   --route preview:<templateId>  otomatik "Video Oluştur" + önizleme
+    ///
+    /// Karşılama ekranının bayrakları (`--onboarding` / `--skip-onboarding`) ve
+    /// bu bayrakların otomasyonla ilişkisi `OnboardingGate.shouldPresent`'ta:
+    /// buradaki `--route` gibi bir otomasyon bayrağı verildiğinde karşılama
+    /// hiç gösterilmez, yani yığın kurulduktan sonra önüne bir örtü gelmez.
     private func applyLaunchRoute() {
         let args = ProcessInfo.processInfo.arguments
         if args.contains("--open-videos") { tab = .videos }

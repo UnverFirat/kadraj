@@ -20,6 +20,11 @@ public struct Template: Codable, Equatable, Sendable, Identifiable {
     public var audio: AudioDefaults?
     /// Sinematik overlay (vignette/grain) — tüm kareye, en üstte. nil = yok.
     public var overlay: OverlaySpec?
+    /// Medyanın üstüne düşen metinlerin okunabilirlik koruması.
+    /// nil = alan JSON'da yok = `.auto` (güvenli varsayılan). Bu yüzden
+    /// OPSİYONEL: 127 şablonun hiçbirine dokunmadan davranış devreye girer,
+    /// dokunmak isteyen şablon `"textLegibility": "off"` yazar.
+    public var textLegibility: TextLegibility?
     /// Çizim sırasına göre; ilk eleman en altta. Sahneli şablonlarda bunlar
     /// TÜM video boyunca görünen global overlay katmanlarıdır (en üst z'de).
     public var layers: [Layer]
@@ -27,6 +32,9 @@ public struct Template: Codable, Equatable, Sendable, Identifiable {
     public var scenes: [TemplateScene]?
 
     public static let supportedSchemaVersions = 1...2
+
+    /// Alan yoksa geçerli olan mod. Kod her yerde bunu okur, ham alanı değil.
+    public var legibility: TextLegibility { textLegibility ?? .auto }
 
     /// Şablonun gerçek toplam süresi. Sahneli şablonlarda geçiş örtüşmeleri
     /// düşülmüş montaj süresi; klasikte `explicitDuration`.
@@ -82,6 +90,7 @@ public struct Template: Codable, Equatable, Sendable, Identifiable {
                 palette: [String: String],
                 audio: AudioDefaults? = nil,
                 overlay: OverlaySpec? = nil,
+                textLegibility: TextLegibility? = nil,
                 layers: [Layer] = [],
                 scenes: [TemplateScene]? = nil) {
         self.schemaVersion = schemaVersion
@@ -94,6 +103,7 @@ public struct Template: Codable, Equatable, Sendable, Identifiable {
         self.palette = palette
         self.audio = audio
         self.overlay = overlay
+        self.textLegibility = textLegibility
         self.layers = layers
         self.scenes = scenes
     }
@@ -101,7 +111,7 @@ public struct Template: Codable, Equatable, Sendable, Identifiable {
     private enum CodingKeys: String, CodingKey {
         case schemaVersion, id, name, category, isPro, canvas
         case explicitDuration = "duration"
-        case palette, audio, overlay, layers, scenes
+        case palette, audio, overlay, textLegibility, layers, scenes
     }
 
     public init(from decoder: Decoder) throws {
@@ -116,6 +126,7 @@ public struct Template: Codable, Equatable, Sendable, Identifiable {
         palette = try c.decode([String: String].self, forKey: .palette)
         audio = try c.decodeIfPresent(AudioDefaults.self, forKey: .audio)
         overlay = try c.decodeIfPresent(OverlaySpec.self, forKey: .overlay)
+        textLegibility = try c.decodeIfPresent(TextLegibility.self, forKey: .textLegibility)
         layers = try c.decodeIfPresent([Layer].self, forKey: .layers) ?? []
         scenes = try c.decodeIfPresent([TemplateScene].self, forKey: .scenes)
     }
@@ -128,11 +139,13 @@ public struct Template: Codable, Equatable, Sendable, Identifiable {
     /// geçiş). Global `layers` en üste (sona) eklenir. Sahnesiz şablonlarda
     /// `layers` olduğu gibi döner.
     public func flattenedLayersForRender(edits: UserEdits) -> [Layer] {
-        guard let scenes, !scenes.isEmpty else { return layers }
+        guard let scenes, !scenes.isEmpty else { return Layer.bindingPlatesToLabels(layers) }
         let timeline = MontageTimeline(scenes: scenes)
         var result: [Layer] = []
         for window in timeline.windows {
-            for var layer in scenes[window.index].layers {
+            // Plaka/etiket eşleşmesi SAHNE İÇİNDE aranır: farklı sahnelerin
+            // katmanları aynı kadrajda olsa bile aynı nesne değildir.
+            for var layer in Layer.bindingPlatesToLabels(scenes[window.index].layers) {
                 // Montaj sahnelerindeki her medya slotu 1. geçişe gider; burada
                 // yalnız grafik/metin katmanları bırakılır.
                 if case .mediaSlot = layer.content { continue }
@@ -142,7 +155,34 @@ public struct Template: Codable, Equatable, Sendable, Identifiable {
                 result.append(layer)
             }
         }
-        result.append(contentsOf: layers)
+        result.append(contentsOf: Layer.bindingPlatesToLabels(layers))
+        return result
+    }
+
+    /// TABAN VİDEOYA yakılmış kullanıcı medyasının kadrajda durduğu
+    /// dikdörtgenler, mutlak şablon zamanıyla. Klasik şablonda boştur — orada
+    /// medya slotu render listesinde gerçek bir katman olarak durur ve
+    /// z-sırası kendi başına anlamlıdır.
+    ///
+    /// NEDEN GEREKLİ: montaj yolunda sahnelerin medya slotları
+    /// `flattenedLayersForRender`'dan ÇIKARILIR (1. geçişte tek videoya
+    /// yakılırlar), yani render listesine bakan kod medyanın nerede olduğunu
+    /// göremez. Taban videonun tüm kanvası kaplaması "her yer medya" DEMEK
+    /// DEĞİLDİR — slot dışında kalan alanı sahne arka plan rengi doldurur
+    /// (`spa-calm-01`: medya üstteki %56, alt yarısı krem zemin).
+    public func prerenderedMediaRegions() -> [MediaRegion] {
+        guard let scenes, !scenes.isEmpty else { return [] }
+        var result: [MediaRegion] = []
+        for window in MontageTimeline(scenes: scenes).windows {
+            let scene = scenes[window.index]
+            for layer in scene.layers {
+                guard case .mediaSlot = layer.content else { continue }
+                let local = layer.timing.window(templateDuration: scene.duration)
+                result.append(MediaRegion(frame: layer.frame,
+                                          start: window.start + local.start,
+                                          end: window.start + local.end))
+            }
+        }
         return result
     }
 
@@ -154,6 +194,19 @@ public struct Template: Codable, Equatable, Sendable, Identifiable {
             merged.merge(override) { _, new in new }
         }
         return merged.compactMapValues(RGBAColor.init(hex:))
+    }
+}
+
+/// Kullanıcı medyasının kadrajda durduğu bir dikdörtgen + zaman aralığı.
+public struct MediaRegion: Equatable, Sendable {
+    public var frame: NormalizedRect
+    public var start: Double
+    public var end: Double
+
+    public init(frame: NormalizedRect, start: Double, end: Double) {
+        self.frame = frame
+        self.start = start
+        self.end = end
     }
 }
 
@@ -251,6 +304,45 @@ public struct NormalizedRect: Codable, Equatable, Sendable {
         self.y = y
         self.width = width
         self.height = height
+    }
+
+    public var minX: Double { x - width / 2 }
+    public var maxX: Double { x + width / 2 }
+    public var minY: Double { y - height / 2 }
+    public var maxY: Double { y + height / 2 }
+
+    /// `other` bu dikdörtgenin içinde mi (normalize kanvas oranında pay ile)?
+    public func contains(_ other: NormalizedRect, tolerance: Double = 0) -> Bool {
+        other.minX >= minX - tolerance && other.maxX <= maxX + tolerance
+            && other.minY >= minY - tolerance && other.maxY <= maxY + tolerance
+    }
+
+    /// Kesişen alan (normalize birim kare oranında). 0 = değmiyor.
+    public func intersectionArea(_ other: NormalizedRect) -> Double {
+        let w = min(maxX, other.maxX) - max(minX, other.minX)
+        let h = min(maxY, other.maxY) - max(minY, other.minY)
+        return w > 0 && h > 0 ? w * h : 0
+    }
+}
+
+// MARK: - Okunabilirlik
+
+/// Medyanın üstüne düşen metinlerin okunabilirlik koruması (bkz.
+/// `TemplateLayerBuilder` — koyu/açık yarı saydam hap + tam opak yazı).
+public enum TextLegibility: String, Codable, Sendable {
+    /// Varsayılan: YALNIZ altında kullanıcı medyası kalan metinlere uygulanır.
+    case auto
+    /// Motor hiç dokunmaz — korumayı kendi tasarımıyla çözen şablonlar için.
+    case off
+    /// Zeminden bağımsız her metne uygulanır (bilinçli "sticker" tipografisi).
+    case always
+
+    /// Bilinmeyen değer `.auto`'ya düşer: preset/geçiş stilleriyle aynı ileri
+    /// uyumluluk kuralı — yeni bir mod eklenirse eski uygulama çökmez, güvenli
+    /// davranışa döner.
+    public init(from decoder: Decoder) throws {
+        let raw = try decoder.singleValueContainer().decode(String.self)
+        self = TextLegibility(rawValue: raw) ?? .auto
     }
 }
 
@@ -434,6 +526,75 @@ public struct Layer: Codable, Equatable, Sendable, Identifiable {
         case .text(let value): try value.encode(to: encoder)
         case .lottie(let value): try value.encode(to: encoder)
         }
+    }
+}
+
+// MARK: - Plaka / etiket bağı
+
+extension Layer {
+
+    /// Bir "plaka" ile onun etiketi TEK NESNEDİR; iki ayrı katman olmaları bir
+    /// uygulama detayı. Motor bunu bilmediği için her katman kendi
+    /// `timing.start`'ına göre giriyordu ve şablon yazarının 0,1–0,3 sn'lik
+    /// kademesi ekranda BOŞ bir renkli kutu olarak görünüyordu
+    /// (`sale-promo-01`: `cta-pill` 2,1 sn — `cta` 2,3 sn; ölçülen export'ta
+    /// hap tamamen doldururken yazı henüz yoktu).
+    ///
+    /// Bu, tek bir şablonun hatası DEĞİL: katalogdaki 136 dar plaka/etiket
+    /// çiftinin 135'inde plaka etiketinden önce giriyor (medyan 0,12 sn).
+    /// 127 JSON'a dokunmadan düzeltilebilecek tek yer motor.
+    ///
+    /// Kural: plaka etiketiyle AYNI ANDA girer (`plaka.start = etiket.start`).
+    /// Etiketi öne çekmek DEĞİL — çünkü etiket plakanın dönüşümünü miras
+    /// almaz (ayrı container'lar); plaka `bounce` ile 0,4 ölçekten büyürken
+    /// yazı tam boyda durur ve hapın dışına taşar. Plakayı beklettiğimizde
+    /// ikisi de kendi giriş animasyonunu aynı anda oynar ve tek parça okunur.
+    ///
+    /// "Plaka" DAR olmak zorunda: metni saran ama ondan belirgin büyük bir
+    /// kart (davetiye kartı, not kâğıdı) sahne dekorudur, etiketini beklerse
+    /// tasarım çöker — bu yüzden boyut farkı ve mutlak yükseklik sınırlanır.
+    static func bindingPlatesToLabels(_ layers: [Layer]) -> [Layer] {
+        /// Plakanın gireceği yeni an: kendisine bağlı EN ERKEN etiket.
+        var bound: [Int: Double] = [:]
+        for (index, label) in layers.enumerated() {
+            guard case .text = label.content else { continue }
+            // Metnin ALTINDAKİ en yakın plaka: çizim sırasında geriye doğru
+            // ilk eşleşen. (Aynı kadrajda birden çok plaka varsa metne en
+            // yakın olan onun plakasıdır.)
+            guard let plate = (0..<index).reversed().first(where: {
+                layers[$0].isPlate(for: label)
+            }) else { continue }
+            let gap = abs(label.timing.start - layers[plate].timing.start)
+            // Saniyeler süren bir fark kademe değil, bilinçli bir kurgudur
+            // (önce boş çerçeve, sonra yazı); motor ona karışmaz.
+            guard gap <= 1.0 else { continue }
+            bound[plate] = min(bound[plate] ?? .greatestFiniteMagnitude,
+                               label.timing.start)
+        }
+        guard !bound.isEmpty else { return layers }
+
+        return layers.enumerated().map { index, layer in
+            guard let start = bound[index], start != layer.timing.start else { return layer }
+            var copy = layer
+            // Pencerenin SONU korunur: plaka geç girer, erken çıkmaz.
+            let end = layer.timing.duration.map { layer.timing.start + $0 }
+            copy.timing = Timing(start: start,
+                                 duration: end.map { max($0 - start, 0.01) })
+            return copy
+        }
+    }
+
+    /// Bu katman, verilen metin katmanının plakası mı?
+    private func isPlate(for label: Layer) -> Bool {
+        guard case .shape = content else { return false }
+        // Eğik plaka yalnız aynı açıdaki etiketle eşleşir: normalize
+        // çerçeveler dönüş ÖNCESİ olduğu için farklı açılarda kapsama testi
+        // ekranda gördüğümüz şeyi anlatmaz.
+        guard rotation == label.rotation else { return false }
+        guard frame.height <= 0.25 else { return false }
+        guard frame.width - label.frame.width <= 0.12,
+              frame.height - label.frame.height <= 0.09 else { return false }
+        return frame.contains(label.frame, tolerance: 0.01)
     }
 }
 

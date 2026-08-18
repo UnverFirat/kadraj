@@ -92,14 +92,26 @@ public actor TemplateCatalog {
 
     // MARK: Manifest
 
-    /// Ağa çıkmadan elde olan liste: önce cache, yoksa seed.
+    /// Ağa çıkmadan elde olan liste: cache ile seed'in YENİ olanı.
+    ///
+    /// Sıra körlemesine "cache → seed" DEĞİLDİR. Uygulama güncellendiğinde yeni
+    /// şablonlar paketle (seed) gelir, ama diskte eski bir CDN indirmesi
+    /// duruyorsa o eskisi kazanıyordu: mevcut kullanıcı, paket 127 şablon
+    /// içerirken galeride 100 görüyordu ve eksik şablonlar aramada da derin
+    /// bağlantıda da "bulunamadı" veriyordu (CDN yapılandırılmamışsa kalıcı
+    /// olarak). Karar `revision`'a bakar; eşitlikte cache kazanır (CDN son
+    /// sözü söyler).
     public func current() throws -> Snapshot {
-        if let manifest = loadManifest(at: manifestCacheURL) {
-            return Snapshot(entries: manifest.entries(forAppVersion: appVersion), origin: .cache)
+        let cached = loadManifest(at: manifestCacheURL)
+        let seeded = seedManifest()
+        if let cached {
+            if let seeded, seeded.revision > cached.revision {
+                return Snapshot(entries: seeded.entries(forAppVersion: appVersion), origin: .seed)
+            }
+            return Snapshot(entries: cached.entries(forAppVersion: appVersion), origin: .cache)
         }
-        if let seedDirectory,
-           let manifest = loadManifest(at: seedDirectory.appendingPathComponent("manifest.json")) {
-            return Snapshot(entries: manifest.entries(forAppVersion: appVersion), origin: .seed)
+        if let seeded {
+            return Snapshot(entries: seeded.entries(forAppVersion: appVersion), origin: .seed)
         }
         throw TemplateCatalogError.noManifestAvailable
     }
@@ -120,6 +132,11 @@ public actor TemplateCatalog {
             try data.write(to: manifestCacheURL, options: .atomic)
             if let etag { try? Data(etag.utf8).write(to: etagCacheURL, options: .atomic) }
             pruneCachedTemplates(keeping: manifest)
+            // Sunucudaki yayın paketten ESKİYSE (CDN henüz güncellenmedi) taze
+            // indirme de seed'i ezmemeli — `current()` ile aynı kural.
+            if let seeded = seedManifest(), seeded.revision > manifest.revision {
+                return Snapshot(entries: seeded.entries(forAppVersion: appVersion), origin: .seed)
+            }
             return Snapshot(entries: manifest.entries(forAppVersion: appVersion), origin: .network)
         }
     }
@@ -261,6 +278,12 @@ public actor TemplateCatalog {
         guard fileManager.fileExists(atPath: manifestCacheURL.path),
               let data = try? Data(contentsOf: etagCacheURL) else { return nil }
         return String(decoding: data, as: UTF8.self)
+    }
+
+    /// Uygulamayla gelen manifest (yoksa nil).
+    private func seedManifest() -> TemplateManifest? {
+        guard let seedDirectory else { return nil }
+        return loadManifest(at: seedDirectory.appendingPathComponent("manifest.json"))
     }
 
     private func loadManifest(at url: URL) -> TemplateManifest? {

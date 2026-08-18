@@ -70,11 +70,20 @@ final class ExportFlow: ObservableObject {
     ///     project'in örnek medyasının yerini alır (slotIndex -> medya).
     ///   - music: kullanıcının seçtiği parça (nil = müziksiz).
     ///   - entitlements: filigran ve Pro içerik kararlarını verir.
+    ///   - speeds: slotIndex -> klip hız çarpanı (1 = normal). Şablonun süresini
+    ///     değiştirmez; klibin sahneye sığdırılan bölümünü değiştirir.
+    ///   - crops: slotIndex -> kullanıcı kadrajı (yakınlaştır/kaydır).
+    ///   - starts: slotIndex -> klibin hangi saniyesinden başlanacağı (trim).
     func run(project: DemoProject, texts: [String: String],
              photos: [Int: CGImage], videos: [Int: URL],
              music: TemplateKit.MusicTrack?, entitlements: Entitlements,
              accentOverride: String? = nil,
-             originalAudioFrom videoAudioURL: URL? = nil) {
+             speeds: [Int: Double] = [:],
+             crops: [Int: CropTransform] = [:],
+             starts: [Int: Double] = [:],
+             textStyles: [String: TextStyleOverride] = [:],
+             originalAudioFrom videoAudioURL: URL? = nil,
+             originalAudioSpeed: Double = 1) {
         // Yer yoksa render'ı hiç başlatma: AVFoundation yarı yolda anlamsız bir
         // hata veriyor, kullanıcı da niye olmadığını anlamıyor.
         if let free = Self.freeDiskBytes(), free < Self.requiredFreeBytes {
@@ -100,7 +109,7 @@ final class ExportFlow: ObservableObject {
         }
         template.canvas = Self.renderCanvas(template.canvas, quality: quality)
 
-        var edits = UserEdits(textOverrides: texts)
+        var edits = UserEdits(textOverrides: texts, textStyles: textStyles)
         // Kullanıcının seçtiği vurgu rengi. Motor paleti rol bazlı çözdüğü için
         // tek rolü değiştirmek şablonun TÜM vurgularını (rozet, çizgi, fiyat,
         // buton) birlikte döndürür — "tek dokunuşla renk şeması" bu demek.
@@ -109,11 +118,20 @@ final class ExportFlow: ObservableObject {
         }
         var videoInputs: [TemplateExporter.VideoInput] = []
         for (slot, url) in videos {
-            edits.slots[slot] = SlotAssignment(assetIdentifier: url.path, kind: .video)
-            videoInputs.append(.init(asset: AVURLAsset(url: url), slotIndex: slot))
+            let start = starts[slot] ?? 0
+            edits.slots[slot] = SlotAssignment(assetIdentifier: url.path, kind: .video,
+                                               crop: crops[slot] ?? CropTransform(),
+                                               videoStart: start,
+                                               speed: speeds[slot] ?? 1)
+            // Motor klibin başlangıcını `VideoInput.start`'tan okuyor (montaj
+            // yolunda `VideoSource.start`); `edits` tarafındaki `videoStart` da
+            // aynı değeri taşır — taslak kaydı ve doğrulama tek yerden okunsun.
+            videoInputs.append(.init(asset: AVURLAsset(url: url), slotIndex: slot,
+                                     start: start))
         }
         for slot in photos.keys {
-            edits.slots[slot] = SlotAssignment(assetIdentifier: "photo", kind: .photo)
+            edits.slots[slot] = SlotAssignment(assetIdentifier: "photo", kind: .photo,
+                                               crop: crops[slot] ?? CropTransform())
         }
 
         let work = FileManager.default.temporaryDirectory
@@ -123,9 +141,11 @@ final class ExportFlow: ObservableObject {
         // Önizleme her yenilemede yeniden üretilir; bir öncekini bırakmak
         // geçici klasörü büyütür (kullanıcının videosu ASLA silinmez — o
         // `ExportLibrary`'ye alınmış oluyor).
-        if quality == .preview, let previous = previousWorkDirectory {
-            try? FileManager.default.removeItem(at: previous)
-        }
+        //
+        // Eski klasör HEMEN silinmez: otomatik yenilemede oynatıcı o dosyayı
+        // hâlâ oynatıyor (bayat önizleme, yenisi hazırlanırken ekranda kalır).
+        // Yeni render bitince silinir.
+        let obsolete = quality == .preview ? previousWorkDirectory : nil
         previousWorkDirectory = work
 
         // Müzik: kütüphaneden video süresinde sentezlenir (cache'li), audio mix'i
@@ -136,7 +156,8 @@ final class ExportFlow: ObservableObject {
             // AVAsset kabul ettiği için kullanıcının klibini doğrudan veriyoruz —
             // ayrı bir "orijinal ses" yolu yazmaya gerek yok. Lisans maliyeti
             // sıfır: ses kullanıcının kendi çekiminden geliyor.
-            audio = .init(asset: AVURLAsset(url: videoAudioURL), volume: 1)
+            audio = .init(asset: AVURLAsset(url: videoAudioURL), volume: 1,
+                          speed: originalAudioSpeed)
         } else if let music = entitlements.resolvedTrack(music),
                   // Kilitli parça seçili kaldıysa ücretsiz alternatife düşülür.
                   let url = Self.musicURL(track: music, duration: template.totalDuration) {
@@ -171,7 +192,8 @@ final class ExportFlow: ObservableObject {
         if project.isMontage {
             var sources: [Int: MontageComposer.VideoSource] = [:]
             for (slot, url) in videos {
-                sources[slot] = MontageComposer.VideoSource(asset: AVURLAsset(url: url))
+                sources[slot] = MontageComposer.VideoSource(asset: AVURLAsset(url: url),
+                                                            start: starts[slot] ?? 0)
             }
             let montageOnly = work.appendingPathComponent("montage-only.mp4")
             job = Task {
@@ -181,9 +203,9 @@ final class ExportFlow: ObservableObject {
                         photos: photos,
                         outputURL: montageOnly, progress: report)
                     self.finish(url, project: project, startedAt: startedAt,
-                                entitlements: entitlements)
+                                entitlements: entitlements, obsolete: obsolete)
                 } catch {
-                    self.fail(error, project: project)
+                    self.fail(error, project: project, obsolete: obsolete)
                 }
             }
             return
@@ -194,15 +216,16 @@ final class ExportFlow: ObservableObject {
             do {
                 let url = try await exporter.export(request, progress: report)
                 self.finish(url, project: project, startedAt: startedAt,
-                            entitlements: entitlements)
+                            entitlements: entitlements, obsolete: obsolete)
             } catch {
-                self.fail(error, project: project)
+                self.fail(error, project: project, obsolete: obsolete)
             }
         }
     }
 
     private func finish(_ url: URL, project: DemoProject, startedAt: Date,
-                        entitlements: Entitlements) {
+                        entitlements: Entitlements, obsolete: URL? = nil) {
+        if let obsolete { try? FileManager.default.removeItem(at: obsolete) }
         if quality == .final {
             Analytics.shared.log(.exportFinished(templateID: project.id,
                                                  seconds: Date().timeIntervalSince(startedAt),
@@ -216,9 +239,12 @@ final class ExportFlow: ObservableObject {
     /// Hata yolu. Kullanıcıya ANLAŞILIR bir cümle gösterilir (ham `Error`
     /// dökümü değil); analitiğe de mesaj değil hata TÜRÜ gider — mesaj dosya
     /// yolu taşıyabilir.
-    private func fail(_ error: Error, project: DemoProject) {
+    private func fail(_ error: Error, project: DemoProject, obsolete: URL? = nil) {
         job = nil
         endBackgroundTask()
+        // Render patlasa da bir önceki önizleme klasörü artık gereksiz; yoksa
+        // her başarısız denemede geçici alanda bir kopya kalıyor.
+        if let obsolete { try? FileManager.default.removeItem(at: obsolete) }
         if error is CancellationError || (error as? TemplateExportError).isCancelled {
             // Kullanıcı iptal etti: hata ekranı gösterme.
             phase = .idle

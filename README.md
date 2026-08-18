@@ -4,9 +4,12 @@ iOS şablon-bazlı video oluşturucu (500 Stories / Mojo tarzı).
 Stack: SwiftUI + AVFoundation/Core Animation + Lottie + RevenueCat + StoreKit 2.
 MVP hunisi: **şablon seç → medya koy → export → öde.**
 
-> **Ad:** ürün adı **Kadraj** olarak belirlendi (depo adı `kadraj`). Kodda
-> kullanıcıya görünen ad hâlâ `StoryTemplate` — `AppInfo.displayName` +
-> `CFBundleDisplayName` + ikon birlikte güncellenecek (bkz. [MAGAZA.md](MAGAZA.md)).
+> **Ad:** ürün adı **Kadraj** olarak belirlendi (depo adı `kadraj`).
+> `AppInfo.displayName`, `CFBundleDisplayName`, filigran ve URL şeması
+> (`kadraj://`) güncellendi; ikon kaldı. Bundle id (`com.storytemplate.app`)
+> ve abonelik ürün ID'leri App Store Connect'e bağlı olduğu için ayrı bir
+> karar — bkz. [MAGAZA.md](MAGAZA.md). Klasör/proje adları (`App/StoryTemplate/`,
+> `StoryTemplate.xcodeproj`) yalnızca kaynak düzeni, kullanıcıya görünmüyor.
 >
 > **Mağazaya çıkış:** App Store Connect'in istediği her metin ve cevap
 > [MAGAZA.md](MAGAZA.md) içinde. Yasal sayfalar `docs/` altında (GitHub Pages):
@@ -22,19 +25,19 @@ MVP hunisi: **şablon seç → medya koy → export → öde.**
 | `docs/template-format.md` | Şablon JSON sözleşmesi (v2: klasik + montaj sahneleri) + CDN manifest formatı |
 | `docs/render-engine.md` | Render motoru mimarisi (iki export yolu) ve kararların gerekçeleri |
 | `docs/cdn-deployment.md` | **Ne pakette, ne sunucuda** — dağıtım kararı, yayınlama adımları, cache başlıkları |
-| `templates/` | **127 şablon** + `manifest.json` (CDN'in tek giriş noktası). 14 kategori: sosyal, tanıtım, yemek, gezi, iş, moda, güzellik, spor, emlak, eğitim, müzik, kutlama, özel günler, minimal. 97 klasik (v1) + 30 montaj (v2); 64 Pro / 63 ücretsiz. Şablonların çoğu `tools/templates_src/` altındaki batch dosyalarından ÜRETİLİR (bkz. Şablon üretim hattı) — elle düzenlenen JSON'lar bir sonraki üretimde ezilir. |
+| `templates/` | **127 şablon** + `manifest.json` (CDN'in tek giriş noktası). 14 kategori: sosyal, tanıtım, yemek, gezi, iş, moda, güzellik, spor, emlak, eğitim, müzik, kutlama, özel günler, minimal. 48 klasik (v1) + 79 montaj (v2); 57 Pro / 70 ücretsiz (her kategoride en az yarısı ücretsiz). Şablonların çoğu `tools/templates_src/` altındaki batch dosyalarından ÜRETİLİR (bkz. Şablon üretim hattı) — elle düzenlenen JSON'lar bir sonraki üretimde ezilir. |
 | `templates/assets/` | Şablonların kullandığı Lottie animasyonları. ÜRETİLMİŞ: `tools/make-lottie-confetti.py` (hazır varlık indirmiyoruz — lisans zinciri olmasın) |
-| `templates/thumbs/`, `templates/previews/` | Galeri varlıkları — manifest'in gösterdiği poster (jpg) ve önizleme (mp4). ÜRETİLMİŞ dosyalar: `templatekit-assets` ile yeniden çıkar |
+| `templates/thumbs/`, `templates/previews/` | Galeri varlıkları — poster (jpg, 254 dosya / 12,3 MB, PAKETE girer) ve önizleme (mp4, 140 MB, yalnız CDN — git'te izlenmiyor). ÜRETİLMİŞ: `templatekit-assets` (127 şablon × 2 dil, ~3 dk/dil). Şablon içeriği değişince yeniden üretilmeli |
 | `TemplateKit/` | Swift paketi: model + validator + render çekirdeği + exporter + müzik + katalog + abonelik |
 | `App/` | iOS uygulaması: `StoryTemplate.xcodeproj` + SwiftUI kabuk (şablonlar / videolarım / ayarlar) |
 | `tools/make-lottie-confetti.py` | `templates/assets/confetti.json` üretici (parça sayısı/hız/renk parametrik, sabit tohum) |
 | `tools/make-manifest.py` | `templates/manifest.json` üretici (sıra/sürüm/rozetleri korur) |
 | `tools/templatelib.py` | Şablon üretim API'si + **lint** (motor kuralları + tasarım kontrolleri) |
 | `tools/templates_src/` | Şablon batch dosyaları; `_reference.py` örnek düzenler ve kurallar (üretime girmez) |
-| `tools/build-templates.py` | Batch'leri çalıştırıp `templates/*.json` yazar, hepsini lint eder |
+| `tools/build-templates.py` | Batch'leri çalıştırıp `templates/*.json` yazar, hepsini lint eder + ritim borcunu ölçer |
+| `tools/rhythmize-json.py` | Ritim dönüşümünü ÜRETİM HATTI DIŞINDAKİ (elle yazılmış) JSON'lara uygular; idempotent, lint'ten geçmeyen dönüşümü yazmaz |
 | `tools/contact-sheet.py` | Posterleri tek görselde toplar (katalogu gözle denetlemenin tek yolu) |
 | `tools/publish-cdn.sh` | CDN'e yüklenecek `dist/cdn/` ağacını hazırlar + tutarlılık doğrular |
-| `templates/seed-posters.txt` | Uygulama paketine giren posterlerin listesi (gerisi CDN'den) |
 
 ## Uygulama (App/)
 
@@ -47,8 +50,12 @@ DEVICE=<udid> ./build.sh                # cihaz seç (ad belirsizse script uyar�
 ./build.sh -- --route editor:quote-01 --pro     # "--" sonrası launch bayrağı
 ```
 
-`App/Scripts/smoke.sh` kritik huniyi (galeri → editör → medya → export →
-Videolarım → paywall → EN dili) simulator'da koşturur ve çökme raporu arar.
+`App/Scripts/smoke.sh` kritik huniyi (galeri → editör → medya → export → gerçek
+video klibiyle montaj export'u → Videolarım → paywall → EN dili) simulator'da
+koşturur ve çökme raporu arar. Cihaz AÇIKÇA seçilir (`DEVICE=…`, çözüm
+`App/Scripts/device.sh` içinde `build.sh` ile ORTAK): eskiden `simctl … booted`
+kullandığı için birden fazla simulator açıkken eski kurulumu test edip
+"geçti" diyebiliyordu.
 
 `build.sh` artık yalnız `xcodebuild` + `simctl` sarmalayıcısı: derlemenin tek
 kaynağı Xcode projesi, yani Xcode'da açtığında ve terminalde koştuğunda aynı şey
@@ -82,6 +89,44 @@ düşüyor ve formun SON alanı eylem çubuğunun altında kalıp hiç erişilem
 Boş editörde sahne **galeri posterini** gösterir (kullanıcının kartta dokunduğu
 görselin aynısı) — şablonun boş slotlarla çizilmiş hali çoğu montajda bomboş bir
 gradyan veriyordu. Medya seçilir seçilmez `TemplatePreview`'a geçilir.
+"Medya ekle" hapı sahnenin ORTASINDA durmaz: şablonun metin bloklarıyla
+çakışmayan bir şeride yerleşir (ortadayken her şablonda başlığı örtüyordu).
+
+**Klip ayarları (`ClipSettingsView`):** DOLU bir kareye dokunmak medyayı
+değiştirmez, klip ayarlarını açar — kadraj (sürükle/yakınlaştır, üçler kuralı
+ızgarası), **nereden başlasın** (şerit üzerinde kullanılacak bölümün penceresi),
+hız (0,25x–4x), sıra (geri/ileri al) ve "medyayı değiştir". Boş kare doğrudan
+seçiciyi açar. Şeritteki kare, dokunulmuş ayarları küçük etiketlerle gösterir
+(hız / makas / kadraj).
+
+Kadraj ve başlangıç motorun ta başından okuduğu iki alandı (`CropTransform`,
+`videoStart`) ama arayüzde karşılığı yoktu: kullanıcı 30 saniyelik videosundan
+hep ilk saniyeleri alıyor ve öznesi merkeze göre kırpılıyordu. Hız videonun
+süresini değiştirmez, klibin o sahneye sığdırılan bölümünü değiştirir
+(bkz. `docs/render-engine.md` → Klip hızı).
+
+**Metin stili (`TextStyleView`):** her metin alanının yanındaki "Stil" düğmesi
+boyut (%60–180), renk (şablonun paleti + nötrler) ve yazı tipi ailesi
+(Modern/Klasik/Yumuşak/İddialı — şablonun KALINLIĞI korunur) verir. Şablonun
+tipografisi varsayılan kalır, "şablonun stiline dön" bir dokunuş uzakta.
+
+**Taslak (`DraftStore`):** editörden çıkan kullanıcı işini kaybetmez. Şablon
+başına TEK taslak tutulur; medya taslak klasörüne kopyalanır (iOS `tmp`'i
+siliyor), galerinin en üstünde "Devam et" şeridi çıkar ve editör "Kaldığın
+yerden devam · Sıfırla" şeridini gösterir. Export bitince taslak düşer.
+
+**Önizleme kendiliğinden yenilenir:** bir kez render alındıktan sonra oynatıcı
+ekranda KALIR; değişiklikten 1,5 sn sonra yeni render arka planda koşar
+("Önizleme yenileniyor…" göstergesi) ve hazır olunca sessizce devreye girer.
+Eskiden her değişiklikte video kaybolup yerine "yenile" düğmesi geliyordu.
+
+**Fotoğraf seçici çoklu seçim:** sahnedeki/alt çubuktaki "medya ekle" boş slot
+sayısı kadar seçime izin verir ve seçilenleri SEÇİM SIRASIYLA boş slotlara
+dağıtır; şeritteki tek bir kareye dokunmak ise tek slot düzenlemedir.
+
+**Farklı oran:** sonuç ekranında "Gönderi 4:5" ve "Kare 1:1" — biten video
+tasarım bozulmadan yeni kadraja oturtulur, artan alan kendi bulanık kopyasıyla
+dolar (`AspectReframer`) ve çıktı Videolarım'a eklenir.
 
 Metin alanlarının başlıkları `TextFieldLabels` tablosundan gelir (katman
 id'lerini "Ana başlık", "Fiyat", "Adım 2" gibi kullanıcı diline çevirir);
@@ -93,7 +138,7 @@ kullanıcıya "Filigranı kaldır", ve iki çıkış (Düzenlemeye dön / Yeni v
 Kapanınca `flow.phase` `.idle`'a çekilir; eskiden faz `.done`'da kaldığı için
 export sonrası metnini değiştiren kullanıcı videoyu bir daha oluşturamıyordu.
 
-Deep link: `storytemplate://sablon/<id>` şablon sekmesinde o şablonun editörünü
+Deep link: `kadraj://sablon/<id>` şablon sekmesinde o şablonun editörünü
 açar (katalogda yoksa "şablon bulunamadı" ekranı).
 
 Launch bayrakları (screenshot otomasyonu ve senaryo denemesi):
@@ -106,6 +151,7 @@ Launch bayrakları (screenshot otomasyonu ve senaryo denemesi):
 | `--billing local` / `storekit` | ödeme arka ucu (varsayılan `local`: mağazasız demo) |
 | `--open-videos`, `--open-settings` | ilgili sekmeyle başla |
 | `--open-music`, `--open-paywall`, `--open-picker`, `--inject-media` | ilgili ekranı aç / seçimi taklit et |
+| `--inject-video <yol>` | verilen klibi video slotlarına koy (montaj hattı + klip hızı otomasyonda ancak böyle görülüyor) |
 
 **Galeri kartı:** `templatekit-assets` ile üretilmiş poster (`thumbs/*.jpg`)
 gösterilir; poster katalogla aynı yoldan gelir (CDN → önbellek → uygulama
@@ -413,7 +459,9 @@ Detaylar `docs/render-engine.md`'de.
       DAĞITIM: posterler artık uygulama paketine tümüyle girmiyor
       (`templates/seed-posters.txt` ile ~28 seed), gerisi CDN'den inip
       önbelleğe alınıyor; paket **26 MB → 18 MB** ve katalog büyüdükçe
-      artmıyor. CDN adresi `Info.plist` → `TemplateCDNBaseURL` ile
+      artmıyor. *(Bu karar Aşama 12'de GERİ ALINDI — CDN'siz yayında "gerisi"
+      hiç gelmiyor; posterlerin tamamı pakete girdi, `seed-posters.txt`
+      kaldırıldı.)* CDN adresi `Info.plist` → `TemplateCDNBaseURL` ile
       yapılandırılıyor (eskiden yalnız `--cdn` bayrağıyla açılabiliyordu, yani
       yayınlanan uygulama ağa hiç çıkmıyordu). `tools/publish-cdn.sh` yükleme
       ağacını hazırlayıp tutarlılığı doğruluyor; ayrıntı `docs/cdn-deployment.md`.
@@ -489,13 +537,181 @@ Detaylar `docs/render-engine.md`'de.
       yerde önbellek yok. İlk yayından SONRA varlıkları yeniden üretirsen
       `version` artırmak ZORUNLU (cache anahtarı `id-vN`).
 
+- [x] **Aşama 12 — klip hızı + uçtan uca testin bulduklarının kapatılması:**
+      2026-08-12 tarihli uçtan uca testin (`YAPILACAKLAR.md`) kod tarafındaki
+      maddeleri kapatıldı ve **klip hızı** eklendi.
+      1. **KLİP HIZI (yeni özellik):** her video slotu için 0,25x–4x hız
+         (`UserEdits.SlotAssignment.speed`). Aynı şablonda bazı klipler
+         hızlandırılıp bazıları ağır çekime alınabiliyor. Hız videonun
+         SÜRESİNİ değiştirmiyor — sahne penceresi sabit, değişen kaynaktan
+         alınan bölüm (3 sn'lik sahne + 2x = klibin 6 saniyesi), böylece tempo
+         hizalaması ve müzik bozulmuyor. İki export yolunda da uygulanıyor
+         (`MontageComposer`, `TemplateExporter`); kullanıcının kendi klibinin
+         sesi seçiliyse ses de aynı oranda ölçekleniyor (yoksa görüntüyle
+         ayrışıyor). Editörde karenin köşesindeki hız etiketi (menü: "2x ·
+         hızlı", "0,5x · ağır çekim"). Doğrulama `ClipSpeedTests`: zamanı
+         parlaklıkla kodlayan bir klipten render alınıp çıktının karesi
+         kaynağın beklenen karesiyle karşılaştırılıyor — modeli okuyan bir test
+         hızın çalıştığını göstermez. Ayrıntı `docs/render-engine.md`.
+      2. **KATALOG CACHE'İ SEED'İ EZİYORDU (sessiz, ürünü bozan):** sıra
+         körlemesine "cache → seed" olduğu için, güncellenen bir uygulamada
+         diskteki eski CDN indirmesi kazanıyordu — paket 127 şablon içerirken
+         galeride 100 görünüyor, eksik 27 şablon aramada ve derin bağlantıda
+         "bulunamadı" veriyordu (CDN yapılandırılmamışsa kalıcı olarak).
+         Manifest artık `revision` taşıyor (`make-manifest.py` içerik değişince
+         artırır) ve yeni olan kazanıyor. 5 regresyon testi.
+      3. **FİLİGRAN AÇIK ZEMİNDE GÖRÜNMÜYORDU:** krem zeminli şablonlarda
+         beyaz "Made with…" yazısı okunmuyordu — oysa filigran Pro'ya geçmenin
+         ana motivasyonu. Yazının arkasına koyu yarı saydam bir hap kondu
+         (kelime kutuları ölçülüp ayrı katman olarak: rasterizer'ın kendi
+         `highlightColor`'ı sağa dayalı yazıda kırpılıyordu). Açık ve koyu
+         zeminli iki şablonda export alınıp kırpılarak doğrulandı.
+      4. **EDİTÖR SÜRTÜNMESİ:** "Medya ekle" hapı her şablonda ilk karede
+         şablonun kendi başlığını örtüyordu — artık metin bloklarıyla
+         çakışmayan bir şeride yerleşiyor (medya slotunun merkezine hizalamak
+         denendi ve İŞE YARAMADI: slot çoğu şablonda tam kadraj). Fotoğraf
+         seçici çoklu seçime geçti (boş slot sayısı kadar, seçim SIRASI
+         korunur — 5 klipli şablonda seçiciyi 5 kez açmak gerekiyordu).
+         Rozetli "Medya 5/5" sekmesi artık kırpılmıyor.
+      5. **GALERİ VİTRİNİ:** posterlerin tamamı pakete girdi. Ölçüm kararı
+         verdi: uygulama posteri en fazla 512 px'de gösterdiği için JPEG
+         kalitesi 0,85 → 0,6 düşürüldü (gözle fark yok), 254 poster 20 MB'dan
+         12 MB'a indi ve `seed-posters.txt` kaldırıldı. CDN'siz bir yayında
+         kartların ~%78'i yer tutucu görünüyordu. Poster gerçekten yoksa
+         (tanınmayan CDN şablonu) kart artık "resim yok" ikonu değil, şablonun
+         paletinden çizilen soyut bir sahne gösteriyor. NOT: 254 posterin
+         DOSYASI değişti, manifest `version`'ları değişmedi — CDN adresi hâlâ
+         boş olduğu için hiçbir yerde önbellek yok. İlk yayından sonra
+         posterleri yeniden kodlarsan `version` artırmak ZORUNLU.
+      6. **YANLIŞ GÜVEN VEREN YEŞİL:** `smoke.sh` `simctl … booted` kullanıyor,
+         `build.sh` ise cihazı adından çözüyordu — birden fazla simulator
+         açıkken duman testi ESKİ kurulumu test edip "geçti" diyebiliyordu.
+         Cihaz çözümü tek dosyada (`App/Scripts/device.sh`), ikisi de aynı
+         UDID'de koşuyor. Duman testine gerçek VİDEO adımı eklendi
+         (`--inject-video`): montaj hattı ve klip hızı fotoğrafla hiç
+         görülmüyordu.
+      7. **RİTİM BORCU ÖLÇÜLÜYOR:** `build-templates.py --check` artık kesme
+         yoğunluğunu raporluyor ve borcu (eşiğin altındaki şablon sayısı)
+         mandal olarak tutuyor — yeni durağan bir şablon eklenirse düşer.
+         Bugün 96/110; katalogu çok sahneliye çevirme işi (YAPILACAKLAR 1.2)
+         bu sayıyı eritecek.
+      114 test + duman testi yeşil.
+
+- [x] **Aşama 13 — "para vermek için gerçek sebep": kontrol + ritim.** Kullanıcı
+      gözüyle yapılan değerlendirme tek bir cümlede toplanıyordu: uygulama güzel
+      görünüyor ama "benim videom üzerinde söz hakkım yok" hissi veriyor. Bu
+      aşama o hissi kaldırdı.
+      1. **TRIM + KADRAJ (en yüksek getirili iş):** motor `videoStart` ve
+         `CropTransform` alanlarını ta başından okuyordu, arayüzde karşılığı
+         YOKTU — kullanıcının 30 saniyelik videosundan hep ilk saniyeler
+         alınıyor ve öznesi merkeze göre kırpılıyordu. `ClipSettingsView`:
+         şerit üzerinde kullanılacak bölümün penceresi, sürükle/yakınlaştır
+         kadraj (üçler kuralı ızgarası), hız, sıra, değiştir. Kadrajın YÖNÜ iki
+         export yolunda ölçülerek eşitlendi (`CropAndTrimTests`): parmağı aşağı
+         sürükleyince şablon türüne göre farklı yöne kayan bir kadraj en sinir
+         bozucu hata türü olurdu.
+      2. **METİN STİLİ:** boyut/renk/yazı tipi (`TextStyleOverride` +
+         `TextStyleView`). Yazı tipi ailesi şablonun KALINLIĞINI koruyor;
+         motor zincirinin tamamı testle ölçülüyor (siyah zemin + beyaz metin,
+         karenin parlaklığı boyutu ve rengi dolaylı ölçüyor).
+      3. **TASLAK:** `DraftStore` — editörden çıkan iş kaybolmuyor, galeride
+         "Devam et" şeridi çıkıyor. Medya taslak klasörüne kopyalanıyor (iOS
+         `tmp`'i siliyor, taslak boş kabuğa dönüyordu); sahipsiz dosyalar
+         toplanıyor, en fazla 12 taslak tutuluyor.
+      4. **ÖNİZLEME SÜRTÜNMESİ:** oynatıcı artık ekrandan kalkmıyor; değişiklik
+         durulunca (1,5 sn) yeni render arka planda koşuyor ve sessizce devreye
+         giriyor. Eski önizleme dosyası yenisi bitene kadar silinmiyor (oynatıcı
+         onu oynatıyor).
+      5. **GÖNDERİ/KARE ORANI:** `AspectReframer` — şablonu yeniden dizmek
+         tipografiyi çökerteceği için biten VİDEO yeni kadraja oturtuluyor,
+         artan alan kendi bulanık kopyasıyla doluyor. Sonuç ekranından "Gönderi
+         4:5" / "Kare 1:1" çıktısı Videolarım'a ekleniyor.
+      6. **KATALOG RİTMİ (bitti):** `templatelib.rhythmize` tek sahneli medya
+         şablonlarını tasarıma DOKUNMADAN çok sahneliye çeviriyor — sahnelere
+         yalnız medya girer (her kesmede farklı kenBurns yönü/zoom'u),
+         metin/şekil katmanları global overlay olarak ORİJİNAL zamanlamasıyla
+         kalır (katman id'leri ve editör alanları değişmez), toplam süre
+         birebir korunur. Dönüşüm lint'ten geçmezse şablon KORUNUYOR.
+
+         | Ölçüt | Önce | Sonra |
+         |---|---|---|
+         | Eşiği (0,4 kesme/sn) geçen şablon | 14 | **63 / 72** |
+         | Ortalama kesme yoğunluğu | 0,23 | **0,64** |
+         | Borç | 96 | **9** |
+
+         **50 şablon** çevrildi: 38'i üretim hattından (`build-templates.py`),
+         12'si elle yazılmış eski JSON (`tools/rhythmize-json.py` — idempotent,
+         tekrarlanabilir). Kalan 9, ELLE tasarlanmış çok sahneli şablonlar
+         (öncesi/sonrası, reveal, ikiz ekran): sahne sayısı orada bir tasarım
+         kararı, otomatik bölmek şablonun fikrini bozar.
+
+         İki ölçüt eklendi: (a) medya kadrajın en az %35'ini kaplamıyorsa
+         dönüşüm YAPILMAZ — %80'i yazı olan bir kartta köşedeki fotoğrafı
+         kesmek ritim değil titreme üretir (borç metriği de artık onları
+         saymıyor, yoksa mandal hiç kapanmayacak bir borç gösteriyordu);
+         (b) motorda iki kural gevşetildi: aynı `slotIndex` farklı sahnelerde
+         tekrar edebiliyor (validator + lint) ve aynı klip sahneler arasında
+         **kaldığı yerden devam ediyor** (eskiden her kesmede baştan başlıyor,
+         aynı yarım saniye takılıyordu). Bu ikisi olmadan dönüşen şablonlar
+         katalogdan tümüyle düşüyordu — `templatekit-demo` yakaladı.
+      125 test + duman testi yeşil.
+
+- [x] **Aşama 14 — huni, vitrin cilası ve marka (`KULLANICI-ANALIZI.md` planı).**
+      Kullanıcı gözüyle inceleme iki cümlede toplanıyordu: *"değerini görmeden
+      para istiyor"* ve *"vitrin bana kendi fotoğrafımı hayal ettirmiyor"*.
+      Birincisi tamamen, ikincisi yarısı kapatıldı.
+      1. **İLK VİDEO BEDAVA (huninin tamamı bu maddede):** bir kerelik
+         filigransız export hakkı (`hasFirstFreeExport`), paywall sonuç
+         ekranında, galerideki Pro bandı ilk export'a kadar gizli. Dönüşüm
+         şablon uygulamalarında "kullanıcı bir kere sonucu elde eder, sonra
+         filigranı kaldırmak ister" anında olur; ürün o anı yaşatmadan para
+         istiyordu. Ücretsiz/Pro dengesi de düzeltildi: **70 / 57**, her
+         kategori ≥ %50 (Sosyal 6/21 → 11/21, İş 2/7 → 4/7).
+      2. **KARŞILAMA:** 3 kare, her karede atlanabilir. "İlk videon
+         filigransız" rozeti yalnız hak duruyorsa çıkıyor (Pro'ya yanlış vaat
+         yok). `smoke.sh` `--skip-onboarding` ile geçiyor — otomasyon
+         karşılamaya takılmıyor.
+      3. **SİLUET KALKTI:** `.portrait` sahnesi iki elipsten (omuz + kafa)
+         ibaretti; güzellik/kuaför/düğün şablonlarının kapağında kafasız koyu
+         bir gövde duruyordu. Yerine yumuşak plato fonu + cyclorama kavisi.
+         **Üretim sırası burada tuzaklı:** posterler `SampleClips.swift`'ten
+         değil `tools/samples/*.mp4`'ten besleniyor — önce `--make-samples`,
+         sonra 254 poster + 254 önizleme. Sıra atlandığı için düzeltme ilk
+         turda vitrine yansımadı.
+      4. **METİN OKUNABİLİRLİĞİ:** filigranın aldığı koruma (koyu hap) artık
+         metin katmanlarında da var, ama yalnız medyayı **≥ %85** kapsayan
+         metinde. İlk, daha gevşek kural kremrengi zemin ve pembe kart
+         üstündeki yazılara da hap düşürüyordu — sonuç hapsız halinden kötüydü.
+         Kök neden: kesişim testi `> 0` olduğu için **2,8e-17** birimlik kayan
+         nokta artığı "medya üstünde" sayılıyordu. 15 regresyon testi gerçek
+         şablonlara katman adıyla kilitli.
+      5. **ROZET ZAMANLAMASI:** arka plan plakası etiketinden önce giriyordu —
+         136 plaka/etiket çiftinin **135'inde**. Artık birlikte giriyorlar.
+         (Boşluk oynatıcıda scrub ederek "~2 sn" sanılmıştı; kare kare ölçüm
+         0,15–0,2 sn dedi. Sorun gerçek, tahmin yanlıştı.)
+      6. **MARKA:** `CFBundleDisplayName` + `AppInfo.displayName` = **Kadraj**,
+         filigran "Made with Kadraj" (export edilen videonun pikselinde
+         doğrulandı), deep link `kadraj://`. Bundle id ve ürün ID'lerine
+         BİLİNÇLİ dokunulmadı: App Store Connect kaydından sonra değişmiyorlar.
+         Çeviri kataloğuna 9 metin (243 → 252) — biri var olan bir açıktı,
+         `ExportResultView`'ın kullandığı bir metin katalogda yoktu ve
+         İngilizce'de Türkçe düşüyordu.
+
+      151 test yeşil. **Açık kalan:** cihaz doğrulaması (katalogun %62'si),
+      gerçek fotoğraf havuzu (5 kare hâlâ katalog boyunca tekrar ediyor —
+      lisans/model izni kararı gerekiyor), ikon, Pages, ASC.
+
 ## Mağazaya çıkış (App Store hazırlığı)
 
 Yayın için yapılanlar:
 
 - [x] **Örnek klipler telifsiz:** `tools/samples/*.mp4` artık `templatekit-assets
       --make-samples` ile ÜRETİLİYOR (soyut manzara: gökyüzü gradyanı, ışık,
-      silüet katmanları, bokeh — insan/marka/gerçek yer yok). Kaynağı belirsiz
+      bokeh, manzara katmanları — insan/marka/gerçek yer yok). **İNSAN figürü
+      Aşama 14'te tamamen kaldırıldı:** eski `.portrait` sahnesi iki elipsti
+      (omuz + kafa) ve güzellik/kuaför/düğün kapaklarında kafasız koyu bir
+      gövde olarak görünüyordu; yerine özne olmayan bir çekim platosu
+      (cyclorama fonu + anahtar ışık) geçti. Kaynağı belirsiz
       görüntüler depodan kaldırıldı; klipler uygulama paketine GİRMİYOR, yalnız
       vitrin varlıklarını (`thumbs/`, `previews/`) üretiyorlar.
 - [x] **Editör boş açılıyor, medyasız export kilitli.** Kullanıcının videosuna
@@ -532,10 +748,16 @@ Yayın için yapılanlar:
 
 Yayın öncesi KALAN (kod dışı ya da cihaz/hesap gerektiren):
 
-- [ ] **Uygulama adı + ikon.** Şu an `AppInfo.displayName = "StoryTemplate"`
-      (filigran, `CFBundleDisplayName` ve ikon bu adla).
-- [ ] **Gizlilik politikası + destek sayfası** yayınlanacak; `Legal.swift`
-      içindeki iki URL gerçek adresle değişecek (App Store Connect zorunlu alan).
+- [x] **Uygulama adı:** `AppInfo.displayName` / `CFBundleDisplayName` = `Kadraj`,
+      filigran varsayılanı `Made with Kadraj`, URL şeması `kadraj://`.
+- [ ] **İkon** (1024×1024 + tüm boyutlar) — ad kesinleştiğine göre üretilebilir.
+- [ ] **Bundle id / ürün ID kararı:** `com.storytemplate.app` ve
+      `com.storytemplate.pro.*` marka adıyla uyumsuz ama ASC'de uygulama
+      oluşturulduktan sonra değişmiyor — oluşturmadan önce karara bağla.
+- [ ] **Gizlilik politikası + destek sayfası** yayınlanacak. Sayfalar yazıldı
+      ve commit'li (`docs/{gizlilik,kosullar,destek}.html`), `Legal.swift` de
+      onları gösteriyor — ama **GitHub Pages ayarı açık değil**: 2026-08-16'da
+      üç adres de 404 döndü. Depo ayarlarından Source: `main` / `/docs`.
 - [ ] **App Store Connect:** abonelik grubu + `com.storytemplate.pro.monthly` /
       `.yearly` ürünleri, fiyatlar, deneme, lokalize açıklamalar. Sonra
       `BillingBackend.resolved` varsayılanı `.storeKit` yapılacak.

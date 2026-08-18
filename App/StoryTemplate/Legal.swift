@@ -10,9 +10,9 @@ import TemplateKit
 /// topladık ki paywall, ayarlar ve mağaza açıklaması aynı şeyi söylesin.
 enum AppInfo {
     /// Kullanıcıya görünen ad. Filigran ve arayüz bunu kullanır.
-    /// TODO: nihai marka adı seçilince burayı, `CFBundleDisplayName`'i ve
-    /// app icon'u birlikte güncelle.
-    static let displayName = "StoryTemplate"
+    /// `CFBundleDisplayName` ile aynı kalmalı; bundle id (`com.storytemplate.app`)
+    /// ise mağazaya bağlı olduğu için marka adından bağımsız duruyor.
+    static let displayName = "Kadraj"
 
     static var version: String {
         let short = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString")

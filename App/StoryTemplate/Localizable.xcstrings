@@ -233,17 +233,6 @@
         }
       }
     },
-    "ALBÜM": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ALBUM"
-          }
-        }
-      }
-    },
     "Abonelik dönem sonunda otomatik yenilenir. İptal etmezsen yenileme ücreti hesabına yansır; iptali istediğin an Ayarlar → Apple Kimliği → Abonelikler'den yapabilirsin.": {
       "extractionState": "manual",
       "localizations": {
@@ -354,17 +343,6 @@
         }
       }
     },
-    "Analitik olayları (debug)": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Analytics events (debug)"
-          }
-        }
-      }
-    },
     "Aramayı temizle": {
       "extractionState": "manual",
       "localizations": {
@@ -383,6 +361,17 @@
           "stringUnit": {
             "state": "translated",
             "value": "Tell a friend"
+          }
+        }
+      }
+    },
+    "Atla": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skip"
           }
         }
       }
@@ -662,6 +651,17 @@
         }
       }
     },
+    "Devam": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Continue"
+          }
+        }
+      }
+    },
     "Değiştir": {
       "extractionState": "manual",
       "localizations": {
@@ -673,17 +673,6 @@
         }
       }
     },
-    "Değiştirmek için bir kareye dokun": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tap a frame to replace it"
-          }
-        }
-      }
-    },
     "Dinle": {
       "extractionState": "manual",
       "localizations": {
@@ -691,17 +680,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Play"
-          }
-        }
-      }
-    },
-    "Dokun → kendi galerinden foto/video seç": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tap to pick a photo or video from your library"
           }
         }
       }
@@ -926,6 +904,17 @@
         }
       }
     },
+    "Fotoğraflarını ve videolarını ekle, yazıları kendi sözlerinle değiştir.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add your photos and videos, then replace the text with your own words."
+          }
+        }
+      }
+    },
     "Fotoğrafın şablona yerleşsin": {
       "extractionState": "manual",
       "localizations": {
@@ -933,17 +922,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "See your photo inside the template"
-          }
-        }
-      }
-    },
-    "GRID": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "GRID"
           }
         }
       }
@@ -1010,6 +988,17 @@
           "stringUnit": {
             "state": "translated",
             "value": "Privacy Policy"
+          }
+        }
+      }
+    },
+    "Hadi başlayalım": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Let's start"
           }
         }
       }
@@ -1201,17 +1190,6 @@
         }
       }
     },
-    "Klipler (%lld)": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Clips (%lld)"
-          }
-        }
-      }
-    },
     "Konuk": {
       "extractionState": "manual",
       "localizations": {
@@ -1344,17 +1322,6 @@
         }
       }
     },
-    "Medya (%lld)": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Media (%lld)"
-          }
-        }
-      }
-    },
     "Medya alınıyor…": {
       "extractionState": "manual",
       "localizations": {
@@ -1384,6 +1351,17 @@
           "stringUnit": {
             "state": "translated",
             "value": "Couldn't add media"
+          }
+        }
+      }
+    },
+    "Medyanı koy": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add your media"
           }
         }
       }
@@ -2081,6 +2059,17 @@
         }
       }
     },
+    "Videon saniyeler içinde hazır. Doğrudan paylaş ya da galerine kaydet.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your video is ready in seconds. Share it right away or save it to your gallery."
+          }
+        }
+      }
+    },
     "Videonun kendi sesi": {
       "extractionState": "manual",
       "localizations": {
@@ -2088,17 +2077,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Original video sound"
-          }
-        }
-      }
-    },
-    "Videoya filigran eklenecek": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Your video will have a watermark"
           }
         }
       }
@@ -2165,6 +2143,17 @@
           "stringUnit": {
             "state": "translated",
             "value": "Author"
+          }
+        }
+      }
+    },
+    "Yemek, indirim, emlak, kutlama… Hazır şablonlar arasından işine uyanı seç.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Food, deals, real estate, celebrations… Pick the ready-made template that fits."
           }
         }
       }
@@ -2334,17 +2323,6 @@
         }
       }
     },
-    "Önce fotoğraf/video seç": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Add a photo or video first"
-          }
-        }
-      }
-    },
     "Önizle": {
       "extractionState": "manual",
       "localizations": {
@@ -2363,17 +2341,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Preparing preview"
-          }
-        }
-      }
-    },
-    "Önizlemeyi yenile": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Refresh preview"
           }
         }
       }
@@ -2444,13 +2411,13 @@
         }
       }
     },
-    "İKİZ": {
+    "İlk videon filigransız": {
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "SPLIT"
+            "value": "Your first video has no watermark"
           }
         }
       }
@@ -2554,13 +2521,13 @@
         }
       }
     },
-    "Şablon motoru: TemplateKit": {
+    "Şablon seç": {
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Template engine: TemplateKit"
+            "value": "Pick a template"
           }
         }
       }
@@ -2583,17 +2550,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Couldn’t load templates"
-          }
-        }
-      }
-    },
-    "Şablonlar sekmesinden bir şablon seç, medyanı koy,\n\"Video Oluştur\"a bas.": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Pick a template in the Templates tab, add your media,\nthen tap “Create video”."
           }
         }
       }

@@ -257,8 +257,13 @@ struct Assets {
             url as CFURL, UTType.jpeg.identifier as CFString, 1, nil) else {
             throw CocoaError(.fileWriteUnknown)
         }
+        // Kalite 0.6 — uygulama posteri EN FAZLA 512 px'de gösteriyor
+        // (`ThumbnailStore.maxPixelSize`), yani 540 px'lik bu dosya zaten
+        // 1:1'de görünüyor ve daha yüksek kalite ekranda hiç fark etmiyor
+        // (0.85 ile yan yana bakıldı). Karşılığında TÜM katalogun posteri
+        // uygulama paketine sığıyor: 127 şablon × 2 dil ≈ 12 MB, 20 MB değil.
         CGImageDestinationAddImage(destination, image,
-                                   [kCGImageDestinationLossyCompressionQuality: 0.85] as CFDictionary)
+                                   [kCGImageDestinationLossyCompressionQuality: 0.6] as CFDictionary)
         guard CGImageDestinationFinalize(destination) else {
             throw CocoaError(.fileWriteUnknown)
         }
@@ -458,22 +463,26 @@ struct MediaPool {
         }
         let wanted: [String]
         switch category {
-        case "food":       wanted = ["food", "plate", "cafe"]
-        case "travel":     wanted = ["nature", "sunset", "ocean", "desert", "forest"]
-        case "realestate": wanted = ["city", "cafe", "studio"]
-        case "fashion":    wanted = ["texture", "fabric", "studio"]
-        case "beauty":     wanted = ["studio", "cafe", "fabric"]
-        case "fitness":    wanted = ["city", "studio", "forest"]
-        case "music":      wanted = ["night", "city", "studio"]
-        case "business":   wanted = ["workspace", "city", "cafe"]
-        case "education":  wanted = ["workspace", "cafe", "studio"]
+        case "food":       wanted = ["food", "plate", "dessert", "pour", "hands", "cafe"]
+        case "travel":     wanted = ["nature", "sunset", "ocean", "forest", "desert", "city"]
+        case "realestate": wanted = ["room", "house", "city", "cafe"]
+        case "fashion":    wanted = ["clothes", "shoes", "shop", "fabric", "texture"]
+        // GÜZELLİK önce yüzsüz İNSAN VARLIĞI ister: manikür, saç, makyaj
+        // fırçası. Eskiden burada `studio` (boş plato) vardı ve kategori
+        // "kimsenin olmadığı bir stüdyo" gibi görünüyordu — satan kategoride
+        // en pahalı hata buydu.
+        case "beauty":     wanted = ["nails", "hair", "makeup", "salon", "spa"]
+        case "fitness":    wanted = ["gym", "run", "yoga"]
+        case "music":      wanted = ["music", "vinyl", "night", "city"]
+        case "business":   wanted = ["workspace", "write", "shop", "cafe", "city"]
+        case "education":  wanted = ["books", "write", "workspace", "cafe"]
         // promo = her işin indirim/kampanya duyurusu; NÖTR bir zemin ister.
         // Eskiden "food" başta geliyordu ve "Keten Gömlek ₺1.290" kartı bir
         // tabak etle çıkıyordu — vitrinde şablonun ne işe yaradığını yanlış
         // anlatıyor. Yemek promosyonu şablonları `food` kategorisinde.
-        case "promo":      wanted = ["texture", "fabric", "studio", "cafe"]
-        case "wedding":    wanted = ["sunset", "studio", "cafe"]
-        case "holiday":    wanted = ["night", "sunset", "city"]
+        case "promo":      wanted = ["shop", "clothes", "plate", "texture", "fabric"]
+        case "wedding":    wanted = ["flowers", "candle", "spa", "sunset"]
+        case "holiday":    wanted = ["party", "candle", "flowers", "night", "sunset"]
         default:           wanted = []        // social / minimal: tümü
         }
         let available = wanted.flatMap { kind in
@@ -485,7 +494,7 @@ struct MediaPool {
         // yedek listesinin de SONUNA konur. Tam kadraj zemin olarak kullanılınca
         // kart "halı fotoğrafı" gibi görünüyor ve açık dokuda başlık okunmuyor
         // (katalogun ilk kartı bir kez böyle çıktı).
-        let closeUp = ["texture", "fabric"]
+        let closeUp = ["texture", "fabric", "nails"]
         let rest = (0..<clips.count).filter { !available.contains($0) }
         let restMain = rest.filter { !closeUp.contains(kinds[$0]) }
         // Kaydırma yalnız yedeğin ANA bölümünde: tüm listeyi döndürmek yakın plan

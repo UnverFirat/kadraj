@@ -526,6 +526,9 @@ def lint(doc, strict=True):
     def check_layers(layers, container_duration, where, video_budget):
         video_capable = 0
         text_boxes = []
+        # Slot indeksleri sahne İÇİNDE benzersiz olmalı; sahneler arasında
+        # tekrar serbest (bkz. aşağıdaki mediaSlot kontrolü).
+        container_slots = set()
         for layer in layers:
             lid = layer.get("id")
             if lid in layer_ids:
@@ -588,9 +591,14 @@ def lint(doc, strict=True):
                                    layer.get("alignment", "center")))
             elif kind == "mediaSlot":
                 index = layer.get("slotIndex")
-                if index in slot_indexes:
-                    e(f"{tid}/{lid}: slotIndex {index} tekrar ediyor "
-                      f"(sahneler dahil TÜM şablonda benzersiz olmalı)")
+                # Aynı slot AYNI KAPSAMDA (sahne ya da global katmanlar) iki kez
+                # geçemez — bu yazım hatasıdır. Ama FARKLI SAHNELERDE geçebilir:
+                # ritimli şablonların temeli tam olarak bu (tek klip, dört
+                # kesme; motor klibi kaldığı yerden sürdürür, bkz.
+                # MontageComposer.consumed ve Template.mediaSlots).
+                if index in container_slots:
+                    e(f"{tid}/{lid}: slotIndex {index} aynı sahnede tekrar ediyor")
+                container_slots.add(index)
                 slot_indexes.add(index)
                 # `media` ve `mask` JSON'da opsiyonel; motor sırasıyla
                 # photoOrVideo ve rect varsayıyor.
@@ -719,6 +727,204 @@ def lint(doc, strict=True):
           f"(editör şeridi '1,2,3…' diye numaralandırıyor) — {sorted(slot_indexes)}")
 
     return errors
+
+
+# --- Ritim (kesme yoğunluğu) ----------------------------------------------
+#
+# ÜRÜN KURALI, motor kuralı değil. 2026-08-12 ölçümü: katalogun %82'si TEK
+# sahneli, ortalama kesme yoğunluğu 0,21 kesme/sn — yani ~5 saniyede bir
+# kesme. Reels/TikTok ritmi bunun 5-10 katı; üretilen 8 sn'lik tarif
+# videosunun ~5 saniyesi durağandı. İnsanların abonelik ödediği şey tam
+# olarak o hareket.
+#
+# Eşik ihlali TEK ŞABLONU hata yapmıyor (mevcut katalogun 96 şablonu altında
+# kalıyor, bu bilinen bir borç). Yerine TOPLAM BORÇ sayılıyor ve yalnız
+# AZALABİLİYOR: yeni bir durağan şablon eklenirse sayı artar ve
+# `build-templates.py --check` düşer. Borç eridikçe aşağıdaki sayı da
+# düşürülür.
+RHYTHM_MIN_DENSITY = 0.4        # ~2,5 sn'de bir kesme (katalog ortalamasının 2 katı)
+# Kesme ritmi ancak medya kadrajda anlamlı yer kaplıyorsa işe yarar; eşik
+# kanvasın %35'i (ör. yarım ekran fotoğraf 0,45-0,50 tutuyor).
+MIN_RHYTHM_MEDIA_AREA = 0.35
+RHYTHM_DEBT_BUDGET = 9          # eşik altında kalmasına izin verilen şablon sayısı
+                                # 96 → 73 → 44 → 9. Kalan 9, ELLE tasarlanmış
+                                # çok sahneli şablonlar (öncesi/sonrası, reveal,
+                                # ikiz ekran): sahne sayısı orada bir TASARIM
+                                # kararı — "öncesi/sonrası"nı ikiye bölmek
+                                # şablonun fikrini bozar. Bunları düşürmek
+                                # otomatik dönüşümle değil, tasarım kararıyla
+                                # olur.
+
+# RİTİM DÖNÜŞÜMÜ UYGULANAN ŞABLONLAR (bkz. rhythmize).
+#
+# Katalogun tamamı bir kerede çevrilmiyor: dönüşüm tasarımı korusa da 73 şablonu
+# aynı anda değiştirmek gözle denetlenemez. Bu liste BATCH BATCH büyür; her
+# turda çıktılar kare kare bakılır. Liste dışındaki şablonlar tek sahneli kalır
+# ve `RHYTHM_DEBT_BUDGET` mandalı borcu ölçmeye devam eder.
+RHYTHM_BATCH = [
+    "sale-promo-01", "recipe-steps-01", "menu-card-01", "testimonial-01",
+    "audiogram-01", "vlog-intro-01", "music-card-01", "cafe-menu-01",
+    "caption-bar-01", "coffee-shop-01", "coupon-code-01", "course-promo-01",
+    "daily-special-01", "flash-discount-01", "food-delivery-01", "for-rent-01",
+    "free-shipping-01", "gym-offer-01", "mono-frame-01", "nail-art-01",
+    "new-arrival-01", "open-house-01", "photo-dump-01", "price-drop-01",
+    "recipe-quick-01", "sale-rack-01", "skincare-steps-01", "style-tip-01",
+    "workout-steps-01", "three-things-01",
+    # 2. tur (2026-08-12): kalan uygun şablonların tamamı. `calm` işaretli
+    # tasarımlar (davetiye, tebrik, alıntı) dönüşümün kendisi tarafından
+    # atlanıyor — listeye girmeleri zararsız.
+    "bogo-offer-01", "graduation-01", "lyric-card-01", "pet-star-01",
+    "poll-card-01", "property-specs-01", "qa-card-01", "retro-vhs-01",
+    "run-stats-01", "salon-booking-01", "save-the-date-01", "spa-calm-01",
+    "sunset-diary-01", "team-hiring-01", "throwback-01", "webinar-invite-01",
+    "class-schedule-01", "hair-color-01", "just-sold-01", "nutrition-tip-01",
+    "open-mic-01", "pr-card-01", "student-work-01",
+]
+
+
+def rhythmize(doc, target_beat=1.4, min_scenes=3, max_scenes=6):
+    """Tek sahneli bir MEDYA şablonunu, tasarımı bozmadan çok sahneliye çevirir.
+
+    NEDEN: katalog ölçüldüğünde şablonların %82'si tek sahneliydi ve kesme
+    yoğunluğu 0,23 kesme/sn çıktı — üretilen 8 saniyelik videonun ~5 saniyesi
+    hiç değişmiyordu. Reels/TikTok ritmi bunun 5-10 katı; insanların abonelik
+    ödediği şey tam olarak o hareket.
+
+    DÖNÜŞÜMÜN KURALI — tasarıma DOKUNMA:
+
+      * Sahnelere yalnız MEDYA katmanları girer; her sahne aynı slotu kendi
+        `kenBurns`'üyle (yönü ve zoom'u dönüşümlü) gösterir. Motor aynı klibi
+        sahneler arasında kaldığı yerden sürdürür (MontageComposer.consumed),
+        yani tek klipten ilerleyen bir kurgu çıkar — aynı yarım saniye
+        tekrarlanmaz.
+      * Metin/şekil katmanları GLOBAL overlay olarak, ORİJİNAL zamanlamasıyla
+        aynen kalır (v2'de global katmanlar tüm video boyunca en üstte çizilir).
+        Böylece katman id'leri, animasyonlar ve editördeki metin alanları
+        değişmez — sahnelere kopyalanırsa her metin 4 kez sorulurdu.
+      * Toplam süre BİREBİR korunur (tüm geçişler `cut`, örtüşme yok): tempo
+        hizalaması, posterler ve önizlemeler geçerli kalır.
+      * Tam kadraj OPAK zemin şekli düşer — montajda compositor paletteki
+        `background` rengini kendisi boyuyor, o katman kalsa medyanın üstünü
+        kapatırdı (lint'in yakaladığı klasik tuzak).
+
+    Dönüşüm uygun değilse `None` döner (zaten çok sahneli, medyasız, kısa ya da
+    `calm` işaretli tasarım).
+    """
+    if doc.get("scenes") or doc.get("_calm"):
+        return None
+    duration = doc.get("duration") or 0
+    if duration < 4:
+        return None
+
+    layers = doc.get("layers", [])
+    media = [l for l in layers if l.get("type") == "mediaSlot"]
+    if not media:
+        return None
+    # MEDYA KADRAJDA ANLAMLI YER KAPLAMALI. Tasarımın %80'i yazı olan bir
+    # kartta (alıntı, fiyat listesi, davetiye) köşedeki küçük fotoğrafı 1,5
+    # saniyede bir kesmek ritim yaratmaz, titreme yaratır — o işlerin hareketi
+    # metin animasyonundan gelir (bkz. enliven).
+    if max(l.get("frame", {}).get("width", 0) * l.get("frame", {}).get("height", 0)
+           for l in media) < MIN_RHYTHM_MEDIA_AREA:
+        return None
+
+    palette = doc.get("palette", {})
+
+    def is_opaque_backdrop(layer):
+        if layer.get("type") != "shape" or layer.get("opacity", 1.0) < 0.85:
+            return False
+        frame = layer.get("frame", {})
+        if frame.get("width", 0) * frame.get("height", 0) < 0.8:
+            return False
+        gradient = layer.get("gradient")
+        ends = ([palette.get(gradient.get("from"), "#000000"),
+                 palette.get(gradient.get("to"), "#000000")] if gradient
+                else [palette.get(layer.get("colorRole"), "#000000")])
+        return all(len(c) == 7 or c[7:9].upper() == "FF" for c in ends)
+
+    overlay_layers = [l for l in layers
+                      if l.get("type") != "mediaSlot" and not is_opaque_backdrop(l)]
+
+    count = max(min_scenes, min(max_scenes, int(round(duration / target_beat))))
+    beat = duration / count
+    # Sahne süreleri kareye oturması için 3 haneye yuvarlanır; son sahne
+    # yuvarlama artığını üstlenir ki toplam BİREBİR aynı kalsın.
+    beats = [round(beat, 3)] * count
+    beats[-1] = round(duration - sum(beats[:-1]), 3)
+
+    directions = ["up", "left", "down", "right"]
+    scenes = []
+    for index, seconds in enumerate(beats):
+        scene_layers = []
+        for slot_index, layer in enumerate(media):
+            copy = json.loads(json.dumps(layer))
+            # Katman id'si TÜM şablonda benzersiz olmak zorunda (lint kuralı).
+            if index > 0:
+                copy["id"] = f"{layer['id']}-b{index + 1}"
+            copy["timing"] = {}
+            # Her kesmede farklı bir hareket: yön dönüşümlü, zoom bir sahne
+            # yakın bir sahne uzak — "punch-in" hissi kesmeyi duyurur.
+            zoom = 1.10 if (index + slot_index) % 2 == 0 else 1.20
+            copy["animations"] = [ken_burns(seconds, zoom=zoom,
+                                            direction=directions[(index + slot_index) % 4])]
+            scene_layers.append(copy)
+        scene = {"id": f"beat{index + 1}", "duration": seconds, "layers": scene_layers}
+        if index < count - 1:
+            # Kesme: örtüşme yok, toplam süre değişmez.
+            scene["transition"] = {"style": "cut", "duration": 0.0}
+        scenes.append(scene)
+
+    result = dict(doc)
+    result["schemaVersion"] = SCHEMA_V2
+    result.pop("duration", None)
+    result["scenes"] = scenes
+    result["layers"] = overlay_layers
+    return result
+
+
+def cut_density(doc):
+    """(kesme sayısı, süre, kesme/sn). Kesme = sahne sayısı; sahnesiz
+    şablonda 1 (tek kadraj boyunca hiç kesme yok)."""
+    scenes = doc.get("scenes")
+    if scenes:
+        total = sum(s["duration"] for s in scenes)
+        total -= sum((s.get("transition") or {}).get("duration", 0) for s in scenes[:-1])
+        cuts = len(scenes)
+    else:
+        total = doc.get("duration") or 0
+        cuts = 1
+    return cuts, total, (cuts / total if total else 0)
+
+
+def needs_rhythm(doc):
+    """Ritim kuralı bu şablona uygulanır mı?
+
+    İki koşul: (1) medya slotu var, (2) en büyük slot kadrajda anlamlı bir yer
+    kaplıyor (`MIN_RHYTHM_MEDIA_AREA`). Saf tipografi işleri (alıntı kartı,
+    fiyat listesi, davetiye) ve köşede küçük bir fotoğraf taşıyan kartlar
+    hareketini METİN animasyonlarından alır; onları kesmeye zorlamak tasarımı
+    bozar. Borç metriği de bu yüzden onları saymaz — sayarsa mandal hiç
+    kapanmayacak bir borç gösterir ve anlamını yitirir.
+    """
+    biggest = 0.0
+    def scan(layers):
+        nonlocal biggest
+        for l in layers:
+            if l.get("type") != "mediaSlot":
+                continue
+            frame = l.get("frame", {})
+            biggest = max(biggest, frame.get("width", 0) * frame.get("height", 0))
+    scan(doc.get("layers", []))
+    for scene in doc.get("scenes") or []:
+        scan(scene.get("layers", []))
+    return biggest >= MIN_RHYTHM_MEDIA_AREA
+
+
+def rhythm_debt(docs):
+    """Eşiğin altında kalan şablonlar: [(id, yoğunluk)], yoğunluğa göre artan."""
+    below = [(d.get("id", "?"), cut_density(d)[2]) for d in docs
+             if needs_rhythm(d) and cut_density(d)[2] < RHYTHM_MIN_DENSITY]
+    return sorted(below, key=lambda row: row[1])
 
 
 def _require_role(e, tid, lid, palette, role):

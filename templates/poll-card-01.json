@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "id": "poll-card-01",
   "name": {
     "en": "This or That",
@@ -12,7 +12,6 @@
     "height": 1920,
     "fps": 30
   },
-  "duration": 6.0,
   "palette": {
     "background": "#101014",
     "surface": "#FFFFFF",
@@ -28,71 +27,6 @@
     "volume": 0.85
   },
   "layers": [
-    {
-      "id": "bg",
-      "frame": {
-        "x": 0.5,
-        "y": 0.5,
-        "width": 1.0,
-        "height": 1.0
-      },
-      "type": "shape",
-      "colorRole": "background"
-    },
-    {
-      "id": "top",
-      "frame": {
-        "x": 0.5,
-        "y": 0.25,
-        "width": 1.0,
-        "height": 0.5
-      },
-      "animations": [
-        {
-          "role": "loop",
-          "preset": "kenBurns",
-          "duration": 6.0,
-          "params": {
-            "zoom": 1.1,
-            "direction": "down"
-          }
-        }
-      ],
-      "type": "mediaSlot",
-      "slotIndex": 0,
-      "media": "photo",
-      "contentMode": "fill",
-      "mask": "rect",
-      "filter": "vivid",
-      "filterIntensity": 0.5
-    },
-    {
-      "id": "bottom",
-      "frame": {
-        "x": 0.5,
-        "y": 0.75,
-        "width": 1.0,
-        "height": 0.5
-      },
-      "animations": [
-        {
-          "role": "loop",
-          "preset": "kenBurns",
-          "duration": 6.0,
-          "params": {
-            "zoom": 1.1,
-            "direction": "up"
-          }
-        }
-      ],
-      "type": "mediaSlot",
-      "slotIndex": 1,
-      "media": "photo",
-      "contentMode": "fill",
-      "mask": "rect",
-      "filter": "vivid",
-      "filterIntensity": 0.5
-    },
     {
       "id": "top-veil",
       "frame": {
@@ -143,15 +77,6 @@
           "duration": 0.5,
           "params": {
             "overshoot": 1.1
-          }
-        },
-        {
-          "role": "loop",
-          "preset": "floatLoop",
-          "duration": 2.6,
-          "params": {
-            "distance": 0.006,
-            "axis": "y"
           }
         }
       ],
@@ -330,6 +255,268 @@
       },
       "colorRole": "textSecondary",
       "alignment": "center"
+    }
+  ],
+  "scenes": [
+    {
+      "id": "beat1",
+      "duration": 1.5,
+      "layers": [
+        {
+          "id": "top",
+          "frame": {
+            "x": 0.5,
+            "y": 0.25,
+            "width": 1.0,
+            "height": 0.5
+          },
+          "animations": [
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 1.5,
+              "params": {
+                "zoom": 1.1,
+                "direction": "up"
+              }
+            }
+          ],
+          "type": "mediaSlot",
+          "slotIndex": 0,
+          "media": "photo",
+          "contentMode": "fill",
+          "mask": "rect",
+          "filter": "vivid",
+          "filterIntensity": 0.5,
+          "timing": {}
+        },
+        {
+          "id": "bottom",
+          "frame": {
+            "x": 0.5,
+            "y": 0.75,
+            "width": 1.0,
+            "height": 0.5
+          },
+          "animations": [
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 1.5,
+              "params": {
+                "zoom": 1.2,
+                "direction": "left"
+              }
+            }
+          ],
+          "type": "mediaSlot",
+          "slotIndex": 1,
+          "media": "photo",
+          "contentMode": "fill",
+          "mask": "rect",
+          "filter": "vivid",
+          "filterIntensity": 0.5,
+          "timing": {}
+        }
+      ],
+      "transition": {
+        "style": "cut",
+        "duration": 0.0
+      }
+    },
+    {
+      "id": "beat2",
+      "duration": 1.5,
+      "layers": [
+        {
+          "id": "top-b2",
+          "frame": {
+            "x": 0.5,
+            "y": 0.25,
+            "width": 1.0,
+            "height": 0.5
+          },
+          "animations": [
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 1.5,
+              "params": {
+                "zoom": 1.2,
+                "direction": "left"
+              }
+            }
+          ],
+          "type": "mediaSlot",
+          "slotIndex": 0,
+          "media": "photo",
+          "contentMode": "fill",
+          "mask": "rect",
+          "filter": "vivid",
+          "filterIntensity": 0.5,
+          "timing": {}
+        },
+        {
+          "id": "bottom-b2",
+          "frame": {
+            "x": 0.5,
+            "y": 0.75,
+            "width": 1.0,
+            "height": 0.5
+          },
+          "animations": [
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 1.5,
+              "params": {
+                "zoom": 1.1,
+                "direction": "down"
+              }
+            }
+          ],
+          "type": "mediaSlot",
+          "slotIndex": 1,
+          "media": "photo",
+          "contentMode": "fill",
+          "mask": "rect",
+          "filter": "vivid",
+          "filterIntensity": 0.5,
+          "timing": {}
+        }
+      ],
+      "transition": {
+        "style": "cut",
+        "duration": 0.0
+      }
+    },
+    {
+      "id": "beat3",
+      "duration": 1.5,
+      "layers": [
+        {
+          "id": "top-b3",
+          "frame": {
+            "x": 0.5,
+            "y": 0.25,
+            "width": 1.0,
+            "height": 0.5
+          },
+          "animations": [
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 1.5,
+              "params": {
+                "zoom": 1.1,
+                "direction": "down"
+              }
+            }
+          ],
+          "type": "mediaSlot",
+          "slotIndex": 0,
+          "media": "photo",
+          "contentMode": "fill",
+          "mask": "rect",
+          "filter": "vivid",
+          "filterIntensity": 0.5,
+          "timing": {}
+        },
+        {
+          "id": "bottom-b3",
+          "frame": {
+            "x": 0.5,
+            "y": 0.75,
+            "width": 1.0,
+            "height": 0.5
+          },
+          "animations": [
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 1.5,
+              "params": {
+                "zoom": 1.2,
+                "direction": "right"
+              }
+            }
+          ],
+          "type": "mediaSlot",
+          "slotIndex": 1,
+          "media": "photo",
+          "contentMode": "fill",
+          "mask": "rect",
+          "filter": "vivid",
+          "filterIntensity": 0.5,
+          "timing": {}
+        }
+      ],
+      "transition": {
+        "style": "cut",
+        "duration": 0.0
+      }
+    },
+    {
+      "id": "beat4",
+      "duration": 1.5,
+      "layers": [
+        {
+          "id": "top-b4",
+          "frame": {
+            "x": 0.5,
+            "y": 0.25,
+            "width": 1.0,
+            "height": 0.5
+          },
+          "animations": [
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 1.5,
+              "params": {
+                "zoom": 1.2,
+                "direction": "right"
+              }
+            }
+          ],
+          "type": "mediaSlot",
+          "slotIndex": 0,
+          "media": "photo",
+          "contentMode": "fill",
+          "mask": "rect",
+          "filter": "vivid",
+          "filterIntensity": 0.5,
+          "timing": {}
+        },
+        {
+          "id": "bottom-b4",
+          "frame": {
+            "x": 0.5,
+            "y": 0.75,
+            "width": 1.0,
+            "height": 0.5
+          },
+          "animations": [
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 1.5,
+              "params": {
+                "zoom": 1.1,
+                "direction": "up"
+              }
+            }
+          ],
+          "type": "mediaSlot",
+          "slotIndex": 1,
+          "media": "photo",
+          "contentMode": "fill",
+          "mask": "rect",
+          "filter": "vivid",
+          "filterIntensity": 0.5,
+          "timing": {}
+        }
+      ]
     }
   ]
 }

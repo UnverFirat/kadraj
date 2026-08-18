@@ -1,11 +1,17 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "id": "countdown-01",
-  "name": { "en": "Countdown", "tr": "Geri Sayım" },
+  "name": {
+    "en": "Countdown",
+    "tr": "Geri Sayım"
+  },
   "category": "wedding",
   "isPro": false,
-  "canvas": { "width": 1080, "height": 1920, "fps": 30 },
-  "duration": 4.0,
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
   "palette": {
     "background": "#0A0A0C",
     "surface": "#17171B",
@@ -13,54 +19,289 @@
     "textPrimary": "#FFFFFF",
     "textSecondary": "#C7C7CE"
   },
-  "audio": { "defaultTrackId": "anticipation-01", "volume": 0.9 },
+  "audio": {
+    "defaultTrackId": "anticipation-01",
+    "volume": 0.9
+  },
   "layers": [
-    { "id": "photo", "type": "mediaSlot", "slotIndex": 0, "media": "photoOrVideo",
-      "contentMode": "fill", "mask": "rect",
-      "frame": { "x": 0.5, "y": 0.5, "width": 1.0, "height": 1.0 },
-      "animations": [
-        { "role": "in", "preset": "fadeIn", "duration": 0.6 },
-        { "role": "loop", "preset": "kenBurns", "duration": 4.0,
-          "params": { "zoom": 1.14, "direction": "up" } } ] },
-    { "id": "scrim", "type": "shape", "colorRole": "background", "opacity": 0.55,
-      "frame": { "x": 0.5, "y": 0.5, "width": 1.0, "height": 1.0 } },
-    { "id": "kicker", "type": "text", "key": "kicker",
-      "default": { "en": "SAVE THE DATE", "tr": "BÜYÜK GÜN" },
-      "font": { "name": "AvenirNext-Medium", "size": 0.022 },
-      "colorRole": "accent", "alignment": "center", "allCaps": true,
+    {
+      "id": "scrim",
+      "type": "shape",
+      "colorRole": "background",
+      "opacity": 0.55,
+      "frame": {
+        "x": 0.5,
+        "y": 0.5,
+        "width": 1.0,
+        "height": 1.0
+      }
+    },
+    {
+      "id": "kicker",
+      "type": "text",
+      "key": "kicker",
+      "default": {
+        "en": "SAVE THE DATE",
+        "tr": "BÜYÜK GÜN"
+      },
+      "font": {
+        "name": "AvenirNext-Medium",
+        "size": 0.022
+      },
+      "colorRole": "accent",
+      "alignment": "center",
+      "allCaps": true,
       "letterSpacing": 0.014,
-      "frame": { "x": 0.5, "y": 0.34, "width": 0.8, "height": 0.04 },
-      "timing": { "start": 0.4 },
-      "animations": [ { "role": "in", "preset": "fadeIn", "duration": 0.5 } ] },
-    { "id": "number", "type": "text", "key": "number",
-      "default": { "en": "7", "tr": "7" },
-      "font": { "name": "AvenirNext-Heavy", "size": 0.22 },
-      "colorRole": "textPrimary", "alignment": "center",
-      "frame": { "x": 0.5, "y": 0.48, "width": 0.9, "height": 0.26 },
-      "timing": { "start": 0.6 },
+      "frame": {
+        "x": 0.5,
+        "y": 0.34,
+        "width": 0.8,
+        "height": 0.04
+      },
+      "timing": {
+        "start": 0.4
+      },
       "animations": [
-        { "role": "in", "preset": "pop", "duration": 0.6, "easing": "spring",
-          "params": { "overshoot": 1.14 } } ] },
-    { "id": "unit", "type": "text", "key": "unit",
-      "default": { "en": "DAYS TO GO", "tr": "GÜN KALDI" },
-      "font": { "name": "AvenirNext-Bold", "size": 0.032 },
-      "colorRole": "textPrimary", "alignment": "center", "allCaps": true,
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.5
+        }
+      ]
+    },
+    {
+      "id": "number",
+      "type": "text",
+      "key": "number",
+      "default": {
+        "en": "7",
+        "tr": "7"
+      },
+      "font": {
+        "name": "AvenirNext-Heavy",
+        "size": 0.22
+      },
+      "colorRole": "textPrimary",
+      "alignment": "center",
+      "frame": {
+        "x": 0.5,
+        "y": 0.48,
+        "width": 0.9,
+        "height": 0.26
+      },
+      "timing": {
+        "start": 0.6
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "pop",
+          "duration": 0.6,
+          "easing": "spring",
+          "params": {
+            "overshoot": 1.14
+          }
+        }
+      ]
+    },
+    {
+      "id": "unit",
+      "type": "text",
+      "key": "unit",
+      "default": {
+        "en": "DAYS TO GO",
+        "tr": "GÜN KALDI"
+      },
+      "font": {
+        "name": "AvenirNext-Bold",
+        "size": 0.032
+      },
+      "colorRole": "textPrimary",
+      "alignment": "center",
+      "allCaps": true,
       "letterSpacing": 0.006,
-      "frame": { "x": 0.5, "y": 0.62, "width": 0.8, "height": 0.06 },
-      "timing": { "start": 0.9 },
-      "animations": [ { "role": "in", "preset": "slideIn", "duration": 0.5,
-        "params": { "direction": "up", "distance": 0.03 } } ] },
-    { "id": "bar", "type": "shape", "colorRole": "accent",
-      "frame": { "x": 0.5, "y": 0.69, "width": 0.1, "height": 0.005 },
-      "timing": { "start": 1.2 },
-      "animations": [ { "role": "in", "preset": "wipeReveal", "duration": 0.4,
-        "params": { "direction": "right" } } ] },
-    { "id": "event", "type": "text", "key": "event",
-      "default": { "en": "AYŞE & MEHMET · 12.08", "tr": "AYŞE & MEHMET · 12.08" },
-      "font": { "name": "AvenirNext-Medium", "size": 0.021 },
-      "colorRole": "textSecondary", "alignment": "center", "letterSpacing": 0.006,
-      "frame": { "x": 0.5, "y": 0.735, "width": 0.85, "height": 0.04 },
-      "timing": { "start": 1.4 },
-      "animations": [ { "role": "in", "preset": "fadeIn", "duration": 0.6 } ] }
+      "frame": {
+        "x": 0.5,
+        "y": 0.62,
+        "width": 0.8,
+        "height": 0.06
+      },
+      "timing": {
+        "start": 0.9
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "slideIn",
+          "duration": 0.5,
+          "params": {
+            "direction": "up",
+            "distance": 0.03
+          }
+        }
+      ]
+    },
+    {
+      "id": "bar",
+      "type": "shape",
+      "colorRole": "accent",
+      "frame": {
+        "x": 0.5,
+        "y": 0.69,
+        "width": 0.1,
+        "height": 0.005
+      },
+      "timing": {
+        "start": 1.2
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "wipeReveal",
+          "duration": 0.4,
+          "params": {
+            "direction": "right"
+          }
+        }
+      ]
+    },
+    {
+      "id": "event",
+      "type": "text",
+      "key": "event",
+      "default": {
+        "en": "AYŞE & MEHMET · 12.08",
+        "tr": "AYŞE & MEHMET · 12.08"
+      },
+      "font": {
+        "name": "AvenirNext-Medium",
+        "size": 0.021
+      },
+      "colorRole": "textSecondary",
+      "alignment": "center",
+      "letterSpacing": 0.006,
+      "frame": {
+        "x": 0.5,
+        "y": 0.735,
+        "width": 0.85,
+        "height": 0.04
+      },
+      "timing": {
+        "start": 1.4
+      },
+      "animations": [
+        {
+          "role": "in",
+          "preset": "fadeIn",
+          "duration": 0.6
+        }
+      ]
+    }
+  ],
+  "scenes": [
+    {
+      "id": "beat1",
+      "duration": 1.333,
+      "layers": [
+        {
+          "id": "photo",
+          "type": "mediaSlot",
+          "slotIndex": 0,
+          "media": "photoOrVideo",
+          "contentMode": "fill",
+          "mask": "rect",
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 1.0,
+            "height": 1.0
+          },
+          "animations": [
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 1.333,
+              "params": {
+                "zoom": 1.1,
+                "direction": "up"
+              }
+            }
+          ],
+          "timing": {}
+        }
+      ],
+      "transition": {
+        "style": "cut",
+        "duration": 0.0
+      }
+    },
+    {
+      "id": "beat2",
+      "duration": 1.333,
+      "layers": [
+        {
+          "id": "photo-b2",
+          "type": "mediaSlot",
+          "slotIndex": 0,
+          "media": "photoOrVideo",
+          "contentMode": "fill",
+          "mask": "rect",
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 1.0,
+            "height": 1.0
+          },
+          "animations": [
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 1.333,
+              "params": {
+                "zoom": 1.2,
+                "direction": "left"
+              }
+            }
+          ],
+          "timing": {}
+        }
+      ],
+      "transition": {
+        "style": "cut",
+        "duration": 0.0
+      }
+    },
+    {
+      "id": "beat3",
+      "duration": 1.334,
+      "layers": [
+        {
+          "id": "photo-b3",
+          "type": "mediaSlot",
+          "slotIndex": 0,
+          "media": "photoOrVideo",
+          "contentMode": "fill",
+          "mask": "rect",
+          "frame": {
+            "x": 0.5,
+            "y": 0.5,
+            "width": 1.0,
+            "height": 1.0
+          },
+          "animations": [
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 1.334,
+              "params": {
+                "zoom": 1.1,
+                "direction": "down"
+              }
+            }
+          ],
+          "timing": {}
+        }
+      ]
+    }
   ]
 }

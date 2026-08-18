@@ -28,19 +28,39 @@ struct EditorView: View {
     @EnvironmentObject var exports: ExportLibrary
     /// Galeri posteri — boş editörde sahne bunu gösterir (aşağıya bak).
     @EnvironmentObject var thumbnails: ThumbnailStore
+    /// Yarım kalmış işler — bu ekran hem okur (devam) hem yazar (çıkışta).
+    @EnvironmentObject var drafts: DraftStore
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.scenePhase) private var scenePhase
     @StateObject private var flow = ExportFlow()
     /// Editördeki oynatılabilir önizleme: motorun kendisiyle küçük çözünürlükte
     /// ön-render (bkz. `ExportFlow.Quality`). Kullanıcının videosuyla aynı
     /// hattan çıkar, yani önizlemede gördüğü kare export'ta da aynıdır.
     @StateObject private var preview = ExportFlow(quality: .preview)
     @State private var previewPlayer: AVPlayer?
+    /// Ekranda oynayan önizleme dosyası. Faz `.done` olduğunda güncellenir;
+    /// oynatıcı buna göre kurulur (bkz. previewStage).
+    @State private var previewURL: URL?
+    /// Otomatik yenileme için bekleyen iş (her değişiklikte sıfırlanır).
+    @State private var refreshTask: Task<Void, Never>?
     /// Metin/medya/müzik değişti mi — önizleme bayat, yenilenmesi gerek.
     @State private var previewStale = false
     @State private var texts: [String: String]
     /// Güncel medya (başlangıçta boş, kullanıcı galeriden seçer).
     @State private var photos: [Int: CGImage]
     @State private var videos: [Int: URL]
+    /// slotIndex -> klip hız çarpanı (kayıt yoksa 1). Yalnız VİDEO slotlarında
+    /// anlamlı; şablonun süresini değiştirmez (bkz. `SlotAssignment.speed`).
+    @State private var speeds: [Int: Double] = [:]
+    /// slotIndex -> kullanıcı kadrajı (yakınlaştır/kaydır). Motor bu alanı ta
+    /// başından okuyordu, arayüzde karşılığı yoktu: dikey olmayan her medya
+    /// merkeze göre kırpılıyor ve kullanıcının öznesi kadraj dışında kalıyordu.
+    @State private var crops: [Int: CropTransform] = [:]
+    /// slotIndex -> klibin hangi saniyesinden başlanacağı (trim).
+    @State private var starts: [Int: Double] = [:]
+    /// Katman id -> metin stili (boyut/renk/yazı tipi). Şablonun tipografisi
+    /// varsayılan; burada yalnız kullanıcının dokunduğu alan durur.
+    @State private var textStyles: [String: TextStyleOverride] = [:]
     /// Açık modal. TEK sheet var: aynı view'a birden fazla `.sheet` takmak
     /// SwiftUI'da yanlış içeriği açabiliyor (bir kere müzik seçici, medya
     /// seçicinin yerine açıldı) — hepsi bu enum üzerinden gider.
@@ -57,22 +77,39 @@ struct EditorView: View {
     @State private var loopTokens: [NSObjectProtocol] = []
     /// Biten export — tam ekran sonuç ekranını açar.
     @State private var result: ExportResult?
+    /// Bu export BAŞLARKEN bir kerelik ücretsiz hak duruyor muydu.
+    ///
+    /// Filigran kararı export başlarken veriliyor (motora o an geçiyor); hak
+    /// ise bitişte tükeniyor. Sonuç ekranı da başlangıçtaki durumu anlatmalı,
+    /// yoksa "hediye" mesajı kendi tükettiği hakkın ardından kaybolurdu.
+    @State private var usedFirstFreeExport = false
     /// Panelde açık olan sekme.
     @State private var panel: Panel = .media
     /// Seçilen dosya okunuyor (iCloud videosu birkaç saniye sürebilir).
     @State private var isImportingMedia = false
     /// Medya alınamadıysa gösterilecek açıklama.
     @State private var mediaError: String?
+    /// Bu oturum bir TASLAKTAN açıldı mı (kullanıcıya söylenmeli: alanların
+    /// neden dolu olduğu açıklanmazsa "uygulama benim adıma bir şey mi yaptı"
+    /// hissi veriyor).
+    @State private var restoredDraft = false
     @FocusState private var focusedField: String?
 
     enum Sheet: Identifiable {
-        /// Galeri seçici: hangi slot, hangi medya türü.
-        case picker(slot: Int, kind: MediaPicker.Kind)
+        /// Galeri seçici: hangi slottan başlanacağı, medya türü ve kaç medya
+        /// birden seçilebileceği (1 = tek slot düzenleme).
+        case picker(slot: Int, kind: MediaPicker.Kind, limit: Int)
+        /// Dolu bir slotun ayarları: kadraj, başlangıç, hız, sıra.
+        case clip(slot: Int)
+        /// Bir metin alanının stili: boyut, renk, yazı tipi.
+        case textStyle(key: String)
         case music
 
         var id: String {
             switch self {
-            case .picker(let slot, _): return "picker-\(slot)"
+            case .picker(let slot, _, let limit): return "picker-\(slot)-\(limit)"
+            case .clip(let slot): return "clip-\(slot)"
+            case .textStyle(let key): return "style-\(key)"
             case .music: return "music"
             }
         }
@@ -82,6 +119,9 @@ struct EditorView: View {
     struct ExportResult: Identifiable {
         let id = UUID()
         let url: URL
+        /// Bu video bir kerelik "ilk videon bizden" hakkıyla mı çıktı — sonuç
+        /// ekranı hediyeyi söyleyip sonrakilerin filigranlı olacağını belirtir.
+        let usedFirstFreeExport: Bool
     }
 
     enum Panel: String, CaseIterable, Identifiable {
@@ -131,6 +171,7 @@ struct EditorView: View {
                     .aspectRatio(9.0 / 16.0, contentMode: .fit)
                     .background(Color(hex: project.template.palette["background"] ?? "#0B0B0D"))
                     .overlay { if isImportingMedia { importingBadge } }
+                    .overlay(alignment: .top) { if restoredDraft { draftBanner } }
                     .clipShape(RoundedRectangle(cornerRadius: 18))
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .padding(.horizontal, 16)
@@ -161,6 +202,7 @@ struct EditorView: View {
             // Screenshot otomasyonu: PHPicker seçimini taklit et — verilen medyayı
             // ilk slota koyup (kullanıcının galeriden seçmesiyle aynı yol) export et.
             injectMediaIfRequested()
+            restoreDraftIfAvailable()
             if autoExport {
                 startExport()
             } else if hasMedia, case .idle = preview.phase {
@@ -168,7 +210,7 @@ struct EditorView: View {
             }
             if ProcessInfo.processInfo.arguments.contains("--open-picker"),
                let slot = templateSlots.first {
-                sheet = .picker(slot: slot, kind: pickerKind(forSlot: slot))
+                sheet = .picker(slot: slot, kind: pickerKind(forSlot: slot), limit: 1)
             }
             if ProcessInfo.processInfo.arguments.contains("--open-music") {
                 sheet = .music
@@ -181,11 +223,12 @@ struct EditorView: View {
         }
         .sheet(item: $sheet) { active in
             switch active {
-            case .picker(let slot, let kind):
+            case .picker(let slot, let kind, let limit):
                 MediaPicker(kind: kind,
+                            selectionLimit: limit,
                             onPick: { picked in
                                 isImportingMedia = false
-                                assign(picked, toSlot: slot)
+                                assign(picked, startingAt: slot)
                             },
                             onStart: { isImportingMedia = true },
                             onError: {
@@ -194,6 +237,32 @@ struct EditorView: View {
                                 mediaError = String(localized: "Bu dosya açılamadı. iCloud'daki bir video olabilir — indirilmesini bekleyip tekrar dener misin?")
                             })
                 .ignoresSafeArea()
+            case .clip(let slot):
+                ClipSettingsView(
+                    displayIndex: (templateSlots.firstIndex(of: slot) ?? slot) + 1,
+                    totalSlots: templateSlots.count,
+                    slotAspect: slotAspect(slot),
+                    windowDuration: slotWindowDuration(slot),
+                    accentHex: tintHex,
+                    videoURL: videos[slot],
+                    photo: photos[slot],
+                    crop: cropBinding(for: slot),
+                    start: startBinding(for: slot),
+                    speed: speedBinding(for: slot),
+                    onReplace: { replaceMedia(in: slot) },
+                    onRemove: { clearSlot(slot) },
+                    onMoveEarlier: canMove(slot, by: -1) ? { move(slot, by: -1) } : nil,
+                    onMoveLater: canMove(slot, by: 1) ? { move(slot, by: 1) } : nil)
+            case .textStyle(let key):
+                TextStyleView(
+                    fieldLabel: fieldLabel(key, index: editableTextKeys.firstIndex(of: key) ?? 0),
+                    sample: texts[key] ?? "",
+                    templateFontName: textContent(key)?.font.name ?? "HelveticaNeue-Bold",
+                    templateColorHex: templateTextColorHex(key),
+                    backgroundHex: project.template.palette["background"] ?? "#0B0B0D",
+                    paletteHexes: paletteHexes,
+                    accentHex: tintHex,
+                    style: textStyleBinding(for: key))
             case .music:
                 MusicPicker(selection: $music,
                             duration: project.template.totalDuration,
@@ -211,7 +280,22 @@ struct EditorView: View {
         .onChange(of: flow.phase) { _, phase in
             if case .done(let url) = phase {
                 previewMusic.stop()
-                result = ExportResult(url: register(url))
+                result = ExportResult(url: register(url),
+                                      usedFirstFreeExport: usedFirstFreeExport)
+                // Hak burada tükenir: video GERÇEKTEN çıktı. Başlangıçta
+                // tüketilseydi iptal eden ya da render'ı patlayan kullanıcı
+                // hiç video görmeden hediyesini kaybederdi.
+                store.markFirstFreeExportUsed()
+                // İş bitti: yarım kalmış değil artık.
+                drafts.markExported(templateID: project.id)
+                restoredDraft = false
+            }
+        }
+        // Önizleme render'ı bitti: oynatıcı yeni dosyaya geçer.
+        .onChange(of: preview.phase) { _, phase in
+            if case .done(let url) = phase {
+                previewURL = url
+                previewStale = false
             }
         }
         .onChange(of: music?.id) { _, id in
@@ -223,9 +307,11 @@ struct EditorView: View {
             ExportResultView(
                 url: finished.url,
                 templateID: project.id,
+                templateName: project.template.name.resolved(languageCode: AppLanguage.code),
                 duration: project.template.totalDuration,
                 accentHex: tintHex,
                 showsProUpsell: !store.entitlements.isPro,
+                gotFirstFreeExport: finished.usedFirstFreeExport,
                 onUpgrade: {
                     closeResult()
                     store.showPaywall(reason: String(localized: "Filigransız dışa aktarım Pro'da"))
@@ -256,7 +342,119 @@ struct EditorView: View {
             previewMusic.stop()
             loopTokens.forEach(NotificationCenter.default.removeObserver)
             loopTokens = []
+            refreshTask?.cancel()
+            preview.cancel()
+            saveDraft()
         }
+        // Uygulama arka plana alınırken de yaz: `onDisappear` yalnız ekrandan
+        // ÇIKINCA çalışıyor, kullanıcı ise çoğu zaman ana ekrana basıp gidiyor.
+        .onChange(of: scenePhase) { _, phase in
+            if phase != .active { saveDraft() }
+        }
+    }
+
+    // MARK: - Taslak
+
+    /// Bu şablonun yarım kalmış işi varsa geri yükler.
+    ///
+    /// Otomasyon yollarında (`--inject-*`, otomatik export) YAPILMAZ: duman
+    /// testi ve ekran görüntüleri hep aynı temiz durumdan başlamalı.
+    private func restoreDraftIfAvailable() {
+        guard !autoExport, !hasMedia,
+              !ProcessInfo.processInfo.arguments.contains("--inject-media"),
+              Self.argument(after: "--inject-video") == nil,
+              let draft = drafts.draft(for: project.id) else { return }
+
+        for slot in draft.slots {
+            switch slot.kind {
+            case .photo:
+                guard let image = drafts.photo(slot) else { continue }
+                photos[slot.slot] = image
+            case .video:
+                let url = drafts.fileURL(slot.fileName)
+                guard FileManager.default.fileExists(atPath: url.path) else { continue }
+                videos[slot.slot] = url
+            }
+            if !slot.crop.isIdentity { crops[slot.slot] = slot.crop }
+            if slot.start > 0 { starts[slot.slot] = slot.start }
+            if slot.speed != 1 { speeds[slot.slot] = slot.speed }
+        }
+        guard !photos.isEmpty || !videos.isEmpty else { return }
+
+        // Metinler: taslakta olan alanlar; şablonun yeni eklediği alanlar
+        // varsayılanıyla kalır (şablon güncellenmiş olabilir).
+        for (key, value) in draft.texts where texts[key] != nil { texts[key] = value }
+        textStyles = draft.textStyles
+        accent = draft.accentHex
+        useOriginalAudio = draft.useOriginalAudio
+        if let trackID = draft.musicTrackID {
+            music = MusicLibrary.track(id: trackID) ?? music
+        } else if !draft.useOriginalAudio {
+            music = nil
+        }
+        restoredDraft = true
+        startPreview()
+    }
+
+    private func saveDraft() {
+        drafts.save(templateID: project.id,
+                    templateName: project.template.name.resolved(languageCode: AppLanguage.code),
+                    texts: texts, textStyles: textStyles,
+                    photos: photos, videos: videos,
+                    crops: crops, starts: starts, speeds: speeds,
+                    accentHex: accent, musicTrackID: music?.id,
+                    useOriginalAudio: useOriginalAudio)
+    }
+
+    /// Taslağı bırakıp şablonun temiz haline dön.
+    ///
+    /// SIRA ÖNEMLİ: taslağı silmek medyayı DİSKTEN de kaldırıyor (çöp toplama),
+    /// bu yüzden önce ekrandaki her şey bırakılır, sonra taslak silinir —
+    /// oynatıcı silinmiş bir dosyaya bakmasın.
+    private func resetToTemplate() {
+        refreshTask?.cancel()
+        preview.cancel()
+        previewPlayer = nil
+        previewURL = nil
+        photos = [:]
+        videos = [:]
+        crops = [:]
+        starts = [:]
+        speeds = [:]
+        textStyles = [:]
+        texts = project.texts
+        accent = nil
+        useOriginalAudio = false
+        music = MusicLibrary.defaultTrack(for: project.template)
+        restoredDraft = false
+        previewStale = false
+        preview.phase = .idle
+        drafts.remove(templateID: project.id)
+    }
+
+    /// "Kaldığın yerden devam" şeridi — alanların neden dolu olduğunu söyler ve
+    /// tek dokunuşla temiz sayfa verir.
+    private var draftBanner: some View {
+        HStack(spacing: 8) {
+            Image(systemName: "clock.arrow.circlepath")
+                .font(.system(size: 11, weight: .semibold))
+            Text("Kaldığın yerden devam")
+                .font(.system(size: 11, weight: .medium))
+            Button {
+                Haptics.warning()
+                resetToTemplate()
+            } label: {
+                Text("Sıfırla")
+                    .font(.system(size: 11, weight: .semibold))
+                    .foregroundStyle(Color(hex: tintHex))
+            }
+            .buttonStyle(.plain)
+        }
+        .foregroundStyle(.white.opacity(0.8))
+        .padding(.horizontal, 12).padding(.vertical, 7)
+        .background(.black.opacity(0.55), in: Capsule())
+        .overlay(Capsule().stroke(.white.opacity(0.18), lineWidth: 1))
+        .padding(.top, 10)
     }
 
     /// Panel yüksekliği ekran boyuna göre. SE gibi kısa cihazlarda panel
@@ -324,6 +522,10 @@ struct EditorView: View {
                         if item == .media, filledSlotCount > 0 {
                             Text("\(filledSlotCount)/\(templateSlots.count)")
                                 .font(.system(size: 10, weight: .heavy))
+                                // Rozet TEK SATIR: sıkışınca "5/" ve "5" diye
+                                // ikiye bölünüyordu.
+                                .lineLimit(1)
+                                .fixedSize()
                                 .padding(.horizontal, 5).padding(.vertical, 2)
                                 .background(selected ? Color.black.opacity(0.12)
                                                      : Color.white.opacity(0.14),
@@ -331,7 +533,13 @@ struct EditorView: View {
                         }
                     }
                     .foregroundStyle(selected ? .black : .white.opacity(0.75))
-                    .frame(maxWidth: .infinity)
+                    // Sekmeler eşit paylaşır, ROZETLİ medya sekmesi hariç:
+                    // dört eşit dilime bölünen 393 pt'lik bir ekranda rozet
+                    // yüzünden başlık "Med… 5/5" diye kırpılıyordu. Rozetli
+                    // sekme SIKIŞMAYI REDDEDER (fixedSize), kalanlar geri
+                    // kalanı eşit böler — etiketleri kısa, hepsi rahat sığıyor.
+                    .frame(maxWidth: hugsContent(item) ? nil : .infinity)
+                    .fixedSize(horizontal: hugsContent(item), vertical: false)
                     .padding(.vertical, 9)
                     .padding(.horizontal, 4)
                     .background(selected ? Color.white : Color.white.opacity(0.08),
@@ -341,6 +549,12 @@ struct EditorView: View {
             }
         }
         .padding(.horizontal, 14)
+    }
+
+    /// Sekme eşit dilim yerine kendi genişliğini mi alsın (yalnız rozetli
+    /// medya sekmesi).
+    private func hugsContent(_ item: Panel) -> Bool {
+        item == .media && filledSlotCount > 0
     }
 
     // MARK: Medya paneli
@@ -359,27 +573,191 @@ struct EditorView: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 10) {
                     ForEach(templateSlots, id: \.self) { slot in
+                        // DOLU kareye dokunmak medyayı DEĞİŞTİRMEZ, klip
+                        // ayarlarını açar (kadraj / başlangıç / hız / sıra) —
+                        // video editörlerinin alışılmış davranışı; değiştirme
+                        // orada bir düğme. Boş kare doğrudan seçiciyi açar.
                         Button {
                             Haptics.tap()
-                            sheet = .picker(slot: slot, kind: pickerKind(forSlot: slot))
+                            if photos[slot] != nil || videos[slot] != nil {
+                                sheet = .clip(slot: slot)
+                            } else {
+                                sheet = .picker(slot: slot, kind: pickerKind(forSlot: slot),
+                                                limit: 1)
+                            }
                         } label: {
                             MediaThumb(url: videos[slot], cgImage: photos[slot],
-                                       index: slot, isPhoto: !slotAllowsVideo(slot))
+                                       index: displayIndex(of: slot),
+                                       isPhoto: !slotAllowsVideo(slot),
+                                       speed: speeds[slot],
+                                       isTrimmed: (starts[slot] ?? 0) > 0.05,
+                                       isCropped: !(crops[slot] ?? CropTransform()).isIdentity)
                         }
                         .buttonStyle(.plain)
                         .accessibilityLabel(mediaSlotLabel(slot))
-                        .accessibilityHint(Text("Fotoğraf veya video seçmek için dokun"))
+                        .accessibilityHint(Text(photos[slot] != nil || videos[slot] != nil
+                                                ? "Klibi ayarlamak için dokun"
+                                                : "Fotoğraf veya video seçmek için dokun"))
                     }
                 }
                 .padding(.horizontal, 20)
             }
-            Text(hasMedia
-                 ? String(localized: "Değiştirmek için bir kareye dokun")
-                 : String(localized: "Kendi fotoğraf ve videolarını ekle"))
+            Text(mediaHint)
                 .font(.system(size: 11))
                 .foregroundStyle(.white.opacity(0.45))
+                .lineLimit(2)
                 .padding(.horizontal, 20)
         }
+    }
+
+    private var mediaHint: String {
+        if hasMedia {
+            return String(localized: "Kadraj, başlangıç ve hız için bir kareye dokun")
+        }
+        return String(localized: "Kendi fotoğraf ve videolarını ekle")
+    }
+
+    // MARK: Klip hızı
+
+    /// Seçilebilen hızlar. Üst/alt sınır motorunkiyle aynı
+    /// (`SlotAssignment.speedRange`); aradaki basamaklar Reels/TikTok'ta
+    /// alışılmış olanlar.
+    static let speedChoices: [Double] = [0.25, 0.5, 1, 2, 3, 4]
+
+    static func speedLabel(_ value: Double) -> String {
+        let number = value.formatted(.number.precision(.fractionLength(0...2)))
+        return "\(number)×"
+    }
+
+    private func speedBinding(for slot: Int) -> Binding<Double> {
+        Binding(get: { speeds[slot] ?? 1 },
+                set: { value in
+                    guard value != (speeds[slot] ?? 1) else { return }
+                    Haptics.select()
+                    if value == 1 { speeds[slot] = nil } else { speeds[slot] = value }
+                    Analytics.shared.log(.clipSpeedChanged(slot: slot, speed: value))
+                    markDirty()
+                })
+    }
+
+    // MARK: Klip ayarları (kadraj / başlangıç / sıra)
+
+    private func cropBinding(for slot: Int) -> Binding<CropTransform> {
+        Binding(get: { crops[slot] ?? CropTransform() },
+                set: { value in
+                    guard value != (crops[slot] ?? CropTransform()) else { return }
+                    crops[slot] = value.isIdentity ? nil : value
+                    markDirty()
+                })
+    }
+
+    private func startBinding(for slot: Int) -> Binding<Double> {
+        Binding(get: { starts[slot] ?? 0 },
+                set: { value in
+                    let rounded = max(0, (value * 20).rounded() / 20)   // 0,05 sn ızgara
+                    guard rounded != (starts[slot] ?? 0) else { return }
+                    starts[slot] = rounded == 0 ? nil : rounded
+                    markDirty()
+                })
+    }
+
+    /// Şeritte kaçıncı kare olduğu (slotIndex ile aynı olmayabilir).
+    private func displayIndex(of slot: Int) -> Int {
+        templateSlots.firstIndex(of: slot) ?? slot
+    }
+
+    /// Slotun şablondaki kadraj oranı (genişlik / yükseklik). Kadraj ekranı
+    /// kullanıcıya GERÇEK kadrajı göstermeli — 9:16 bir kutuda kadrajlanan
+    /// fotoğraf, kare bir slotta bambaşka duruyor.
+    private func slotAspect(_ slot: Int) -> Double {
+        var best: NormalizedRect?
+        func scan(_ layers: [Layer]) {
+            for layer in layers {
+                guard case .mediaSlot(let content) = layer.content,
+                      content.slotIndex == slot else { continue }
+                let area = layer.frame.width * layer.frame.height
+                if area > (best.map { $0.width * $0.height } ?? 0) { best = layer.frame }
+            }
+        }
+        project.template.scenes?.forEach { scan($0.layers) }
+        scan(project.template.layers)
+        guard let best, best.height > 0 else { return 9.0 / 16.0 }
+        let canvas = project.template.canvas
+        let width = best.width * Double(canvas.width)
+        let height = best.height * Double(canvas.height)
+        return height > 0 ? width / height : 9.0 / 16.0
+    }
+
+    /// Slotun ekranda kaç saniye göründüğü: montajda sahne penceresi, klasik
+    /// şablonda tüm süre. "Klibin ne kadarı kullanılacak" hesabı buna dayanır.
+    private func slotWindowDuration(_ slot: Int) -> Double {
+        guard let scenes = project.template.scenes, !scenes.isEmpty else {
+            return project.template.totalDuration
+        }
+        let timeline = MontageTimeline(scenes: scenes)
+        for window in timeline.windows {
+            let contains = scenes[window.index].layers.contains { layer in
+                if case .mediaSlot(let content) = layer.content {
+                    return content.slotIndex == slot
+                }
+                return false
+            }
+            if contains { return window.end - window.start }
+        }
+        return project.template.totalDuration
+    }
+
+    /// Klip ayarları ekranındaki "medyayı değiştir": sheet'ten sheet'e geçiş
+    /// SwiftUI'da aynı karede yapılırsa yeni sheet açılmıyor — önce kapanır.
+    private func replaceMedia(in slot: Int) {
+        sheet = nil
+        Task {
+            try? await Task.sleep(nanoseconds: 300_000_000)
+            sheet = .picker(slot: slot, kind: pickerKind(forSlot: slot), limit: 1)
+        }
+    }
+
+    private func clearSlot(_ slot: Int) {
+        photos[slot] = nil
+        videos[slot] = nil
+        speeds[slot] = nil
+        crops[slot] = nil
+        starts[slot] = nil
+        markDirty()
+    }
+
+    private func canMove(_ slot: Int, by delta: Int) -> Bool {
+        guard let index = templateSlots.firstIndex(of: slot) else { return false }
+        let target = index + delta
+        return target >= 0 && target < templateSlots.count
+    }
+
+    /// Klibi şeritte bir yana taşır. Medya YALNIZ BAŞINA taşınmaz: kadrajı,
+    /// başlangıcı ve hızı da birlikte gider — yoksa kullanıcı sırayı
+    /// düzelttiğinde ayarları karışıyor.
+    private func move(_ slot: Int, by delta: Int) {
+        guard let index = templateSlots.firstIndex(of: slot), canMove(slot, by: delta) else {
+            return
+        }
+        let other = templateSlots[index + delta]
+        // `swap(&photos[a], &photos[b])` derlenmiyor: @State sözlüğü hesaplanan
+        // bir özellik, aynı çağrıda iki kez inout geçilemiyor.
+        exchange(&photos, slot, other)
+        exchange(&videos, slot, other)
+        exchange(&speeds, slot, other)
+        exchange(&crops, slot, other)
+        exchange(&starts, slot, other)
+        // Ayarlar ekranı taşınan klibi izlesin (kullanıcı aynı klibe bakmaya
+        // devam ediyor, sabit bir slota değil).
+        sheet = .clip(slot: other)
+        markDirty()
+    }
+
+    /// İki slotun kaydını yer değiştirir (biri boşsa diğerine geçer).
+    private func exchange<Value>(_ dictionary: inout [Int: Value], _ a: Int, _ b: Int) {
+        let first = dictionary[a]
+        dictionary[a] = dictionary[b]
+        dictionary[b] = first
     }
 
     // MARK: Metin paneli
@@ -393,9 +771,34 @@ struct EditorView: View {
                 VStack(alignment: .leading, spacing: 10) {
                     ForEach(Array(editableTextKeys.enumerated()), id: \.element) { index, key in
                         VStack(alignment: .leading, spacing: 3) {
-                            Text(fieldLabel(key, index: index))
-                                .font(.system(size: 11))
-                                .foregroundStyle(.white.opacity(0.5))
+                            HStack(spacing: 6) {
+                                Text(fieldLabel(key, index: index))
+                                    .font(.system(size: 11))
+                                    .foregroundStyle(.white.opacity(0.5))
+                                Spacer()
+                                // Stil ayrı bir ekranda: panel sabit yükseklikli,
+                                // her alanın altına boyut/renk/font satırı
+                                // sığdırmak metin alanlarını ezerdi.
+                                Button {
+                                    Haptics.tap()
+                                    focusedField = nil
+                                    sheet = .textStyle(key: key)
+                                } label: {
+                                    HStack(spacing: 3) {
+                                        Image(systemName: "textformat")
+                                            .font(.system(size: 10, weight: .semibold))
+                                        Text(styleBadgeText(key))
+                                            .font(.system(size: 10, weight: .semibold))
+                                    }
+                                    .foregroundStyle(textStyles[key] == nil
+                                                     ? .white.opacity(0.55)
+                                                     : Color(hex: tintHex))
+                                    .padding(.horizontal, 7).padding(.vertical, 3)
+                                    .background(.white.opacity(0.09), in: Capsule())
+                                }
+                                .buttonStyle(.plain)
+                                .accessibilityLabel(Text("Yazı stili"))
+                            }
                             TextField(placeholder(for: key), text: binding(for: key), axis: .vertical)
                                 .lineLimit(1...3)
                                 .textFieldStyle(.plain)
@@ -531,26 +934,41 @@ struct EditorView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 
-    /// Galeriden seçilen medyayı slota atar; aynı slottaki diğer türü temizler.
-    private func assign(_ media: PickedMedia, toSlot slot: Int) {
+    /// Seçilen medyaları slotlara dağıtır: ilki `slot`'a, kalanlar sırayla BOŞ
+    /// slotlara (dolu slotlar korunur — kullanıcı onları bilerek doldurdu).
+    /// Boş slot kalmazsa fazlası sessizce yok sayılır.
+    private func assign(_ media: [PickedMedia], startingAt slot: Int) {
+        guard !media.isEmpty else { return }
         let wasEmpty = !hasMedia
+        let targets = [slot] + templateSlots.filter {
+            $0 != slot && photos[$0] == nil && videos[$0] == nil
+        }
+        for (target, picked) in zip(targets, media) { place(picked, in: target) }
+        Haptics.select()
+        if wasEmpty {
+            // İlk medya: önizlemeyi kendiliğinden üret — kullanıcı seçtiği
+            // görüntünün şablonda nasıl durduğunu hemen görsün. Çoklu seçimde
+            // render TÜM slotlar yerleştikten SONRA bir kez başlar.
+            startPreview()
+        } else {
+            markDirty()
+        }
+    }
+
+    /// Medyayı slota yazar; aynı slottaki diğer türü temizler. Önizleme kararı
+    /// çağırana ait (bkz. `assign`) — slot slot render tetiklenmemeli.
+    private func place(_ media: PickedMedia, in slot: Int) {
         switch media {
         case .photo(let cg):
             photos[slot] = cg
             videos[slot] = nil
+            // Fotoğrafın hızı yok; slot videodan fotoğrafa dönerse ayar da düşer.
+            speeds[slot] = nil
             Analytics.shared.log(.mediaPicked(slot: slot, kind: "photo"))
         case .video(let url):
             videos[slot] = url
             photos[slot] = nil
             Analytics.shared.log(.mediaPicked(slot: slot, kind: "video"))
-        }
-        Haptics.select()
-        if wasEmpty {
-            // İlk medya: önizlemeyi kendiliğinden üret — kullanıcı seçtiği
-            // görüntünün şablonda nasıl durduğunu hemen görsün.
-            startPreview()
-        } else {
-            markDirty()
         }
     }
 
@@ -617,41 +1035,112 @@ struct EditorView: View {
     /// Editör önizlemesi. Hazır bir ön-render varsa oynatılır (scrub edilebilir);
     /// yoksa şablonun katmanlarından çizilen statik poster gösterilir ve
     /// üstünde onu üretecek düğme durur.
+    /// Editör önizlemesi.
+    ///
+    /// ÖNEMLİ DAVRANIŞ: bir kez render alındıktan sonra oynatıcı EKRANDAN
+    /// KALKMAZ. Kullanıcı metni değiştirdiğinde eldeki (bayat) video oynamaya
+    /// devam eder, yenisi arka planda hazırlanır ve hazır olunca sessizce
+    /// devreye girer. Eskiden her değişiklikte video kaybolup yerine "önizlemeyi
+    /// yenile" düğmesi geliyordu; kullanıcı hem videosunu kaybediyor hem de
+    /// her seferinde elle düğmeye basmak zorunda kalıyordu.
     @ViewBuilder private var previewStage: some View {
-        switch preview.phase {
-        case .done(let url) where !previewStale:
-            Group {
-                if let previewPlayer {
-                    PlayerScrubView(player: previewPlayer,
-                                    duration: project.template.totalDuration,
-                                    accentHex: tintHex) {
-                        if needsTextOverlay {
-                            MontagePreviewOverlay(template: project.template,
-                                                  texts: texts, player: previewPlayer)
-                        }
+        ZStack {
+            if let previewPlayer {
+                PlayerScrubView(player: previewPlayer,
+                                duration: project.template.totalDuration,
+                                accentHex: tintHex) {
+                    if needsTextOverlay {
+                        MontagePreviewOverlay(template: project.template,
+                                              texts: texts, player: previewPlayer)
                     }
-                } else {
+                }
+            } else if case .exporting(let progress) = preview.phase {
+                // İLK render: gösterilecek bir video yok, ilerleme göster.
+                renderProgress(progress, title: "Önizleme hazırlanıyor")
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+            } else {
+                ZStack {
                     staticPreview
+                    if needsMedia, !hasMedia { emptyStageScrim }
+                    // Hap SAHNENİN ORTASINDA DURMAZ: her şablonda kullanıcının
+                    // gördüğü ilk karede şablonun kendi başlığını örtüyordu
+                    // ("TAKİPTE KAL", "Mercimek Çorbası" okunmuyordu). Kart bir
+                    // söz veriyor, editör o sözü kendi butonuyla kapatıyordu.
+                    // Artık hap şablonun METİN BLOKLARINDAN uzak bir şeride durur.
+                    GeometryReader { geo in
+                        previewButton
+                            .frame(maxWidth: .infinity)
+                            .position(x: geo.size.width / 2,
+                                      y: geo.size.height * stageActionAnchor)
+                    }
                 }
-            }
-            .task(id: url) {
-                let p = makeLoopingPlayer(url)
-                previewPlayer = p
-                p.play()
-                if needsAudioOverlay, let music {
-                    previewMusic.toggle(track: music, duration: project.template.totalDuration)
-                }
-            }
-        case .exporting(let progress):
-            renderProgress(progress, title: "Önizleme hazırlanıyor")
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-        default:
-            ZStack {
-                staticPreview
-                if needsMedia, !hasMedia { emptyStageScrim }
-                previewButton
             }
         }
+        .overlay(alignment: .top) {
+            if isRenderingPreview, previewPlayer != nil { refreshingChip }
+        }
+        .task(id: previewURL) {
+            guard let previewURL else { return }
+            let player = makeLoopingPlayer(previewURL)
+            previewPlayer = player
+            player.play()
+            if needsAudioOverlay, let music {
+                previewMusic.toggle(track: music, duration: project.template.totalDuration)
+            }
+        }
+    }
+
+    private var isRenderingPreview: Bool {
+        if case .exporting = preview.phase { return true }
+        return false
+    }
+
+    /// "Yenileniyor" göstergesi: bayat video oynarken yeni render'ın sürdüğünü
+    /// söyler. Taslak şeridiyle çakışmaması için taslak varken aşağı kaçar.
+    private var refreshingChip: some View {
+        HStack(spacing: 6) {
+            ProgressView().tint(.white).scaleEffect(0.6)
+            Text("Önizleme yenileniyor…")
+                .font(.system(size: 11, weight: .medium))
+                .foregroundStyle(.white.opacity(0.85))
+        }
+        .padding(.horizontal, 10).padding(.vertical, 6)
+        .background(.black.opacity(0.55), in: Capsule())
+        .padding(.top, restoredDraft ? 52 : 10)
+    }
+
+    /// Hapın sahne yüksekliğinin kaçta kaçına yerleşeceği (0-1).
+    ///
+    /// Sırayla alt üçte bir → üst çeyrek → orta denenir; metin bloğuyla
+    /// ÇAKIŞMAYAN ilki kazanır. Alt üçte bir başta çünkü şablon başlıkları
+    /// neredeyse her zaman üstte/ortada duruyor. (Medya slotunun merkezine
+    /// hizalamak denendi ve işe YARAMADI: slot çoğu şablonda tam kadraj,
+    /// merkezi de tam başlığın üstüne düşüyor.)
+    private var stageActionAnchor: Double {
+        let bands = textBands
+        let margin = 0.07
+        for candidate in [0.78, 0.24, 0.5] {
+            let clash = bands.contains { $0.min < candidate + margin && candidate - margin < $0.max }
+            if !clash { return candidate }
+        }
+        return 0.78
+    }
+
+    /// İlk karede görünen metin katmanlarının dikey aralıkları (0-1).
+    /// Statik önizleme montajın İLK sahnesini çiziyor (bkz. staticPreview),
+    /// bakılan yer de orası.
+    private var textBands: [(min: Double, max: Double)] {
+        var bands: [(min: Double, max: Double)] = []
+        func scan(_ layers: [Layer]) {
+            for layer in layers {
+                guard case .text = layer.content else { continue }
+                bands.append((layer.frame.y - layer.frame.height / 2,
+                              layer.frame.y + layer.frame.height / 2))
+            }
+        }
+        scan(project.template.scenes?.first?.layers ?? [])
+        scan(project.template.layers)
+        return bands
     }
 
     /// Sahnenin hareketsiz hali.
@@ -673,11 +1162,15 @@ struct EditorView: View {
                 .aspectRatio(contentMode: .fill)
         } else {
             TemplatePreview(template: project.template, texts: texts,
-                            photos: photos, videos: videos,
+                            textStyles: textStyles,
+                            photos: photos, videos: videos, crops: crops,
                             // Boş projede montajın SON sahnesi çoğu şablonda
                             // yalnız kapanış yazısı taşıyor; ilk sahne düzeni
                             // daha iyi anlatır.
                             progress: hasMedia ? 0.75 : 0.15,
+                            // Editörde boş slot bir EKSİKTİR: soyut bir sahneyle
+                            // doluymuş gibi gösterilmemeli.
+                            placeholder: .hint,
                             accentOverride: accent)
         }
     }
@@ -709,17 +1202,16 @@ struct EditorView: View {
             .allowsHitTesting(false)
     }
 
-    /// Statik posterin üstündeki oynat/yenile düğmesi. "Yenile" metni, önizleme
-    /// bir kez üretildikten sonra metin/medya değişince çıkar — kullanıcı
-    /// gördüğü karenin bayat olduğunu bilmeli.
+    /// Statik posterin üstündeki düğme. Yalnız HENÜZ RENDER YOKKEN görünür:
+    /// ilk render alındıktan sonra yenileme kendiliğinden oluyor
+    /// (bkz. scheduleAutoRefresh), düğmeye gerek kalmıyor.
     @ViewBuilder private var previewButton: some View {
         if canExport {
             Button {
                 Haptics.tap()
                 startPreview()
             } label: {
-                Label(previewStale ? "Önizlemeyi yenile" : "Önizle",
-                      systemImage: previewStale ? "arrow.clockwise" : "play.fill")
+                Label("Önizle", systemImage: "play.fill")
                     .modifier(StageBadge())
             }
             .buttonStyle(.plain)
@@ -727,7 +1219,8 @@ struct EditorView: View {
             VStack(spacing: 8) {
                 Button {
                     Haptics.tap()
-                    sheet = .picker(slot: first, kind: pickerKind(forSlot: first))
+                    sheet = .picker(slot: first, kind: pickerKind(forSlot: first),
+                                    limit: emptySlotCount)
                 } label: {
                     Label("Medya ekle", systemImage: "photo.badge.plus")
                         .modifier(StageBadge())
@@ -776,49 +1269,96 @@ struct EditorView: View {
     /// küçük kadraj — bkz. `ExportFlow.Quality.preview`.
     private func startPreview() {
         previewMusic.stop()
-        previewPlayer = nil
-        previewStale = false
+        refreshTask?.cancel()
         preview.run(project: project, texts: texts, photos: photos, videos: videos,
                     music: music, entitlements: store.entitlements,
-                    accentOverride: accent,
-                    originalAudioFrom: originalAudioSource)
+                    accentOverride: accent, speeds: speeds,
+                    crops: crops, starts: starts, textStyles: textStyles,
+                    originalAudioFrom: originalAudioSource?.url,
+                    originalAudioSpeed: originalAudioSource?.speed ?? 1)
     }
 
     /// Girdi değişti: eldeki ön-render artık ekrandakini göstermiyor.
+    ///
+    /// Oynatıcı EKRANDA KALIR (bayat da olsa bir şey görmek, hiçbir şey
+    /// görmemekten iyidir) ve kısa bir sessizlikten sonra yenilenir.
     private func markDirty() {
-        guard case .done = preview.phase else { return }
+        guard previewURL != nil || isRenderingPreview else { return }
         previewStale = true
-        previewPlayer = nil
         previewMusic.stop()
+        scheduleAutoRefresh()
+    }
+
+    /// Değişiklik durulduktan sonra önizlemeyi kendiliğinden yeniler.
+    ///
+    /// Bekleme SÜRESİ önemli: her tuş vuruşunda render başlatmak cihazı
+    /// ısıtır ve hiçbiri bitmez. Kullanıcı bir buçuk saniye ara verince
+    /// (yazmayı bitirdiğinin işareti) tek bir render koşar.
+    private func scheduleAutoRefresh() {
+        refreshTask?.cancel()
+        guard canExport, !isExporting else { return }
+        refreshTask = Task {
+            try? await Task.sleep(nanoseconds: 1_500_000_000)
+            guard !Task.isCancelled, previewStale, !isExporting else { return }
+            startPreview()
+        }
     }
 
     // MARK: - Alt aksiyon çubuğu
 
     private var actionBar: some View {
         VStack(spacing: 8) {
-            // Ücretsiz kullanıcıya filigranı export'tan ÖNCE söyle (sürpriz olmasın).
+            // Ücretsiz kullanıcıya çıktının ne olacağını export'tan ÖNCE söyle
+            // (sürpriz olmasın). İlk hak duruyorken bu bir HABERDİR, teklif
+            // değil: kullanıcı henüz karşılığını görmediği bir şey için
+            // paywall'a itilmemeli.
             if !store.entitlements.isPro {
-                Button {
-                    Haptics.tap()
-                    store.showPaywall(reason: String(localized: "Filigransız dışa aktarım Pro'da"))
-                } label: {
-                    HStack(spacing: 6) {
-                        Image(systemName: "drop.fill").font(.system(size: 10))
-                        Text("Filigranlı").font(.system(size: 11, weight: .medium))
-                        Text("· Kaldır")
-                            .font(.system(size: 11, weight: .semibold))
-                            .foregroundStyle(Color(hex: "#F2C14E"))
-                    }
-                    .foregroundStyle(.white.opacity(0.55))
-                    .padding(.horizontal, 12).padding(.vertical, 5)
-                    .background(.white.opacity(0.07), in: Capsule())
+                if store.entitlements.hasFirstFreeExport {
+                    firstFreePill
+                } else {
+                    watermarkPill
                 }
-                .buttonStyle(.plain)
             }
             primaryButton
         }
         .padding(.top, 10)
         .padding(.bottom, 6)
+    }
+
+    /// İlk hak duruyorken: iyi haber. Dokunulacak bir şey değil — burada
+    /// satacak bir şey yok, kullanıcının yalnız devam etmesi isteniyor.
+    private var firstFreePill: some View {
+        HStack(spacing: 6) {
+            Image(systemName: "gift.fill").font(.system(size: 10))
+            Text("Bu video filigransız").font(.system(size: 11, weight: .semibold))
+            Text("· ilk videon bizden")
+                .font(.system(size: 11, weight: .medium))
+                .foregroundStyle(.white.opacity(0.55))
+        }
+        .foregroundStyle(Color(hex: "#F2C14E"))
+        .padding(.horizontal, 12).padding(.vertical, 5)
+        .background(Color(hex: "#F2C14E").opacity(0.12), in: Capsule())
+        .accessibilityElement(children: .combine)
+    }
+
+    /// Hak tükendikten sonraki hâl: filigran var, kaldırmanın yolu Pro.
+    private var watermarkPill: some View {
+        Button {
+            Haptics.tap()
+            store.showPaywall(reason: String(localized: "Filigransız dışa aktarım Pro'da"))
+        } label: {
+            HStack(spacing: 6) {
+                Image(systemName: "drop.fill").font(.system(size: 10))
+                Text("Filigranlı").font(.system(size: 11, weight: .medium))
+                Text("· Kaldır")
+                    .font(.system(size: 11, weight: .semibold))
+                    .foregroundStyle(Color(hex: "#F2C14E"))
+            }
+            .foregroundStyle(.white.opacity(0.55))
+            .padding(.horizontal, 12).padding(.vertical, 5)
+            .background(.white.opacity(0.07), in: Capsule())
+        }
+        .buttonStyle(.plain)
     }
 
     /// Tek birincil eylem. Medya yokken DEVRE DIŞI bir düğme göstermek yerine
@@ -832,7 +1372,8 @@ struct EditorView: View {
             } else if let first = templateSlots.first {
                 Haptics.tap()
                 panel = .media
-                sheet = .picker(slot: first, kind: pickerKind(forSlot: first))
+                sheet = .picker(slot: first, kind: pickerKind(forSlot: first),
+                                limit: emptySlotCount)
             }
         } label: {
             Label(canExport ? "Video Oluştur" : "Fotoğraf / video ekle",
@@ -849,10 +1390,13 @@ struct EditorView: View {
 
     // MARK: - Helpers
 
-        /// Orijinal ses seçiliyse hangi klipten alınacağı (ilk video slotu).
-    private var originalAudioSource: URL? {
-        guard useOriginalAudio else { return nil }
-        return videos.sorted { $0.key < $1.key }.first?.value
+    /// Orijinal ses seçiliyse hangi klipten alınacağı (ilk video slotu) ve o
+    /// klibin hızı — klip hızlandırıldıysa sesin de aynı oranda hızlanması
+    /// gerekiyor, yoksa görüntüyle ses ayrışıyor.
+    private var originalAudioSource: (url: URL, speed: Double)? {
+        guard useOriginalAudio,
+              let first = videos.sorted(by: { $0.key < $1.key }).first else { return nil }
+        return (first.value, speeds[first.key] ?? 1)
     }
 
     /// Arayüzün vurgu rengi: kullanıcı seçtiyse onunki, yoksa şablonunki.
@@ -878,6 +1422,11 @@ struct EditorView: View {
         templateSlots.filter { photos[$0] != nil || videos[$0] != nil }.count
     }
 
+    /// Seçicinin izin vereceği en fazla seçim: doldurulacak slot sayısı.
+    private var emptySlotCount: Int {
+        max(1, templateSlots.count - filledSlotCount)
+    }
+
     /// Simulator'da montaj çıktısı metinsiz kolaj videosudur → metni canlı
     /// bindir. Cihazda tam export metni gömer → overlay gerekmez.
     private var needsTextOverlay: Bool {
@@ -894,10 +1443,15 @@ struct EditorView: View {
 
     private func startExport() {
         previewMusic.stop()
+        // Hakkı ŞİMDİ oku (tüketme): filigran kararı da bu anın durumuyla
+        // veriliyor, sonuç ekranı aynı anı anlatsın.
+        usedFirstFreeExport = store.entitlements.hasFirstFreeExport
         flow.run(project: project, texts: texts, photos: photos, videos: videos,
                  music: music, entitlements: store.entitlements,
-                 accentOverride: accent,
-                 originalAudioFrom: originalAudioSource)
+                 accentOverride: accent, speeds: speeds,
+                 crops: crops, starts: starts, textStyles: textStyles,
+                 originalAudioFrom: originalAudioSource?.url,
+                 originalAudioSpeed: originalAudioSource?.speed ?? 1)
     }
 
     /// --inject-media ile PHPicker seçimini programatik taklit eder: belirgin
@@ -905,9 +1459,30 @@ struct EditorView: View {
     /// "kullanıcı kendi medyasını seçti → export onu kullandı" akışı screenshot'la
     /// doğrulanabilir (gerçek galeri dokunuşu simctl'de otomatikleştirilemiyor).
     private func injectMediaIfRequested() {
+        // `--inject-video <yol>`: video kabul eden slotlara verilen klibi koyar.
+        // Hız etiketi yalnız VİDEO slotunda çıktığı için otomasyonun (duman
+        // testi, ekran görüntüsü) o yolu görmesinin tek yolu bu.
+        if let path = Self.argument(after: "--inject-video") {
+            let url = URL(fileURLWithPath: path)
+            let slots = templateSlots.filter(slotAllowsVideo)
+            if !slots.isEmpty, FileManager.default.fileExists(atPath: path) {
+                assign(slots.map { _ in PickedMedia.video(url) }, startingAt: slots[0])
+                return
+            }
+        }
         guard ProcessInfo.processInfo.arguments.contains("--inject-media"),
               let cg = EditorView.injectedTestPhoto() else { return }
-        for slot in templateSlots { assign(.photo(cg), toSlot: slot) }
+        assign(templateSlots.map { _ in PickedMedia.photo(cg) },
+               startingAt: templateSlots.first ?? 0)
+    }
+
+    /// `--bayrak <değer>` biçimindeki başlatma argümanının değeri.
+    private static func argument(after flag: String) -> String? {
+        let arguments = ProcessInfo.processInfo.arguments
+        guard let index = arguments.firstIndex(of: flag),
+              arguments.index(after: index) < arguments.endIndex else { return nil }
+        let value = arguments[arguments.index(after: index)]
+        return value.hasPrefix("--") ? nil : value
     }
 
     /// `--inject-media [yol]`: yol verilmişse GERÇEK bir görüntü dosyası okunur
@@ -943,9 +1518,10 @@ struct EditorView: View {
 
     /// VoiceOver: slotun kaçıncı olduğu ve dolu mu boş mu.
     private func mediaSlotLabel(_ slot: Int) -> Text {
-        if videos[slot] != nil { return Text("Medya \(slot + 1), video seçili") }
-        if photos[slot] != nil { return Text("Medya \(slot + 1), fotoğraf seçili") }
-        return Text("Medya \(slot + 1), boş")
+        let number = displayIndex(of: slot) + 1
+        if videos[slot] != nil { return Text("Medya \(number), video seçili") }
+        if photos[slot] != nil { return Text("Medya \(number), fotoğraf seçili") }
+        return Text("Medya \(number), boş")
     }
 
     /// Şablondaki tüm medya slot indeksleri (sahne + global), sıralı ve tekil.
@@ -976,6 +1552,62 @@ struct EditorView: View {
 
     private func fieldLabel(_ key: String, index: Int) -> String {
         TextFieldLabels.label(forLayerID: key, fallbackIndex: index)
+    }
+
+    /// Stil düğmesinin etiketi: dokunulmuşsa neyin değiştiğini söyler.
+    private func styleBadgeText(_ key: String) -> String {
+        guard let style = textStyles[key] else { return String(localized: "Stil") }
+        var parts: [String] = []
+        if style.scale != 1 { parts.append("%\(Int((style.scale * 100).rounded()))") }
+        if style.colorHex != nil { parts.append(String(localized: "renk")) }
+        if let family = TextFontFamily.from(style.fontFamily) {
+            parts.append(TextStyleView.title(for: family))
+        }
+        return parts.isEmpty ? String(localized: "Stil") : parts.joined(separator: " · ")
+    }
+
+    /// Katmanın şablondaki metin içeriği (font/renk varsayılanları için).
+    private func textContent(_ key: String) -> TextContent? {
+        var found: TextContent?
+        func scan(_ layers: [Layer]) {
+            for layer in layers {
+                if case .text(let content) = layer.content, layer.id == key { found = content }
+            }
+        }
+        project.template.scenes?.forEach { scan($0.layers) }
+        scan(project.template.layers)
+        return found
+    }
+
+    /// Şablonun bu metin için tasarladığı renk (palet rolünden çözülür).
+    private func templateTextColorHex(_ key: String) -> String {
+        guard let role = textContent(key)?.colorRole else { return "#FFFFFF" }
+        if role == "accent" { return tintHex }
+        return project.template.palette[role] ?? "#FFFFFF"
+    }
+
+    /// Şablonun paletindeki renkler — kullanıcı kendi şablonuna uyumlu kalsın.
+    private var paletteHexes: [String] {
+        let roles = ["accent", "primary", "secondary", "text", "surface", "background"]
+        var result: [String] = []
+        for role in roles {
+            guard var hex = project.template.palette[role] else { continue }
+            if role == "accent" { hex = tintHex }
+            // Saydam roller (scrim uçları) metin rengi olarak işe yaramaz.
+            if hex.count == 9, hex.uppercased().hasSuffix("00") { continue }
+            result.append(String(hex.prefix(7)))
+        }
+        return result
+    }
+
+    private func textStyleBinding(for key: String) -> Binding<TextStyleOverride> {
+        Binding(get: { textStyles[key] ?? TextStyleOverride() },
+                set: { value in
+                    let current = textStyles[key] ?? TextStyleOverride()
+                    guard value != current else { return }
+                    textStyles[key] = value.isEmpty ? nil : value
+                    markDirty()
+                })
     }
 
     /// Alanın yer tutucusu: şablonun kendi varsayılan metni. Kullanıcı alanı
@@ -1016,6 +1648,12 @@ struct MediaThumb: View {
     var cgImage: CGImage?
     var index: Int
     var isPhoto: Bool = false
+    /// 1'den farklıysa hız etiketi gösterilir (nil = normal).
+    var speed: Double?
+    /// Klibin başı kırpıldı mı (makas göstergesi).
+    var isTrimmed: Bool = false
+    /// Kadraj değiştirildi mi (yakınlaştırma göstergesi).
+    var isCropped: Bool = false
     @State private var image: Image?
 
     private let size = CGSize(width: 64, height: 88)
@@ -1048,6 +1686,7 @@ struct MediaThumb: View {
                 .font(.system(size: 10, weight: .bold))
                 .padding(4).background(.black.opacity(0.6), in: Circle())
                 .padding(4)
+            badges
         }
         // Video URL'i değişince thumbnail'i yeniden üret.
         .task(id: url) {
@@ -1061,19 +1700,43 @@ struct MediaThumb: View {
         }
     }
 
-    /// Dolu slot: küçük bir "değiştir" işareti taşır — aksi halde seçilmiş
-    /// kare, dokunulabilir olduğunu hiç belli etmiyor.
+    /// Dolu slot: küçük bir "ayarla" işareti taşır — aksi halde seçilmiş kare,
+    /// dokunulabilir olduğunu hiç belli etmiyor.
     private func filled(_ image: Image) -> some View {
         image.resizable().aspectRatio(contentMode: .fill)
             .frame(width: size.width, height: size.height)
             .clipShape(RoundedRectangle(cornerRadius: 10))
             .overlay(alignment: .topTrailing) {
-                Image(systemName: "arrow.triangle.2.circlepath")
+                Image(systemName: "slider.horizontal.3")
                     .font(.system(size: 9, weight: .bold))
                     .foregroundStyle(.white)
                     .padding(4)
                     .background(.black.opacity(0.55), in: Circle())
                     .padding(3)
             }
+    }
+
+    /// Kullanıcının bu klibe DOKUNDUĞUNU gösteren küçük etiketler: hız, kırpma,
+    /// kadraj. Ayarlar başka bir ekranda olduğu için şeritte iz bırakmalı,
+    /// yoksa kullanıcı hangi klibi ayarladığını hatırlamıyor.
+    @ViewBuilder private var badges: some View {
+        let speedText = speed.map { abs($0 - 1) < 0.001 ? nil : EditorView.speedLabel($0) } ?? nil
+        if speedText != nil || isTrimmed || isCropped {
+            HStack(spacing: 2) {
+                if let speedText {
+                    Text(speedText).font(.system(size: 9, weight: .heavy))
+                }
+                if isTrimmed { Image(systemName: "scissors").font(.system(size: 8, weight: .bold)) }
+                if isCropped {
+                    Image(systemName: "arrow.up.left.and.arrow.down.right")
+                        .font(.system(size: 8, weight: .bold))
+                }
+            }
+            .foregroundStyle(.black)
+            .padding(.horizontal, 4).padding(.vertical, 2)
+            .background(.white.opacity(0.92), in: Capsule())
+            .padding(4)
+            .frame(width: size.width, height: size.height, alignment: .bottomTrailing)
+        }
     }
 }

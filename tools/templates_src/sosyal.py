@@ -50,7 +50,7 @@ def day_in_life():
 def three_things():
     t = Template("three-things-01", tr="3 Şey", en="Three Things",
                  category="social", track="clean-01",
-                 palette=PALETTES["slate"], pro=True, duration=7.0)
+                 palette=PALETTES["slate"], pro=False, duration=7.0)
     t.add(bg())
     t.add(media("photo", 0, y=0.26, h=0.52, filter="cool", intensity=0.4,
                 anims=[fade_in(0.6), ken_burns(7.0, zoom=1.1, direction="up")]))
@@ -207,7 +207,7 @@ def photo_dump():
 def weekly_recap():
     t = Template("weekly-recap-01", tr="Haftalık Özet", en="Weekly Recap",
                  category="social", track="cinematic-01",
-                 palette=PALETTES["midnight"], pro=True)
+                 palette=PALETTES["midnight"], pro=False)
 
     cover = t.scene("cover", 2.2, transition="slideUp", transition_duration=0.4)
     cover.add(bg("background", "cov-bg"))

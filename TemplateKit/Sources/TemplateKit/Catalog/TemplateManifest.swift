@@ -5,6 +5,13 @@ import Foundation
 /// sürümler tamamen sunucudan yönetilir, uygulama güncellemesi gerekmez.
 public struct TemplateManifest: Codable, Equatable, Sendable {
     public var manifestVersion: Int
+    /// Manifestin YAYIN numarası — `tools/make-manifest.py` içerik değiştikçe
+    /// artırır. Aynı dosya hem uygulama paketine (seed) hem CDN'e gittiği için
+    /// bu sayı ikisinin hangisinin yeni olduğunu söyleyen tek ölçüttür
+    /// (`TemplateCatalog.current()`). Alan yoksa 0 sayılır: alanı hiç
+    /// tanımayan eski bir indirme, alanı taşıyan her seed'e KAYBEDER — zaten
+    /// istediğimiz de bu.
+    public var revision: Int
     public var templates: [Entry]
 
     public struct Entry: Codable, Equatable, Sendable, Identifiable {
@@ -71,9 +78,19 @@ public struct TemplateManifest: Codable, Equatable, Sendable {
         public var thumbnailPath: String { thumbnail ?? "thumbs/\(id).jpg" }
     }
 
-    public init(manifestVersion: Int = 1, templates: [Entry]) {
+    public init(manifestVersion: Int = 1, revision: Int = 0, templates: [Entry]) {
         self.manifestVersion = manifestVersion
+        self.revision = revision
         self.templates = templates
+    }
+
+    private enum CodingKeys: String, CodingKey { case manifestVersion, revision, templates }
+
+    public init(from decoder: Decoder) throws {
+        let c = try decoder.container(keyedBy: CodingKeys.self)
+        manifestVersion = try c.decodeIfPresent(Int.self, forKey: .manifestVersion) ?? 1
+        revision = try c.decodeIfPresent(Int.self, forKey: .revision) ?? 0
+        templates = try c.decode([Entry].self, forKey: .templates)
     }
 
     /// Uygulama sürümünün açabildiği şablonlar (`minAppVersion` süzgeci).

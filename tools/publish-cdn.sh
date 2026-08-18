@@ -5,7 +5,7 @@
 # JSON'ları, posterler, önizlemeler, lottie varlıkları) `dist/cdn/` altına
 # kopyalar, tutarlılığı doğrular ve yükleme komutlarını yazdırır. Depoyu
 # olduğu gibi yüklemek yerine ayrı bir klasör üretmesinin sebebi: `templates/`
-# içinde yayına GİTMEMESİ gereken dosyalar var (seed-posters.txt, üretim
+# içinde yayına GİTMEMESİ gereken dosyalar var (üretim
 # kaynakları) ve yanlışlıkla yüklenen bir dosya CDN'de kalıcı olur.
 #
 #   tools/publish-cdn.sh                 # dist/cdn hazırla + doğrula
@@ -63,9 +63,6 @@ mkdir -p "$OUT/thumbs" "$OUT/assets"
 
 cp "$SRC/manifest.json" "$OUT/"
 cp "$SRC"/*.json "$OUT/" 2>/dev/null || true
-# seed-posters.txt yayına gitmez (yalnız uygulama paketini ilgilendirir).
-rm -f "$OUT/seed-posters.txt"
-
 cp "$SRC"/thumbs/*.jpg "$OUT/thumbs/"
 for lang in "$SRC"/thumbs/*/; do
   [ -d "$lang" ] || continue

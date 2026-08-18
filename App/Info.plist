@@ -9,7 +9,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>tr</string>
 	<key>CFBundleDisplayName</key>
-	<string>StoryTemplate</string>
+	<string>Kadraj</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -54,7 +54,9 @@
 	     docs/cdn-deployment.md. -->
 	<key>TemplateCDNBaseURL</key>
 	<string></string>
-	<!-- Deep link iskeleti: app://sablon/<id> (yönlendirme RootView'da). -->
+	<!-- Deep link iskeleti: kadraj://sablon/<id> (yönlendirme RootView'da).
+	     CFBundleURLName bundle id'yi taşıyor; o App Store Connect'e bağlı
+	     olduğu için marka adı değişse de sabit kalıyor. -->
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -62,7 +64,7 @@
 			<string>com.storytemplate.app</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>storytemplate</string>
+				<string>kadraj</string>
 			</array>
 		</dict>
 	</array>

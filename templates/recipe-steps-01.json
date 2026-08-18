@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "id": "recipe-steps-01",
   "name": {
     "en": "Recipe Steps",
@@ -12,7 +12,6 @@
     "height": 1920,
     "fps": 30
   },
-  "duration": 8.0,
   "palette": {
     "background": "#FFF7ED",
     "surface": "#FFFFFF",
@@ -26,52 +25,6 @@
     "volume": 0.8
   },
   "layers": [
-    {
-      "id": "bg",
-      "type": "shape",
-      "colorRole": "background",
-      "frame": {
-        "x": 0.5,
-        "y": 0.5,
-        "width": 1.0,
-        "height": 1.0
-      }
-    },
-    {
-      "id": "photo",
-      "type": "mediaSlot",
-      "slotIndex": 0,
-      "media": "photoOrVideo",
-      "contentMode": "fill",
-      "mask": "rect",
-      "frame": {
-        "x": 0.5,
-        "y": 0.27,
-        "width": 0.9,
-        "height": 0.4
-      },
-      "cornerRadius": 0.02,
-      "animations": [
-        {
-          "role": "in",
-          "preset": "scaleIn",
-          "duration": 0.6,
-          "easing": "easeOut",
-          "params": {
-            "from": 0.94
-          }
-        },
-        {
-          "role": "loop",
-          "preset": "kenBurns",
-          "duration": 8.0,
-          "params": {
-            "zoom": 1.08,
-            "direction": "up"
-          }
-        }
-      ]
-    },
     {
       "id": "kicker",
       "type": "text",
@@ -448,6 +401,226 @@
           "role": "in",
           "preset": "fadeIn",
           "duration": 0.5
+        }
+      ]
+    }
+  ],
+  "scenes": [
+    {
+      "id": "beat1",
+      "duration": 1.333,
+      "layers": [
+        {
+          "id": "photo",
+          "type": "mediaSlot",
+          "slotIndex": 0,
+          "media": "photoOrVideo",
+          "contentMode": "fill",
+          "mask": "rect",
+          "frame": {
+            "x": 0.5,
+            "y": 0.27,
+            "width": 0.9,
+            "height": 0.4
+          },
+          "cornerRadius": 0.02,
+          "animations": [
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 1.333,
+              "params": {
+                "zoom": 1.1,
+                "direction": "up"
+              }
+            }
+          ],
+          "timing": {}
+        }
+      ],
+      "transition": {
+        "style": "cut",
+        "duration": 0.0
+      }
+    },
+    {
+      "id": "beat2",
+      "duration": 1.333,
+      "layers": [
+        {
+          "id": "photo-b2",
+          "type": "mediaSlot",
+          "slotIndex": 0,
+          "media": "photoOrVideo",
+          "contentMode": "fill",
+          "mask": "rect",
+          "frame": {
+            "x": 0.5,
+            "y": 0.27,
+            "width": 0.9,
+            "height": 0.4
+          },
+          "cornerRadius": 0.02,
+          "animations": [
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 1.333,
+              "params": {
+                "zoom": 1.2,
+                "direction": "left"
+              }
+            }
+          ],
+          "timing": {}
+        }
+      ],
+      "transition": {
+        "style": "cut",
+        "duration": 0.0
+      }
+    },
+    {
+      "id": "beat3",
+      "duration": 1.333,
+      "layers": [
+        {
+          "id": "photo-b3",
+          "type": "mediaSlot",
+          "slotIndex": 0,
+          "media": "photoOrVideo",
+          "contentMode": "fill",
+          "mask": "rect",
+          "frame": {
+            "x": 0.5,
+            "y": 0.27,
+            "width": 0.9,
+            "height": 0.4
+          },
+          "cornerRadius": 0.02,
+          "animations": [
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 1.333,
+              "params": {
+                "zoom": 1.1,
+                "direction": "down"
+              }
+            }
+          ],
+          "timing": {}
+        }
+      ],
+      "transition": {
+        "style": "cut",
+        "duration": 0.0
+      }
+    },
+    {
+      "id": "beat4",
+      "duration": 1.333,
+      "layers": [
+        {
+          "id": "photo-b4",
+          "type": "mediaSlot",
+          "slotIndex": 0,
+          "media": "photoOrVideo",
+          "contentMode": "fill",
+          "mask": "rect",
+          "frame": {
+            "x": 0.5,
+            "y": 0.27,
+            "width": 0.9,
+            "height": 0.4
+          },
+          "cornerRadius": 0.02,
+          "animations": [
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 1.333,
+              "params": {
+                "zoom": 1.2,
+                "direction": "right"
+              }
+            }
+          ],
+          "timing": {}
+        }
+      ],
+      "transition": {
+        "style": "cut",
+        "duration": 0.0
+      }
+    },
+    {
+      "id": "beat5",
+      "duration": 1.333,
+      "layers": [
+        {
+          "id": "photo-b5",
+          "type": "mediaSlot",
+          "slotIndex": 0,
+          "media": "photoOrVideo",
+          "contentMode": "fill",
+          "mask": "rect",
+          "frame": {
+            "x": 0.5,
+            "y": 0.27,
+            "width": 0.9,
+            "height": 0.4
+          },
+          "cornerRadius": 0.02,
+          "animations": [
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 1.333,
+              "params": {
+                "zoom": 1.1,
+                "direction": "up"
+              }
+            }
+          ],
+          "timing": {}
+        }
+      ],
+      "transition": {
+        "style": "cut",
+        "duration": 0.0
+      }
+    },
+    {
+      "id": "beat6",
+      "duration": 1.335,
+      "layers": [
+        {
+          "id": "photo-b6",
+          "type": "mediaSlot",
+          "slotIndex": 0,
+          "media": "photoOrVideo",
+          "contentMode": "fill",
+          "mask": "rect",
+          "frame": {
+            "x": 0.5,
+            "y": 0.27,
+            "width": 0.9,
+            "height": 0.4
+          },
+          "cornerRadius": 0.02,
+          "animations": [
+            {
+              "role": "loop",
+              "preset": "kenBurns",
+              "duration": 1.335,
+              "params": {
+                "zoom": 1.2,
+                "direction": "left"
+              }
+            }
+          ],
+          "timing": {}
         }
       ]
     }

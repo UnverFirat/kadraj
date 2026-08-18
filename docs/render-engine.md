@@ -124,7 +124,7 @@ motor değişince kural gevşer, format değişmez.
 | `Template` (Model/) | JSON'un tip güvenli hali. Saf Foundation — UIKit'siz derlenir, testleri Mac'te koşar. |
 | `UserEdits` (Model/) | Slot atamaları (medya + kadraj), metin değişiklikleri, palet, müzik. Taslak kaydetme = bunun serialize'ı. |
 | `TemplateValidator` | Yükleme anı kuralları (format dokümanındaki 5 kural). |
-| `TemplateLayerBuilder` (Render/) | Model → CALayer ağacı. Her katman bir **container** (presence/görünürlük penceresi) + **content** (asıl çizim) çiftidir; preset animasyonlar content'e, görünürlük penceresi container'a uygulanır ki çakışmasınlar. |
+| `TemplateLayerBuilder` (Render/) | Model → CALayer ağacı. Her katman bir **container** (presence/görünürlük penceresi) + **content** (asıl çizim) çiftidir; preset animasyonlar content'e, görünürlük penceresi container'a uygulanır ki çakışmasınlar. Ayrıca "hangi metin kullanıcının medyası üstünde" kararını verir (Okunabilirlik). |
 | `AnimationFactory` (Render/) | `AnimationSpec` → `[CAAnimation]`. Tanınmayan preset → boş liste (graceful degrade). |
 | `TemplateExporter` (Render/) | AVMutableComposition + AVVideoComposition kurulumu, watermark, ilerleme, iptal. |
 
@@ -139,6 +139,92 @@ motor değişince kural gevşer, format değişmez.
 - Builder'a `TimeOrigin` parametresi geçilir (`.export` / `.preview`) — tek fark bu.
 - Ağaç kurulurken `CATransaction.setDisableActions(true)` (implicit animasyon sızıntısı
   export'ta kare kayması yapar).
+
+### Plaka ve etiketi tek nesnedir
+
+Bir rozetin dolgusu ile içindeki yazı ŞABLONDA iki ayrı katmandır, EKRANDA tek
+bir nesnedir. Motor bunu bilmediği için her katman kendi `timing.start`'ına göre
+giriyordu ve şablon yazarının 0,1–0,3 sn'lik kademesi ekranda **boş renkli bir
+kutu** olarak görünüyordu (`sale-promo-01`: `cta-pill` 2,1 sn — `cta` 2,3 sn;
+gerçek export'ta hap dolarken yazı henüz yoktu).
+
+Tek şablonun hatası değildi: katalogdaki 136 dar plaka/etiket çiftinin
+**135'inde** plaka etiketinden önce giriyor (medyan 0,12 sn). 127 JSON'a
+dokunmadan düzeltilebilecek tek yer motor, o yüzden kural
+`Layer.bindingPlatesToLabels` ile render listesinin kurulduğu yere
+(`flattenedLayersForRender`) kondu — hem önizleme hem export aynı listeden
+beslendiği için WYSIWYG bozulmaz.
+
+- **Plaka etiketiyle aynı anda girer** (`plaka.start = etiket.start`), penceresinin
+  SONU korunur (geç giren plaka geç çıkmaz).
+- Ters yön (etiketi öne çekmek) DEĞİL: etiket plakanın dönüşümünü miras almaz
+  (ayrı container'lar), plaka `bounce` ile 0,4 ölçekten büyürken yazı tam boyda
+  durur ve hapın dışına taşar.
+- **"Plaka" dar olmak zorunda**: metni saran ama ondan belirgin büyük bir kart
+  (davetiye kartı, not kâğıdı) sahne dekorudur; etiketini beklerse tasarım
+  çöker. Bu yüzden boyut farkı (≤0,12 genişlik / ≤0,09 yükseklik) ve mutlak
+  yükseklik (≤0,25) sınırlanır, eğik plaka yalnız aynı açıdaki etiketle eşleşir.
+- Saniyeler süren fark (>1 sn) kademe değil bilinçli kurgudur; motor karışmaz.
+- Eşleşme sahne İÇİNDE aranır: farklı sahnelerin katmanları aynı kadrajda olsa
+  bile aynı nesne değildir.
+
+### Klip hızı (hızlandır / ağır çekim)
+
+Kullanıcı her video slotu için bir hız çarpanı seçebilir
+(`UserEdits.SlotAssignment.speed`, 0,25–4). **Hız videonun SÜRESİNİ
+değiştirmez** — şablonun ritmi, sahne pencereleri ve müzik hizası sabit kalır;
+değişen, pencereye sığdırılan KAYNAK bölümüdür:
+
+| Hız | 3 sn'lik sahnede kaynaktan alınan | Etki |
+|---|---|---|
+| 0,5x | 1,5 sn | ağır çekim |
+| 1x | 3 sn | normal |
+| 3x | 9 sn | hızlandırılmış |
+
+Uygulanışı iki yolda da aynı: `insertTimeRange` ile `pencere × hız` kadar kaynak
+alınır, sonra `scaleTimeRange` ile pencereye yayılır.
+
+- Montaj (v2): `MontageComposer` — slot slot, `edits.slots[i].speed`.
+- Klasik (v1): `TemplateExporter.compositeAndExport` — taban klip.
+- Kullanıcının KENDİ SESİ seçiliyse ses track'i de aynı oranda ölçeklenir
+  (`AudioInput.speed`), yoksa görüntüyle ses saniyeler içinde ayrışır. Müzikte
+  hız her zaman 1 ve ses track'i HİÇ ölçeklenmez (videodan kısa bir parça
+  uzatılmamalı).
+- Kaynak klip istenen bölümü karşılamıyorsa (5 sn'lik klip, 3x'te 9 sn isteniyor)
+  eldeki bölüm pencereye yayılır — yani hız sessizce düşer, pencerede boşluk
+  kalmaz.
+- Aralık `SlotAssignment.clampSpeed` ile zorlanır: 0 veya NaN bir zaman aralığını
+  sıfıra ölçekler ve AVFoundation kompozisyonu tümden reddeder.
+
+Doğrulama `ClipSpeedTests`: zamanı PARLAKLIKLA kodlayan bir klip render edilip
+çıktının verilen anındaki gri değeri kaynağın beklenen karesiyle karşılaştırılır
+(hem montaj hem klasik yol).
+
+### Aynı klip birden çok sahnede
+
+Bir `slotIndex` birden çok sahnede geçebilir (ritimli şablonların temeli: tek
+klip, dört kesme). Motor o klibi **kaldığı yerden sürdürür**
+(`MontageComposer`'daki `consumed` haritası); klip tükenirse başa sarar.
+Eskiden her sahne baştan oynattığı için aynı yarım saniye tekrar tekrar
+takılıyordu ve tek klipten kurgu çıkarmak mümkün değildi.
+
+### Kadraj ve kırpma başlangıcı
+
+`CropTransform` ve `videoStart` iki yolda AYRI kodla uygulanıyor (montaj
+CoreImage'da y-yukarı, klasik yol `CGAffineTransform` ile). İkisinin aynı anlama
+geldiği ölçülerek doğrulandı — `CropAndTrimTests`: offsetY büyüdükçe görüntü
+AŞAĞI kayar, offsetX büyüdükçe SAĞA, `scale` yakınlaştırır. Kullanıcı parmağını
+aşağı sürükleyip şablon türüne göre farklı yöne kayan bir kadraj görmesin.
+
+### Gönderi/kare oranı (4:5, 1:1)
+
+Şablonlar 9:16 için tasarlandı ve koordinatlar normalize; kanvası değiştirmek
+tipografiyi dikeyde sıkıştırır ve kompozisyonu çökertir. Bu yüzden oran
+dönüşümü ŞABLONU DEĞİL BİTMİŞ VİDEOYU işler (`AspectReframer`): tasarım
+olduğu gibi yeni kadraja sığdırılır (contain), artan alan aynı karenin
+bulanık + hafif koyulaştırılmış kopyasıyla dolar. Tasarım riski sıfır;
+`AspectReframerTests` hem boyutu hem "içerik kırpılmadı / kenar siyah bant
+değil" iddialarını ölçüyor.
 
 ## Export hattı, adım adım
 
@@ -190,6 +276,75 @@ Kazanımlar:
 - **Auto-shrink**: kullanıcı metni kutuya sığmıyorsa font sığana kadar küçülür
   (satır kırpmak yerine — kullanıcı metni serbest olduğu için şart).
 - `allCaps` locale'li uppercase kullanır (Türkçe i → İ).
+
+### Okunabilirlik: kullanıcının medyası üstündeki metin
+
+Şablonun zemini paletle tasarlanır ve kontrastı bilinir; **medya slotunun
+üstündeki metnin zemini kullanıcının fotoğrafıdır** ve bilinemez. Ölçülen bir
+export'ta beyaz "YAZ İNDİRİMİ" başlığı açık renkli bir fotoğrafın üstünde
+tamamen okunmaz çıktı — filigranın yıllar önce yaşadığı sorunun aynısı.
+
+Çözüm de aynı (bkz. `TemplateExporter.makeWatermarkLayer` üstündeki gerekçe):
+**palet tahmini ya da fotoğraf analizi değil**, yazının arkasına satır bazlı
+koyu yarı saydam hap + tam opak yazı. Kareyi örneklemek işe yaramaz: parlaklık
+her karede değişir ve "ortalama açık" bir karede koyu bir lekeye denk gelen
+yazıyı kurtarmaz. Sabit hap her karede bir kontrast TABANI garanti eder — en
+kötü durum bembeyaz bir fotoğraf: %45 siyah hap zemini ~0,55 griye indirir,
+tam opak beyaz yazı ~3:1 kontrast tutar (büyük/kalın tipografi eşiği). Hapın
+üstüne harflere yumuşak koyu bir hale eklenir; hale harfin KENARINI ayırdığı
+için hap %45'te kalabiliyor (tek başına yeterli olması için ~%65 gerekirdi ve
+o yoğunlukta kadraj kararıyordu). Hap rengi metnin KENDİ renginden türer
+(açık yazı → siyah hap, koyu yazı → beyaz hap); eşik 0,5 değil **0,3**, çünkü
+pembe/turuncu gibi doygun vurgu renkleri koyu zeminde parlar, açıkta çamura döner.
+
+**Kime uygulanır** — `TemplateLayerBuilder.textsOverMedia`, ŞABLONUN KATMAN
+SIRASINI yürüyerek "metnin altında ne var" durumunu taşır. Yön şudur: **yanlış
+hap, kaçırılan haptan pahalıdır** (tasarımı bozar VE metni okunmaz yapar), o
+yüzden şüphede kalan metne dokunulmaz.
+
+| Katman | Etki |
+|---|---|
+| Taban videoya yakılmış medya (`prerenderedMediaRegions`) | slot KADRAJI kadar kapsama — "tüm kanvas" değil |
+| Metinle kesişen `mediaSlot` | kesişim oranı kadar kapsama (birikmiş örtü sıfırlanır) |
+| Metni tümüyle örten **tam opak** `shape` | zemin yeniden bilinir → kapsama 0 |
+| Koyu **yarı saydam** `shape`/gradyan | örtüler `1 − Π(1−aᵢ)` ile birikir |
+| `highlightColorRole` taşıyan metin | zaten opak vurgusu var → hap yok |
+| Harf/rakam içermeyen metin (❤️ ✨ 🎉) | sticker → hap yok |
+
+Hap ancak kapsama **≥ 0,85** ve birikmiş örtü **< 0,7** ise konur.
+
+- **Neden kapsama oranı, "kesişim var mı" değil:** `makeup-look-01`'de sol
+  etiketler portre slotuna `2,8e-17` birim değiyordu (`0,115+0,105` ile
+  `0,5−0,28` ikili tabanda aynı sayı değil), sağdaki simetrikleri tam `0,0`
+  çıkıyordu — poster sol/sağ asimetrik haplanmıştı. Eşiğin 0,85 olması
+  `valentines-01`'in portre kenarına oturan dört kalbini de birlikte kurtarır
+  (kapsamaları 0,55 ve 0,60; 0,6 eşiğinde yalnız biri hap alıyordu).
+- **Neden taban videonun kapladığı alan değil slot kadrajı:** montajda sahne
+  medya slotları düzleştirilmiş listede yoktur, ama taban videonun tüm kanvası
+  doldurması "her yer medya" demek değildir — slot dışını sahne arka plan rengi
+  doldurur. `spa-calm-01`'de medya üstteki %56'dır; alt yarısı krem düz zemindir
+  ve oradaki üç metin (koyu yazı, krem zemin) haplandığında **hapsız halinden
+  daha az okunuyordu**.
+- **Örtü eşiği 0,7:** alfa `a`'lık siyah bir örtü en kötü durumu (bembeyaz kare)
+  `1−a` parlaklığına indirir; beyaz yazının 3:1 kontrastı için
+  `1,05/(L+0,05) ≥ 3 → L ≤ 0,3 → a ≥ 0,7`. Dikey gradyanların alfası metnin
+  bandına göre hesaplanır (kutunun iki kenarından en zayıfı) — `sale-promo-01`'de
+  alt kenardaki `@markanız` böyle kurtulur, kadrajın ortasındaki başlık kurtulmaz.
+
+Karar `TemplateLayerBuilder.legibilityScrimTargets` ile ağaç kurmadan
+sorulabilir; regresyon testleri DEPODAKİ şablonlar üzerinde KATMAN ADIYLA kilit
+koyar (`spa-calm-01`/`makeup-look-01`/`valentines-01`/`sticker-fun-01` hap
+ALMAZ, `sale-promo-01`'in başlığı ALIR). Bu kilitler olmadan bir tur görsel
+regresyon üretildi: kare ölçen testler yeşilken posterlerde yanlış haplar
+çıktı, çünkü yapay test şablonlarında o geometriler yoktu.
+
+Şablon başına kapatılabilir: `Template.textLegibility` (`auto` / `off` /
+`always`). Alan **opsiyoneldir**; yoksa `auto`. Bilinmeyen değer `auto`'ya
+düşer (preset/geçiş stilleriyle aynı ileri uyumluluk kuralı). Doğrulama
+`TextLegibilityTests`: bembeyaz fotoğrafın üstündeki beyaz metnin bandı
+ölçülür — koruma kapalıyken standart sapma ~0 (metin yok gibi), açıkken
+yüksek; düz renk zeminli ve opak kart üstündeki metinlerde ise kare **birebir
+aynı** kalır.
 
 ## Lottie
 

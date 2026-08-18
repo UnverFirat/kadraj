@@ -12,7 +12,10 @@
 #   ./build.sh -- --route editor:quote-01 --pro
 #                                    "--" sonrası uygulamaya launch bayrağı
 set -e
-cd "$(dirname "$0")"
+# Yol, cd'DEN ÖNCE mutlaklaştırılır: cd sonrası `dirname "$0"` hâlâ göreli
+# olduğu için device.sh yanlış yerde aranıyordu.
+HERE="$(cd "$(dirname "$0")" && pwd)"
+cd "$HERE"
 
 DEVICE="${DEVICE:-iPhone 15 Pro}"
 APP_ID="com.storytemplate.app"
@@ -28,29 +31,12 @@ while [ $# -gt 0 ]; do
   esac
 done
 
-# Adı UDID'ye çevir. Aynı ada sahip birden fazla simulator olabiliyor (Xcode
-# sürüm yükseltmeleri eskiyi bırakıyor) — o durumda simctl birini kendi seçiyor
-# ve derlediğin uygulama BAKTIĞIN cihaza kurulmuyor. Belirsizse durup soruyoruz.
-if [[ "$DEVICE" =~ ^[0-9A-F]{8}- ]]; then
-  UDID="$DEVICE"
-else
-  ALL="$(xcrun simctl list devices available \
-         | sed -n "s/^ *$DEVICE (\([0-9A-F-]*\)).*/\1/p")"
-  # Ad birden fazlaysa AÇIK olanı seç — kullanıcı baktığı simulator'ı kasteder.
-  BOOTED="$(xcrun simctl list devices available \
-            | sed -n "s/^ *$DEVICE (\([0-9A-F-]*\)) (Booted).*/\1/p")"
-  MATCHES="$ALL"
-  [ -n "$BOOTED" ] && MATCHES="$BOOTED"
-  COUNT="$(echo "$MATCHES" | grep -c . || true)"
-  if [ "$COUNT" = "0" ]; then
-    echo "hata: '$DEVICE' adında kullanılabilir simulator yok"; exit 1
-  elif [ "$COUNT" != "1" ]; then
-    echo "hata: '$DEVICE' adında $COUNT (açık) simulator var — DEVICE=<udid> ile seç:"
-    echo "$MATCHES" | sed 's/^/  /'
-    exit 1
-  fi
-  UDID="$MATCHES"
-fi
+# Adı UDID'ye çevir (tek kaynak: Scripts/device.sh — duman testi de aynı
+# cihazda koşsun diye ortak). Aynı ada sahip birden fazla simulator olabiliyor;
+# o durumda simctl birini kendi seçiyor ve derlediğin uygulama BAKTIĞIN cihaza
+# kurulmuyor.
+. "$HERE/Scripts/device.sh"
+UDID="$(resolve_device "$DEVICE")" || exit 1
 
 echo "== Derleniyor ($DEVICE · $UDID) =="
 xcodebuild -project StoryTemplate.xcodeproj \

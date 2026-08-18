@@ -326,7 +326,7 @@ def testimonial_quote():
 def stat_card():
     t = Template("stat-card-01", tr="Rakam Kartı", en="Stat Card",
                  category="business", track="anticipation-01",
-                 palette=PALETTES["steel"], pro=True, duration=6.0)
+                 palette=PALETTES["steel"], pro=False, duration=6.0)
     t.add(bg())
     t.add(shape("halo", "accent", y=0.47, w=0.78, h=0.44, mask="circle",
                 opacity=0.13, anims=[scale_in(0.78, 0.9), pulse(3.2, 1.04)]))

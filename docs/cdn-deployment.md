@@ -1,8 +1,17 @@
 # Şablon dağıtımı: ne pakette, ne sunucuda
 
 Bu doküman katalogun nereden geldiğini ve yayına çıkarken ne yapılacağını
-anlatır. Karar tek cümlede: **şablon TARİFLERİ uygulamayla gelir, şablon
-GÖRSELLERİ sunucudan.**
+anlatır. Karar tek cümlede: **şablon tarifleri VE galeri posterleri uygulamayla
+gelir, önizleme videoları sunucudan.**
+
+> 2026-08-12 GÜNCELLEMESİ — posterler artık TÜMÜYLE pakette. Aşağıdaki "yalnız
+> ~28 seed posteri paketlenir" kararı geri alındı: CDN yapılandırılmamış bir
+> yayında "gerisi sunucudan" HİÇ gelmiyor, mağazadan gelen kullanıcı 127 kartın
+> ~99'unu yer tutucu olarak görüyordu. Poster kalitesi 0,85 → 0,6 düşürülerek
+> (uygulama posteri en fazla 512 px'de gösteriyor, gözle fark yok) 254 posterin
+> tamamı **12 MB**'a indi ve pakete girdi. `templates/seed-posters.txt`
+> kaldırıldı; `copy-templates.sh` tüm posterleri kopyalar ve 20 MB eşiğini
+> aşarsa uyarır.
 
 ## Neden
 
@@ -21,19 +30,17 @@ Bu yüzden bölüşüm şöyle:
 |---|---|---|---|
 | Şablon JSON'ları (hepsi) | uygulama paketi | ~1 MB | Katalog listesi ilk açılışta ve çevrimdışında EKSİKSİZ görünsün |
 | `manifest.json` | paket + CDN | ~40 KB | Paketteki seed, CDN'deki güncel |
-| Seed posterleri (~28 şablon) | uygulama paketi | ~3 MB | Galerinin İLK ekranı ağ beklemeden dolu görünsün |
-| Diğer posterler | **CDN** | — | İlk görüntülemede inip önbelleğe alınır |
+| Posterler (127 şablon × 2 dil) | uygulama paketi + CDN | ~12 MB | Galeri CDN OLMADAN da eksiksiz görünsün (vitrin ürünün kendisi) |
 | Önizleme videoları | **CDN** | 85 MB | Uygulamaya hiç girmez |
 | Lottie varlıkları | paket + CDN | 24 KB | Şablon paketten geliyorsa animasyonu da gelmeli |
 
-Sonuç: uygulama paketi **26 MB → 18 MB** (simulator debug ölçümü; App Store'a
-giden thinned/sıkıştırılmış boyut daha küçük olur). Katalog 300 şablona
-çıksa bile paket boyutu **artmaz** — yalnız seed listesi belirler.
+Sonuç: uygulama paketi ~**14 MB** (simulator release ölçümü; App Store'a giden
+thinned/sıkıştırılmış boyut daha küçük olur). Poster kısmı katalogla DOĞRUSAL
+büyüyor — `copy-templates.sh` toplam 20 MB'ı aşarsa uyarı basar ve karar
+(kaliteyi düşür / dili azalt / CDN'i zorunlu kıl) yeniden verilir.
 
-Hangi posterlerin pakete gireceği `templates/seed-posters.txt` ile seçilir
-(kategori başına 1-2 iş). Liste yorumlarla birlikte kendini anlatıyor.
-
-**Poster inmemişken kart BOŞ KALMAZ:** `TemplateCard`, poster yoksa
+**Poster yine de bulunamazsa kart BOŞ KALMAZ** (CDN'den gelen, uygulamanın
+tanımadığı bir şablon; ya da bellek baskısında atılmış bir poster): `TemplateCard`, poster yoksa
 `TemplatePreview`'a düşer ve şablonu kendi katmanlarından çizer. Yani ağ yoksa
 galeri sade ama dolu görünür; poster gelince kart kendiliğinden zenginleşir.
 

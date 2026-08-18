@@ -6,8 +6,10 @@ kopyala-yapıştır; koda dokunması gereken adımlar `→ kod` ile işaretli.
 > **Ad kararı:** Uygulama adı **Kadraj** olarak öneriliyor (gerekçe: TR'de
 > "kadraj" = kadrajlama/çerçeveleme, video işiyle doğrudan ilgili; kısa,
 > akılda kalır, App Store'da aynı adla bir uygulama görünmüyor; EN'de de
-> telaffuz edilebiliyor). Kodda kullanıcıya görünen ad hâlâ `StoryTemplate` —
-> değiştirmek tek adım, aşağıda "Yapılacaklar" bölümünde.
+> telaffuz edilebiliyor). Kodda uygulandı: `AppInfo.displayName`,
+> `CFBundleDisplayName`, filigran metni ve URL şeması (`kadraj://`).
+> Bundle id ve abonelik ürün ID'leri hâlâ `com.storytemplate.*` — bunlar
+> ASC'ye bağlı, aşağıdaki "Yapılacaklar" bölümünde ayrı karar.
 
 ---
 
@@ -55,6 +57,10 @@ NEDEN KADRAJ
 • Fotoğraf ve videon telefonundan ÇIKMAZ — her şey cihazda işlenir
 • Hesap açmak yok, kayıt yok, veri toplama yok
 
+İLK VİDEON BİZDEN
+İlk videonu filigransız dışa aktarıyorsun — denemek için abonelik gerekmiyor.
+Şablonların 70'i zaten ücretsiz.
+
 PRO
 Pro aboneliğiyle filigran kalkar, kilitli şablonlar ve tüm müzikler açılır.
 Aylık ya da yıllık; istediğin an Ayarlar → Abonelikler'den iptal edebilirsin.
@@ -89,6 +95,10 @@ WHY KADRAJ
 • Text auto-fits — long copy never overflows the frame
 • Your photos and videos NEVER leave your phone; everything renders on device
 • No account, no sign-up, no data collection
+
+YOUR FIRST VIDEO IS ON US
+Your first export is watermark-free — no subscription needed to try it.
+70 of the templates are free anyway.
 
 PRO
 A Pro subscription removes the watermark and unlocks locked templates and all
@@ -166,8 +176,13 @@ DEVICE="iPhone 17 Pro Max" ./App/build.sh --no-run && OUT=~/Desktop/kadraj-shots
 2. Editör, gerçek fotoğrafla — “Medyanı koy, yazını değiştir”
 3. Renk paneli açık — “Tek dokunuşla tüm renkler”
 4. Müzik sekmesi — “Kendi sesin ya da hazır müzik”
-5. Sonuç ekranı (video hazır) — “Dakikalar içinde paylaş”
+5. Sonuç ekranı (video hazır) — “İlk videon filigransız”
 6. Kategori filtresi / arama — “İşine uygun şablonu bul”
+
+> **Ekran görüntülerini gerçek fotoğraf havuzu bitmeden çekme.** Galeri
+> posterleri bugün hâlâ 5 gerçek fotoğraftan üretiliyor; kare 1 ve 2 bu haliyle
+> vitrin sorununu doğrudan mağazaya taşır
+> (`KULLANICI-ANALIZI.md` §2.1 ve P1).
 
 ## 6. App Review bilgileri
 
@@ -206,9 +221,12 @@ Kısa vadede önerilmiyor.
 
 ## Yapılacaklar (sırayla)
 
-- [ ] **Ad onayı** → `AppInfo.displayName` ve `CFBundleDisplayName` = `Kadraj`
-      (`App/StoryTemplate/Legal.swift`, `App/Info.plist`) → kod
+- [x] **Ad onayı** → `AppInfo.displayName` ve `CFBundleDisplayName` = `Kadraj`
+      (`App/StoryTemplate/Legal.swift`, `App/Info.plist`); filigran varsayılanı
+      `Made with Kadraj`, URL şeması `kadraj://` → kod
 - [ ] **Bundle ID kararı** (`com.kadraj.app`?) — ASC'de uygulama oluşturmadan önce → kod
+- [ ] **Abonelik ürün ID kararı** (`com.kadraj.pro.monthly/.yearly`?) — ürün ID'si
+      ASC'de oluşturulduktan sonra değişmiyor, bundle id ile birlikte karara bağla → kod
 - [ ] **İkon** (1024×1024 + tüm boyutlar) — ad kesinleşince üretilir → kod
 - [ ] **GitHub Pages'i aç**: Settings → Pages → Source: `main` / klasör: `/docs`
 - [ ] **Yasal URL'ler** `Legal.swift` içinde Pages adresine çekildi ✓ (Pages açılınca doğrula)

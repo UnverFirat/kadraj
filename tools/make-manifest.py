@@ -18,8 +18,10 @@ MANIFEST = TEMPLATES / "manifest.json"
 
 previous = {}
 order = []
+previous_doc = {}
 if MANIFEST.exists():
-    for entry in json.loads(MANIFEST.read_text())["templates"]:
+    previous_doc = json.loads(MANIFEST.read_text())
+    for entry in previous_doc["templates"]:
         previous[entry["id"]] = entry
         order.append(entry["id"])
 
@@ -45,6 +47,16 @@ for path in paths:
         "name": template["name"],
     })
 
+# YAYIN NUMARASI. Uygulama, diskteki (CDN'den indirilmiş) manifest ile paketle
+# gelen manifestin hangisinin yeni olduğuna buna bakarak karar veriyor
+# (`TemplateCatalog.current()`): sayı artmazsa güncellenen uygulamanın yeni
+# şablonları eski bir indirmenin altında kalıyor. İçerik değişmediyse
+# artırılmaz — manifest her koşuda gereksizce kirlenmesin.
+revision = previous_doc.get("revision", 0)
+if entries != previous_doc.get("templates") or "revision" not in previous_doc:
+    revision += 1
+
 MANIFEST.write_text(json.dumps(
-    {"manifestVersion": 1, "templates": entries}, ensure_ascii=False, indent=2) + "\n")
-print(f"{MANIFEST.relative_to(ROOT)} — {len(entries)} şablon")
+    {"manifestVersion": 1, "revision": revision, "templates": entries},
+    ensure_ascii=False, indent=2) + "\n")
+print(f"{MANIFEST.relative_to(ROOT)} — {len(entries)} şablon · yayın {revision}")
