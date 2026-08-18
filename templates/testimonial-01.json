@@ -170,7 +170,7 @@
       "type": "text",
       "key": "name",
       "default": {
-        "en": "AYSE K.",
+        "en": "EMMA C.",
         "tr": "AYŞE K."
       },
       "font": {
@@ -203,7 +203,7 @@
       "type": "text",
       "key": "role",
       "default": {
-        "en": "Cafe owner · Izmir",
+        "en": "Cafe owner · Denver",
         "tr": "Kafe sahibi · İzmir"
       },
       "font": {

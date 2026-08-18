@@ -215,7 +215,7 @@
       "type": "text",
       "key": "price0",
       "default": {
-        "en": "₺85",
+        "en": "$8",
         "tr": "₺85"
       },
       "font": {
@@ -376,7 +376,7 @@
       "type": "text",
       "key": "price1",
       "default": {
-        "en": "₺60",
+        "en": "$5",
         "tr": "₺60"
       },
       "font": {
@@ -537,7 +537,7 @@
       "type": "text",
       "key": "price2",
       "default": {
-        "en": "₺110",
+        "en": "$9",
         "tr": "₺110"
       },
       "font": {
@@ -592,7 +592,7 @@
       "type": "text",
       "key": "footer",
       "default": {
-        "en": "Kadikoy · daily 09-22",
+        "en": "Riverside · daily 09-22",
         "tr": "Kadıköy · her gün 09-22"
       },
       "font": {

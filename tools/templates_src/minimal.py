@@ -195,7 +195,7 @@ def neon_sign():
     t.add(shape("underline", "neonPink", y=0.685, w=0.16, h=0.005,
                 opacity=0.9, start=1.2, anims=[wipe("right", 0.6)]))
     t.add(text("where", "where", "Kadıköy · Moda Cad. 12",
-               "Downtown · 12 Moda St.", 0.021,
+               "Downtown · 12 Maple St.", 0.021,
                y=0.745, w=0.78, h=0.04, font="AvenirNext-Regular",
                role="textSecondary", start=1.35, anims=[fade_in(0.7)]))
     return t
@@ -276,7 +276,7 @@ def caption_bar():
     t.add(scrim("veil-bottom", direction="down", y=0.8, h=0.4))
     t.add(shape("avatar-ring", "accent", x=0.115, y=0.085, w=0.085, h=0.048,
                 mask="circle", anims=[scale_in(0.7, 0.5)]))
-    t.add(text("handle", "handle", "@ada.kaya", "@ada.kaya", 0.022,
+    t.add(text("handle", "handle", "@ada.kaya", "@ada.lane", 0.022,
                x=0.42, y=0.085, w=0.44, h=0.04, font="AvenirNext-DemiBold",
                align="left", start=0.3, anims=[slide_in("right", 0.03, 0.5)]))
     t.add(text("caption", "caption", "bu tarifi üç kez\ndenedim, sonunda tuttu",
@@ -311,7 +311,7 @@ def testimonial_quote():
     t.add(media("avatar", 0, x=0.155, y=0.7, w=0.16, h=0.09, kind="photo",
                 mask="circle", filter="warm", intensity=0.25,
                 anims=[scale_in(0.8, 0.6, delay=1.0), ken_burns(7.0, zoom=1.08)]))
-    t.add(text("name", "name", "Selin Aydın", "Selin Aydin", 0.026,
+    t.add(text("name", "name", "Selin Aydın", "Nora Vance", 0.026,
                x=0.6, y=0.682, w=0.6, h=0.042, font="AvenirNext-Bold",
                role="textPrimary", align="left",
                start=1.15, anims=[fade_in(0.5)]))

@@ -228,7 +228,7 @@
       "type": "text",
       "key": "place",
       "default": {
-        "en": "Karşıyaka, İzmir · gated complex",
+        "en": "Lakeview, Denver · gated complex",
         "tr": "Karşıyaka, İzmir · site içinde"
       },
       "font": {
@@ -323,7 +323,7 @@
       "type": "text",
       "key": "spec1",
       "default": {
-        "en": "3+1",
+        "en": "3 bed",
         "tr": "3+1"
       },
       "font": {

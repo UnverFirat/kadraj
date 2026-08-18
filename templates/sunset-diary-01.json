@@ -176,7 +176,7 @@
       "type": "text",
       "key": "sunPlace",
       "default": {
-        "en": "OLUDENIZ, TURKEY",
+        "en": "AMALFI, ITALY",
         "tr": "ÖLÜDENİZ, FETHİYE"
       },
       "font": {

@@ -272,7 +272,7 @@
       "type": "text",
       "key": "track1",
       "default": {
-        "en": "Midnight Hour — Mert Kaya",
+        "en": "Midnight Hour — Miles Carter",
         "tr": "Gece Yarısı — Mert Kaya"
       },
       "font": {
@@ -370,7 +370,7 @@
       "type": "text",
       "key": "track2",
       "default": {
-        "en": "Coast Road — Deniz Ay",
+        "en": "Coast Road — Ava Lane",
         "tr": "Sahil Yolu — Deniz Ay"
       },
       "font": {
@@ -468,7 +468,7 @@
       "type": "text",
       "key": "track3",
       "default": {
-        "en": "Faraway — Kara Orman",
+        "en": "Faraway — Dark Pines",
         "tr": "Uzak — Kara Orman"
       },
       "font": {
@@ -566,7 +566,7 @@
       "type": "text",
       "key": "track4",
       "default": {
-        "en": "Last Stop — Ela",
+        "en": "Last Stop — Elle Ray",
         "tr": "Son Durak — Ela"
       },
       "font": {

@@ -224,7 +224,7 @@
       "type": "text",
       "key": "row0Price",
       "default": {
-        "en": "₺75",
+        "en": "$4",
         "tr": "₺75"
       },
       "font": {
@@ -316,7 +316,7 @@
       "type": "text",
       "key": "row1Price",
       "default": {
-        "en": "₺95",
+        "en": "$6",
         "tr": "₺95"
       },
       "font": {
@@ -408,7 +408,7 @@
       "type": "text",
       "key": "row2Price",
       "default": {
-        "en": "₺65",
+        "en": "$5",
         "tr": "₺65"
       },
       "font": {

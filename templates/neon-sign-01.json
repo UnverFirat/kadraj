@@ -264,7 +264,7 @@
       "type": "text",
       "key": "where",
       "default": {
-        "en": "Downtown · 12 Moda St.",
+        "en": "Downtown · 12 Maple St.",
         "tr": "Kadıköy · Moda Cad. 12"
       },
       "font": {

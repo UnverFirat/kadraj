@@ -243,10 +243,10 @@ def class_schedule():
                 start=0.6, anims=[wipe("right", 0.55)]))
 
     classes = [
-        ("07.00", "Sabah HIIT", "Morning HIIT", "Deniz ile", "with Deniz"),
-        ("12.30", "Öğle Pilates", "Lunch Pilates", "Ece ile", "with Ece"),
-        ("18.00", "Fonksiyonel Güç", "Functional Strength", "Kaan ile", "with Kaan"),
-        ("20.00", "Akşam Yogası", "Evening Yoga", "Sude ile", "with Sude"),
+        ("07.00", "Sabah HIIT", "Morning HIIT", "Deniz ile", "with Maya"),
+        ("12.30", "Öğle Pilates", "Lunch Pilates", "Ece ile", "with Ivy"),
+        ("18.00", "Fonksiyonel Güç", "Functional Strength", "Kaan ile", "with Ryan"),
+        ("20.00", "Akşam Yogası", "Evening Yoga", "Sude ile", "with Chloe"),
     ]
     for i, (hour, tr_name, en_name, tr_coach, en_coach) in enumerate(classes):
         y = 0.365 + 0.14 * i

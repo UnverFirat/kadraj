@@ -158,7 +158,7 @@
       "type": "text",
       "key": "location",
       "default": {
-        "en": "İSTANBUL · 2026",
+        "en": "LISBON · 2026",
         "tr": "İSTANBUL · 2026"
       },
       "font": {

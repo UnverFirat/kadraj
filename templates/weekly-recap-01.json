@@ -341,7 +341,7 @@
           "type": "text",
           "key": "gNote",
           "default": {
-            "en": "Izmir and Ankara",
+            "en": "Denver and Austin",
             "tr": "İzmir ve Ankara"
           },
           "font": {

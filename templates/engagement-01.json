@@ -269,7 +269,7 @@
           "type": "text",
           "key": "names",
           "default": {
-            "en": "Ayşe & Mehmet",
+            "en": "Emma & James",
             "tr": "Ayşe & Mehmet"
           },
           "font": {

@@ -269,7 +269,7 @@
       "type": "text",
       "key": "class1Coach",
       "default": {
-        "en": "with Deniz",
+        "en": "with Maya",
         "tr": "Deniz ile"
       },
       "font": {
@@ -392,7 +392,7 @@
       "type": "text",
       "key": "class2Coach",
       "default": {
-        "en": "with Ece",
+        "en": "with Ivy",
         "tr": "Ece ile"
       },
       "font": {
@@ -515,7 +515,7 @@
       "type": "text",
       "key": "class3Coach",
       "default": {
-        "en": "with Kaan",
+        "en": "with Ryan",
         "tr": "Kaan ile"
       },
       "font": {
@@ -638,7 +638,7 @@
       "type": "text",
       "key": "class4Coach",
       "default": {
-        "en": "with Sude",
+        "en": "with Chloe",
         "tr": "Sude ile"
       },
       "font": {

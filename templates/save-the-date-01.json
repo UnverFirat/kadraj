@@ -204,7 +204,7 @@
       "type": "text",
       "key": "names",
       "default": {
-        "en": "Ayşe & Mehmet",
+        "en": "Emma & James",
         "tr": "Ayşe & Mehmet"
       },
       "font": {
@@ -235,7 +235,7 @@
       "type": "text",
       "key": "venue",
       "default": {
-        "en": "Çeşme, Izmir",
+        "en": "Sonoma, California",
         "tr": "Çeşme, İzmir"
       },
       "font": {

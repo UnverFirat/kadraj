@@ -227,7 +227,7 @@
       "type": "text",
       "key": "venue",
       "default": {
-        "en": "ISTANBUL · KUCUKCIFTLIK PARK",
+        "en": "AUSTIN · RIVERSIDE ARENA",
         "tr": "İSTANBUL · KÜÇÜKÇİFTLİK PARK"
       },
       "font": {

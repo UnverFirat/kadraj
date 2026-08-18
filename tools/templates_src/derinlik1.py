@@ -211,7 +211,7 @@ def student_work():
     t.add(text("headline", "headline", "Öğrenci Çalışması", "Student Work", 0.054,
                y=0.775, w=0.88, h=0.09, font="AvenirNext-Heavy",
                start=0.7, anims=[slide_in("up", 0.05, 0.6)]))
-    t.add(text("student", "student", "Elif Demir · 3. dönem", "Elif Demir · Term 3", 0.028,
+    t.add(text("student", "student", "Elif Demir · 3. dönem", "Sofia Reyes · Term 3", 0.028,
                y=0.855, w=0.86, h=0.045, font="AvenirNext-DemiBold",
                role="accent", start=0.95, anims=[slide_in("up", 0.03, 0.5)]))
     t.add(text("note", "note", "Bitirme projesi · Afiş serisi",
@@ -291,7 +291,7 @@ def price_drop():
     t.add(shape("rule", "accent", y=0.835, w=0.88, h=0.002, opacity=0.5,
                 start=1.05, anims=[wipe("left", 0.6)]))
     t.add(text("info", "info", "3+1 · 128 m² · Ataşehir · 5. kat",
-               "3 bed · 1,378 ft² · Ataşehir · 5th floor", 0.024,
+               "3 bed · 1,378 ft² · Riverside · 5th floor", 0.024,
                y=0.878, w=0.9, h=0.045, font="AvenirNext-Medium",
                start=1.1, anims=[slide_in("up", 0.03, 0.5)]))
     t.add(text("cta", "cta", "Fırsat için arayın · 0532 000 00 00",
@@ -363,7 +363,7 @@ def agent_card():
     t.add(media("portrait", 0, y=0.31, w=0.52, h=0.2925, kind="photo",
                 mask="circle", filter="warm", intensity=0.2,
                 anims=[scale_in(0.9, 0.65), ken_burns(7.0, zoom=1.07, direction="up")]))
-    t.add(text("name", "name", "Elif Demir", "Elif Demir", 0.058,
+    t.add(text("name", "name", "Elif Demir", "Claire Bennett", 0.058,
                y=0.51, w=0.86, h=0.09, font="AvenirNext-Bold",
                start=0.6, anims=[slide_in("up", 0.03, 0.55)]))
     t.add(text("role", "role", "GAYRİMENKUL DANIŞMANI", "REAL ESTATE ADVISOR", 0.02,
@@ -375,8 +375,8 @@ def agent_card():
 
     rows = [
         ("TELEFON", "PHONE", "0532 000 00 00", "555 010 0134"),
-        ("OFİS", "OFFICE", "Bağdat Cad. No:212, Kadıköy", "212 Bagdat Ave, Kadıköy"),
-        ("E-POSTA", "EMAIL", "elif@meridyenemlak.com", "elif@meridianrealty.com"),
+        ("OFİS", "OFFICE", "Bağdat Cad. No:212, Kadıköy", "212 Maple Avenue, Riverside"),
+        ("E-POSTA", "EMAIL", "elif@meridyenemlak.com", "claire@meridianrealty.com"),
     ]
     for i, (tr_label, en_label, tr_value, en_value) in enumerate(rows):
         y = 0.70 + 0.085 * i
@@ -421,14 +421,14 @@ def new_listing():
                y=0.625, w=0.80, h=0.075, font="Georgia-Bold",
                start=0.65, anims=[slide_in("up", 0.03, 0.55)]))
     t.add(text("place", "place", "Karşıyaka, İzmir · site içinde",
-               "Karşıyaka, İzmir · gated complex", 0.022,
+               "Lakeview, Denver · gated complex", 0.022,
                y=0.69, w=0.78, h=0.04, font="AvenirNext-Regular",
                role="textSecondary", start=0.85, anims=[fade_in(0.55)]))
     t.add(shape("divider", "textSecondary", y=0.735, w=0.76, h=0.0018,
                 opacity=0.35, start=0.95, anims=[wipe("right", 0.6)]))
 
     cols = [
-        (0.24, "ODA", "ROOMS", "3+1", "3+1"),
+        (0.24, "ODA", "ROOMS", "3+1", "3 bed"),
         (0.50, "ALAN", "AREA", "135 m²", "1,453 ft²"),
         (0.76, "KAT", "FLOOR", "6 / 12", "6 of 12"),
     ]
@@ -476,10 +476,10 @@ def playlist_card():
                role="textSecondary", start=0.75, anims=[fade_in(0.55)]))
 
     songs = [
-        ("1", "Gece Yarısı — Mert Kaya", "Midnight Hour — Mert Kaya", "3:42"),
-        ("2", "Sahil Yolu — Deniz Ay", "Coast Road — Deniz Ay", "4:05"),
-        ("3", "Uzak — Kara Orman", "Faraway — Kara Orman", "3:18"),
-        ("4", "Son Durak — Ela", "Last Stop — Ela", "2:57"),
+        ("1", "Gece Yarısı — Mert Kaya", "Midnight Hour — Miles Carter", "3:42"),
+        ("2", "Sahil Yolu — Deniz Ay", "Coast Road — Ava Lane", "4:05"),
+        ("3", "Uzak — Kara Orman", "Faraway — Dark Pines", "3:18"),
+        ("4", "Son Durak — Ela", "Last Stop — Elle Ray", "2:57"),
     ]
     for i, (num, tr_song, en_song, length) in enumerate(songs):
         y = 0.645 + 0.083 * i
@@ -552,7 +552,7 @@ def studio_session():
                      y=0.73, w=0.82, h=0.05, font="AvenirNext-Heavy",
                      role="accent", start=0.85, anims=[fade_in(0.55)]))
     closing.add(text("closing-handle", "closingHandle", "@mertkaya.music",
-                     "@mertkaya.music", 0.02,
+                     "@milescarter.music", 0.02,
                      y=0.80, w=0.7, h=0.035, font="AvenirNext-Regular",
                      role="textSecondary", tracking=0.008,
                      start=1.05, anims=[fade_in(0.6)]))
@@ -577,10 +577,10 @@ def tour_dates():
                 start=0.55, anims=[wipe("right", 0.65)]))
 
     dates = [
-        ("14 EKİM", "OCT 14", "İSTANBUL", "ISTANBUL"),
-        ("21 EKİM", "OCT 21", "ANKARA", "ANKARA"),
-        ("28 EKİM", "OCT 28", "İZMİR", "IZMIR"),
-        ("4 KASIM", "NOV 4", "BURSA", "BURSA"),
+        ("14 EKİM", "OCT 14", "İSTANBUL", "AUSTIN"),
+        ("21 EKİM", "OCT 21", "ANKARA", "DENVER"),
+        ("28 EKİM", "OCT 28", "İZMİR", "PORTLAND"),
+        ("4 KASIM", "NOV 4", "BURSA", "NASHVILLE"),
     ]
     for i, (tr_date, en_date, tr_city, en_city) in enumerate(dates):
         y = 0.40 + 0.115 * i
@@ -617,7 +617,7 @@ def cover_art():
                y=0.095, w=0.8, h=0.04, font="AvenirNext-Medium",
                role="accent", caps=True, tracking=0.026,
                start=0.2, anims=[fade_in(0.55)]))
-    t.add(text("artist", "artist", "SELİN ARAS", "SELIN ARAS", 0.056,
+    t.add(text("artist", "artist", "SELİN ARAS", "NORA VANCE", 0.056,
                y=0.17, w=0.88, h=0.09, font="AvenirNext-Heavy",
                caps=True, tracking=0.014, start=0.35,
                anims=[slide_in("down", 0.04, 0.55)]))
@@ -660,11 +660,11 @@ def open_mic():
     t.add(text("headline", "headline", "Sahne Akşamı", "Open Mic Night", 0.06,
                y=0.735, w=0.88, h=0.10, font="AvenirNext-Heavy",
                start=0.7, anims=[slide_in("up", 0.05, 0.6)]))
-    t.add(text("when", "when", "Salı 20:30 · Kadıköy", "Tuesdays 8:30 PM · Kadıköy", 0.03,
+    t.add(text("when", "when", "Salı 20:30 · Kadıköy", "Tuesdays 8:30 PM · Riverside", 0.03,
                y=0.82, w=0.88, h=0.05, font="AvenirNext-DemiBold",
                role="accent", start=0.95, anims=[slide_in("up", 0.03, 0.5)]))
     t.add(text("venue", "venue", "Mikrofon Kahve · Moda Cad. No:41",
-               "Mikrofon Coffee · 41 Moda Ave", 0.022,
+               "Corner Coffee · 41 Maple Ave", 0.022,
                y=0.882, w=0.9, h=0.04, font="AvenirNext-Regular",
                role="textSecondary", start=1.1, anims=[fade_in(0.6)]))
     t.add(text("cta", "cta", "Sıra almak için DM · Giriş serbest",

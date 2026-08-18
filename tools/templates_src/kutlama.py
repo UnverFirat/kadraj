@@ -76,7 +76,7 @@ def valentines():
     for lid, hx, hy, rot, delay in hearts:
         t.add(sticker(lid, lid, "❤️", size=0.045, x=hx, y=hy, rotation=rot,
                       start=delay, anims=[pop(1.25, 0.5), pulse(2.0, 1.08)]))
-    t.add(text("names", "names", "Ayşe & Mehmet", "Ayşe & Mehmet", 0.072,
+    t.add(text("names", "names", "Ayşe & Mehmet", "Emma & James", 0.072,
                y=0.72, w=0.8, h=0.12, font="SnellRoundhand-Bold",
                start=0.9, anims=[slide_in("up", 0.04, 0.7)]))
     t.add(text("note", "note", "İyi ki varsın", "Glad you're mine", 0.024,
@@ -159,10 +159,10 @@ def save_the_date():
     t.add(text("date", "date", "12.06.2026", "06.12.2026", 0.082,
                y=0.50, w=0.88, h=0.14, font="Didot", role="surface",
                tracking=0.01, start=0.7, anims=[scale_in(0.86, 0.8)]))
-    t.add(text("names", "names", "Ayşe & Mehmet", "Ayşe & Mehmet", 0.066,
+    t.add(text("names", "names", "Ayşe & Mehmet", "Emma & James", 0.066,
                y=0.76, w=0.82, h=0.12, font="SnellRoundhand-Bold", role="surface",
                start=0.95, anims=[slide_in("up", 0.04, 0.7)]))
-    t.add(text("venue", "venue", "Çeşme, İzmir", "Çeşme, Izmir", 0.022,
+    t.add(text("venue", "venue", "Çeşme, İzmir", "Sonoma, California", 0.022,
                y=0.865, w=0.7, h=0.04, font="AvenirNext-Regular",
                role="surface", tracking=0.008,
                start=1.15, anims=[fade_in(0.6)]))
@@ -198,7 +198,7 @@ def engagement():
                  anims=[scale_in(0.86, 0.7)]))
     s2.add(sticker("s2-ring-emoji", "ring", "💍", size=0.075, x=0.5, y=0.42,
                    start=0.3, anims=[bounce(0.7)]))
-    s2.add(text("s2-names", "names", "Ayşe & Mehmet", "Ayşe & Mehmet", 0.072,
+    s2.add(text("s2-names", "names", "Ayşe & Mehmet", "Emma & James", 0.072,
                 y=0.62, w=0.82, h=0.12, font="SnellRoundhand-Bold",
                 role="textPrimary", start=0.45, anims=[slide_in("up", 0.04, 0.6)]))
     s2.add(shape("s2-rule", "accent", y=0.71, w=0.10, h=0.004,
@@ -234,7 +234,7 @@ def baby_news():
     t.add(media("portrait", 0, y=0.47, w=0.68, h=0.3825, mask="circle",
                 filter="warm", intensity=0.35,
                 anims=[scale_in(0.9, 0.7), ken_burns(7.0, zoom=1.08, direction="up")]))
-    t.add(text("name", "name", "Deniz", "Deniz", 0.075,
+    t.add(text("name", "name", "Deniz", "Noah", 0.075,
                y=0.75, w=0.7, h=0.11, font="SnellRoundhand-Bold",
                role="textPrimary", start=0.9, anims=[slide_in("up", 0.035, 0.7)]))
     t.add(text("date", "date", "Ekim 2026'da aramızda", "Arriving October 2026", 0.023,
@@ -264,11 +264,11 @@ def graduation():
                tracking=0.004, start=0.6, anims=[scale_in(0.82, 0.7)]))
     t.add(shape("rule", "accent", y=0.635, w=0.14, h=0.005,
                 start=0.9, anims=[wipe("right", 0.6)]))
-    t.add(text("name", "name", "Ayşe Yılmaz", "Ayşe Yılmaz", 0.05,
+    t.add(text("name", "name", "Ayşe Yılmaz", "Sofia Reyes", 0.05,
                y=0.72, w=0.86, h=0.09, font="AvenirNext-Bold",
                start=0.95, anims=[slide_in("up", 0.04, 0.6)]))
     t.add(text("school", "school", "İstanbul Üniversitesi · Mimarlık",
-               "University of Istanbul · Architecture", 0.023,
+               "State University · Architecture", 0.023,
                y=0.81, w=0.88, h=0.045, font="AvenirNext-Medium",
                role="textSecondary", start=1.1, anims=[fade_in(0.6)]))
     t.add(text("tagline", "tagline", "Yeni bir sayfa açılıyor", "A new chapter begins",
@@ -307,7 +307,7 @@ def anniversary():
                  role="textPrimary", caps=True, tracking=0.016,
                  start=0.3, anims=[pop(1.08, 0.55)]))
     now.add(text("now-sub", "nowSub", "Ayşe & Mehmet · 1. yıl",
-                 "Ayşe & Mehmet · Year one", 0.022,
+                 "Emma & James · Year one", 0.022,
                  y=0.885, w=0.76, h=0.04, font="AvenirNext-Medium",
                  role="textSecondary", start=0.65, anims=[fade_in(0.6)]))
     return t
@@ -482,7 +482,7 @@ def track_drop():
     t.add(text("title", "title", "Gece Yarısı", "Midnight Hour", 0.062,
                y=0.68, w=0.88, h=0.11, font="AvenirNext-Heavy",
                start=0.6, anims=[slide_in("up", 0.045, 0.6)]))
-    t.add(text("artist", "artist", "MERT KAYA", "MERT KAYA", 0.024,
+    t.add(text("artist", "artist", "MERT KAYA", "MILES CARTER", 0.024,
                y=0.775, w=0.74, h=0.04, font="AvenirNext-Medium",
                role="textSecondary", caps=True, tracking=0.018,
                start=0.8, anims=[fade_in(0.6)]))
@@ -521,7 +521,7 @@ def lyric_card():
                y=0.46, w=0.84, h=0.30, font="Georgia-Italic", lines=3,
                start=0.7, anims=[slide_in("up", 0.03, 0.9)]))
     t.add(text("artist", "artist", "— Mert Kaya, “Gece Yarısı”",
-               "— Mert Kaya, “Midnight Hour”", 0.022,
+               "— Miles Carter, “Midnight Hour”", 0.022,
                y=0.70, w=0.82, h=0.04, font="AvenirNext-Medium",
                role="textSecondary", start=1.1, anims=[fade_in(0.7)]))
     t.add(text("footer", "footer", "Yeni albüm 12 Eylül'de", "New album, September 12",
@@ -553,7 +553,7 @@ def gig_poster():
                caps=True, tracking=0.01,
                start=0.85, anims=[slide_in("up", 0.04, 0.6)]))
     t.add(text("venue", "venue", "İSTANBUL · KÜÇÜKÇİFTLİK PARK",
-               "ISTANBUL · KUCUKCIFTLIK PARK", 0.024,
+               "AUSTIN · RIVERSIDE ARENA", 0.024,
                y=0.79, w=0.92, h=0.045, font="AvenirNext-Medium",
                role="textSecondary", caps=True, tracking=0.012,
                start=1.0, anims=[fade_in(0.6)]))

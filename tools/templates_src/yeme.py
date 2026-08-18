@@ -29,18 +29,19 @@ def cafe_menu():
     t.add(shape("panel", "surface", y=0.655, w=0.86, h=0.46, radius=0.022,
                 start=0.45, anims=[scale_in(0.95, 0.55)]))
 
+    # Fiyat çift dilli: TR vitrininde ₺, EN vitrininde $ görünür.
     rows = [
-        ("Filtre Kahve", "Filter Coffee", "₺75"),
-        ("Tereyağlı Kruvasan", "Butter Croissant", "₺95"),
-        ("Ev Yapımı Limonata", "House Lemonade", "₺65"),
+        ("Filtre Kahve", "Filter Coffee", "₺75", "$4"),
+        ("Tereyağlı Kruvasan", "Butter Croissant", "₺95", "$6"),
+        ("Ev Yapımı Limonata", "House Lemonade", "₺65", "$5"),
     ]
-    for i, (tr_name, en_name, price) in enumerate(rows):
+    for i, (tr_name, en_name, tr_price, en_price) in enumerate(rows):
         y = 0.49 + 0.125 * i
         t.add(text(f"row{i}-name", f"row{i}Name", tr_name, en_name, 0.030,
                    x=0.32, y=y, w=0.42, h=0.055, font="AvenirNext-DemiBold",
                    role="textPrimary", align="left", start=0.7 + 0.15 * i,
                    anims=[slide_in("right", 0.03, 0.5)]))
-        t.add(text(f"row{i}-price", f"row{i}Price", price, price, 0.030,
+        t.add(text(f"row{i}-price", f"row{i}Price", tr_price, en_price, 0.030,
                    x=0.79, y=y, w=0.18, h=0.055, font="AvenirNext-Heavy",
                    role="accent", align="right", start=0.8 + 0.15 * i,
                    anims=[fade_in(0.45)]))
@@ -172,7 +173,7 @@ def food_delivery():
                y=0.10, w=0.92, h=0.05, font="AvenirNext-Heavy",
                role="textOnAccent", caps=True, tracking=0.014,
                start=0.35, anims=[fade_in(0.4)]))
-    t.add(text("brand", "brand", "Lezzet Mutfağı", "Lezzet Kitchen", 0.024,
+    t.add(text("brand", "brand", "Lezzet Mutfağı", "Harvest Kitchen", 0.024,
                y=0.70, w=0.8, h=0.04, font="AvenirNext-Medium",
                role="textSecondary", start=0.6, anims=[fade_in(0.55)]))
     t.add(text("phone", "phone", "0212 555 04 20", "(212) 555 0420", 0.052,
@@ -221,7 +222,7 @@ def restaurant_tour():
                    role="textPrimary", start=0.5,
                    anims=[fade_in(0.6)]))
 
-    t.add(text("venue", "venue", "Lezzet Mutfağı — Moda", "Lezzet Kitchen — Moda",
+    t.add(text("venue", "venue", "Lezzet Mutfağı — Moda", "Harvest Kitchen — Riverside",
                0.019, y=0.945, w=0.8, h=0.035, font="AvenirNext-Medium",
                role="textSecondary", tracking=0.008,
                start=0.6, anims=[fade_in(0.7)]))
@@ -289,18 +290,18 @@ def drinks_list():
                 start=0.6, anims=[wipe("right", 0.6)]))
 
     drinks = [
-        ("Espresso Tonik", "Espresso Tonic", "₺95"),
-        ("Sıcak Beyaz Çikolata", "White Hot Chocolate", "₺110"),
-        ("Nane Limon Soda", "Mint Lemon Soda", "₺85"),
-        ("Kestaneli Latte", "Chestnut Latte", "₺120"),
+        ("Espresso Tonik", "Espresso Tonic", "₺95", "$6"),
+        ("Sıcak Beyaz Çikolata", "White Hot Chocolate", "₺110", "$7"),
+        ("Nane Limon Soda", "Mint Lemon Soda", "₺85", "$5"),
+        ("Kestaneli Latte", "Chestnut Latte", "₺120", "$8"),
     ]
-    for i, (tr_name, en_name, price) in enumerate(drinks):
+    for i, (tr_name, en_name, tr_price, en_price) in enumerate(drinks):
         y = 0.40 + 0.125 * i
         t.add(text(f"drink{i}-name", f"drink{i}Name", tr_name, en_name, 0.032,
                    x=0.31, y=y, w=0.38, h=0.06, font="AvenirNext-Medium",
                    role="textPrimary", align="left", start=0.75 + 0.14 * i,
                    anims=[slide_in("right", 0.03, 0.5)]))
-        t.add(text(f"drink{i}-price", f"drink{i}Price", price, price, 0.032,
+        t.add(text(f"drink{i}-price", f"drink{i}Price", tr_price, en_price, 0.032,
                    x=0.79, y=y, w=0.20, h=0.06, font="AvenirNext-Heavy",
                    role="accent", align="right", start=0.85 + 0.14 * i,
                    anims=[fade_in(0.45)]))
@@ -409,7 +410,7 @@ def coupon_code():
                y=0.415, w=0.7, h=0.04, font="AvenirNext-DemiBold",
                role="cardInk", caps=True, tracking=0.02, start=0.6,
                anims=[fade_in(0.5)]))
-    t.add(text("code", "code", "LEZZET25", "LEZZET25", 0.072,
+    t.add(text("code", "code", "LEZZET25", "TASTE25", 0.072,
                y=0.50, w=0.78, h=0.11, font="Courier-Bold",
                role="cardInk", caps=True, tracking=0.02, start=0.75,
                anims=[pop(1.08, 0.55)]))

@@ -229,7 +229,7 @@
       "type": "text",
       "key": "drink0Price",
       "default": {
-        "en": "₺95",
+        "en": "$6",
         "tr": "₺95"
       },
       "font": {
@@ -321,7 +321,7 @@
       "type": "text",
       "key": "drink1Price",
       "default": {
-        "en": "₺110",
+        "en": "$7",
         "tr": "₺110"
       },
       "font": {
@@ -413,7 +413,7 @@
       "type": "text",
       "key": "drink2Price",
       "default": {
-        "en": "₺85",
+        "en": "$5",
         "tr": "₺85"
       },
       "font": {
@@ -505,7 +505,7 @@
       "type": "text",
       "key": "drink3Price",
       "default": {
-        "en": "₺120",
+        "en": "$8",
         "tr": "₺120"
       },
       "font": {

@@ -201,7 +201,7 @@
           "type": "text",
           "key": "place0",
           "default": {
-            "en": "Van Breakfast House",
+            "en": "Corner Breakfast House",
             "tr": "Van Kahvaltı Evi"
           },
           "font": {
@@ -232,7 +232,7 @@
           "type": "text",
           "key": "note0",
           "default": {
-            "en": "Kadikoy • 08:30",
+            "en": "Riverside • 08:30",
             "tr": "Kadıköy • 08:30"
           },
           "font": {
@@ -422,7 +422,7 @@
           "type": "text",
           "key": "place1",
           "default": {
-            "en": "Fazil Bey Coffee",
+            "en": "Maple Street Coffee",
             "tr": "Fazıl Bey Kahvesi"
           },
           "font": {
@@ -453,7 +453,7 @@
           "type": "text",
           "key": "note1",
           "default": {
-            "en": "Moda • 11:00",
+            "en": "Harbor Walk • 11:00",
             "tr": "Moda • 11:00"
           },
           "font": {
@@ -643,7 +643,7 @@
           "type": "text",
           "key": "place2",
           "default": {
-            "en": "Moda Seaside",
+            "en": "Harbor Walk",
             "tr": "Moda Sahili"
           },
           "font": {
@@ -674,7 +674,7 @@
           "type": "text",
           "key": "note2",
           "default": {
-            "en": "Kadikoy • 19:45",
+            "en": "Riverside • 19:45",
             "tr": "Kadıköy • 19:45"
           },
           "font": {
@@ -725,7 +725,7 @@
       "type": "text",
       "key": "guideTitle",
       "default": {
-        "en": "ISTANBUL GUIDE",
+        "en": "CITY GUIDE",
         "tr": "İSTANBUL REHBERİ"
       },
       "font": {

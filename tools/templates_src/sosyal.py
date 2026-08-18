@@ -236,7 +236,7 @@ def weekly_recap():
     grid.add(text("g-title", "gTitle", "İki şehir, bir hafta", "Two cities, one week",
                   0.046, y=0.79, w=0.82, h=0.09, font="AvenirNext-Bold",
                   start=0.6, anims=[slide_in("up", 0.04, 0.55)]))
-    grid.add(text("g-note", "gNote", "İzmir ve Ankara", "Izmir and Ankara", 0.022,
+    grid.add(text("g-note", "gNote", "İzmir ve Ankara", "Denver and Austin", 0.022,
                   y=0.87, w=0.7, h=0.04, font="AvenirNext-Regular",
                   role="textSecondary", start=0.9, anims=[fade_in(0.5)]))
 
@@ -330,12 +330,12 @@ def city_guide():
                  palette=PALETTES["ocean"], pro=False)
 
     stops = [
-        ("KAHVALTI", "BREAKFAST", "Van Kahvaltı Evi", "Van Breakfast House",
-         "Kadıköy • 08:30", "Kadikoy • 08:30", "up"),
-        ("KAHVE", "COFFEE", "Fazıl Bey Kahvesi", "Fazil Bey Coffee",
-         "Moda • 11:00", "Moda • 11:00", "left"),
-        ("GÜN BATIMI", "SUNSET", "Moda Sahili", "Moda Seaside",
-         "Kadıköy • 19:45", "Kadikoy • 19:45", "down"),
+        ("KAHVALTI", "BREAKFAST", "Van Kahvaltı Evi", "Corner Breakfast House",
+         "Kadıköy • 08:30", "Riverside • 08:30", "up"),
+        ("KAHVE", "COFFEE", "Fazıl Bey Kahvesi", "Maple Street Coffee",
+         "Moda • 11:00", "Harbor Walk • 11:00", "left"),
+        ("GÜN BATIMI", "SUNSET", "Moda Sahili", "Harbor Walk",
+         "Kadıköy • 19:45", "Riverside • 19:45", "down"),
     ]
 
     for i, (ltr, len_, ptr, pen, ntr, nen, direction) in enumerate(stops):
@@ -364,7 +364,7 @@ def city_guide():
                    start=0.65, anims=[fade_in(0.5)]))
 
     t.add(scrim("guide-veil", direction="up", y=0.10, h=0.20))
-    t.add(text("guide-title", "guideTitle", "İSTANBUL REHBERİ", "ISTANBUL GUIDE",
+    t.add(text("guide-title", "guideTitle", "İSTANBUL REHBERİ", "CITY GUIDE",
                0.028, y=0.075, w=0.8, h=0.05, font="AvenirNext-DemiBold",
                caps=True, tracking=0.016, start=0.3, anims=[fade_in(0.6)]))
     return t
@@ -430,7 +430,7 @@ def sunset_diary():
                start=0.4, anims=[slide_in("up", 0.04, 0.7)]))
     t.add(shape("sun-dash", "accent", y=0.845, w=0.08, h=0.005,
                 start=1.0, anims=[wipe("right", 0.5)]))
-    t.add(text("sun-place", "sunPlace", "ÖLÜDENİZ, FETHİYE", "OLUDENIZ, TURKEY", 0.022,
+    t.add(text("sun-place", "sunPlace", "ÖLÜDENİZ, FETHİYE", "AMALFI, ITALY", 0.022,
                y=0.895, w=0.72, h=0.04, font="AvenirNext-DemiBold",
                role="accent", caps=True, tracking=0.014,
                start=1.15, anims=[fade_in(0.6)]))
@@ -444,7 +444,7 @@ def road_trip():
                  palette=PALETTES["sand"], pro=True)
 
     legs = [
-        ("start", 2.3, "whip", 0.3, "KM 0 • İZMİR", "KM 0 • IZMIR",
+        ("start", 2.3, "whip", 0.3, "KM 0 • İZMİR", "MILE 0 • DENVER",
          "Yola çıkıyoruz", "Hitting the road", "left"),
         ("road", 2.4, "slideLeft", 0.4, "KM 148 • ÇEŞME YOLU", "KM 148 • COAST ROAD",
          "Cam açık, müzik açık", "Windows down, music up", "up"),
@@ -538,7 +538,7 @@ def birthday_wish():
     t.add(text("bd-title", "bdTitle", "İYİ Kİ DOĞDUN", "HAPPY BIRTHDAY", 0.058,
                y=0.635, w=0.86, h=0.10, font="AvenirNext-Heavy", caps=True,
                tracking=0.006, start=0.6, anims=[pop(1.1, 0.55)]))
-    t.add(text("bd-wish", "bdWish", "Nice mutlu yıllara Elif!", "Many happy returns, Elif!",
+    t.add(text("bd-wish", "bdWish", "Nice mutlu yıllara Elif!", "Many happy returns, Mia!",
                0.024, y=0.75, w=0.76, h=0.045, font="AvenirNext-Medium",
                role="textSecondary", start=0.85, anims=[slide_in("up", 0.03, 0.5)]))
 

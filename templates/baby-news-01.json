@@ -255,7 +255,7 @@
       "type": "text",
       "key": "name",
       "default": {
-        "en": "Deniz",
+        "en": "Noah",
         "tr": "Deniz"
       },
       "font": {

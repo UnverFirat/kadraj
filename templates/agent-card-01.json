@@ -191,7 +191,7 @@
       "type": "text",
       "key": "name",
       "default": {
-        "en": "Elif Demir",
+        "en": "Claire Bennett",
         "tr": "Elif Demir"
       },
       "font": {
@@ -413,7 +413,7 @@
       "type": "text",
       "key": "row2",
       "default": {
-        "en": "212 Bagdat Ave, Kadıköy",
+        "en": "212 Maple Avenue, Riverside",
         "tr": "Bağdat Cad. No:212, Kadıköy"
       },
       "font": {
@@ -508,7 +508,7 @@
       "type": "text",
       "key": "row3",
       "default": {
-        "en": "elif@meridianrealty.com",
+        "en": "claire@meridianrealty.com",
         "tr": "elif@meridyenemlak.com"
       },
       "font": {

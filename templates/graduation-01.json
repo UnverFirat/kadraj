@@ -211,7 +211,7 @@
       "type": "text",
       "key": "name",
       "default": {
-        "en": "Ayşe Yılmaz",
+        "en": "Sofia Reyes",
         "tr": "Ayşe Yılmaz"
       },
       "font": {
@@ -242,7 +242,7 @@
       "type": "text",
       "key": "school",
       "default": {
-        "en": "University of Istanbul · Architecture",
+        "en": "State University · Architecture",
         "tr": "İstanbul Üniversitesi · Mimarlık"
       },
       "font": {

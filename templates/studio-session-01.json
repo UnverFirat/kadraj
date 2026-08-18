@@ -705,7 +705,7 @@
           "type": "text",
           "key": "closingHandle",
           "default": {
-            "en": "@mertkaya.music",
+            "en": "@milescarter.music",
             "tr": "@mertkaya.music"
           },
           "font": {

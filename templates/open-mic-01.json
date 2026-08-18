@@ -178,7 +178,7 @@
       "type": "text",
       "key": "when",
       "default": {
-        "en": "Tuesdays 8:30 PM · Kadıköy",
+        "en": "Tuesdays 8:30 PM · Riverside",
         "tr": "Salı 20:30 · Kadıköy"
       },
       "font": {
@@ -209,7 +209,7 @@
       "type": "text",
       "key": "venue",
       "default": {
-        "en": "Mikrofon Coffee · 41 Moda Ave",
+        "en": "Corner Coffee · 41 Maple Ave",
         "tr": "Mikrofon Kahve · Moda Cad. No:41"
       },
       "font": {

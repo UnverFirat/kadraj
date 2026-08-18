@@ -357,7 +357,7 @@ def property_specs():
     t.add(text("title", "title", "Deniz Manzaralı Daire", "Sea-View Apartment", 0.05,
                y=0.625, w=0.86, h=0.08, font="Georgia-Bold",
                start=0.5, anims=[slide_in("up", 0.03, 0.6)]))
-    t.add(text("sub", "sub", "Kiralık · Konak, İzmir", "For rent · Konak, İzmir", 0.022,
+    t.add(text("sub", "sub", "Kiralık · Konak, İzmir", "For rent · Midtown, Denver", 0.022,
                y=0.695, w=0.8, h=0.04, font="AvenirNext-Regular",
                role="textSecondary", start=0.7, anims=[fade_in(0.55)]))
     t.add(shape("rule", "accent", y=0.75, w=0.86, h=0.002, opacity=0.35,

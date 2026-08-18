@@ -233,7 +233,7 @@
           "type": "text",
           "key": "nowSub",
           "default": {
-            "en": "Ayşe & Mehmet · Year one",
+            "en": "Emma & James · Year one",
             "tr": "Ayşe & Mehmet · 1. yıl"
           },
           "font": {

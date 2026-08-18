@@ -155,7 +155,7 @@
       "type": "text",
       "key": "names",
       "default": {
-        "en": "AYSE & MEHMET",
+        "en": "EMMA & JAMES",
         "tr": "AYŞE & MEHMET"
       },
       "font": {
@@ -251,7 +251,7 @@
       "type": "text",
       "key": "place",
       "default": {
-        "en": "Sapanca · Golkoy",
+        "en": "Hudson Valley · New York",
         "tr": "Sapanca · Gölköy"
       },
       "font": {

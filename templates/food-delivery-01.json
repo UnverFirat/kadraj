@@ -136,7 +136,7 @@
       "type": "text",
       "key": "brand",
       "default": {
-        "en": "Lezzet Kitchen",
+        "en": "Harvest Kitchen",
         "tr": "Lezzet Mutfağı"
       },
       "font": {

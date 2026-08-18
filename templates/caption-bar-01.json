@@ -108,7 +108,7 @@
       "type": "text",
       "key": "handle",
       "default": {
-        "en": "@ada.kaya",
+        "en": "@ada.lane",
         "tr": "@ada.kaya"
       },
       "font": {
