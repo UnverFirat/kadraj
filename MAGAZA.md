@@ -8,7 +8,8 @@ kopyala-yapıştır; koda dokunması gereken adımlar `→ kod` ile işaretli.
 > akılda kalır, App Store'da aynı adla bir uygulama görünmüyor; EN'de de
 > telaffuz edilebiliyor). Kodda uygulandı: `AppInfo.displayName`,
 > `CFBundleDisplayName`, filigran metni ve URL şeması (`kadraj://`).
-> Bundle id ve abonelik ürün ID'leri hâlâ `com.storytemplate.*` — bunlar
+> Bundle id ve abonelik ürün ID'leri `com.fireflysoftware.kadraj*` olarak
+> sabitlendi (2026-08-18) — bunlar
 > ASC'ye bağlı, aşağıdaki "Yapılacaklar" bölümünde ayrı karar.
 
 ---
@@ -19,7 +20,7 @@ kopyala-yapıştır; koda dokunması gereken adımlar `→ kod` ile işaretli.
 |---|---|
 | App Store adı (max 30) | `Kadraj: Hikâye Şablonları` (TR) · `Kadraj: Story Templates` (EN) |
 | Alt başlık (max 30) | `Hikâye ve reel şablonları` (TR) · `Story & reel video templates` (EN) |
-| Bundle ID | şu an `com.storytemplate.app` → **karar ver:** `com.kadraj.app` yapılacaksa ASC'de uygulama OLUŞTURULMADAN ÖNCE değiştir (sonra değişmiyor) |
+| Bundle ID | `com.fireflysoftware.kadraj` — **karar verildi (2026-08-18)**, kodda uygulandı. Diğer üç uygulamayla aynı yayıncı öneki (`lumijournal`, `smallstart`, `quarterlyTaxEstimator`). ASC'de uygulama oluşturulduktan sonra DEĞİŞMEZ |
 | SKU | `kadraj-ios-01` |
 | Birincil kategori | Fotoğraf ve Video |
 | İkincil kategori | İş (Business) |
@@ -138,8 +139,8 @@ Abonelik grubu: `Kadraj Pro`
 
 | Ürün | Ürün ID (kodla eşleşmeli) | Süre | Deneme |
 |---|---|---|---|
-| Pro Aylık | `com.storytemplate.pro.monthly` | 1 ay | 3 gün |
-| Pro Yıllık | `com.storytemplate.pro.yearly` | 1 yıl | 3 gün |
+| Pro Aylık | `com.fireflysoftware.kadraj.pro.monthly` | 1 ay | 3 gün |
+| Pro Yıllık | `com.fireflysoftware.kadraj.pro.yearly` | 1 yıl | 3 gün |
 
 > Bundle ID'yi `com.kadraj.*` yapacaksan ürün ID'lerini de **ASC'de ürünleri
 > oluşturmadan önce** değiştir; ürün ID'si sonradan değişmiyor. Kod tarafında

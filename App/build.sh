@@ -18,7 +18,7 @@ HERE="$(cd "$(dirname "$0")" && pwd)"
 cd "$HERE"
 
 DEVICE="${DEVICE:-iPhone 15 Pro}"
-APP_ID="com.storytemplate.app"
+APP_ID="com.fireflysoftware.kadraj"
 DERIVED="build/DerivedData"
 
 RUN=1

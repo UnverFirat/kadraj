@@ -55,13 +55,13 @@
 	<key>TemplateCDNBaseURL</key>
 	<string></string>
 	<!-- Deep link iskeleti: kadraj://sablon/<id> (yönlendirme RootView'da).
-	     CFBundleURLName bundle id'yi taşıyor; o App Store Connect'e bağlı
-	     olduğu için marka adı değişse de sabit kalıyor. -->
+	     CFBundleURLName bundle id'yi taşıyor; ASC'ye bağlı olduğu için
+	     uygulama oluşturulduktan SONRA değişmez. -->
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
 			<key>CFBundleURLName</key>
-			<string>com.storytemplate.app</string>
+			<string>com.fireflysoftware.kadraj</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>kadraj</string>

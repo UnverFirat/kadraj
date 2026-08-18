@@ -6,9 +6,9 @@ MVP hunisi: **şablon seç → medya koy → export → öde.**
 
 > **Ad:** ürün adı **Kadraj** olarak belirlendi (depo adı `kadraj`).
 > `AppInfo.displayName`, `CFBundleDisplayName`, filigran ve URL şeması
-> (`kadraj://`) güncellendi; ikon kaldı. Bundle id (`com.storytemplate.app`)
-> ve abonelik ürün ID'leri App Store Connect'e bağlı olduğu için ayrı bir
-> karar — bkz. [MAGAZA.md](MAGAZA.md). Klasör/proje adları (`App/StoryTemplate/`,
+> (`kadraj://`) güncellendi. Bundle id **`com.fireflysoftware.kadraj`** ve
+> ürün ID'leri `…kadraj.pro.{monthly,yearly}` olarak karara bağlandı
+> (2026-08-18) — bkz. [MAGAZA.md](MAGAZA.md). Klasör/proje adları (`App/StoryTemplate/`,
 > `StoryTemplate.xcodeproj`) yalnızca kaynak düzeni, kullanıcıya görünmüyor.
 >
 > **Mağazaya çıkış:** App Store Connect'in istediği her metin ve cevap
@@ -61,7 +61,7 @@ kullandığı için birden fazla simulator açıkken eski kurulumu test edip
 kaynağı Xcode projesi, yani Xcode'da açtığında ve terminalde koştuğunda aynı şey
 derlenir. TemplateKit projeye **yerel SPM paketi** olarak bağlı (`../TemplateKit`)
 — uygulama gerçek bir modül sınırının arkasında (`import TemplateKit`), eskisi
-gibi tek modülde birleştirilmiyor. Bundle id: `com.storytemplate.app`.
+gibi tek modülde birleştirilmiyor. Bundle id: `com.fireflysoftware.kadraj`.
 
 Şablonlar bundle'a bir Run Script fazıyla **depo `templates/` klasöründen**
 kopyalanır (tek kaynak, `App/Scripts/copy-templates.sh`); bu kopya katalogun
@@ -750,15 +750,16 @@ Yayın öncesi KALAN (kod dışı ya da cihaz/hesap gerektiren):
 
 - [x] **Uygulama adı:** `AppInfo.displayName` / `CFBundleDisplayName` = `Kadraj`,
       filigran varsayılanı `Made with Kadraj`, URL şeması `kadraj://`.
-- [ ] **İkon** (1024×1024 + tüm boyutlar) — ad kesinleştiğine göre üretilebilir.
-- [ ] **Bundle id / ürün ID kararı:** `com.storytemplate.app` ve
-      `com.storytemplate.pro.*` marka adıyla uyumsuz ama ASC'de uygulama
-      oluşturulduktan sonra değişmiyor — oluşturmadan önce karara bağla.
+- [x] **Bundle id / ürün ID kararı (2026-08-18):** `com.fireflysoftware.kadraj`,
+      ürünler `…kadraj.pro.{monthly,yearly}`. Diğer üç uygulamayla aynı yayıncı
+      öneki. Kodda uygulandı; ASC'de uygulama oluşturulduktan sonra değişmez.
+- [x] **İkon** — 1024×1024 commit'li (hikâye kartı destesi + oynat üçgeni).
+      Markaya özel bir işaret istenirse yeniden tasarlanabilir, eksik değil.
 - [ ] **Gizlilik politikası + destek sayfası** yayınlanacak. Sayfalar yazıldı
       ve commit'li (`docs/{gizlilik,kosullar,destek}.html`), `Legal.swift` de
       onları gösteriyor — ama **GitHub Pages ayarı açık değil**: 2026-08-16'da
       üç adres de 404 döndü. Depo ayarlarından Source: `main` / `/docs`.
-- [ ] **App Store Connect:** abonelik grubu + `com.storytemplate.pro.monthly` /
+- [ ] **App Store Connect:** abonelik grubu + `com.fireflysoftware.kadraj.pro.monthly` /
       `.yearly` ürünleri, fiyatlar, deneme, lokalize açıklamalar. Sonra
       `BillingBackend.resolved` varsayılanı `.storeKit` yapılacak.
 - [ ] **Gerçek cihazda export smoke testi** (montajın 2. geçişi simulator'da

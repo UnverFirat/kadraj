@@ -18,7 +18,7 @@ set -euo pipefail
 
 HERE="$(cd "$(dirname "$0")" && pwd)"
 cd "$HERE/.."
-APP_ID="com.storytemplate.app"
+APP_ID="com.fireflysoftware.kadraj"
 OUT="${OUT:-$(mktemp -d)}"
 mkdir -p "$OUT"
 FAILED=0

@@ -27,8 +27,8 @@ public final class StoreKitEntitlementProvider: EntitlementProvider, @unchecked 
         public var monthlyProductID: String
         public var yearlyProductID: String
 
-        public init(monthlyProductID: String = "com.storytemplate.pro.monthly",
-                    yearlyProductID: String = "com.storytemplate.pro.yearly") {
+        public init(monthlyProductID: String = "com.fireflysoftware.kadraj.pro.monthly",
+                    yearlyProductID: String = "com.fireflysoftware.kadraj.pro.yearly") {
             self.monthlyProductID = monthlyProductID
             self.yearlyProductID = yearlyProductID
         }

@@ -10,7 +10,7 @@ import TemplateKit
 /// topladık ki paywall, ayarlar ve mağaza açıklaması aynı şeyi söylesin.
 enum AppInfo {
     /// Kullanıcıya görünen ad. Filigran ve arayüz bunu kullanır.
-    /// `CFBundleDisplayName` ile aynı kalmalı; bundle id (`com.storytemplate.app`)
+    /// `CFBundleDisplayName` ile aynı kalmalı; bundle id (`com.fireflysoftware.kadraj`)
     /// ise mağazaya bağlı olduğu için marka adından bağımsız duruyor.
     static let displayName = "Kadraj"
 

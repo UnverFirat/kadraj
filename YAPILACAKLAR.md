@@ -128,11 +128,12 @@ geri yükleme ve klip ayarları ekranı gibi çok adımlı akışlar.
   içinde koda gömülü sahte fiyatlar, "Ücretsiz denemeyi başlat" gerçek satın alma
   yapmıyor. App Store Connect'te abonelik ürünleri tanımlanmalı; sonra
   `BillingBackend.resolved` varsayılanını `.storeKit` yapmak **benim** işim (tek satır).
-- **İkon + ASC kaydı.** Ad işi bitti (filigran, `CFBundleDisplayName`,
-  `AppInfo.displayName`, deep link `kadraj://` → hepsi Kadraj). Kalan:
-  **bundle id** hâlâ `com.storytemplate.app` — bilinçli dokunulmadı, çünkü
-  ASC'de uygulama oluşturulduktan sonra değişmiyor; `com.kadraj.app` kararını
-  verirsen tek turda değiştiririm. İkon tasarımı ve ASC kaydı sende.
+- **ASC kaydı.** Ad işi bitti (filigran, `CFBundleDisplayName`,
+  `AppInfo.displayName`, deep link `kadraj://` → hepsi Kadraj). Bundle id
+  **`com.fireflysoftware.kadraj`** olarak karara bağlandı ve kodda uygulandı
+  (2026-08-18) — diğer üç uygulamayla aynı yayıncı öneki; ürün ID'leri
+  `…kadraj.pro.{monthly,yearly}`. İkon da var (1024×1024, commit'li).
+  Kalan: ASC'de uygulamayı ve abonelik ürünlerini OLUŞTURMAK — sende.
 - **Gizlilik/destek sayfaları.** GitHub Pages **hâlâ kapalı** — 2026-08-16'da
   `kosullar/gizlilik/destek.html` üçü de 404 döndü. Depo (`UnverFirat/kadraj`)
   ve `docs/*.html` yerinde; eksik olan deponun Pages ayarı: Settings → Pages →
