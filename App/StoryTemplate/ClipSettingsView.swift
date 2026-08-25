@@ -122,16 +122,16 @@ struct ClipSettingsView: View {
             // sheet'i kaydırmak da mümkün olmuyor. Sınırla birlikte tüm
             // kontroller tek ekrana sığıyor.
             //
-            // GENİŞLİK SINIRSIZ BIRAKILMAZ: burada bir zamanlar `maxWidth:
-            // .infinity` vardı ve çerçeveyi ekran genişliğine yayıyordu —
-            // altındaki clip/stroke da o boş kutuya çiziliyor, kullanıcının
-            // fotoğrafı ortada dar bir şerit olarak kalıyordu. Oysa bu ekranın
-            // tek işi "fotoğrafımın neresi videoya girecek" sorusunu
-            // yanıtlamak; çerçeve kadrajın KENDİSİNİ göstermeli. Genişlik
-            // orandan türesin, kutuyu VStack ortalasın.
-            .frame(maxHeight: 330)
+            // SIRA ÖNEMLİ: clip/stroke ORAN KUTUSUNA uygulanır, dıştaki
+            // ortalama çerçevesine değil. Eskiden `.frame(maxWidth: .infinity,
+            // maxHeight: 330)` önce geliyor, yuvarlak köşeli çerçeve o boş
+            // kutuya (ekran genişliğinde) çiziliyordu; kullanıcının fotoğrafı
+            // ortada dar bir şerit gibi duruyor, çerçeve de kadrajı YANLIŞ
+            // gösteriyordu. Oysa bu ekranın tek işi "fotoğrafımın neresi
+            // videoya girecek" sorusunu yanıtlamak.
             .clipShape(RoundedRectangle(cornerRadius: 14))
             .overlay(RoundedRectangle(cornerRadius: 14).stroke(.white.opacity(0.18), lineWidth: 1))
+            .frame(maxWidth: .infinity, maxHeight: 330)
 
             HStack(spacing: 10) {
                 Image(systemName: "hand.draw")
