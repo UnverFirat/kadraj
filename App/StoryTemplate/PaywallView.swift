@@ -31,7 +31,14 @@ struct PaywallView: View {
     var body: some View {
         VStack(spacing: 0) {
             ScrollView {
-                VStack(spacing: 22) {
+                // BOŞLUKLAR SIKI: 393×852'lik bir iPhone'da sheet açılır
+                // açılmaz güven satırlarının sonuncusu ("Videoların yalnızca
+                // cihazında kalır") sabit düğmenin başladığı yerde yarım
+                // kalıyordu. Kaydırınca görünüyordu ama ilk kare kesik bir
+                // satır gösteriyordu — hem de ticari olarak en önemli ekranda,
+                // tam da güven vermesi gereken satırda. Ölçüler bu yüzden
+                // dolgudan ve dikey aralıklardan kısıldı; düğme sabit kaldı.
+                VStack(spacing: 18) {
                     header
                     VStack(alignment: .leading, spacing: 14) {
                         ForEach(benefits, id: \.0) { icon, title, detail in
@@ -52,7 +59,11 @@ struct PaywallView: View {
                     plans
                     reassurance
                 }
-                .padding(24)
+                .padding(.horizontal, 24)
+                .padding(.top, 14)
+                // Kaydırma GEREKEN küçük ekranlarda son satır düğmeye
+                // yapışmasın diye altta biraz nefes payı kalır.
+                .padding(.bottom, 12)
             }
             footer
         }
@@ -86,7 +97,7 @@ struct PaywallView: View {
             Image(systemName: "crown.fill")
                 .font(.system(size: 34))
                 .foregroundStyle(Color(hex: "#F2C14E"))
-                .padding(.top, 12)
+                .padding(.top, 4)
             Text("Pro'ya geç")
                 .font(.system(size: 28, weight: .bold))
             Text(reason ?? "Tüm şablonlar, tüm müzikler, filigransız video")
@@ -196,7 +207,7 @@ struct PaywallView: View {
     }
 
     private var footer: some View {
-        VStack(spacing: 10) {
+        VStack(spacing: 9) {
             Button {
                 guard let product = store.products.first(where: { $0.plan == selected })
                 else { return }
@@ -254,7 +265,7 @@ struct PaywallView: View {
             .font(.system(size: 10, weight: .medium))
             .foregroundStyle(.white.opacity(0.5))
         }
-        .padding(.horizontal, 24).padding(.bottom, 16)
+        .padding(.horizontal, 24).padding(.bottom, 10)
     }
 
     /// Plan satırının ikinci satırı. Mağazadan gelen `periodText` MOTOR

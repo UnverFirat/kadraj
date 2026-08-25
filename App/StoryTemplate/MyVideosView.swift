@@ -113,30 +113,46 @@ private struct VideoCard: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-            ZStack(alignment: .bottomLeading) {
-                RoundedRectangle(cornerRadius: 16).fill(.white.opacity(0.08))
-                if let image = UIImage(contentsOfFile: poster.path) {
-                    Image(uiImage: image)
-                        .resizable().aspectRatio(contentMode: .fill)
-                } else {
-                    Image(systemName: "film").font(.title)
-                        .foregroundStyle(.white.opacity(0.4))
+            // KARTIN ÖLÇÜSÜNÜ POSTER DEĞİL, IZGARA SÜTUNU BELİRLER.
+            //
+            // Oranı eskiden posteri de içeren ZStack taşıyordu. `aspectRatio
+            // (contentMode: .fill)` yapan bir Image, kendisine önerilen kutudan
+            // BÜYÜK bir ölçü bildirir (dolduracak kadar); ZStack o ölçüye
+            // büyüyünce dıştaki `.aspectRatio(.fit)` de, `.clipShape` de
+            // kurtarmıyordu — kart sütun genişliğini aşıyor, LazyVGrid ekranın
+            // dışına taşıyordu. 9:16 posterlerde fark edilmiyordu; 9:16 OLMAYAN
+            // bir poster (farklı oran çıktıları: 4:5, 1:1) tek başına ızgaranın
+            // tamamını kaydırıyordu.
+            //
+            // Artık oranı boş bir kutu taşır, poster onun ÜSTÜNE binen bir
+            // katmandır: overlay içeriği kabın ölçüsünü hiçbir koşulda
+            // değiştiremez, taşan kısmı clipShape kırpar.
+            Color.white.opacity(0.08)
+                .aspectRatio(9.0 / 16.0, contentMode: .fit)
+                .overlay {
+                    if let image = UIImage(contentsOfFile: poster.path) {
+                        Image(uiImage: image)
+                            .resizable().aspectRatio(contentMode: .fill)
+                    } else {
+                        Image(systemName: "film").font(.title)
+                            .foregroundStyle(.white.opacity(0.4))
+                    }
                 }
                 // Oynat rozeti KÖŞEDE durur. Ortadaki büyük daire, kullanıcının
                 // kendi videosunun tam da en önemli yerini (başlığını, yüzünü)
                 // kapatıyordu — oysa bu ızgarada bakılacak şey işin kendisi.
-                HStack(spacing: 4) {
-                    Image(systemName: "play.fill").font(.system(size: 8, weight: .bold))
-                    Text("\(String(format: "%.0f", item.duration)) sn")
-                        .font(.system(size: 10, weight: .semibold))
+                .overlay(alignment: .bottomLeading) {
+                    HStack(spacing: 4) {
+                        Image(systemName: "play.fill").font(.system(size: 8, weight: .bold))
+                        Text("\(String(format: "%.0f", item.duration)) sn")
+                            .font(.system(size: 10, weight: .semibold))
+                    }
+                    .foregroundStyle(.white)
+                    .padding(.horizontal, 7).padding(.vertical, 4)
+                    .background(.black.opacity(0.55), in: Capsule())
+                    .padding(8)
                 }
-                .foregroundStyle(.white)
-                .padding(.horizontal, 7).padding(.vertical, 4)
-                .background(.black.opacity(0.55), in: Capsule())
-                .padding(8)
-            }
-            .aspectRatio(9.0 / 16.0, contentMode: .fit)
-            .clipShape(RoundedRectangle(cornerRadius: 16))
+                .clipShape(RoundedRectangle(cornerRadius: 16))
 
             VStack(alignment: .leading, spacing: 2) {
                 Text(item.templateName)
@@ -146,6 +162,9 @@ private struct VideoCard: View {
                     .font(.system(size: 12))
                     .foregroundStyle(.secondary)
             }
+            // Uzun şablon adı da sütunu genişletmesin: metin kırpılır, kart
+            // yerinde kalır.
+            .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.top, 8)
         }
     }

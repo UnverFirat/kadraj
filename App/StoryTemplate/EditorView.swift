@@ -178,6 +178,9 @@ struct EditorView: View {
                     .padding(.top, 6)
 
                 editPanel(height: panelHeight(for: geo.size.height))
+                    // Metin sekmesine geçerken panel büyüyor; sahne bu yüzden
+                    // küçülüyor. Zıplamasın diye animasyonlu.
+                    .animation(.easeInOut(duration: 0.22), value: panel)
                 actionBar
             }
             .frame(width: geo.size.width, height: geo.size.height)
@@ -403,7 +406,17 @@ struct EditorView: View {
                     photos: photos, videos: videos,
                     crops: crops, starts: starts, speeds: speeds,
                     accentHex: accent, musicTrackID: music?.id,
-                    useOriginalAudio: useOriginalAudio)
+                    useOriginalAudio: useOriginalAudio,
+                    hasEdits: hasEdits)
+    }
+
+    /// Kullanıcı şablonun HAZIR halinden ayrıldı mı? Medyasız şablonlarda
+    /// taslağın kaydedilip kaydedilmeyeceğini bu belirler: sadece açıp kapatan
+    /// kullanıcının galerisi "Devam et" kartlarıyla dolmasın, ama yazdığı
+    /// menüyü de kaybetmesin.
+    private var hasEdits: Bool {
+        texts != project.texts || !textStyles.isEmpty || accent != nil
+            || music?.id != project.template.audio?.defaultTrackId || useOriginalAudio
     }
 
     /// Taslağı bırakıp şablonun temiz haline dön.
@@ -459,8 +472,23 @@ struct EditorView: View {
 
     /// Panel yüksekliği ekran boyuna göre. SE gibi kısa cihazlarda panel
     /// küçülür ki sahne tamamen ezilmesin.
+    ///
+    /// METİN SEKMESİ İSTİSNADIR. Sabit 182 pt'lik panelde aynı anda YALNIZ ~2
+    /// metin alanı görünüyordu; `playlist-card-01`'de 16, `class-schedule-01`'de
+    /// 15 alan var — kullanıcı 500 pt'lik bir sahnenin altındaki iki satırlık
+    /// gözetleme deliğinden sekiz kez kaydırarak yazıyordu. Panel alan sayısı
+    /// kadar (bir yere kadar) büyür.
+    ///
+    /// SAHNENİN TABANI KORUNUR: bu düzende sahne ESNEK, kardeşleri SABİT
+    /// yükseklikli — panel büyüdükçe sahne kendiliğinden küçülüyor. Tavan
+    /// `available`'ın oranına bağlandı ki 9:16 kadraj hiçbir cihazda
+    /// okunamayacak kadar ezilmesin (bu tuzağa bir kez düşüldü: kadraj 430 pt
+    /// ekranda 174 pt'ye inmişti).
     private func panelHeight(for available: CGFloat) -> CGFloat {
-        available < 620 ? 148 : 182
+        let base: CGFloat = available < 620 ? 148 : 182
+        guard panel == .text, editableTextKeys.count > 2 else { return base }
+        let wanted = base + CGFloat(min(editableTextKeys.count - 2, 4)) * 46
+        return min(wanted, max(base, available * 0.40))
     }
 
     /// Geçici klasördeki export'u kalıcı kütüphaneye alır ve kalıcı dosyayı verir.
@@ -768,11 +796,15 @@ struct EditorView: View {
                        message: String(localized: "Bu şablonda düzenlenecek metin yok"))
         } else {
             ScrollView {
+                // Başlıklar liste başına BİR KEZ: `fieldLabels` tüm alanları
+                // birlikte çözüyor, satır satır sormak onu her satırda baştan
+                // hesaplatırdı.
+                let labels = fieldLabels
                 VStack(alignment: .leading, spacing: 10) {
                     ForEach(Array(editableTextKeys.enumerated()), id: \.element) { index, key in
                         VStack(alignment: .leading, spacing: 3) {
                             HStack(spacing: 6) {
-                                Text(fieldLabel(key, index: index))
+                                Text(labels[key] ?? String(localized: "Metin \(index + 1)"))
                                     .font(.system(size: 11))
                                     .foregroundStyle(.white.opacity(0.5))
                                 Spacer()
@@ -1067,11 +1099,28 @@ struct EditorView: View {
                     // ("TAKİPTE KAL", "Mercimek Çorbası" okunmuyordu). Kart bir
                     // söz veriyor, editör o sözü kendi butonuyla kapatıyordu.
                     // Artık hap şablonun METİN BLOKLARINDAN uzak bir şeride durur.
-                    GeometryReader { geo in
-                        previewButton
-                            .frame(maxWidth: .infinity)
-                            .position(x: geo.size.width / 2,
-                                      y: geo.size.height * stageActionAnchor)
+                    if let anchor = stageActionAnchor {
+                        GeometryReader { geo in
+                            previewButton
+                                .frame(maxWidth: .infinity)
+                                .position(x: geo.size.width / 2,
+                                          y: geo.size.height * anchor)
+                        }
+                    } else {
+                        // Boş şerit yok: düğme tasarımın ÜSTÜNE binmek yerine
+                        // alta demirler ve altına ince bir perde alır — böylece
+                        // şablonun bir parçası değil, bir KONTROL gibi okunur.
+                        VStack(spacing: 0) {
+                            Spacer(minLength: 0)
+                            previewButton
+                                .frame(maxWidth: .infinity)
+                                .padding(.bottom, 12)
+                                .background {
+                                    LinearGradient(colors: [.clear, .black.opacity(0.55)],
+                                                   startPoint: .top, endPoint: .bottom)
+                                        .allowsHitTesting(false)
+                                }
+                        }
                     }
                 }
             }
@@ -1116,14 +1165,19 @@ struct EditorView: View {
     /// neredeyse her zaman üstte/ortada duruyor. (Medya slotunun merkezine
     /// hizalamak denendi ve işe YARAMADI: slot çoğu şablonda tam kadraj,
     /// merkezi de tam başlığın üstüne düşüyor.)
-    private var stageActionAnchor: Double {
+    /// Boş şerit bulunamazsa `nil` — düğme o zaman sahnenin ALTINA demirler
+    /// (bkz. `previewButton` kullanımı). Yazı tabanlı şablonlarda (menü, ders
+    /// programı, liste) tasarım kadrajın tamamını dolduruyor: üç aday şeridin
+    /// üçü de doluyken eskiden yine 0.78'e dönülüyordu ve düğme "Kestaneli
+    /// Latte ₺120" satırının üstüne oturuyordu.
+    private var stageActionAnchor: Double? {
         let bands = textBands
         let margin = 0.07
         for candidate in [0.78, 0.24, 0.5] {
             let clash = bands.contains { $0.min < candidate + margin && candidate - margin < $0.max }
             if !clash { return candidate }
         }
-        return 0.78
+        return nil
     }
 
     /// İlk karede görünen metin katmanlarının dikey aralıkları (0-1).
@@ -1167,7 +1221,18 @@ struct EditorView: View {
                             // Boş projede montajın SON sahnesi çoğu şablonda
                             // yalnız kapanış yazısı taşıyor; ilk sahne düzeni
                             // daha iyi anlatır.
-                            progress: hasMedia ? 0.75 : 0.15,
+                            //
+                            // AMA bu gerekçe yalnız MEDYA BEKLEYEN şablonlar
+                            // için geçerli. Yazı tabanlı 17 şablonda (menü,
+                            // ders programı, valiz listesi…) `hasMedia` HİÇ
+                            // true olmuyor, yani sahne kalıcı olarak sürenin
+                            // %15'inde donuyordu: `drinks-list-01` dört menü
+                            // kaleminin ikisini gösterip altını boş bırakıyor,
+                            // kullanıcı "Önizle"ye basıp render bekleyene kadar
+                            // tasarımın doğru halini hiç görmüyordu. O
+                            // şablonlarda beklenen kare, her şeyin sahnede
+                            // olduğu geç andır.
+                            progress: !needsMedia ? 0.9 : (hasMedia ? 0.75 : 0.15),
                             // Editörde boş slot bir EKSİKTİR: soyut bir sahneyle
                             // doluymuş gibi gösterilmemeli.
                             placeholder: .hint,
@@ -1550,8 +1615,16 @@ struct EditorView: View {
         return keys.isEmpty ? Array(texts.keys).sorted() : keys
     }
 
+    /// Alan başlıkları TEK SEFERDE hesaplanır: sıralı bir alanın kaçıncı
+    /// olduğu ve `a-label` gibi çift anlamlı id'lerin hangi işi anlattığı
+    /// KOMŞU alanlara bakılarak çözülüyor (bkz. `TextFieldLabels.labels`).
+    /// Alan alan sormak o bağlamı kaybettiriyordu.
+    private var fieldLabels: [String: String] {
+        TextFieldLabels.labels(forLayerIDs: editableTextKeys)
+    }
+
     private func fieldLabel(_ key: String, index: Int) -> String {
-        TextFieldLabels.label(forLayerID: key, fallbackIndex: index)
+        fieldLabels[key] ?? String(localized: "Metin \(index + 1)")
     }
 
     /// Stil düğmesinin etiketi: dokunulmuşsa neyin değiştiğini söyler.

@@ -121,7 +121,15 @@ struct ClipSettingsView: View {
             // üstelik alan kaydırma jestini kadrajlama için yuttuğu için
             // sheet'i kaydırmak da mümkün olmuyor. Sınırla birlikte tüm
             // kontroller tek ekrana sığıyor.
-            .frame(maxWidth: .infinity, maxHeight: 330)
+            //
+            // GENİŞLİK SINIRSIZ BIRAKILMAZ: burada bir zamanlar `maxWidth:
+            // .infinity` vardı ve çerçeveyi ekran genişliğine yayıyordu —
+            // altındaki clip/stroke da o boş kutuya çiziliyor, kullanıcının
+            // fotoğrafı ortada dar bir şerit olarak kalıyordu. Oysa bu ekranın
+            // tek işi "fotoğrafımın neresi videoya girecek" sorusunu
+            // yanıtlamak; çerçeve kadrajın KENDİSİNİ göstermeli. Genişlik
+            // orandan türesin, kutuyu VStack ortalasın.
+            .frame(maxHeight: 330)
             .clipShape(RoundedRectangle(cornerRadius: 14))
             .overlay(RoundedRectangle(cornerRadius: 14).stroke(.white.opacity(0.18), lineWidth: 1))
 

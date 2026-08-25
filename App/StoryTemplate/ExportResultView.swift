@@ -42,8 +42,11 @@ struct ExportResultView<Overlay: View>: View {
     @State private var player: AVPlayer?
     /// Hangi oran hazırlanıyor (nil = yok).
     @State private var reframing: AspectReframer.Preset?
-    /// Üretilmiş oranlar — aynı oranı iki kez üretmeye gerek yok.
-    @State private var reframed: Set<String> = []
+    /// EKRANDA gösterilen oran (nil = şablonun kendi 9:16 çıktısı).
+    @State private var activePreset: AspectReframer.Preset?
+    /// Üretilmiş oranların kütüphanedeki KALICI dosyaları. Aynı oranı ikinci
+    /// kez seçmek yeniden render değil, eldekine geçiş demek.
+    @State private var reframedURLs: [String: URL] = [:]
     @State private var loopToken: NSObjectProtocol?
     @State private var isSaving = false
     @State private var saveMessage: String?
@@ -70,7 +73,9 @@ struct ExportResultView<Overlay: View>: View {
                         Color.black
                     }
                 }
-                .aspectRatio(9.0 / 16.0, contentMode: .fit)
+                // Oran seçiliyse SAHNE de o orana geçer — kullanıcı neyi
+                // paylaşacağını görmeden seçmiş olmasın.
+                .aspectRatio(shownRatio, contentMode: .fit)
                 .clipShape(RoundedRectangle(cornerRadius: 20))
                 .frame(maxHeight: .infinity)
 
@@ -92,10 +97,21 @@ struct ExportResultView<Overlay: View>: View {
         }
         .overlay(alignment: .topTrailing) { closeButton }
         .preferredColorScheme(.dark)
-        .sheet(isPresented: $showShare) { ShareSheet(items: [url]) }
-        .onAppear { start() }
+        .sheet(isPresented: $showShare) { ShareSheet(items: [shownURL]) }
+        .onAppear { play(shownURL) }
+        // Oran değişince oynatıcı da değişir: Kaydet/Paylaş ile ekrandaki
+        // görüntü ASLA farklı dosyayı göstermesin.
+        .onChange(of: shownURL) { _, target in play(target) }
         .onDisappear { stop() }
     }
+
+    /// Ekranın (oynatıcının, Kaydet'in, Paylaş'ın) hedefi. Seçili oran yoksa
+    /// şablonun kendi 9:16 çıktısı.
+    private var shownURL: URL {
+        activePreset.flatMap { reframedURLs[$0.rawValue] } ?? url
+    }
+
+    private var shownRatio: Double { activePreset?.ratio ?? 9.0 / 16.0 }
 
     // MARK: - Parçalar
 
@@ -252,78 +268,122 @@ struct ExportResultView<Overlay: View>: View {
             .stroke(Color(hex: "#F2C14E").opacity(0.35), lineWidth: 1))
     }
 
-    /// FARKLI ORAN. Şablonlar 9:16 (hikâye) için tasarlandı, ama kullanıcı aynı
+    /// ORAN SEÇİCİ. Şablonlar 9:16 (hikâye) için tasarlandı, ama kullanıcı aynı
     /// işi gönderi ve kare olarak da paylaşmak istiyor. Tasarımı yeniden dizmek
     /// yerine biten video yeni kadraja oturtuluyor; artan alanı kendi bulanık
     /// kopyası dolduruyor (bkz. AspectReframer) — tasarım hiç bozulmuyor.
+    ///
+    /// Bu satır eskiden yalnızca ÜRETİYORDU: "Videolarım'a eklendi" yazıyor ama
+    /// ekrandaki oynatıcı 9:16 kalıyor, altındaki Kaydet/Paylaş da 9:16 dosyayı
+    /// veriyordu. Kullanıcı 4:5 seçtiğini sanıp hikâye videosunu paylaşıyordu —
+    /// yani düğme sessizce YANLIŞ dosyayı gönderiyordu. Artık seçim ekranı
+    /// değiştirir, "Hikâye 9:16" da bir seçenektir ve geri dönülebilir.
     private var aspectRow: some View {
         HStack(spacing: 8) {
             Image(systemName: "aspectratio")
                 .font(.system(size: 11))
                 .foregroundStyle(.white.opacity(0.45))
-            Text("Farklı oran:")
+            Text("Oran:")
                 .font(.system(size: 11))
                 .foregroundStyle(.white.opacity(0.45))
+            aspectChip(nil)
             ForEach(AspectReframer.Preset.allCases, id: \.rawValue) { preset in
-                Button {
-                    Haptics.tap()
-                    reframe(preset)
-                } label: {
-                    HStack(spacing: 5) {
-                        if reframing == preset {
-                            ProgressView().tint(.white).scaleEffect(0.55)
-                        } else if reframed.contains(preset.rawValue) {
-                            Image(systemName: "checkmark")
-                                .font(.system(size: 9, weight: .bold))
-                        }
-                        Text(Self.title(for: preset))
-                            .font(.system(size: 11, weight: .semibold))
-                    }
-                    .foregroundStyle(.white.opacity(0.9))
-                    .padding(.horizontal, 10).padding(.vertical, 6)
-                    .background(.white.opacity(0.12), in: Capsule())
-                }
-                .buttonStyle(.plain)
-                .disabled(reframing != nil)
+                aspectChip(preset)
             }
         }
     }
 
-    static func title(for preset: AspectReframer.Preset) -> String {
+    private func aspectChip(_ preset: AspectReframer.Preset?) -> some View {
+        let isActive = activePreset == preset
+        return Button {
+            Haptics.select()
+            select(preset)
+        } label: {
+            HStack(spacing: 5) {
+                if preset != nil, reframing == preset {
+                    ProgressView().tint(.black).scaleEffect(0.55)
+                }
+                Text(Self.title(for: preset))
+                    .font(.system(size: 11, weight: .semibold))
+            }
+            .foregroundStyle(isActive ? .black : .white.opacity(0.9))
+            .padding(.horizontal, 10).padding(.vertical, 6)
+            .background(isActive ? AnyShapeStyle(Color(hex: accentHex))
+                                 : AnyShapeStyle(.white.opacity(0.12)),
+                        in: Capsule())
+        }
+        .buttonStyle(.plain)
+        .disabled(reframing != nil)
+    }
+
+    static func title(for preset: AspectReframer.Preset?) -> String {
         switch preset {
+        case .none: return String(localized: "Hikâye 9:16")
         case .post: return String(localized: "Gönderi 4:5")
         case .square: return String(localized: "Kare 1:1")
         }
     }
 
-    /// Videoyu istenen orana çevirip kütüphaneye ekler.
-    private func reframe(_ preset: AspectReframer.Preset) {
+    /// Oran seçimi: eldeki çıktı varsa ANINDA geçer, yoksa üretir.
+    private func select(_ preset: AspectReframer.Preset?) {
         guard reframing == nil else { return }
-        reframing = preset
+        // Yeni dosyaya geçiliyor: "Fotoğraflar'a kaydedildi" durumu bu dosya
+        // için geçerli değil.
+        savedToPhotos = false
         saveMessage = nil
+        guard let preset else {
+            activePreset = nil
+            return
+        }
+        if reframedURLs[preset.rawValue] != nil {
+            activePreset = preset
+            return
+        }
+        reframe(preset)
+    }
+
+    /// Videoyu istenen orana çevirip kütüphaneye ekler ve ekranı ona geçirir.
+    private func reframe(_ preset: AspectReframer.Preset) {
+        reframing = preset
         Task {
             let output = FileManager.default.temporaryDirectory
                 .appendingPathComponent("reframe-\(UUID().uuidString)-\(preset.fileSuffix).mp4")
-            do {
-                _ = try await AspectReframer.render(source: url, preset: preset,
-                                                    outputURL: output)
-                let duration = try await AVURLAsset(url: output).load(.duration).seconds
-                exports.add(videoAt: output, templateID: templateID,
-                            templateName: "\(templateName) · \(Self.title(for: preset))",
-                            duration: duration)
-                try? FileManager.default.removeItem(at: output)
-                reframed.insert(preset.rawValue)
+            let stored = await renderAndStore(preset, at: output)
+            try? FileManager.default.removeItem(at: output)
+            if let stored {
+                reframedURLs[preset.rawValue] = stored
+                activePreset = preset
                 Haptics.success()
                 withAnimation {
                     saveMessage = String(localized: "\(Self.title(for: preset)) çıktısı Videolarım'a eklendi")
                 }
-            } catch {
+            } else {
                 Haptics.warning()
                 withAnimation {
                     saveMessage = String(localized: "Bu oran hazırlanamadı. Tekrar dener misin?")
                 }
             }
             reframing = nil
+        }
+    }
+
+    /// Yeni oranı üretip kütüphaneye yazar; dönen URL KALICI kopyanın yeri.
+    /// Ekranın oynattığı/paylaştığı dosya bu olmalı — geçici dosya hemen
+    /// siliniyor, oynatıcının elinde kalırsa video ortadan kaybolur.
+    private func renderAndStore(_ preset: AspectReframer.Preset,
+                                at output: URL) async -> URL? {
+        do {
+            _ = try await AspectReframer.render(source: url, preset: preset,
+                                                outputURL: output)
+            let seconds = try await AVURLAsset(url: output).load(.duration).seconds
+            guard let item = exports.add(
+                videoAt: output, templateID: templateID,
+                templateName: "\(templateName) · \(Self.title(for: preset))",
+                duration: seconds)
+            else { return nil }
+            return exports.videoURL(item)
+        } catch {
+            return nil
         }
     }
 
@@ -346,8 +406,12 @@ struct ExportResultView<Overlay: View>: View {
 
     // MARK: - Oynatma / kaydetme
 
-    private func start() {
-        let item = AVPlayer(url: url)
+    /// Oynatıcıyı verilen dosyaya kurar (döngüde). Oran değiştiğinde de
+    /// çağrılır: döngü gözlemcisi item'a bağlı olduğu için oynatıcıyı baştan
+    /// kurmak, aynı oynatıcıya yeni item vermekten daha güvenli.
+    private func play(_ target: URL) {
+        stop()
+        let item = AVPlayer(url: target)
         item.actionAtItemEnd = .none
         loopToken = NotificationCenter.default.addObserver(
             forName: .AVPlayerItemDidPlayToEndTime,
@@ -357,6 +421,9 @@ struct ExportResultView<Overlay: View>: View {
             }
         player = item
         item.play()
+        // Kutlama YALNIZ ilk kurulumda: oran değiştirmek bir "sonuç anı"
+        // değil, bir gözden geçirme.
+        guard !revealed else { return }
         Haptics.success()
         withAnimation(.easeOut(duration: 0.35).delay(0.1)) { revealed = true }
     }
@@ -371,7 +438,7 @@ struct ExportResultView<Overlay: View>: View {
         isSaving = true
         saveMessage = nil
         Task {
-            let outcome = await PhotoSaver.save(videoAt: url)
+            let outcome = await PhotoSaver.save(videoAt: shownURL)
             isSaving = false
             savedToPhotos = outcome == .saved
             outcome == .saved ? Haptics.success() : Haptics.warning()

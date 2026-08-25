@@ -20,7 +20,10 @@ struct GalleryView: View {
         }
         let trimmed = query.trimmingCharacters(in: .whitespaces)
         guard !trimmed.isEmpty else { return result }
-        return result.filter { $0.matches(trimmed) }
+        // Eş anlamlı tablosu sorgu başına BİR kez çözülür, 127 şablon için
+        // ayrı ayrı değil (bkz. TemplateSynonyms).
+        let synonyms = TemplateSynonyms.matching(trimmed)
+        return result.filter { $0.matches(trimmed, synonyms: synonyms) }
     }
 
     var body: some View {
@@ -83,6 +86,22 @@ struct GalleryView: View {
         // aklına gelmeyecek bir yer.
         .refreshable { await library.load() }
         .background(Color.black.ignoresSafeArea())
+        // ÜST GÜVENLİ ALANA PERDE. Izgara durum çubuğunun ve Dynamic
+        // Island'ın ALTINDAN akıyor; hiçbir geçiş olmadığı için kaydırırken
+        // poster ve kart başlıkları saatin arkasında okunmaz hale geliyor,
+        // ekran bozuk görünüyordu. Perde yalnız güvenli alanı kaplar, içeriğe
+        // dolgu eklemez — sayfanın üstündeki büyük başlık yerinde kalır.
+        .overlay(alignment: .top) { topEdgeScrim }
+    }
+
+    private var topEdgeScrim: some View {
+        GeometryReader { geo in
+            LinearGradient(colors: [.black, .black.opacity(0.85), .clear],
+                           startPoint: .top, endPoint: .bottom)
+                .frame(height: geo.safeAreaInsets.top + 8)
+                .ignoresSafeArea(edges: .top)
+        }
+        .allowsHitTesting(false)
     }
 
     /// Süzgeçsiz gezinme: kategori seçili değil ve arama boş.
@@ -373,6 +392,20 @@ struct TemplateCard: View {
         VStack(alignment: .leading, spacing: 0) {
             ZStack(alignment: .topTrailing) {
                 poster
+                // ROZETİN ARKASINA İNCE BİR PERDE. Rozet posterin üstüne
+                // biniyor ve bazı şablonların KENDİ yazısı tam oraya denk
+                // geliyor: `poll-card-01`'de "BU MU, ŞU MU?" başlığı PRO
+                // rozetinin altında kayboluyor, `beauty-before-after-01`'de
+                // posterdeki "ÖNCE" plakası rozetle dip dibe sıkışıyordu.
+                // Perde tek bir şablona özel bir çözüm değil: her kartta aynı
+                // yerde duruyor, rozetsiz kartlarda hiç çizilmiyor.
+                if hasBadge {
+                    LinearGradient(colors: [.black.opacity(0.45), .clear],
+                                   startPoint: .top, endPoint: .bottom)
+                        .frame(height: 64)
+                        .frame(maxHeight: .infinity, alignment: .top)
+                        .allowsHitTesting(false)
+                }
                 // Kartta TEK rozet var.
                 //
                 // Eskiden aynı kartta üç rozet birden olabiliyordu
@@ -405,6 +438,8 @@ struct TemplateCard: View {
             .padding(.top, 8)
         }
     }
+
+    private var hasBadge: Bool { project.template.isPro || project.tags.first != nil }
 
     @ViewBuilder private var badge: some View {
         if project.template.isPro {

@@ -91,10 +91,17 @@ final class DraftStore: ObservableObject {
               crops: [Int: CropTransform], starts: [Int: Double],
               speeds: [Int: Double],
               accentHex: String?, musicTrackID: String?,
-              useOriginalAudio: Bool) -> Draft? {
-        // Hiç medya ve hiç metin değişikliği yoksa taslak yaratmak gürültüdür:
+              useOriginalAudio: Bool,
+              hasEdits: Bool = false) -> Draft? {
+        // Hiç medya ve hiç değişiklik yoksa taslak yaratmak gürültüdür:
         // şablona bakıp çıkan kullanıcının galerisini taslakla doldurmayalım.
-        guard !photos.isEmpty || !videos.isEmpty else {
+        //
+        // AMA ölçüt eskiden YALNIZ medyaydı ve bu, yazı tabanlı şablonlarda
+        // (menü, ders programı, valiz listesi — tam da en çok yazı yazılan
+        // şablonlar) kullanıcının yazdığı her satırı geri tuşuna basınca
+        // çöpe atıyordu; renk seçimi de aynı şekilde kayboluyordu. Medyası
+        // olmayan bir şablonda "iş" metnin kendisidir, `hasEdits` onu söyler.
+        guard !photos.isEmpty || !videos.isEmpty || hasEdits else {
             remove(templateID: templateID)
             return nil
         }
@@ -113,7 +120,10 @@ final class DraftStore: ObservableObject {
                                crop: crops[slot] ?? CropTransform(),
                                start: starts[slot] ?? 0, speed: speeds[slot] ?? 1))
         }
-        guard !slots.isEmpty else { return nil }
+        // Medyasız taslak SADECE bir düzenleme varsa anlamlı (yukarıdaki
+        // gerekçe); medya yazılamadıysa ve ortada düzenleme de yoksa taslak
+        // boş bir kabuk olur.
+        guard !slots.isEmpty || hasEdits else { return nil }
 
         let draft = Draft(templateID: templateID, templateName: templateName,
                           updatedAt: Date(), texts: texts, textStyles: textStyles,
