@@ -482,6 +482,30 @@ def fetch(per, only=None):
     print("Sırada: yüz taraması + gözle eleme → ACCEPTED.txt → --promote")
 
 
+#: `source/` DEPOYA GİRİYOR, `candidates/` girmiyor. Commons kareleri
+#: 4000–6600 piksel iniyor; örnek klipler 1080×1920 üretiliyor. Ham hâlleriyle
+#: 57 fotoğraf 154 MB ediyordu — public bir depoda taşınacak ölü ağırlık.
+#: 2160 uzun kenar, Ken Burns'ün 1,1× yakınlaştırmasına bile fazlasıyla yetiyor
+#: ve toplam 38 MB'a iniyor. Küçültme KOPYALAMA ANINDA yapılır: `promote()`
+#: `source/`ü her seferinde sıfırdan kuruyor, sonradan elle küçültmek bir
+#: sonraki promote'ta geri alınırdı.
+MAX_EDGE = 2160
+JPEG_QUALITY = 88
+
+
+def shrink(source, target):
+    """Adayı en fazla `MAX_EDGE` uzun kenarla `source/`e yazar."""
+    from PIL import Image                       # yalnız promote yolunda gerekli
+    image = Image.open(source).convert("RGB")
+    width, height = image.size
+    if max(width, height) > MAX_EDGE:
+        scale = MAX_EDGE / max(width, height)
+        image = image.resize((round(width * scale), round(height * scale)),
+                             Image.LANCZOS)
+    image.save(target, "JPEG", quality=JPEG_QUALITY,
+               optimize=True, progressive=True)
+
+
 def promote():
     """ACCEPTED.txt'teki kareleri `source/`e taşı ve künyeyi yeniden yaz."""
     manifest = json.loads((STAGE / "manifest.json").read_text())
@@ -506,7 +530,7 @@ def promote():
         kind = name.split("-")[0]
         counters[kind] = counters.get(kind, 0) + 1
         target = f"{kind}-{counters[kind]}.jpg"
-        shutil.copyfile(STAGE / name, OUT / target)
+        shrink(STAGE / name, OUT / target)
         promoted.append((target, manifest[name]))
 
     rejected = rejected_entries()

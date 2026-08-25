@@ -1,0 +1,83 @@
+# Gözle elenmiş vitrin kareleri (2026-08-25). 126 aday tarandı, 55'i geçti.
+#
+# ÖLÇÜT: (1) yüz yok — `detect-faces.swift` bulduğu 22 karenin hepsi elendi,
+# oran küçük olsa bile; (2) okunur MARKA / afiş / fiyat / iletişim metni yok;
+# (3) tarihî sepya tarama, tablo, çizim, uydu görüntüsü değil; (4) 9:16
+# kırpımında konu ayakta kalıyor; (5) türü ADINI hak ediyor (MediaPool
+# kategoriye göre bu adı arıyor — "salon" adlı bir bina fotoğrafı güzellik
+# şablonuna girerse eşleşme yanlış olur).
+#
+# Elenenler ve gerekçeleri: ../source/REJECTED.txt
+
+# — yemek
+food-1.jpg
+food-2.jpg
+dessert-3.jpg
+dessert-4.jpg
+dessert-5.jpg
+dessert-6.jpg
+pour-8.jpg
+cafe-6.jpg
+cafe-7.jpg
+cafe-8.jpg
+cafe-9.jpg
+cafe-10.jpg
+cafe-11.jpg
+
+# — insan varlığı, yüzsüz (vitrinin asıl ihtiyacı)
+hands-1.jpg
+hands-2.jpg
+hands-4.jpg
+write-1.jpg
+
+# — gezi / doğa
+nature-1.jpg
+nature-5.jpg
+nature-6.jpg
+sunset-1.jpg
+sunset-2.jpg
+ocean-1.jpg
+ocean-6.jpg
+forest-1.jpg
+forest-5.jpg
+forest-6.jpg
+city-2.jpg
+city-3.jpg
+
+# — emlak
+house-1.jpg
+house-3.jpg
+house-4.jpg
+
+# — moda / doku
+clothes-2.jpg
+clothes-5.jpg
+shoes-3.jpg
+shoes-4.jpg
+fabric-1.jpg
+fabric-5.jpg
+texture-4.jpg
+texture-7.jpg
+
+# — güzellik
+makeup-2.jpg
+makeup-7.jpg
+makeup-9.jpg
+makeup-10.jpg
+
+# — spor
+gym-3.jpg
+run-2.jpg
+
+# — düğün / özel gün
+flowers-2.jpg
+flowers-3.jpg
+flowers-4.jpg
+flowers-7.jpg
+flowers-8.jpg
+flowers-9.jpg
+flowers-10.jpg
+candle-5.jpg
+
+# — iş / eğitim
+books-1.jpg

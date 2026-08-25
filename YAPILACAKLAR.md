@@ -1,20 +1,75 @@
 # Kadraj — yapılacaklar
 
-2026-08-16. Üç tur iş yapıldı: (1) uçtan uca testin kod tarafındaki bulguları,
-(2) "kullanıcı neden para verir" değerlendirmesinden çıkan kontrol + ritim
-işleri, (3) `KULLANICI-ANALIZI.md` planının P1-yarısı + P2 + P3 + P4-kod
-tarafı. Üçü de **Bitti** bölümlerinde; kalanlar aşağıda.
+2026-08-25. Uygulama temiz kurulumla baştan sona kullanıcı gözüyle gezildi;
+çıkan yerleşim/editör kusurları düzeltildi ve **gerçek fotoğraf havuzu
+tamamlandı** (§0b). 2026-08-16'daki üç tur ve öncesi **Bitti** bölümlerinde.
 
-**Şu an açık olan üç şey** (sırayla):
+**Şu an açık olan iki şey** (sırayla):
 
 1. **P0 — cihaz doğrulaması.** Katalogun %62'si (79 şablon) gerçek cihazda hiç
    denenmedi. Fiziksel iPhone gerekiyor; bu yapılmadan yayın yok (§4.1).
-2. **Gerçek fotoğraf havuzu.** Siluet gitti ama yerine gelen sade gradyan
-   "senin fotoğrafın buraya gelecek" demiyor. Yüzsüz-ama-gerçek kareler
-   (arkadan baş, omuz üstü, çalışan eller) bu işi bitirir — **lisans/model
-   izni kararı sende**.
-3. **Mağaza kaydı ve marka artıkları:** bundle id, ürün ID'leri, ikon,
+2. **Mağaza kaydı ve marka artıkları:** ürün ID'leri, ASC kaydı,
    GitHub Pages (§5).
+
+---
+
+## 0b. Kullanıcı turu + gerçek fotoğraf havuzu — BİTTİ (2026-08-25)
+
+### Vitrin: örnek medya artık gerçek
+`tools/samples/source/` **5 → 55 fotoğraf**; hepsi kamu malı / CC0, künyeleri
+`source/CREDITS.md`'de. Eksik olan şey indirme değil, **gözle eleme turuydu**:
+133 aday indirilmiş ama `ACCEPTED.txt` hiç yazılmamıştı, bu yüzden 127 şablon
+5 fotoğrafla besleniyordu ve katalog sentetik çizimlerle doluydu.
+
+78 kare elendi, gerekçeleri `source/REJECTED.txt`'te (betik bir daha indirmez):
+yüz (22 kare — biri **yüz taramasının kaçırdığı**, gözle yakalanan bir çift
+portre), okunur marka (Nike, Coca-Cola, Clinique, Sony, acer), müze etiketi,
+kartvizit, tarihî sepya tarama, tablo/gravür, patent çizimi, uydu görüntüsü.
+
+**Elemede öğrenilen şey**: kontak baskısının 220 px'lik hücresi kalabalık iç
+mekân karelerinde YANILTIYOR. Temiz görünen bir kafe karesi tam boyda bakınca
+Starbucks mağazası çıktı (okunur kampanya afişi + personel/müşteri yüzleri);
+bir "oturma odası" karesinin duvarındaki çerçevelerde tanınabilir aile
+portreleri vardı. İkisi de promote edilip klibe ve 254 postere girmişti,
+sonradan büyük hücreyle yakalanıp geri alındı. İnsan/metin içerebilecek türler
+(`cafe`, `room`, `shop`, `house`, `books`) promote SONRASI bir kez de tam boyda
+gözden geçirilmeli.
+
+Bunun sonucu, `MediaPool.order(for:)` eşleştirmesine HİÇ dokunmadan düzelen
+uyumsuzluklar: tırnak sanatı (gezegen çizimi → makyaj paleti), saç rengi
+(tabak → palet), spor salonu/antrenman (sokak, boş gri → dambıl), spa (boş
+gradyan → fırçalar), kapsül gardırop (örgü → askılık), emlak (tek sokak
+karesi → iç mekân + ev cepheleri), kahve molası (tabak çizimi → hamur yoğuran
+eller). Eşleştirme zaten doğruydu; eşleşecek fotoğraf yoktu.
+
+**KAYNAK BOYUTU**: Commons kareleri 4000–6600 px iniyor, klipler 1080×1920
+üretiliyor. Ham hâlleriyle 55 fotoğraf 150 MB'ı aşıyordu. `promote()` artık kopyalama
+anında 2160 uzun kenara indiriyor (→ 34 MB). Elle küçültme YAPMA: promote
+`source/`ü her seferinde sıfırdan kuruyor, bir sonraki turda geri alınır.
+
+Hâlâ zayıf türler (Commons'ta CC0 havuzu gerçekten dar): `pet` (tüm adaylar
+tarihî ya da tanınabilir mekân), `nails`, `salon`, `vinyl`, `yoga`. Bu
+şablonlar yedek havuza düşüyor — `pet-star-01` bir kedi şablonu ama tiramisu
+gösteriyor. Çözüm ya lisanslı bir kaynak ya da o şablonların yeniden
+tasarlanması.
+
+### Arayüz: kullanıcı turunda bulunan kusurlar
+Tamamı ekran görüntüsüyle doğrulandı (commit'ler: yerleşim/editör turu +
+kadraj çerçevesi turu).
+
+| Kusur | Ölçüm |
+|---|---|
+| Metin alanları "Metin N" diye görünüyordu | 418/746 (%56), 92 şablon → **0/746** |
+| Arama sıfır sonuç veriyordu | 18/54 sorgu → **0/62** |
+| Videolarım ızgarası ekran dışına taşıyordu | düzeldi |
+| Klip kadraj çerçevesi kadrajı yanlış gösteriyordu | düzeldi |
+| Paywall ilk karede güven satırı kesikti | düzeldi |
+| 4:5 / 1:1 yalnız üretiyor, ekran/paylaşım 9:16 kalıyordu | oran seçici oldu |
+| Yazı tabanlı 17 şablon sürenin %15'inde donuyordu | tasarımın tamamı |
+| Metin sekmesinde aynı anda 2 alan görünüyordu | ~4 alan |
+| Taslak yalnız medya varsa kaydediliyordu | metin + renk + müzik de |
+| Galeri durum çubuğu altından geçiyor, rozet başlığı örtüyordu | perde eklendi |
+| Kart alt satırı: "klip / medya / fotoğraf" karışık | tek kural |
 
 ---
 

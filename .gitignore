@@ -12,9 +12,13 @@ DerivedData/
 templates/previews/
 tools/samples/*.mp4
 tools/contact/
-# Fotoğraf havuzu elemesi: indirilen adaylar (183 MB). Seçilenler
+# Fotoğraf havuzu elemesi: indirilen adaylar (280 MB). Seçilenler
 # tools/samples/source/ altına taşınır ve ORAYA girer.
 tools/samples/candidates/
+# ...ama ELEME KARARI depoda kalır: hangi adayın vitrine girdiğini yalnız bu
+# dosya söylüyor ve `--promote` onu okuyor. Kaybolursa 133 adayın gözle
+# elenmesi baştan yapılır.
+!tools/samples/candidates/ACCEPTED.txt
 
 
 # Xcode kullanıcı durumu (paylaşılan scheme'ler xcshareddata'da, o kalır)
