@@ -10,7 +10,10 @@ verdi** (§0a) — üçü tek bir oynatıcı sızıntısına bağlanıyor.
 **Şu an açık olan üç şey** (sırayla):
 
 1. **Cihaz turu bulguları (§0a).** Oynatıcı sızıntısı, istenmeden başlayan
-   önizleme, susmayan müzik, editörden çıkarken çökme, ısınma.
+   önizleme, susmayan müzik, editörden çıkarken çökme, ısınma. Kod yazıldı;
+   2026-08-27'de simulator'da A ve B doğrulandı ve önizlemeyi yalancı yapan
+   iki bindirme hatası çıktı. **Kalan C–G yalnız telefonda görülebilir;
+   uygulama cihaza kurulu, tur bekliyor.**
 2. **P0 — cihaz doğrulamasının geri kalanı.** Montaj export'unun metinli
    çıktısı, ritim dönüşümü uygulanmış 50 şablon, 4:5/1:1 (§4.1).
 3. **Mağaza kaydı ve marka artıkları:** ürün ID'leri, ASC kaydı,
@@ -70,17 +73,42 @@ Sıradaki oturum buradan devam etmeli.
       `silenceStalePreview()` ekrandaki oynatıcıyı `isMuted = true` yapıyor;
       görüntü kalıyor, yanlış ses gidiyor.
 
-**Simulator'da doğrulanan:** medya eklendiğinde render başlamıyor, sahnede
-kullanıcının kendi fotoğrafı + "Önizle" düğmesi duruyor (ekran görüntüsüyle).
-"Önizle" sonrası bayat hapının çıkışı ekranda GÖRÜLMEDİ — oturum orada kesildi.
+**Simulator'da doğrulanan (2026-08-27):** medya eklendiğinde render
+başlamıyor, sahnede kullanıcının kendi fotoğrafı + "Önizle" düğmesi duruyor;
+"Önizle" tek render veriyor; sonra renk değiştirilince **"Önizlemeyi yenile"
+hapı çıkıyor, video oynamaya devam ediyor ve kendiliğinden render OLMUYOR**;
+hapa basınca "Önizleme yenileniyor…" göstergesi bayat videonun üstünde
+beliriyor. Hepsi ekran görüntüsüyle. Geçen oturumda görülemeyen madde buydu.
+
+### Simulator önizlemesi iki yerde YALAN SÖYLÜYORDU (bulundu ve düzeltildi)
+Montaj önizlemesi simulator'da videonun üstüne metin/şekil katmanlarını canlı
+bindiriyor (`MontagePreviewOverlay`; cihazda export gömdüğü için bu yol hiç
+çalışmaz). Bindirme iki şeyi düşürüyordu:
+
+1. **Katman saydamlığı.** `layer.opacity` yok sayılıyordu; quote-01'in tam
+   kadraj `scrim`i (opacity 0,62) dolu renkle çizilip **altındaki videoyu
+   tamamen örtüyordu**. Ekranda siyah zeminde metin görünüyordu, kullanıcının
+   fotoğrafı yoktu — oysa render edilen MP4 doğruydu (kareyi çıkarıp
+   bakıldı). Doğrulamayı bu tıkadı: önizlemede medyanın gelip gelmediği
+   görülemiyordu.
+2. **Vurgu rengi.** Bindirme `template.palette`i okuyordu, kullanıcının
+   seçtiği rengi değil. "Renk" sekmesinden pembe seçmek videoyu altın
+   bırakıyordu; export `edits.paletteOverride` ile doğrusunu gömüyordu.
+
+İkisi de yalnız simulator yolunu ilgilendiriyor — cihaz davranışı değişmedi.
+Ama simulator doğrulamasını yalanladıkları için düzeltildi.
 
 ### SIRADAKİ OTURUM İÇİN — cihazda doğrulanacaklar
-Kur: `./App/Scripts/install-device.sh` (imza ve cihaz seçimi hazır).
+**Uygulama 2026-08-27'de gerçek iPhone'a kuruldu ve başlatıldı** (iPhone 14
+Pro, `28EFD77A…`); aşağıdakiler telefonda elle gezilmeyi bekliyor.
+Yeniden kurmak için: `./App/Scripts/install-device.sh`.
 
 - [ ] **A.** Medya ekle → **video ve ses BAŞLAMAMALI**, sahnede statik önizleme
-      ve "Önizle" düğmesi durmalı.
+      ve "Önizle" düğmesi durmalı. *(Simulator'da geçti; cihazda SES tarafı
+      hiç duyulmadığı için asıl sınav burada.)*
 - [ ] **B.** "Önizle" → tek render, tek oynatıcı. Sonra bir şey değiştir →
       "Önizlemeyi yenile" hapı çıkmalı, kendiliğinden render OLMAMALI.
+      *(Simulator'da geçti.)*
 - [ ] **C.** 5 fotoğrafı tek tek ekle, birkaç kez "Önizle" → **ses üst üste
       binmemeli** (sızıntının asıl testi).
 - [ ] **D.** Müziği "Müziksiz" yap → çalan ses **anında** kesilmeli.
@@ -101,9 +129,32 @@ videosundan hazır şablonla video çıkaracak**. Katalogda kişisel kullanım
 şablonları (seyahat, aile, doğum günü, arkadaş, evcil hayvan, spor, "günüm")
 var ama azınlıkta ve vitrinin ilk sıralarında değil.
 
-Bu bir hata değil, KONUMLANDIRMA kararı — ölçülmeden iş yapılmamalı. Önce
-kategori/şablon dağılımı kişisel-vs-işletme diye sayılmalı, sonra ya galeri
-sırası değişmeli ya da kişisel şablonlar eklenmeli. **Karar kullanıcıda.**
+Bu bir hata değil, KONUMLANDIRMA kararı — ölçülmeden iş yapılmamalı.
+
+**ÖLÇÜLDÜ (2026-08-27).** `tools/audience-split.py` 127 şablonun hepsini elle
+etiketliyor ve vitrin sırasına göre döküyor (`TemplateCategory.order`'ı Swift
+kaynağından okur, kopyalamaz). Etiketle aynı fikirde değilsen betikteki
+tabloyu düzelt ve yeniden koş.
+
+| | şablon | pay |
+|---|---|---|
+| işletme | **62** | %49 |
+| kişisel | **41** | %32 |
+| nötr (biçim şablonu: kolaj, alıntı, grid…) | 24 | %19 |
+
+Gözlem doğrulandı, ama **asıl sorun sayı değil SIRA.** Kişisel yoğunluğu en
+yüksek iki bölüm — Kutlama (7/8 kişisel) ve Özel Günler (6/6 kişisel) —
+14 bölümün **12. ve 13.** sırasında. Aralarındaki dokuz bölümün altısı saf
+işletme: Tanıtım (8/8), İş (7/7), Güzellik (8/8), Emlak (9/9) hiç kişisel
+şablon içermiyor.
+
+    kişisel şablonların 21/41'i vitrinin ilk yarısında (ilk 63 kart)
+    ilk kişisel şablon 4. kartta, ortancası 62. kartta
+
+Kullanıcı Emlak'ı, Güzellik'i, Tanıtım'ı geçmeden Doğum Günü'ne varamıyor.
+Sıra değişikliği ucuz (`TemplateCategory.order` tek satır), yeni şablon yazmak
+pahalı — ama ikisi de KONUMLANDIRMA kararı. **Karar kullanıcıda; sıraya
+dokunulmadı.**
 
 ## 0b. Kullanıcı turu + gerçek fotoğraf havuzu — BİTTİ (2026-08-25)
 

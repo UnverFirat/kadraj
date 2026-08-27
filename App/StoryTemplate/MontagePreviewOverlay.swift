@@ -12,6 +12,10 @@ import TemplateKit
 struct MontagePreviewOverlay: View {
     let template: Template
     let texts: [String: String]
+    /// Kullanıcının seçtiği vurgu rengi (yoksa şablonunki). Export bunu
+    /// `edits.paletteOverride` ile gömüyor; bindirme de aynı rengi
+    /// kullanmazsa "Renk" sekmesi simulator'da hiçbir şey yapmıyor görünür.
+    var accentHex: String?
     let player: AVPlayer
 
     @State private var time: Double = 0
@@ -27,8 +31,14 @@ struct MontagePreviewOverlay: View {
         GeometryReader { geo in
             ZStack {
                 ForEach(overlayLayers) { layer in
+                    // KATMANIN KENDİ SAYDAMLIĞI ÇARPILIR. Yok sayıldığında
+                    // tam kadraj scrim'ler (quote-01'de opacity 0.62) dolu
+                    // renkle çizilip ALTTAKİ VİDEOYU tamamen örtüyordu:
+                    // önizleme siyah zeminde metin gösteriyor, kullanıcının
+                    // fotoğrafı görünmüyordu. Simulator'a özel bir yol ama
+                    // simulator doğrulamasını yalanlıyordu.
                     layerView(layer, in: geo.size)
-                        .opacity(isVisible(layer) ? 1 : 0)
+                        .opacity(isVisible(layer) ? layer.opacity : 0)
                 }
             }
         }
@@ -81,7 +91,8 @@ struct MontagePreviewOverlay: View {
     }
 
     private func color(_ role: String) -> Color {
-        Color(hex: template.palette[role] ?? "#FFFFFF")
+        if role == "accent", let accentHex { return Color(hex: accentHex) }
+        return Color(hex: template.palette[role] ?? "#FFFFFF")
     }
 
     private func weight(_ fontName: String) -> Font.Weight {

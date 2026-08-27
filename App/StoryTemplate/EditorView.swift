@@ -335,7 +335,8 @@ struct EditorView: View {
                 overlay: { player in
                     if needsTextOverlay {
                         MontagePreviewOverlay(template: project.template,
-                                              texts: texts, player: player)
+                                              texts: texts, accentHex: tintHex,
+                                              player: player)
                     }
                 })
         }
@@ -1091,7 +1092,8 @@ struct EditorView: View {
                                 accentHex: tintHex) {
                     if needsTextOverlay {
                         MontagePreviewOverlay(template: project.template,
-                                              texts: texts, player: previewPlayer)
+                                              texts: texts, accentHex: tintHex,
+                                              player: previewPlayer)
                     }
                 }
             } else if case .exporting(let progress) = preview.phase {
