@@ -9,14 +9,33 @@ public enum TemplateCategory {
 
     /// Galeride görünme sırası. Listede olmayan kategoriler sona alınır.
     ///
-    /// Sıra ürün kararıdır: en çok kullanılan işler önde. Katalog 100 şablona
-    /// çıkarken tek bir "İş" kovası yetmez oldu — esnafın aradığı şey
+    /// Sıra ürün kararıdır. Kategoriler ayrı ayrı duruyor çünkü katalog 100
+    /// şablona çıkarken tek bir "İş" kovası yetmez oldu — esnafın aradığı şey
     /// (kuaför / spor salonu / emlak / kurs) birbirine hiç benzemiyor, hepsi
     /// aynı çipin altındayken kimse kendi şablonunu bulamıyordu.
-    public static let order = ["social", "promo", "food", "travel", "business",
-                               "fashion", "beauty", "fitness", "realestate",
-                               "education", "music", "wedding", "holiday",
-                               "minimal"]
+    ///
+    /// SIRA 2026-08-27'DE DEĞİŞTİ: önce kişisel kullanım. Uygulamanın son
+    /// kullanıcısı kendi fotoğraf ve videosundan video çıkaran kişi, esnaf
+    /// değil; eski sıra bunun tersini söylüyordu. `tools/audience-split.py`
+    /// 127 şablonu saydı (kişisel 41 / işletme 62 / nötr 24) ve asıl kusurun
+    /// sayı değil SIRA olduğunu gösterdi: kişisel yoğunluğu en yüksek iki
+    /// bölüm — Kutlama (7/8) ve Özel Günler (6/6) — 14 bölümün 12. ve 13.
+    /// sırasındaydı, kullanıcı Emlak'ı ve Tanıtım'ı geçmeden Doğum Günü'ne
+    /// varamıyordu. Kişisel şablonların yalnız 21/41'i ilk yarıdaydı; şimdi
+    /// 32/41'i ilk 61 kartta.
+    ///
+    /// İşletme kategorileri SİLİNMEDİ, sona alındı — 62 şablon duruyor ve
+    /// kategori çipi tek dokunuşla oraya götürüyor (çip şeridi de bu diziyi
+    /// kullanır). Esnafın maliyeti bir dokunuş; son kullanıcının kazancı
+    /// kaydırmadan kendi şablonunu görmek.
+    ///
+    /// Üç kuşak: kişisel (sosyal, gezi, kutlama, özel günler) → herkese uyan
+    /// biçim ve karma (minimal, spor, moda, yemek, eğitim, müzik) → saf
+    /// işletme (tanıtım, güzellik, iş, emlak).
+    public static let order = ["social", "travel", "wedding", "holiday",
+                               "minimal", "fitness", "fashion", "food",
+                               "education", "music",
+                               "promo", "beauty", "business", "realestate"]
 
     private static let labels: [String: LocalizedText] = [
         "social":     LocalizedText(["en": "Social", "tr": "Sosyal"]),

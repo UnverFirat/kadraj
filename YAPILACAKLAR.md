@@ -142,19 +142,38 @@ tabloyu düzelt ve yeniden koş.
 | kişisel | **41** | %32 |
 | nötr (biçim şablonu: kolaj, alıntı, grid…) | 24 | %19 |
 
-Gözlem doğrulandı, ama **asıl sorun sayı değil SIRA.** Kişisel yoğunluğu en
-yüksek iki bölüm — Kutlama (7/8 kişisel) ve Özel Günler (6/6 kişisel) —
-14 bölümün **12. ve 13.** sırasında. Aralarındaki dokuz bölümün altısı saf
-işletme: Tanıtım (8/8), İş (7/7), Güzellik (8/8), Emlak (9/9) hiç kişisel
-şablon içermiyor.
+Gözlem doğrulandı, ama **asıl sorun sayı değil SIRA idi.** Kişisel yoğunluğu
+en yüksek iki bölüm — Kutlama (7/8 kişisel) ve Özel Günler (6/6 kişisel) —
+14 bölümün **12. ve 13.** sırasındaydı; aralarındaki bölümlerin dördü saf
+işletmeydi (Tanıtım 8/8, İş 7/7, Güzellik 8/8, Emlak 9/9). Kullanıcı Emlak'ı
+ve Tanıtım'ı geçmeden Doğum Günü'ne varamıyordu.
 
-    kişisel şablonların 21/41'i vitrinin ilk yarısında (ilk 63 kart)
-    ilk kişisel şablon 4. kartta, ortancası 62. kartta
+### SIRA DEĞİŞTİ (2026-08-27) — kullanıcı kararı
 
-Kullanıcı Emlak'ı, Güzellik'i, Tanıtım'ı geçmeden Doğum Günü'ne varamıyor.
-Sıra değişikliği ucuz (`TemplateCategory.order` tek satır), yeni şablon yazmak
-pahalı — ama ikisi de KONUMLANDIRMA kararı. **Karar kullanıcıda; sıraya
-dokunulmadı.**
+`TemplateCategory.order` üç kuşağa göre yeniden dizildi:
+
+    kişisel   Sosyal · Gezi · Kutlama · Özel Günler
+    karma     Minimal · Spor · Moda · Yemek · Eğitim · Müzik
+    işletme   Tanıtım · Güzellik · İş · Emlak
+
+| | önce | sonra |
+|---|---|---|
+| kişisel şablonların ilk yarıdaki payı | 21/41 | **33/41** |
+| kişisel şablonun ortanca sırası | 62. kart | **35. kart** |
+| Kutlama bölümü | 12. | **3.** |
+| Özel Günler bölümü | 13. | **4.** |
+
+İlk 43 kartın 41'i artık kişisel ya da nötr. Ekranda doğrulandı: çip şeridi
+"Tümü · Sosyal · Gezi · Kutlama · Özel Günl…" ve Kutlama bölümü Gezi'nin
+hemen ardından geliyor.
+
+**İşletme şablonları silinmedi, sona alındı** — 62'si duruyor ve kategori çipi
+tek dokunuşla oraya götürüyor (çip şeridi de aynı diziyi kullanıyor). Esnafın
+maliyeti bir dokunuş; son kullanıcının kazancı kaydırmadan kendi şablonunu
+görmek.
+
+Sayı dengesi DEĞİŞMEDİ (41/62/24). Kişisel şablon eklemek hâlâ açık bir seçenek
+ve pahalı olanı o; sıra ucuzdu ve önce o denendi.
 
 ## 0b. Kullanıcı turu + gerçek fotoğraf havuzu — BİTTİ (2026-08-25)
 
