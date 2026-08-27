@@ -280,6 +280,17 @@ struct EditorView: View {
         .onChange(of: flow.phase) { _, phase in
             if case .done(let url) = phase {
                 previewMusic.stop()
+                // SONUÇ EKRANI KENDİ OYNATICISINI KURUYOR. Editörünki
+                // duraklatılmazsa iki oynatıcı aynı anda video çözüyor: biri
+                // görünmüyor bile, ama döngü bildirimi her bitişte tekrar
+                // `play()` diyor ve kullanıcı sonuç ekranında dakikalarca
+                // durabiliyor (Kaydet / Paylaş / oran seçimi).
+                //
+                // DURAKLATILIR, BIRAKILMAZ: oynatıcıyı yok etmek sahneyi de
+                // boşaltıyordu — kullanıcı "Düzenlemeye dön" dediğinde ne
+                // video ne de "Önizle" düğmesi kalıyordu (`.task(id:)`
+                // yeniden çalışmadığı için oynatıcı geri gelmiyor).
+                previewPlayer?.pause()
                 result = ExportResult(url: register(url),
                                       usedFirstFreeExport: usedFirstFreeExport)
                 // Hak burada tükenir: video GERÇEKTEN çıktı. Başlangıçta
@@ -361,7 +372,17 @@ struct EditorView: View {
         // Uygulama arka plana alınırken de yaz: `onDisappear` yalnız ekrandan
         // ÇIKINCA çalışıyor, kullanıcı ise çoğu zaman ana ekrana basıp gidiyor.
         .onChange(of: scenePhase) { _, phase in
-            if phase != .active { saveDraft() }
+            // EKRAN GİTTİĞİNDE VİDEO DA DURUR. Döngüye alınmış önizleme
+            // oynatıcısı arka planda ve Control Center açıkken de kare
+            // çözmeye devam ediyordu — kullanıcının göremediği bir video
+            // için pil ve ısı.
+            if phase != .active { previewPlayer?.pause() } else { previewPlayer?.play() }
+            // Kaydetme YALNIZ `.background`'da. SwiftUI geçişi
+            // `.active → .inactive → .background` diye veriyor; `!= .active`
+            // demek tek çıkışta taslağı İKİ KEZ yazmak (her fotoğrafı iki kez
+            // JPEG'e kodlamak) demekti. Üstelik bildirim çekmecesini açmak
+            // gibi geri dönen `.inactive` anları da boşuna kayıt tetikliyordu.
+            if phase == .background { saveDraft() }
         }
     }
 
@@ -519,6 +540,8 @@ struct EditorView: View {
     private func closeResult() {
         result = nil
         flow.phase = .idle
+        // Sonuç ekranı açılırken duraklatılan önizleme geri döner.
+        previewPlayer?.play()
     }
 
     // MARK: - Düzenleme paneli

@@ -19,6 +19,11 @@ struct MontagePreviewOverlay: View {
     let player: AVPlayer
 
     @State private var time: Double = 0
+    /// Zaman gözlemcisi, EKLENDİĞİ oynatıcıyla birlikte (bkz. PlayerScrubView:
+    /// aynı kusurun cihazda çöken kardeşi). Eskiden dönüş değeri atılıyordu:
+    /// token olmayınca gözlemci hiç kaldırılamıyor, kapanış oynatıcıyı tutuyor
+    /// ve görünüm her belirdiğinde bir gözlemci daha ekleniyordu.
+    @State private var observed: (player: AVPlayer, token: Any)?
 
     private var overlayLayers: [Layer] {
         // Video slotları hariç grafik/metin katmanları, mutlak zamanlı.
@@ -44,6 +49,11 @@ struct MontagePreviewOverlay: View {
         }
         .allowsHitTesting(false)
         .onAppear { observe() }
+        .onChange(of: player) { _, _ in
+            stopObserving()
+            observe()
+        }
+        .onDisappear { stopObserving() }
     }
 
     @ViewBuilder
@@ -101,8 +111,19 @@ struct MontagePreviewOverlay: View {
     }
 
     private func observe() {
-        player.addPeriodicTimeObserver(
-            forInterval: CMTime(seconds: 0.05, preferredTimescale: 600),
-            queue: .main) { t in time = t.seconds }
+        guard observed == nil else { return }
+        // Kapanış görünüm yapısını (dolayısıyla `player`ı) yakalamasın.
+        let currentTime = $time
+        // 0,05 sn saniyede 20 kez tüm katman ağacını yeniden düzleştiriyordu;
+        // katmanların görünüp kaybolması için 0,1 yeterli.
+        let token = player.addPeriodicTimeObserver(
+            forInterval: CMTime(seconds: 0.1, preferredTimescale: 600),
+            queue: .main) { t in currentTime.wrappedValue = t.seconds }
+        observed = (player, token)
+    }
+
+    private func stopObserving() {
+        if let observed { observed.player.removeTimeObserver(observed.token) }
+        observed = nil
     }
 }

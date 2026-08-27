@@ -29,10 +29,11 @@ struct DemoProject: Identifiable {
     /// İki dil birden taranıyor çünkü kullanıcı Türkçe arayüzde "recipe" ya da
     /// İngilizce arayüzde "tarif" yazabiliyor; ayrıca şablonun demo metinleri
     /// ("YAZ İNDİRİMİ") kullanıcının aklındaki kelimeye adından daha yakın.
-    var searchTerms: [String] {
-        var terms = Array(template.name.values.values)
-        terms.append(template.category)
-        terms += TemplateCategory.label(template.category).values.values
+    static func searchTerms(name: LocalizedText, category: String,
+                            tags: [String], texts: [String: String]) -> [String] {
+        var terms = Array(name.values.values)
+        terms.append(category)
+        terms += TemplateCategory.label(category).values.values
         // Manifest etiketleri ("new" / "popular") okunmuyordu: rozet olarak
         // gösterdiğimiz bir bilgi aramada yok sayılıyordu.
         terms += tags
@@ -40,12 +41,27 @@ struct DemoProject: Identifiable {
         return terms
     }
 
+    /// Aranacak her şeyin normalize edilmiş, tek satıra dizilmiş hali.
+    ///
+    /// NEDEN ÖNCEDEN HESAPLANIYOR: eskiden `searchTerms` her çağrıda yeniden
+    /// kuruluyor ve `matches` terimlerin HER BİRİNİ `searchNormalized`'dan
+    /// geçiriyordu. 127 şablon × ~12 terim = tuş başına ~1500 Unicode katlama
+    /// (`folding` + `replacingOccurrences`), üstelik galeri `visibleProjects`i
+    /// aynı `body` geçişinde iki kez çağırdığı için çoğu zaman iki katı.
+    /// Arama kutusuna yazarken hissedilen takılma buydu. Artık katlama şablon
+    /// başına bir kez, yüklemede yapılıyor; arama `contains`'e iniyor.
+    ///
+    /// ANLIK GÖRÜNTÜ: `texts` düzenlenebilir bir alan, ama düzenleme editörün
+    /// KENDİ kopyasında olur — galerinin gösterdiği projelerin metinleri
+    /// şablon varsayılanlarıdır ve değişmez.
+    let searchBlob: String
+
     /// `synonyms` sorgu başına BİR kez çözülür (bkz. `TemplateSynonyms`), her
     /// şablon için yeniden hesaplanmaz.
     func matches(_ query: String, synonyms: TemplateSynonyms.Match = .init()) -> Bool {
         let needle = query.searchNormalized
         guard !needle.isEmpty else { return true }
-        if searchTerms.contains(where: { $0.searchNormalized.contains(needle) }) { return true }
+        if searchBlob.contains(needle) { return true }
         return synonyms.templateIDs.contains(id)
             || synonyms.categories.contains(template.category)
     }
@@ -353,13 +369,20 @@ final class DemoLibrary: ObservableObject {
                              entry: TemplateManifest.Entry?) -> DemoProject? {
         let texts = template.defaultTexts(languageCode: AppLanguage.code)
         let isMontage = template.scenes?.isEmpty == false
+        let tags = entry?.tags ?? []
+        // Arama metni yüklemede BİR kez normalize edilir (bkz. `searchBlob`).
+        let blob = DemoProject
+            .searchTerms(name: template.name, category: template.category,
+                         tags: tags, texts: texts)
+            .map(\.searchNormalized)
+            .joined(separator: "\n")
         return DemoProject(
             id: template.id, template: template, texts: texts,
             videoSlots: [:], photoSlots: [:],
             subtitle: Self.subtitle(for: template),
             accentHex: template.palette["accent"] ?? "#D9A441",
             isMontage: isMontage,
-            tags: entry?.tags ?? [], entry: entry)
+            tags: tags, entry: entry, searchBlob: blob)
     }
 
     /// Galeri kartının alt satırı.

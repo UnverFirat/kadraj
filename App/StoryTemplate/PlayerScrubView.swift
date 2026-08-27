@@ -22,7 +22,19 @@ struct PlayerScrubView<Overlay: View>: View {
     @State private var time: Double = 0
     @State private var isPlaying = true
     @State private var isScrubbing = false
-    @State private var observer: Any?
+    /// Zaman gözlemcisi, EKLENDİĞİ oynatıcıyla BİRLİKTE saklanır.
+    ///
+    /// Eskiden yalnız token tutuluyordu ve bu cihazda ÇÖKME veriyordu:
+    /// `player` bir `let`, ama görünümün kimliği çağrı yerinde sabit
+    /// (`if let previewPlayer { PlayerScrubView(player:) }`, `.id` yok), yani
+    /// önizleme yenilenip oynatıcı A→B olduğunda @State KORUNUYOR. Sonra
+    /// `stopObserving()` A'dan alınmış token'ı B'ye veriyor ve
+    /// `AVPlayer.removeTimeObserver` `NSInvalidArgumentException` atıyordu —
+    /// yakalayan olmadığı için uygulama anında kapanıyordu. "Editörden geri
+    /// çıkarken uygulama kapanıyor" şikâyeti buydu ve yalnız önizlemeyi en az
+    /// bir kez YENİLEYEN kullanıcıda olduğu için düzensiz görünüyordu.
+    /// (Aynı kusur sonuç ekranında da vardı: oran değişince yeni oynatıcı.)
+    @State private var observed: (player: AVPlayer, token: Any)?
     /// Kontroller görünür mü. Oynatırken kısa süre sonra solar.
     @State private var controlsVisible = true
     /// Solma zamanlayıcısı — her etkileşimde sıfırlanır.
@@ -58,6 +70,16 @@ struct PlayerScrubView<Overlay: View>: View {
         .onAppear {
             startObserving()
             scheduleHide()
+        }
+        // Oynatıcı değişti (önizleme yenilendi, oran değişti): gözlemciyi
+        // ESKİSİNDEN bırakıp yenisine tak. Bu olmadan yeni oynatıcı hiç
+        // gözlenmiyordu — çubuk yenilemeden sonra donuyordu — ve çıkışta
+        // token yanlış oynatıcıya veriliyordu (bkz. `observed`).
+        .onChange(of: player) { _, _ in
+            stopObserving()
+            time = 0
+            isPlaying = true
+            startObserving()
         }
         .onDisappear {
             stopObserving()
@@ -178,18 +200,30 @@ struct PlayerScrubView<Overlay: View>: View {
     /// Çubuğu oynatmayla eşler. Scrub sırasında güncelleme YAPILMAZ — yoksa
     /// oynatıcının bir önceki zamanı parmağın altındaki değeri geri çekiyor.
     private func startObserving() {
-        guard observer == nil else { return }
-        observer = player.addPeriodicTimeObserver(
-            forInterval: CMTime(seconds: 0.05, preferredTimescale: 600),
+        guard observed == nil else { return }
+        // KAPANIŞ GÖRÜNÜM YAPISINI YAKALAMAMALI. `isScrubbing`/`time`'a
+        // doğrudan dokunmak `self`i (dolayısıyla `let player`ı) yakalıyordu;
+        // gözlemciyi oynatıcı tuttuğu için player → gözlemci → görünüm →
+        // player döngüsü çıkıyor ve oynatıcı hiç serbest kalmıyordu.
+        // Binding'ler yalnız @State kutusunu yakalar, oynatıcıyı değil.
+        let currentTime = $time
+        let scrubbing = $isScrubbing
+        // 0,05 sn saniyede 20 kez `body` demekti; çubuk için 0,1 fazlasıyla
+        // yeter ve düzen geçişini yarıya indirir.
+        let token = player.addPeriodicTimeObserver(
+            forInterval: CMTime(seconds: 0.1, preferredTimescale: 600),
             queue: .main) { current in
-                guard !isScrubbing else { return }
-                time = current.seconds
+                guard !scrubbing.wrappedValue else { return }
+                currentTime.wrappedValue = current.seconds
             }
+        observed = (player, token)
     }
 
     private func stopObserving() {
-        if let observer { player.removeTimeObserver(observer) }
-        observer = nil
+        // Kayıt HANGİ oynatıcıdan alındıysa ondan silinir — ekrandaki
+        // oynatıcıdan değil.
+        if let observed { observed.player.removeTimeObserver(observed.token) }
+        observed = nil
     }
 
     static func timeLabel(_ seconds: Double) -> String {

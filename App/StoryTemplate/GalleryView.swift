@@ -343,13 +343,22 @@ struct GalleryView: View {
     private func chip(title: String, selected: Bool, action: @escaping () -> Void) -> some View {
         Button {
             Haptics.select()
-            withAnimation(.easeOut(duration: 0.18)) { action() }
+            // ANİMASYONSUZ. Bu eylem `category`yi değiştiriyor, o da galerinin
+            // TÜM içeriğini takas ediyor (14 bölüm başlığı + 14 ızgara ↔ tek
+            // ızgara). `withAnimation` SwiftUI'a "bu ağaca girip çıkan her
+            // düğümü animasyonla" demek oluyordu; çipe dokunmak 127 kartlık
+            // bir geçiş başlatıyordu. Seçili çipin kendi görünümü zaten
+            // `.animation(value: selected)` ile yumuşuyor.
+            action()
         } label: {
             Text(title)
                 .font(.system(size: 13, weight: selected ? .semibold : .medium))
                 .foregroundStyle(selected ? .black : .white.opacity(0.8))
                 .padding(.horizontal, 14).padding(.vertical, 7)
                 .background(selected ? Color.white : Color.white.opacity(0.1), in: Capsule())
+                // Animasyon YALNIZ çipin kendi seçili görünümüne bağlı —
+                // arkadaki 127 kartlık takasa değil.
+                .animation(.easeOut(duration: 0.18), value: selected)
         }
         .buttonStyle(.plain)
     }

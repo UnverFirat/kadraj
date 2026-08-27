@@ -112,10 +112,33 @@ Yeniden kurmak için: `./App/Scripts/install-device.sh`.
 - [ ] **C.** 5 fotoğrafı tek tek ekle, birkaç kez "Önizle" → **ses üst üste
       binmemeli** (sızıntının asıl testi).
 - [ ] **D.** Müziği "Müziksiz" yap → çalan ses **anında** kesilmeli.
-- [ ] **E.** Editörden geri çık → **uygulama kapanmamalı**. Kapanırsa bu ayrı
-      bir kazı: sızıntı düzeldiğine göre sebep başka. Xcode'da Debug > Attach
-      ya da cihazın çökme kaydı (Ayarlar > Gizlilik > Analiz Verileri) gerekir;
-      simulator'da üretilemiyor.
+- [x] **E. ÇÖKME BULUNDU, ÜRETİLDİ VE DÜZELTİLDİ (2026-08-27).** Sebep bellek
+      baskısı DEĞİLDİ ve "simulator'da üretilemiyor" notu YANLIŞTI: adımlar
+      bilinince simulator'da her seferinde çöküyor.
+
+      `PlayerScrubView` zaman gözlemcisinin token'ını tutuyor ama HANGİ
+      oynatıcıdan aldığını tutmuyordu. `player` bir `let`; görünümün kimliği
+      ise çağrı yerinde sabit (`if let previewPlayer { … }`, `.id` yok). Yani
+      önizleme yenilenip oynatıcı A→B olduğunda `@State` korunuyor, sonra
+      çıkışta `stopObserving()` A'dan alınmış token'ı B'ye veriyordu:
+      `-[AVPlayer removeTimeObserver:]` → `objc_exception_throw` → SIGABRT.
+      Yalnız önizlemeyi EN AZ BİR KEZ yenileyende olduğu için düzensiz
+      görünüyordu.
+
+      Kanıt: eski kodla `PlayerScrubView.swift:191` yığın izinde, çökme kaydı
+      `StoryTemplate-2026-08-27-222229.ips`. Düzeltmeden sonra aynı adımlar
+      (önizle → renk değiştir → yenile → geri) galeriye dönüyor, yeni çökme
+      kaydı yok.
+
+      İki yan kusur da aynı yerden çıktı: (1) yenilemeden sonra yeni oynatıcıya
+      hiç gözlemci takılmadığı için scrub çubuğu donuyordu; (2) gözlemci
+      kapanışı görünüm yapısını yakaladığı için `player → gözlemci → görünüm →
+      player` döngüsü vardı ve `releasePlayer()` bunu kıramıyordu — yani
+      "sızıntı düzeltildi" eksik bir teşhisti.
+
+      Aynı kusur sonuç ekranında da vardı (oran değişince yeni oynatıcı);
+      düzeltme `PlayerScrubView`'ın içinde olduğu için iki çağrı yerini birden
+      kapatıyor. CİHAZDA hâlâ teyit edilmeli.
 - [ ] **F.** Isınma/akıcılık: 5 klipli montajda editörde gezinirken telefon
       ısınıyor mu, arayüz takılıyor mu.
 - [ ] **G.** (P0'ın asıl maddesi, §4.1) Montaj export'unun **metinli** çıktısı:

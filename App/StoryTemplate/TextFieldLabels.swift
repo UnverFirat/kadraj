@@ -166,11 +166,25 @@ enum TextFieldLabels {
     /// Birebir tanınan id'ler. Derleyici tek bir dev sözlük değişmezini makul
     /// sürede tip denetleyemiyor; konu konu bölünmüş hali hem hızlı derlenir
     /// hem okunur.
+    ///
+    /// ÖNBELLEKLİ (2026-08-27). Bu bir hesaplanan özellikti ve her çağrıda
+    /// sekiz sözlüğü sıfırdan kurup 303 `String(localized:)` çözüyordu.
+    /// Çağıran `EditorView.fieldLabels` → `textPanel`, yani Metin sekmesi
+    /// açıkken HER `body` geçişi — pratikte her tuş vuruşu. Yazarken hissedilen
+    /// takılmanın ölçülebilir bir parçası buydu.
+    ///
+    /// Dil anahtarı korunuyor: `String(localized:)` çıktısı dile bağlı ve
+    /// uygulama içi dil değişimi (`AppLanguage`) tabloyu geçersizleştirmeli.
+    private static var tableCache: [String: [String: String]] = [:]
+
     private static var table: [String: String] {
+        let language = AppLanguage.code
+        if let cached = tableCache[language] { return cached }
         var all = headings
         for group in [identity, placeAndTime, commerce, badges, questions, scenes, stickers] {
             all.merge(group) { current, _ in current }
         }
+        tableCache[language] = all
         return all
     }
 
