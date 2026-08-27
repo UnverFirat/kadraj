@@ -140,12 +140,82 @@ Yeniden kurmak için: `./App/Scripts/install-device.sh`.
       düzeltme `PlayerScrubView`'ın içinde olduğu için iki çağrı yerini birden
       kapatıyor. CİHAZDA hâlâ teyit edilmeli.
 - [ ] **F.** Isınma/akıcılık: 5 klipli montajda editörde gezinirken telefon
-      ısınıyor mu, arayüz takılıyor mu.
+      ısınıyor mu, arayüz takılıyor mu. **Cihazda ölçülecek olan artık şu
+      düzeltmelerden SONRAKİ hal** (hepsi 2026-08-27, aşağıda §0c).
 - [ ] **G.** (P0'ın asıl maddesi, §4.1) Montaj export'unun **metinli** çıktısı:
       cihazda "Video Oluştur" → metinlerin videoya gömülü geldiğini doğrula.
       Katalogun %62'sinde bu yol hiç görülmedi.
 
-### Ürün notu: katalog fazla "işletme" ağırlıklı
+## 0c. Akıcılık / bellek turu — 2026-08-27
+
+Kullanıcı "butonlar genel olarak kasıyor" dedi. Üç agent kodu taradı, bulgular
+tek tek doğrulandı ve ölçülebilir olanlar düzeltildi. **Hiçbiri cihazda
+doğrulanmadı** — F maddesi bunun için duruyor.
+
+### Dokunuş gecikmesi
+| Ne | Neydi |
+|---|---|
+| `Haptics` | Her çağrıda YENİ üreteç kurup `prepare()` ediyor, hemen tetikliyordu. `prepare()` eşzamansız — motor her dokunuşta boştan kalkıyor, titreşim geç düşüyordu. 57 çağrı yeri, yani her düğme. Dosyanın kendi yorumu bunu yapmamak gerektiğini yazıyordu. |
+| Cihaz build'i | `install-device.sh` hep **Debug** kuruyordu (`-Onone`). Akıcılık Debug'da ölçülmez; `--release` eklendi. |
+| `TextFieldLabels.table` | Hesaplanan özellikti: her çağrıda 8 sözlük + **303 `String(localized:)`**. Çağıran `textPanel`, yani Metin sekmesi açıkken her tuş vuruşu. Dile anahtarlı önbellek. |
+| Galeri araması | Tuş başına 127 şablon × ~12 terim **Unicode-fold** ediliyordu (~1500 katlama, çoğu zaman iki katı). Normalize `searchBlob` artık yüklemede bir kez. |
+| Kategori çipi | `withAnimation` TÜM galeriyi (14 bölüm ↔ tek ızgara) animasyonluyordu. Animasyon artık yalnız çipin kendi seçili görünümünde. |
+
+### Isınma / bellek
+- **Önizleme oynatıcısı hiç durmuyordu:** arka planda ve Control Center
+  açıkken kare çözmeye devam ediyor, sonuç ekranı açıkken de döngüde kalıp
+  ekranın KENDİ oynatıcısıyla birlikte iki video birden çözüyordu.
+  `scenePhase` artık duraklatıyor, sonuç ekranı açılırken de duraklıyor
+  (yıkmıyor — yıkmak sahneyi boşaltıp "Önizle"yi de yok ediyordu).
+- **Taslak her çıkışta İKİ KEZ yazılıyordu:** `!= .active` ölçütü SwiftUI'ın
+  `.active → .inactive → .background` geçişinde iki kez tetikleniyordu.
+  Artık yalnız `.background`.
+- **Fotoğraflar tam çözünürlükte belleğe açılıyordu.** `loadObject(ofClass:
+  UIImage.self)` 48 MP bir kareyi ~195 MB olarak açıyor; 8 slotta bu tek
+  başına uygulamayı öldürecek rakam. Artık ham dosya verisinden
+  `CGImageSourceCreateThumbnailAtIndex` ile **4320 px** sınırıyla alınıyor —
+  kare hiçbir zaman tam açılmıyor. 4320 keyfi değil: kanvas 1080 geniş ve en
+  fazla 4x yakınlaştırma var (1080 × 4), yani üstü export'a hiçbir şey
+  katmaz. 12 MP kareler (4032 px) sınırın altında, HİÇ değişmiyor.
+- **Montaj render'ının 1. geçişi iptal edilemiyordu.** `TemplateExporter.cancel()`
+  yalnız 2. geçişin oturumunu tanıyordu; 1. geçiş `MontageComposer` içinde
+  yerel bir `AVAssetExportSession`'dı. Kullanıcı vazgeçse ya da editörden
+  çıksa bile 300 kare CoreImage yükü sonuna kadar koşuyor, yeni bir "Önizle"
+  buna PARALEL ikinci bir oturum ekliyordu. İki geçiş de artık
+  `withTaskCancellationHandler` ile Task iptaline bağlı.
+- `MontagePreviewOverlay` gözlemcisi hiç kaldırılmıyordu (simulator yolu).
+
+### Geri tuşu artık beklemiyor
+`saveDraft()` senkrondu ve `onDisappear`/`scenePhase` üzerinden geri tuşuna
+bağlıydı: her fotoğrafın tam çözünürlük JPEG kodlaması + her videonun tam
+dosya kopyası ana iş parçacığında. Disk işi `DraftWriter` aktörüne taşındı;
+bellek modeli senkron kaldı (taslak "Devam et" şeridinde anında görünür).
+
+**Bu değişiklik iki yerde yarış açtı, ikisi de kapatıldı** — ekranda görüldü:
+taslak kartının posteri siyah kalıyordu ve taslak geri yüklenirken henüz
+kopyalanmamış VİDEO slotu sessizce düşüyordu. Diskten okuyan yollar artık
+`DraftStore.settle()` ile bekleyen yazmayı bekliyor; fotoğraflar ayrıca
+`pendingPhotos`tan bellekten servis ediliyor.
+
+### Ayrıca: §0a'nın kaçırdığı otomatik önizleme
+`restoreDraftIfAvailable()` sonunda `startPreview()` duruyordu — otomatik
+önizleme döneminden kalma. §0a'da `markDirty` ve `onAppear` temizlenmiş ama bu
+yol atlanmış, oysa **taslağı olan her dönen kullanıcı buradan geçiyor**:
+editör açılır açılmaz video ve SES kendiliğinden başlıyordu. Kaldırıldı;
+ekranda doğrulandı (taslak 4/4 dolu, statik önizleme, "Önizle" duruyor).
+
+### Dokunulmayan, bilinen kalanlar
+- `EditorView` tek parça (~1750 satır, ~25 `@State`): tek bir state değişimi
+  body başına 40+ tam katman taraması tetikliyor. Paneli ayrı `View`lara
+  bölmek ve slot/metin haritalarını şablon başına bir kez çözmek gerekir.
+- Kırpma/zoom sürüklemesi kare başına tüm `EditorView` gövdesini kuruyor
+  (yerel state + `onEnded`'de dışarı yazmak çözer).
+- `ExportLibrary.add` ana iş parçacığında video kopyalıyor + poster karesi
+  decode ediyor; tam sonuç ekranı açılırken.
+- `MyVideosView` kart gövdesinde senkron `UIImage(contentsOfFile:)`.
+- `tmp` altındaki `preview-*` / `export-*` / `picked-*` artıkları toplanmıyor.
+
+## Ürün notu: katalog fazla "işletme" ağırlıklı
 Kullanıcının gözlemi: şablonlar esnaf/işletme işine göre yazılmış (menü, fiyat
 listesi, emlak künyesi, randevu), oysa **son kullanıcı kendi fotoğraf ve
 videosundan hazır şablonla video çıkaracak**. Katalogda kişisel kullanım

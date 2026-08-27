@@ -545,6 +545,9 @@ private struct DraftCard: View {
         }
         .frame(width: 104)
         .task(id: draft.updatedAt) {
+            // Taslak kaydı eşzamansız: dosya daha yeni yazılıyor olabilir.
+            // Beklemezsek kart posteri SİYAH kalıyor ve bir daha denemiyor.
+            await drafts.settle()
             // Poster çözmek (özellikle video karesi) ana iş parçacığında
             // yapılmamalı: galeri kaydırılırken takılıyor.
             guard let first = draft.slots.first else { return }

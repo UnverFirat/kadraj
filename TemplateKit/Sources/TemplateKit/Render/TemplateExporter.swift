@@ -327,8 +327,15 @@ public final class TemplateExporter {
         }
         defer { progressTask?.cancel() }
 
-        await withCheckedContinuation { (continuation: CheckedContinuation<Void, Never>) in
-            session.exportAsynchronously { continuation.resume() }
+        // `cancel()` bu session'ı zaten tanıyor, ama Task iptali (editörden
+        // çıkmak) tek başına oturumu durdurmuyordu — iki yol da bağlansın.
+        let cancelBox = ExportCancelBox(session)
+        await withTaskCancellationHandler {
+            await withCheckedContinuation { (continuation: CheckedContinuation<Void, Never>) in
+                session.exportAsynchronously { continuation.resume() }
+            }
+        } onCancel: {
+            cancelBox.cancel()
         }
 
         switch session.status {
@@ -445,3 +452,18 @@ public final class TemplateExporter {
     }
 }
 #endif
+
+/// `AVAssetExportSession`'ı iptal kolundan güvenle tutmak için ince kutu.
+///
+/// Oturum `Sendable` DEĞİL, ama `cancelExport()` her iş parçacığından
+/// çağrılabilir (AVFoundation'ın sözleşmesi). `withTaskCancellationHandler`'ın
+/// `onCancel` kapanışı `@Sendable` olduğu için oturumu doğrudan yakalamak
+/// Swift 6 kipinde hata; yakalanan tek şey bu kutu ve kutunun açtığı tek
+/// yetenek iptal.
+final class ExportCancelBox: @unchecked Sendable {
+    private let session: AVAssetExportSession
+
+    init(_ session: AVAssetExportSession) { self.session = session }
+
+    func cancel() { session.cancelExport() }
+}

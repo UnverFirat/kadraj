@@ -204,7 +204,6 @@ struct EditorView: View {
             // Screenshot otomasyonu: PHPicker seçimini taklit et — verilen medyayı
             // ilk slota koyup (kullanıcının galeriden seçmesiyle aynı yol) export et.
             injectMediaIfRequested()
-            restoreDraftIfAvailable()
             if autoExport {
                 startExport()
             }
@@ -219,6 +218,11 @@ struct EditorView: View {
         // Editöre deep link / doğrudan açılışla gelindiyse poster henüz
         // yüklenmemiş olabilir (galeriden geçilmedi).
         .task {
+            // `onAppear`DAN TAŞINDI: taslak geri yükleme artık bekleyen disk
+            // yazmalarını beklemek zorunda (bkz. DraftStore.settle), yani
+            // eşzamansız. `injectMediaIfRequested()` onAppear'da çalıştığı ve
+            // geri yükleme `!hasMedia` ile korunduğu için sıra bozulmuyor.
+            await restoreDraftIfAvailable()
             if let entry = project.entry { await thumbnails.load(entry) }
         }
         .sheet(item: $sheet) { active in
@@ -392,7 +396,10 @@ struct EditorView: View {
     ///
     /// Otomasyon yollarında (`--inject-*`, otomatik export) YAPILMAZ: duman
     /// testi ve ekran görüntüleri hep aynı temiz durumdan başlamalı.
-    private func restoreDraftIfAvailable() {
+    private func restoreDraftIfAvailable() async {
+        // Taslak kaydı eşzamansız: video kopyası hâlâ sürüyor olabilir ve
+        // aşağıdaki `fileExists` false dönüp slotu sessizce düşürürdü.
+        await drafts.settle()
         guard !autoExport, !hasMedia,
               !ProcessInfo.processInfo.arguments.contains("--inject-media"),
               Self.argument(after: "--inject-video") == nil,
@@ -426,7 +433,13 @@ struct EditorView: View {
             music = nil
         }
         restoredDraft = true
-        startPreview()
+        // RENDER BAŞLATMAZ. Burada `startPreview()` duruyordu — otomatik
+        // önizleme döneminden kalma. §0a'da önizleme ELLE'ye çevrilirken
+        // `markDirty` ve `onAppear` temizlendi ama bu yol atlanmıştı, oysa
+        // taslağı olan HER dönen kullanıcı buradan geçiyor: editör açılır
+        // açılmaz video ve SES kendiliğinden başlıyordu — cihazda bildirilen
+        // şikâyetin ta kendisi. Sahne statik önizlemeyi ve "Önizle" düğmesini
+        // gösterir; render'ı kullanıcı başlatır.
     }
 
     private func saveDraft() {

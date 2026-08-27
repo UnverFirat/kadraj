@@ -221,8 +221,24 @@ public enum MontageComposer {
         }
         defer { progressTask?.cancel() }
 
-        await withCheckedContinuation { (continuation: CheckedContinuation<Void, Never>) in
-            session.exportAsynchronously { continuation.resume() }
+        // İPTAL EDİLEBİLİR OLMALI. Bu, montajın 1. GEÇİŞİ ve session yerel bir
+        // değişken — `TemplateExporter.cancel()` yalnız kendi (2. geçiş)
+        // session'ını tanıyordu. Sonuç: kullanıcı "İptal"e bassa ya da
+        // editörden çıksa bile bu geçiş sonuna kadar koşuyordu; her kare için
+        // CoreImage ile kolaj + geçiş üretiliyor (10 sn × 30 fps = 300 kare
+        // tam GPU/CPU yükü) ve kullanıcı yeni bir "Önizle" başlatırsa İKİNCİ
+        // bir oturum buna paralel ekleniyordu. Isınmanın kaynaklarından biri.
+        //
+        // `withCheckedContinuation` tek başına iptale duyarlı değil; iptal
+        // kolunu elle bağlamak gerekiyor.
+        try Task.checkCancellation()
+        let cancelBox = ExportCancelBox(session)
+        await withTaskCancellationHandler {
+            await withCheckedContinuation { (continuation: CheckedContinuation<Void, Never>) in
+                session.exportAsynchronously { continuation.resume() }
+            }
+        } onCancel: {
+            cancelBox.cancel()
         }
         guard session.status == .completed else {
             if session.status == .cancelled { throw TemplateExportError.cancelled }
