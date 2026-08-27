@@ -14,8 +14,15 @@
 # Kullanım:
 #   ./install-device.sh                    derle + kur + başlat
 #   ./install-device.sh --no-run           yalnız derle + kur
+#   ./install-device.sh --release          Release derle (AKICILIĞI BUNDA ÖLÇ)
 #   ./install-device.sh --list             bağlı cihazları göster
 #   DEVICE_ID=<udid> ./install-device.sh   belirli bir cihaza kur
+#
+# HANGİ CONFIGURATION: varsayılan Debug, çünkü günlük iş hata ayıklamak.
+# Ama SwiftUI'da Debug ile Release arasındaki fark hissedilir: Debug `-Onone`
+# derlenir, görünüm gövdeleri ve generic'ler optimize edilmez, dokunuş→çizim
+# yolu belirgin biçimde yavaşlar. "Arayüz kasıyor mu" sorusunun cevabı
+# Debug build'de ARANMAZ — önce `--release` ile kur, sonra karar ver.
 set -e
 HERE="$(cd "$(dirname "$0")" && pwd)"
 cd "$HERE/.."
@@ -23,15 +30,18 @@ cd "$HERE/.."
 APP_ID="com.fireflysoftware.kadraj"
 DERIVED="build/DerivedDataDevice"
 RUN=1
+CONFIG="Debug"
 
-case "${1:-}" in
-  --list)
-    xcrun devicectl list devices
-    exit 0 ;;
-  --no-run) RUN=0 ;;
-  "") ;;
-  *) echo "bilinmeyen argüman: $1"; exit 2 ;;
-esac
+while [ $# -gt 0 ]; do
+  case "$1" in
+    --list)
+      xcrun devicectl list devices
+      exit 0 ;;
+    --no-run) RUN=0; shift ;;
+    --release) CONFIG="Release"; shift ;;
+    *) echo "bilinmeyen argüman: $1"; exit 2 ;;
+  esac
+done
 
 # Cihaz seçimi: DEVICE_ID verilmemişse bağlı TEK iPhone'u kullan. Birden fazla
 # varsa durup sorar — yanlış telefona kurup "düzelmemiş" demek en can sıkıcı
@@ -58,18 +68,18 @@ if [ -z "${DEVICE_ID:-}" ]; then
   DEVICE_ID="$(printf "%s\n" "$MATCHES" | head -1)"
 fi
 
-echo "== Derleniyor ($DEVICE_ID) =="
+echo "== Derleniyor ($CONFIG · $DEVICE_ID) =="
 # -allowProvisioningUpdates: App ID / profil eksikse Xcode'un kendisi oluşturur.
 # DEVELOPMENT_TEAM projede yazılı (N6SRRJ6HCK), burada tekrar edilmiyor.
 xcodebuild -project StoryTemplate.xcodeproj \
   -scheme StoryTemplate \
   -destination "id=$DEVICE_ID" \
-  -configuration Debug \
+  -configuration "$CONFIG" \
   -derivedDataPath "$DERIVED" \
   -allowProvisioningUpdates \
   build | tail -3
 
-BUNDLE="$DERIVED/Build/Products/Debug-iphoneos/StoryTemplate.app"
+BUNDLE="$DERIVED/Build/Products/$CONFIG-iphoneos/StoryTemplate.app"
 
 echo "== Kuruluyor =="
 xcrun devicectl device install app --device "$DEVICE_ID" "$BUNDLE" | tail -3

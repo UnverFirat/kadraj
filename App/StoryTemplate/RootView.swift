@@ -75,6 +75,9 @@ struct RootView: View {
         }
         .onOpenURL { open($0) }
         .onAppear {
+            // Taptic Engine'i uyandır: soğuk motorda ilk titreşim geç düşer ve
+            // kullanıcı bunu "ilk dokunuş kastı" diye okur (bkz. Haptics).
+            Haptics.warmUp()
             applyLaunchRoute()
             if ProcessInfo.processInfo.arguments.contains("--open-paywall") {
                 store.showPaywall(reason: String(localized: "Bu şablon Pro"))
