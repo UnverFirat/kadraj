@@ -42,7 +42,6 @@ struct EditorView: View {
     /// oynatıcı buna göre kurulur (bkz. previewStage).
     @State private var previewURL: URL?
     /// Otomatik yenileme için bekleyen iş (her değişiklikte sıfırlanır).
-    @State private var refreshTask: Task<Void, Never>?
     /// Metin/medya/müzik değişti mi — önizleme bayat, yenilenmesi gerek.
     @State private var previewStale = false
     @State private var texts: [String: String]
@@ -208,8 +207,6 @@ struct EditorView: View {
             restoreDraftIfAvailable()
             if autoExport {
                 startExport()
-            } else if hasMedia, case .idle = preview.phase {
-                startPreview()
             }
             if ProcessInfo.processInfo.arguments.contains("--open-picker"),
                let slot = templateSlots.first {
@@ -301,11 +298,19 @@ struct EditorView: View {
                 previewStale = false
             }
         }
+        // SES DEĞİŞİNCE EKRANDAKİ SES HEMEN SUSAR. Müzik render'ın İÇİNE
+        // gömülü; kullanıcı "Müziksiz" dediğinde eldeki video eski parçayı
+        // çalmaya devam ediyordu ("kapattım ama kapanmıyor"). Yenilenene kadar
+        // oynatıcı sessize alınır — görüntü kalır, yanlış ses gitmiş olur.
         .onChange(of: music?.id) { _, id in
             Analytics.shared.log(.musicSelected(trackID: id))
+            silenceStalePreview()
             markDirty()
         }
-        .onChange(of: useOriginalAudio) { _, _ in markDirty() }
+        .onChange(of: useOriginalAudio) { _, _ in
+            silenceStalePreview()
+            markDirty()
+        }
         .fullScreenCover(item: $result) { finished in
             ExportResultView(
                 url: finished.url,
@@ -342,10 +347,13 @@ struct EditorView: View {
             Text(mediaError ?? "")
         }
         .onDisappear {
+            // SIRA ÖNEMLİ: önce SES ve oynatıcı susar, sonra render iptal
+            // edilir. Editörden çıkarken uygulamanın kapandığı cihazda
+            // görüldü; arkada çalan oynatıcılar ve süren bir render bir arada
+            // duruyordu (bkz. makeLoopingPlayer sızıntısı).
             previewMusic.stop()
-            loopTokens.forEach(NotificationCenter.default.removeObserver)
-            loopTokens = []
-            refreshTask?.cancel()
+            releasePlayer()
+            previewPlayer = nil
             preview.cancel()
             saveDraft()
         }
@@ -425,8 +433,9 @@ struct EditorView: View {
     /// bu yüzden önce ekrandaki her şey bırakılır, sonra taslak silinir —
     /// oynatıcı silinmiş bir dosyaya bakmasın.
     private func resetToTemplate() {
-        refreshTask?.cancel()
         preview.cancel()
+        previewMusic.stop()
+        releasePlayer()
         previewPlayer = nil
         previewURL = nil
         photos = [:]
@@ -977,14 +986,13 @@ struct EditorView: View {
         }
         for (target, picked) in zip(targets, media) { place(picked, in: target) }
         Haptics.select()
-        if wasEmpty {
-            // İlk medya: önizlemeyi kendiliğinden üret — kullanıcı seçtiği
-            // görüntünün şablonda nasıl durduğunu hemen görsün. Çoklu seçimde
-            // render TÜM slotlar yerleştikten SONRA bir kez başlar.
-            startPreview()
-        } else {
-            markDirty()
-        }
+        // ÖNİZLEME KENDİLİĞİNDEN BAŞLAMAZ. Eskiden ilk medya gelince render
+        // tetikleniyordu; cihazda bu, kullanıcı "Video Oluştur" demeden video
+        // VE SESİN başlaması demek oluyordu — üstelik art arda eklenen her
+        // fotoğraf yeni bir render kuyruğa atıyor, telefon ısınıyordu.
+        // Kullanıcı seçtiği görüntüyü zaten statik sahnede görüyor; hareketli
+        // hâlini isteyen "Önizle"ye basar.
+        markDirty()
     }
 
     /// Medyayı slota yazar; aynı slottaki diğer türü temizler. Önizleme kararı
@@ -1071,10 +1079,10 @@ struct EditorView: View {
     ///
     /// ÖNEMLİ DAVRANIŞ: bir kez render alındıktan sonra oynatıcı EKRANDAN
     /// KALKMAZ. Kullanıcı metni değiştirdiğinde eldeki (bayat) video oynamaya
-    /// devam eder, yenisi arka planda hazırlanır ve hazır olunca sessizce
-    /// devreye girer. Eskiden her değişiklikte video kaybolup yerine "önizlemeyi
-    /// yenile" düğmesi geliyordu; kullanıcı hem videosunu kaybediyor hem de
-    /// her seferinde elle düğmeye basmak zorunda kalıyordu.
+    /// devam eder; üstünde "Önizlemeyi yenile" belirir ve yeni render'ı
+    /// KULLANICI başlatır. Arka planda kendiliğinden yenileme denendi ve
+    /// cihazda geri alındı: her değişiklik bir render demekti, telefon
+    /// ısınıyordu ve kullanıcı istemediği hâlde video+ses başlıyordu.
     @ViewBuilder private var previewStage: some View {
         ZStack {
             if let previewPlayer {
@@ -1126,7 +1134,11 @@ struct EditorView: View {
             }
         }
         .overlay(alignment: .top) {
-            if isRenderingPreview, previewPlayer != nil { refreshingChip }
+            if isRenderingPreview, previewPlayer != nil {
+                refreshingChip
+            } else if previewStale, previewPlayer != nil, canExport {
+                staleChip
+            }
         }
         .task(id: previewURL) {
             guard let previewURL else { return }
@@ -1155,6 +1167,28 @@ struct EditorView: View {
         }
         .padding(.horizontal, 10).padding(.vertical, 6)
         .background(.black.opacity(0.55), in: Capsule())
+        .padding(.top, restoredDraft ? 52 : 10)
+    }
+
+    /// Bayat önizleme: eldeki video değiştirilen girdiyi göstermiyor.
+    /// Yenilemeyi KULLANICI başlatır (bkz. markDirty).
+    private var staleChip: some View {
+        Button {
+            Haptics.tap()
+            startPreview()
+        } label: {
+            HStack(spacing: 6) {
+                Image(systemName: "arrow.clockwise")
+                    .font(.system(size: 10, weight: .bold))
+                Text("Önizlemeyi yenile")
+                    .font(.system(size: 11, weight: .semibold))
+            }
+            .foregroundStyle(.white)
+            .padding(.horizontal, 11).padding(.vertical, 6)
+            .background(.black.opacity(0.65), in: Capsule())
+            .overlay(Capsule().stroke(.white.opacity(0.22), lineWidth: 1))
+        }
+        .buttonStyle(.plain)
         .padding(.top, restoredDraft ? 52 : 10)
     }
 
@@ -1314,27 +1348,45 @@ struct EditorView: View {
         }
     }
 
-    /// Döngüye alınmış oynatıcı. Bildirim kaydı tutulur (`loopTokens`) — her
-    /// önizleme yenilemesinde yeni bir item gelir, eskisinin gözlemcisi
-    /// bırakılırsa birikir.
+    /// Döngüye alınmış oynatıcı.
+    ///
+    /// SIZINTI (cihazda bulundu, simulator'da duyulmuyordu): gözlemcinin
+    /// kapanışı `player`ı GÜÇLÜ tutuyordu ve kayıt editör kapanana kadar
+    /// `loopTokens`ta duruyordu. Yenilemede `previewPlayer` yeni oynatıcıya
+    /// geçiyor, eskisi serbest kalmıyor — gözlemci onu tutuyor ve video her
+    /// bittiğinde `play()` diyordu. Üçüncü yenilemeden sonra arkada üç oynatıcı
+    /// birden çalıyordu: "ses duplike oluyor", "müziği kapattım susmuyor"
+    /// (susan yalnız EKRANDAKİ oynatıcıydı) ve telefonun ısınması hep buydu.
+    ///
+    /// Artık aynı anda TEK oynatıcı yaşar: yenisi kurulmadan önce eskisi
+    /// durdurulup gözlemcisi bırakılır, kapanış da oynatıcıyı zayıf tutar.
     private func makeLoopingPlayer(_ url: URL) -> AVPlayer {
+        releasePlayer()
         let player = AVPlayer(url: url)
         player.actionAtItemEnd = .none
         let token = NotificationCenter.default.addObserver(
             forName: .AVPlayerItemDidPlayToEndTime,
-            object: player.currentItem, queue: .main) { _ in
-                player.seek(to: .zero)
-                player.play()
+            object: player.currentItem, queue: .main) { [weak player] _ in
+                player?.seek(to: .zero)
+                player?.play()
             }
         loopTokens.append(token)
         return player
+    }
+
+    /// Ekrandaki oynatıcıyı susturur ve gözlemcilerini bırakır.
+    /// Yeni oynatıcı kurmadan ÖNCE ve editörden çıkarken çağrılır.
+    private func releasePlayer() {
+        previewPlayer?.pause()
+        previewPlayer?.replaceCurrentItem(with: nil)
+        loopTokens.forEach(NotificationCenter.default.removeObserver)
+        loopTokens = []
     }
 
     /// Önizlemeyi (yeniden) üretir. Kullanıcının videosuyla aynı hat, yalnız
     /// küçük kadraj — bkz. `ExportFlow.Quality.preview`.
     private func startPreview() {
         previewMusic.stop()
-        refreshTask?.cancel()
         preview.run(project: project, texts: texts, photos: photos, videos: videos,
                     music: music, entitlements: store.entitlements,
                     accentOverride: accent, speeds: speeds,
@@ -1345,28 +1397,21 @@ struct EditorView: View {
 
     /// Girdi değişti: eldeki ön-render artık ekrandakini göstermiyor.
     ///
-    /// Oynatıcı EKRANDA KALIR (bayat da olsa bir şey görmek, hiçbir şey
-    /// görmemekten iyidir) ve kısa bir sessizlikten sonra yenilenir.
+    /// KENDİLİĞİNDEN YENİLEMEZ. Eskiden burada 1,5 sn'lik bir gecikmeyle yeni
+    /// bir render planlanıyordu; simulator'da akıcı hissettiriyordu ama
+    /// cihazda her değişiklik bir render demek oluyordu ve telefon ısınıyordu.
+    /// Oynatıcı ekranda kalır (bayat da olsa bir şey görmek, hiçbir şey
+    /// görmemekten iyidir), üstünde "Önizlemeyi yenile" çıkar; kararı
+    /// kullanıcı verir.
     private func markDirty() {
         guard previewURL != nil || isRenderingPreview else { return }
         previewStale = true
-        previewMusic.stop()
-        scheduleAutoRefresh()
     }
 
-    /// Değişiklik durulduktan sonra önizlemeyi kendiliğinden yeniler.
-    ///
-    /// Bekleme SÜRESİ önemli: her tuş vuruşunda render başlatmak cihazı
-    /// ısıtır ve hiçbiri bitmez. Kullanıcı bir buçuk saniye ara verince
-    /// (yazmayı bitirdiğinin işareti) tek bir render koşar.
-    private func scheduleAutoRefresh() {
-        refreshTask?.cancel()
-        guard canExport, !isExporting else { return }
-        refreshTask = Task {
-            try? await Task.sleep(nanoseconds: 1_500_000_000)
-            guard !Task.isCancelled, previewStale, !isExporting else { return }
-            startPreview()
-        }
+    /// Ekrandaki (artık bayat) önizlemenin sesini kes. Görüntü kalır.
+    private func silenceStalePreview() {
+        previewPlayer?.isMuted = true
+        previewMusic.stop()
     }
 
     // MARK: - Alt aksiyon çubuğu

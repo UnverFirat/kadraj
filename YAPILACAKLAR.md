@@ -4,14 +4,106 @@
 çıkan yerleşim/editör kusurları düzeltildi ve **gerçek fotoğraf havuzu
 tamamlandı** (§0b). 2026-08-16'daki üç tur ve öncesi **Bitti** bölümlerinde.
 
-**Şu an açık olan iki şey** (sırayla):
+Uygulama akşam ilk kez gerçek iPhone'a kuruldu ve **cihaz turu beş bulgu
+verdi** (§0a) — üçü tek bir oynatıcı sızıntısına bağlanıyor.
 
-1. **P0 — cihaz doğrulaması.** Katalogun %62'si (79 şablon) gerçek cihazda hiç
-   denenmedi. Fiziksel iPhone gerekiyor; bu yapılmadan yayın yok (§4.1).
-2. **Mağaza kaydı ve marka artıkları:** ürün ID'leri, ASC kaydı,
+**Şu an açık olan üç şey** (sırayla):
+
+1. **Cihaz turu bulguları (§0a).** Oynatıcı sızıntısı, istenmeden başlayan
+   önizleme, susmayan müzik, editörden çıkarken çökme, ısınma.
+2. **P0 — cihaz doğrulamasının geri kalanı.** Montaj export'unun metinli
+   çıktısı, ritim dönüşümü uygulanmış 50 şablon, 4:5/1:1 (§4.1).
+3. **Mağaza kaydı ve marka artıkları:** ürün ID'leri, ASC kaydı,
    GitHub Pages (§5).
 
 ---
+
+## 0a. CİHAZ TURU BULGULARI — 2026-08-25 akşamı, AÇIK
+
+Uygulama ilk kez gerçek iPhone'a kuruldu (iPhone 14 Pro, iOS 26.6) ve
+kullanıcı beş şey bildirdi. **Hepsi simulator'da görünmeyecek türden** —
+üçü tek bir kök nedene bağlanıyor.
+
+### KÖK NEDEN 1: oynatıcı sızıntısı (ciddi, kod hatası)
+`makeLoopingPlayer` döngü bildirimini kaydederken kapanış (`closure`) oynatıcıyı
+GÜÇLÜ tutuyor ve kayıt `loopTokens`ta editör kapanana kadar duruyor. Her
+önizleme yenilemesinde `previewPlayer` yeni oynatıcıya geçiyor ama **eskisi
+serbest kalmıyor**: gözlemci onu tutuyor, video her bittiğinde `play()` diyor.
+Yani 3. yenilemeden sonra ekranda bir video görünürken arkada üç oynatıcı
+birden çalıyor.
+
+Bu tek hata üç şikâyeti birden açıklıyor:
+- "ses duplike oluyor" — üst üste binen oynatıcılar,
+- "müziği kapattım kapanmıyor" — ESKİ oynatıcı eski müzikle çalmaya devam
+  ediyor; sessize alma yalnız bir sonraki render'ı etkiliyor,
+- "aşırı kasıyor" — N tane AVPlayer aynı anda video çözüyor.
+- Editörden çıkarken çökme de büyük olasılıkla buradan (bellek baskısı);
+  düzeltmeden sonra cihazda tekrar denenmeli.
+
+### KÖK NEDEN 2: önizleme İSTENMEDEN başlıyor (ürün kararı geri alınıyor)
+Bugüne kadarki tasarım "önizleme kendiliğinden yenilenir"di: ilk medya
+seçilince render başlıyor, sonraki her değişiklik 1,5 sn sonra yeni bir render
+tetikliyordu. Simulator'da bu iyi hissettiriyordu; **cihazda yanlış**:
+kullanıcı "Video Oluştur" demeden video ve SES başlıyor, art arda eklenen her
+fotoğraf yeni bir render kuyruğa atıyor, telefon ısınıyor.
+
+Karar: önizleme ARTIK ELLE. Sahne, kullanıcının kendi fotoğraflarıyla çizilen
+statik önizlemeyi gösterir (bugün düzeltildi, tasarımın tamamını çiziyor);
+"Önizle" düğmesi bir kez render eder. Sonraki değişiklikler önizlemeyi BAYAT
+işaretler, kendiliğinden render ETMEZ.
+
+### Yapılacaklar (sırayla)
+
+**Kod tarafı yazıldı ve derleniyor; CİHAZDA HİÇBİRİ DOĞRULANMADI.**
+Sıradaki oturum buradan devam etmeli.
+
+- [x] **1. Oynatıcı sızıntısı.** `makeLoopingPlayer` artık yenisini kurmadan
+      önce `releasePlayer()` çağırıyor (eskisini duraklat + item'ı ayır +
+      gözlemcileri bırak) ve gözlemci kapanışı oynatıcıyı `[weak player]`
+      tutuyor. `onDisappear` ve `resetToTemplate` de aynı yoldan geçiyor.
+- [x] **2. Otomatik önizleme kalktı.** İlk medyada render YOK; `markDirty`
+      artık yalnız BAYAT işaretliyor, render planlamıyor; `scheduleAutoRefresh`
+      ve `refreshTask` tamamen silindi; `onAppear`daki otomatik başlatma
+      kaldırıldı. Oynatıcı ekranda kalırken üstünde "Önizlemeyi yenile" hapı
+      (`staleChip`) çıkıyor — render'ı kullanıcı başlatıyor.
+- [x] **3. Ses anında susuyor.** Müzik ya da "videonun kendi sesi" değişince
+      `silenceStalePreview()` ekrandaki oynatıcıyı `isMuted = true` yapıyor;
+      görüntü kalıyor, yanlış ses gidiyor.
+
+**Simulator'da doğrulanan:** medya eklendiğinde render başlamıyor, sahnede
+kullanıcının kendi fotoğrafı + "Önizle" düğmesi duruyor (ekran görüntüsüyle).
+"Önizle" sonrası bayat hapının çıkışı ekranda GÖRÜLMEDİ — oturum orada kesildi.
+
+### SIRADAKİ OTURUM İÇİN — cihazda doğrulanacaklar
+Kur: `./App/Scripts/install-device.sh` (imza ve cihaz seçimi hazır).
+
+- [ ] **A.** Medya ekle → **video ve ses BAŞLAMAMALI**, sahnede statik önizleme
+      ve "Önizle" düğmesi durmalı.
+- [ ] **B.** "Önizle" → tek render, tek oynatıcı. Sonra bir şey değiştir →
+      "Önizlemeyi yenile" hapı çıkmalı, kendiliğinden render OLMAMALI.
+- [ ] **C.** 5 fotoğrafı tek tek ekle, birkaç kez "Önizle" → **ses üst üste
+      binmemeli** (sızıntının asıl testi).
+- [ ] **D.** Müziği "Müziksiz" yap → çalan ses **anında** kesilmeli.
+- [ ] **E.** Editörden geri çık → **uygulama kapanmamalı**. Kapanırsa bu ayrı
+      bir kazı: sızıntı düzeldiğine göre sebep başka. Xcode'da Debug > Attach
+      ya da cihazın çökme kaydı (Ayarlar > Gizlilik > Analiz Verileri) gerekir;
+      simulator'da üretilemiyor.
+- [ ] **F.** Isınma/akıcılık: 5 klipli montajda editörde gezinirken telefon
+      ısınıyor mu, arayüz takılıyor mu.
+- [ ] **G.** (P0'ın asıl maddesi, §4.1) Montaj export'unun **metinli** çıktısı:
+      cihazda "Video Oluştur" → metinlerin videoya gömülü geldiğini doğrula.
+      Katalogun %62'sinde bu yol hiç görülmedi.
+
+### Ürün notu: katalog fazla "işletme" ağırlıklı
+Kullanıcının gözlemi: şablonlar esnaf/işletme işine göre yazılmış (menü, fiyat
+listesi, emlak künyesi, randevu), oysa **son kullanıcı kendi fotoğraf ve
+videosundan hazır şablonla video çıkaracak**. Katalogda kişisel kullanım
+şablonları (seyahat, aile, doğum günü, arkadaş, evcil hayvan, spor, "günüm")
+var ama azınlıkta ve vitrinin ilk sıralarında değil.
+
+Bu bir hata değil, KONUMLANDIRMA kararı — ölçülmeden iş yapılmamalı. Önce
+kategori/şablon dağılımı kişisel-vs-işletme diye sayılmalı, sonra ya galeri
+sırası değişmeli ya da kişisel şablonlar eklenmeli. **Karar kullanıcıda.**
 
 ## 0b. Kullanıcı turu + gerçek fotoğraf havuzu — BİTTİ (2026-08-25)
 
