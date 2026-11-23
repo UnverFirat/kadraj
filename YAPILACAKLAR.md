@@ -19,6 +19,10 @@ verdi** (§0a) — üçü tek bir oynatıcı sızıntısına bağlanıyor.
 3. **Mağaza kaydı ve marka artıkları:** ürün ID'leri, ASC kaydı,
    GitHub Pages (§5).
 
+Bunların **dışında**, koda değil stratejiye ait açık bir defter: **§6 — gelir
+modeli ve dağıtım** (2026-08-30). Yayına çıkmayı engellemiyor, ama yayından
+sonra tek başına sonucu belirleyen şey orada.
+
 ---
 
 ## 0a. CİHAZ TURU BULGULARI — 2026-08-25 akşamı, AÇIK
@@ -489,6 +493,158 @@ geri yükleme ve klip ayarları ekranı gibi çok adımlı akışlar.
 - **Müzik lisansı** (yukarıda).
 
 ---
+
+## 6. Gelir modeli ve dağıtım — AÇIK (2026-08-30)
+
+Bu bölüm kod değil **strateji** defteri. Sebebi: teknik borç listesi dolu ama
+"bu ürün kime, nasıl satılacak" sorusunun hiçbir yerde karşılığı yoktu —
+`MAGAZA.md` yalnız ASO metinlerini tutuyor, kullanıcı kazanma planı yok.
+Ürün yayına hazır hale gelirken bu tek başına projeyi bitirebilecek eksik.
+
+### 6.1 Ölçüm: katalog Türkiye'ye bağlı DEĞİL
+
+128 şablonun **127'si** yapısal olarak evrensel; tek istisna
+`bayram-greeting-01`. Fiyat listesi, menü kartı, emlak künyesi, ders programı,
+spor salonu, kuaför — hepsi her pazarda aynı işi görüyor. §0 zaten İngilizce
+tarafın eksiksiz olduğunu ölçmüş (239/239 arayüz, 873/873 şablon alanı, iki
+dilde poster).
+
+**Sonuç:** "Türkçe olması" bir ürün özelliği değil, bir **bulunabilirlik**
+avantajı. Ürün bugün global çıkabilir, ek maliyeti yok.
+
+Dar kama yine de doğruydu ama sebebi başka: "story maker" aramasında 400
+rakip var, "kuaför paylaşım" aramasında sıfır. Kama **coğrafya değil formül** —
+"yerel dilde, yerel işletme şablonları" tekrarlanabilir bir kalıp; Türkiye
+onun ilk uygulaması. Yeni dil eklemek ucuz değil (§0 sonundaki üç adım) ama
+yeniden tasarım da değil.
+
+### 6.2 Dağıtım — telefonla arama YOK (kullanıcı kısıtı)
+
+Kullanıcı kimseyi telefonla aramak istemiyor. Bu kısıt tavanı düşürür ama
+potansiyeli sıfırlamaz; en yüksek etkili üç kanal zaten konuşma gerektirmiyor:
+
+1. **Filigran döngüsü — zaten kodlanmış, yarım çalışıyor.** Her ücretsiz
+   export'ta "Made with Kadraj" var. Eksik olan iki şey: filigran bir İSİM
+   söylüyor ama NEREYE bakılacağını söylemiyor (kullanıcı adı yok), ve sonuç
+   ekranı paylaşmayı ödüllendirmiyor.
+   - [ ] Filigrana bulunabilir bir tanıtıcı ekle (ör. `@kadrajapp`)
+   - [ ] "Paylaş → bir video daha filigransız" kuralı (`hasFirstFreeExport`
+         mekanizmasının aynısı, tek ek hak)
+2. **İçerik pazarlaması.** Asenkron, kimseyle konuşulmuyor ve malzemeyi
+   ÜRÜNÜN KENDİSİ üretiyor: şablonu doldur, export et, paylaş. Haftada 3-4
+   saat, günde 1 paylaşım.
+3. **Uzun kuyruk Türkçe ASO.** `MAGAZA.md`'deki anahtar kelimeler jenerik
+   kelimelerle yarışmasın: `kuaför paylaşım`, `esnaf video`, `menü tasarım`,
+   `emlak ilan video`, `fiyat listesi hikaye`, `berber sosyal medya`. Düşük
+   hacim, ama arayan kişi tam olarak hedef kullanıcı ve alternatifi yok.
+
+**"Arama yok" ≠ "kurumsal yok".** Zincir/franchise talebi GELEN talep olarak
+kurgulanabilir; maliyeti tek satır, koymamanın maliyeti kanalın tamamen
+kapanması.
+- [ ] Uygulamaya ve Pages sitesine: "Zinciriniz için markalı şablon —
+      destek@kadraj.app". Yazışma e-posta/DM üzerinden yürür.
+
+### 6.3 ARPU'yu ve müşteriyi değiştiren iki özellik
+
+Bunlar indirme getirmez — elde edilen her indirmenin değerini yükseltir ve
+çok daha fazla ödeyen bir segment açar. Yani çarpan, ikame değil.
+
+**Marka kiti (logo + renk + yazı tipi).** Altyapının yarısı var:
+`Template.resolvedPalette(override:)` kullanıcı renk override'ını zaten
+çözüyor. Eksik: kalıcı profil + logo katmanı.
+Etkisi fiyatlandırmada: Pro'nun bugünkü vaadi "filigran kalkar" — bir eksiği
+gidermek. Marka kitiyle vaat "her videoda senin logon, senin renklerin" olur —
+bir şey kazanmak. `KULLANICI-ANALIZI.md` §3'te açık bırakılan "Pro'nun üçüncü
+vaadi" sorusunun cevabı bu.
+- [ ] Marka profili (logo, palet, yazı tipi) — kalıcı, şablondan bağımsız
+
+**Toplu / veri-güdümlü üretim — kategoriyi ayıran özellik.** Kodda `batch`
+izi yok, ama motor zaten veri-güdümlü: şablon JSON, metinler alan alan ayrı,
+`UserEdits` bağımsız model. "Bir liste ver, N video çıksın" mimari olarak
+neredeyse bedava.
+Emlakçı: 10 ilan → 10 video. Restoran: 20 menü kalemi → 20 hikâye.
+**CapCut bunu yapamaz** — elle kurgu yapan bir editör, veri motoru değil.
+Farklılaşma aranıyorsa gerçek cevap burası.
+- [ ] Liste/CSV → N export; tek şablon, N `UserEdits`
+
+**Bu ikisi müşteriyi değiştirir.** Toplu üretim + marka kiti bir esnafın değil,
+**sosyal medya yöneticisinin / küçük ajansın** ihtiyacı. O kişi 10 müşteri
+hesabı yönetir (10 marka kiti), ayda ₺79 değil ₺500-1.500 öder ve aracı
+ARAYARAK bulur — kimsenin onu araması gerekmez. §6.2'deki kısıtla uyumlu.
+
+### 6.4 Fiyatlandırma
+
+- [ ] **Tek seferlik "ömür boyu" ₺999-1.499 öne çıksın.** Esnaf aidattan kaçar,
+      mevsimsel kullanır (kuaför ayda 4 paylaşım), aylığı 3. ayda iptal eder.
+      Sunucu maliyeti olmadığı için ömür boyu bize hiçbir şeye mal olmuyor.
+      Kimseyi ikna edecek bir insan yoksa fiyatın kendisi ikna etmeli.
+- [ ] Aylık ₺79,99 geri plana; yıllık korunsun.
+- [ ] **Ajans segmenti KADEMELİ olsun** — tek fiyat yanlış. Türkiye'deki
+      "ajans"ların çoğu tek kişilik (toplam geliri ₺30-60k/ay); personelli
+      ajans bambaşka bir bütçe. Tek kişilik ~₺200-300/ay, personelli
+      ~₺600-900/ay; karma ARPU ~₺3.500/yıl.
+- [ ] **Fiyatı erişime değil ÇIKTI HACMİNE bağla** ("ayda 50 video").
+      ₺500'ün ağır gelmesinin sebebi rakam değil karşılaştırma noktası:
+      Canva Pro'ya kıyasla saçma, "10 video için tasarımcıya ₺2.000"a kıyasla
+      ucuz. Hangi çapaya oturduğunu fiyat sayfası belirler.
+
+### 6.5 Gelir tahmini (2026-08-30)
+
+Hepsi VARSAYIM — canlı pazar verisi değil, tabandan kurulmuş model.
+Girdiler: Apple/Google %15 (Small Business), üstüne vergi → **net ≈ brütün
+2/3'ü**. B2C karma ARPU ₺350/yıl, **ajans ₺3.500/yıl** (§6.4 — ilk model
+₺6.000 varsaymıştı, tek kişilik yöneticiler için fazla yüksek). Dönüşüm %3.
+
+Ulaşılabilir havuz: TR'de ~1,5-2 milyon esnaf → işi için Instagram kullanan
+~%30 → **iOS'ta 100-150 bin**, Android dahil **~500 bin**.
+
+| Senaryo | Ödeyen | Net / ay |
+|---|---|---|
+| Yayınla ve bekle (dağıtım yok) | ~15 | **₺300** |
+| Yıl 1 — iOS, TR+EN, içerik pazarlaması | 150-450 | **₺3.000-8.500** |
+| Yıl 2 — + marka kiti + toplu üretim (ajans segmenti açık) | 600 B2C + 60 ajans | **~₺23.000** |
+| Yıl 2-3 — + Android | 1.500 B2C + 120 ajans + global | **~₺62.000** |
+| En iyi %5 ihtimal (yıl 3) | — | **₺140.000-230.000** |
+
+Tablonun söylediği iki şey:
+
+1. **Ajans segmenti, B2C'nin 1/10'u kadar kullanıcıdan denk gelir üretiyor**
+   (60 ajans = ₺210k, 600 esnaf = ₺210k). §6.3'ün önceliği bundan. Bu sonuç
+   ARPU varsayımına DAYANMIYOR: ajans ARPU'sunu ₺6.000'den ₺3.500'e (%40)
+   düşürmek toplamı ancak %25 düşürüyor.
+2. Alt satırı belirleyen ürün değil **dağıtım**. ₺300/ay ile ₺8.500/ay
+   arasındaki tek fark §6.2.
+
+**Modelin en kırılgan yeri fiyat değil, SAYI.** "60 ajans" / "120 ajans"
+rakamlarının hiçbir dayanağı yok — tahmin. Gerçekte 15 tanesi ödemeye razıysa
+segment çöker ve yıl 2 satırı ₺23.000'den ~₺12.000'e iner.
+- [ ] **Özelliği yazmadan önce talebi ölç:** mağaza sayfasına ve Pages'e
+      "Toplu üretim — 10 ilan, 10 video. Yakında." satırı koy, tıklamayı say.
+      Tıklama yoksa segment yok ve 2-4 haftalık geliştirme hiç yapılmamış olur.
+
+Android notu: havuzu 4 katına çıkarır ama Android ARPU belirgin düşük →
+gelir kabaca **1,5-2 kat**, 4 kat değil. Yine de esnaf hedefleniyorsa opsiyonel
+değil: "iOS-only esnaf uygulaması" bir çelişki, ve §6.2'deki kurumsal kanal
+Android olmadan kapalı. Taşıma maliyeti ölçüldü: yeniden yazılacak ~11.300
+satır (8.314 arayüz + 2.970 Apple'a bağlı render), mekanik çevrilecek ~4.188
+satır; şablonlar/varlık hattı (128 JSON + 6.522 satır Python + posterler)
+**sıfır maliyetle** taşınıyor. 2-4 ay; %60'ı render eşitliği. En büyük risk
+metin yerleşimi: `StaticLayout` `CTFrameGetLineOrigins` ile aynı sayıları
+vermez, 746 metin alanı kayabilir.
+
+### 6.6 Sıra
+
+1. Cihaz turu (§0a C-G) ve P0 (§4.1) — bunlar bitmeden hiçbiri anlamlı değil.
+2. **İngilizceyi 1. günden yayına aç.** Maliyeti sıfır (§0/§6.1); karşılığı
+   bedava piyango bileti + "TR dışında da indiriliyor mu?" verisi. Bu cevap
+   sonraki 6 ayın nereye harcanacağını belirler.
+3. Filigran döngüsü (§6.2/1) — küçük iş, cihaz turundan bağımsız.
+4. iOS yayın → **huni sinyalini ölç** (indirme → ilk export → ödeme).
+5. Sinyal varsa: toplu üretim > marka kiti > Android > yeni dil.
+   Sinyal yoksa Android sıfırı 4'le çarpmaktan başka bir şey yapmaz.
+
+---
+
 
 ## Bitti (2026-08-16) — huni, vitrin cilası, marka
 
